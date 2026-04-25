@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>synARKa Intelligence — The Consensus Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cyan:#00e5c8;--purple:#a855f7;--orange:#f97316;--red:#ef4444;
+  --bg:#03070f;--bg2:#070d1a;--bg3:#0a1220;--bg4:#0f1a2e;
+  --border:#1a2a40;--border2:#1e3348;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#4a6080;
+  --green:#22c55e;--amber:#f59e0b;--yellow:#eab308;
+}
+html,body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;overflow-x:hidden;min-height:100vh}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* TICKER */
+.ticker-wrap{background:#000;border-bottom:1px solid var(--border);overflow:hidden;height:22px;display:flex;align-items:center}
+.ticker-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;color:var(--cyan);padding:0 12px;white-space:nowrap;border-right:1px solid var(--border);letter-spacing:2px;flex-shrink:0}
+.ticker-track{display:flex;animation:ticker 35s linear infinite;white-space:nowrap}
+.ticker-item{font-size:10px;color:var(--text2);padding:0 24px;letter-spacing:0.5px}
+.ticker-item .src{color:var(--cyan);margin-right:6px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* MARKET STRIP */
+.market-strip{background:var(--bg2);border-bottom:1px solid var(--border);height:24px;display:flex;align-items:center;overflow:hidden;gap:0}
+.market-label{font-size:9px;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--text3);padding:0 10px;letter-spacing:2px;border-right:1px solid var(--border);flex-shrink:0}
+.market-scroll{display:flex;animation:ticker 40s linear infinite;gap:0}
+.mitem{font-size:9px;padding:0 16px;white-space:nowrap;border-right:1px solid var(--border)}
+.mitem .sym{color:var(--text2);margin-right:4px}
+.mitem .price{color:var(--text);margin-right:3px}
+.mitem .up{color:var(--green)}
+.mitem .dn{color:var(--red)}
+
+/* TIME STRIP */
+.time-strip{background:var(--bg);border-bottom:1px solid var(--border);height:26px;display:flex;align-items:center;padding:0 12px;gap:0}
+.ts-label{font-size:9px;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--cyan);letter-spacing:2px;padding:0 12px;border-right:1px solid var(--border);flex-shrink:0}
+.ts-cities{display:flex;flex:1;overflow:hidden}
+.ts-city{font-size:9px;padding:0 14px;border-right:1px solid var(--border);white-space:nowrap;display:flex;gap:6px}
+.ts-city .city{color:var(--text3);letter-spacing:1px}
+.ts-city .time{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* NAV */
+nav{background:var(--bg);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:48px;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:baseline;gap:8px}
+.nav-logo .syn{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);letter-spacing:2px}
+.nav-logo .ark{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:3px}
+.nav-logo .a{color:var(--purple)}
+.nav-logo .sub{font-size:8px;color:var(--text3);letter-spacing:3px;margin-left:4px;align-self:center}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-status{display:flex;align-items:center;gap:6px;background:rgba(0,229,200,0.05);border:1px solid rgba(0,229,200,0.2);padding:4px 12px;font-size:9px;color:var(--cyan);letter-spacing:2px}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,229,200,0.4)}50%{opacity:0.7;box-shadow:0 0 0 4px rgba(0,229,200,0)}}
+.nav-btn{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;padding:5px 12px;cursor:pointer}
+.nav-btn.primary{border-color:var(--purple);color:var(--purple)}
+.nav-lang{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-family:'IBM Plex Mono',monospace;font-size:9px;padding:5px 10px;letter-spacing:1px}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:380px 1fr 340px;min-height:580px;border-bottom:1px solid var(--border)}
+
+/* LEFT PANEL */
+.hero-left{border-right:1px solid var(--border);overflow-y:auto;background:var(--bg);max-height:580px}
+.signal-card{border-bottom:1px solid var(--border);padding:12px 14px;transition:background 0.15s}
+.signal-card:hover{background:var(--bg2)}
+.sc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.sc-type{font-size:8px;letter-spacing:2px;color:var(--text3)}
+.sc-type.minerals{color:var(--cyan)}
+.sc-type.defence{color:var(--purple)}
+.sc-type.logistics{color:var(--orange)}
+.sc-badge{font-size:7px;letter-spacing:1px;padding:2px 6px;border:1px solid}
+.sc-badge.elevated{border-color:var(--orange);color:var(--orange)}
+.sc-badge.critical{border-color:var(--red);color:var(--red)}
+.sc-badge.monitoring{border-color:var(--amber);color:var(--amber)}
+.sc-actor{font-size:9px;color:var(--cyan);letter-spacing:1px;margin-bottom:4px}
+.sc-text{font-size:10px;color:var(--text2);line-height:1.6;font-style:italic}
+.sc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.sc-time{font-size:8px;color:var(--text3)}
+.sc-link{font-size:8px;color:var(--cyan);letter-spacing:1px;text-decoration:none;opacity:0.7}
+
+/* HERO CENTRE */
+.hero-centre{padding:40px 40px 32px;display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{font-size:8px;letter-spacing:4px;color:var(--text3);margin-bottom:16px}
+.hero-headline{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:0.95;letter-spacing:2px;margin-bottom:8px}
+.hero-headline .white{color:#fff}
+.hero-headline .purple{color:var(--purple)}
+.hero-sub{font-size:10px;color:var(--text2);letter-spacing:2px;line-height:1.8;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;margin-bottom:28px}
+.btn-primary{background:var(--purple);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 20px;cursor:pointer;font-weight:500}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 20px;cursor:pointer}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat-box{border:1px solid var(--border);padding:14px;text-align:center;background:var(--bg2)}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--cyan);letter-spacing:2px;display:block}
+.stat-label{font-size:7px;color:var(--text3);letter-spacing:2px;margin-top:2px}
+
+/* HERO RIGHT */
+.hero-right{border-left:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg);overflow-y:auto;max-height:580px}
+.hr-section{border-bottom:1px solid var(--border);padding:12px 14px}
+.hr-title{font-size:8px;letter-spacing:3px;color:var(--cyan);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.hr-title::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.threat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.threat-box{border:1px solid var(--border);padding:8px;background:var(--bg2)}
+.threat-name{font-size:8px;color:var(--text);letter-spacing:1px;margin-bottom:4px;font-weight:500}
+.threat-row{font-size:7px;color:var(--text3);line-height:1.8}
+.threat-row .val{margin-left:4px}
+.threat-row .critical{color:var(--red)}
+.threat-row .elevated{color:var(--orange)}
+.threat-row .high{color:var(--amber)}
+.threat-row .monitoring{color:var(--amber)}
+.threat-row .affected{color:var(--orange)}
+.threat-dot{display:inline-block;width:4px;height:4px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.threat-dot.red{background:var(--red)}
+.threat-dot.orange{background:var(--orange)}
+.threat-dot.amber{background:var(--amber)}
+
+.osint-card{border:1px solid var(--border);padding:10px 12px;background:var(--bg3);margin-bottom:6px}
+.osint-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.osint-src{font-size:7px;color:var(--text3);letter-spacing:2px}
+.osint-time{font-size:7px;color:var(--text3)}
+.osint-text{font-size:9px;color:var(--text2);line-height:1.6;font-style:italic}
+.osint-entity{font-size:8px;color:var(--cyan);letter-spacing:1px;margin-bottom:3px}
+
+/* TABS */
+.intel-tabs{border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr)}
+.tab{padding:14px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;border-right:1px solid var(--border);transition:all 0.15s;position:relative}
+.tab:last-child{border-right:none}
+.tab.active{background:rgba(0,229,200,0.04)}
+.tab.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cyan)}
+.tab-icon{width:14px;height:14px;flex-shrink:0}
+.tab-label{font-size:10px;letter-spacing:2px;color:var(--text3)}
+.tab.active .tab-label{color:var(--cyan)}
+.tab-dot{width:5px;height:5px;border-radius:50%;background:var(--border);margin-left:auto;flex-shrink:0}
+.tab.active .tab-dot{background:var(--cyan)}
+
+/* INTEL BODY */
+.intel-body{display:grid;grid-template-columns:1fr 320px;min-height:400px}
+.intel-feed{padding:16px 20px;border-right:1px solid var(--border)}
+.feed-header{font-size:8px;letter-spacing:3px;color:var(--text3);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.news-item{border-bottom:1px solid var(--border);padding:12px 0;cursor:pointer}
+.news-item:hover .news-title{color:var(--cyan)}
+.news-src{font-size:8px;color:var(--orange);letter-spacing:2px;margin-bottom:4px}
+.news-title{font-size:11px;color:var(--text);line-height:1.5;letter-spacing:0.3px;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color 0.15s}
+.news-time{font-size:8px;color:var(--text3);margin-top:4px}
+
+.tactical-panel{padding:16px 14px;background:var(--bg2)}
+.tp-title{font-size:8px;letter-spacing:3px;color:var(--purple);margin-bottom:12px}
+.tp-metric{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.tp-label{font-size:8px;color:var(--text3);letter-spacing:1px;margin-bottom:4px}
+.tp-value{font-size:20px;color:var(--cyan);font-family:'Bebas Neue',sans-serif;letter-spacing:2px}
+.tp-value .unit{font-size:11px;color:var(--text3)}
+.tp-bar-wrap{margin-top:6px;background:var(--border);height:2px}
+.tp-bar{height:2px;background:var(--cyan)}
+.tp-text{font-size:9px;color:var(--text2);line-height:1.7;margin-bottom:8px}
+.tp-quote{border-left:2px solid var(--purple);padding-left:10px;font-size:9px;color:var(--text3);font-style:italic;line-height:1.7;margin:8px 0}
+.tp-version{font-size:7px;color:var(--text3);letter-spacing:2px;margin-top:12px}
+.tp-divider{height:1px;background:var(--border);margin:10px 0}
+.tp-section-title{font-size:7px;letter-spacing:3px;color:var(--text3);margin-bottom:8px;margin-top:10px}
+.tp-signal-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:8px}
+.tp-signal-row:last-child{border-bottom:none}
+.tp-signal-name{color:var(--text2);letter-spacing:0.5px;flex:1}
+.tp-signal-val{color:var(--cyan);font-size:9px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;margin-left:8px}
+.tp-signal-val.red{color:var(--red)}
+.tp-signal-val.orange{color:var(--orange)}
+.tp-signal-val.amber{color:var(--amber)}
+.tp-signal-val.green{color:var(--green)}
+.tp-actor-tag{display:inline-block;font-size:7px;letter-spacing:1px;padding:2px 6px;border:1px solid var(--border);color:var(--text3);margin:2px 2px 2px 0}
+.tp-actor-tag.hot{border-color:var(--orange);color:var(--orange)}
+.tp-actor-tag.watch{border-color:var(--amber);color:var(--amber)}
+.tp-actor-tag.neutral{border-color:var(--border2);color:var(--text3)}
+.tp-prediction{border:1px solid var(--border);padding:8px;margin-bottom:6px;background:var(--bg3)}
+.tp-pred-header{display:flex;justify-content:space-between;margin-bottom:3px}
+.tp-pred-id{font-size:7px;color:var(--text3);letter-spacing:1px}
+.tp-pred-conf{font-size:7px;letter-spacing:1px}
+.tp-pred-conf.high{color:var(--green)}
+.tp-pred-conf.med{color:var(--amber)}
+.tp-pred-text{font-size:8px;color:var(--text2);line-height:1.6}
+.tp-pred-resolve{font-size:7px;color:var(--text3);margin-top:3px}
+.tp-mini-bar-wrap{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tp-mini-bar-bg{flex:1;height:2px;background:var(--border)}
+.tp-mini-bar-fill{height:2px}
+.tp-mini-pct{font-size:7px;color:var(--text3);min-width:28px;text-align:right}
+
+/* 72H CASCADE */
+.cascade-section{border-bottom:1px solid var(--border);padding:48px 40px}
+.section-eyebrow{font-size:8px;letter-spacing:4px;color:var(--cyan);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-eyebrow::before{content:'';flex:1;height:1px;background:var(--border)}
+.cascade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:24px}
+.cascade-box{background:var(--bg);padding:24px;transition:background 0.15s}
+.cascade-box:hover{background:var(--bg2)}
+.cb-num{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--border2);margin-bottom:8px;line-height:1}
+.cb-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--text);letter-spacing:2px;margin-bottom:8px}
+.cb-text{font-size:9px;color:var(--text2);line-height:1.8}
+
+/* COMPARISON */
+.comparison-section{border-bottom:1px solid var(--border);padding:48px 40px;display:grid;grid-template-columns:1fr 480px;gap:40px;align-items:start}
+.comp-headline{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:#fff;margin-bottom:12px}
+.comp-headline .accent{color:var(--orange)}
+.comp-text{font-size:10px;color:var(--text2);line-height:1.9;margin-bottom:16px}
+.comp-table{border:1px solid var(--border);width:100%}
+.comp-table th{font-size:8px;letter-spacing:2px;padding:10px 14px;border-bottom:1px solid var(--border);text-align:left}
+.comp-table th:first-child{color:var(--text3)}
+.comp-table th.trad{color:var(--red)}
+.comp-table th.synarka{color:var(--cyan);background:rgba(0,229,200,0.03)}
+.comp-table td{font-size:9px;padding:8px 14px;border-bottom:1px solid var(--border)}
+.comp-table td:first-child{color:var(--text3);letter-spacing:1px}
+.comp-table td.trad{color:var(--red)}
+.comp-table td.synarka{color:var(--cyan);background:rgba(0,229,200,0.03)}
+
+.threat-levels{border:1px solid var(--border);padding:16px;margin-top:16px}
+.tl-title{font-size:8px;letter-spacing:3px;color:var(--text3);margin-bottom:12px}
+.tl-row{margin-bottom:8px}
+.tl-label{display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px}
+.tl-name{color:var(--text2);letter-spacing:1px}
+.tl-status{font-weight:500}
+.tl-status.critical{color:var(--red)}
+.tl-status.elevated{color:var(--orange)}
+.tl-status.high{color:var(--amber)}
+.tl-progress{height:2px;background:var(--border)}
+.tl-fill{height:2px}
+.tl-fill.critical{background:var(--red)}
+.tl-fill.elevated{background:var(--orange)}
+.tl-fill.high{background:var(--amber)}
+
+/* TECH DISCLOSURE */
+.tech-section{border-bottom:1px solid var(--border);padding:48px 40px;background:var(--bg2)}
+.tech-header{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.tech-eyebrow{font-size:8px;letter-spacing:3px;color:var(--cyan)}
+.tech-badge{font-size:7px;letter-spacing:2px;border:1px solid var(--border);padding:3px 10px;color:var(--text3)}
+.tech-title{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:1px}
+.tech-subtitle{font-size:9px;color:var(--text3);letter-spacing:2px;line-height:1.8;margin-bottom:32px}
+.layers{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+.layer{background:var(--bg2);padding:20px}
+.layer-name{font-size:9px;color:var(--cyan);letter-spacing:3px;margin-bottom:8px}
+.layer-text{font-size:9px;color:var(--text2);line-height:1.8}
+.ip-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:1px}
+.ip-box{background:var(--bg2);padding:16px}
+.ip-box-title{font-size:8px;color:var(--purple);letter-spacing:2px;margin-bottom:6px}
+.ip-box-text{font-size:9px;color:var(--text2);line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 40px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:20px}
+.footer-item{display:flex;align-items:start;gap:10px}
+.footer-icon{width:20px;height:20px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.footer-label{font-size:7px;color:var(--text3);letter-spacing:2px;margin-bottom:3px}
+.footer-value{font-size:9px;color:var(--cyan)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:16px;text-align:center;font-size:7px;color:var(--text3);letter-spacing:3px}
+.footer-tagline{font-size:8px;color:var(--text3);letter-spacing:4px;text-align:center;margin-bottom:16px}
+
+/* SIGNAL VELOCITY */
+.sv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
+.sv-item{background:var(--bg3);border:1px solid var(--border);padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
+.sv-label{font-size:7px;color:var(--text3);letter-spacing:1px}
+.sv-val{font-size:11px;color:var(--cyan);font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<!-- NEWS TICKER -->
+<div class="ticker-wrap">
+  <span class="ticker-label">C LIVE SIGNAL FEED</span>
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- MARKET STRIP -->
+<div class="market-strip">
+  <span class="market-label">C MARKET SIGNALS</span>
+  <div class="market-scroll" id="market"></div>
+</div>
+
+<!-- TIME STRIP -->
+<div class="time-strip">
+  <span class="ts-label">C SOVEREIGN TIME</span>
+  <div class="ts-cities" id="clocks"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="syn">SYN</span><span class="ark">ARK<span class="a">A</span></span>
+    <span class="sub">THE CONSENSUS ENGINE</span>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status"><span class="status-dot"></span>SOVEREIGN PROTOCOL ACTIVE</div>
+    <select class="nav-lang"><option>[ LANG: EN ]</option></select>
+    <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="nav-btn primary" style="text-decoration:none">EXECUTIVE BRIEFING &rsaquo;</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- LEFT: SIGNAL FEED -->
+  <div class="hero-left" id="hero-left"></div>
+
+  <!-- CENTRE: HEADLINE -->
+  <div class="hero-centre">
+    <div class="hero-eyebrow">INTELLIGENCE LAYER // GEOPOLITICAL CONSENSUS ENGINE</div>
+    <div class="hero-headline">
+      <div class="white">72 HOURS</div>
+      <div class="white">BEFORE</div>
+      <div class="purple">THE WORLD</div>
+      <div class="white">REACTS.</div>
+    </div>
+    <div class="hero-sub">INTELLIGENCE CONVERGENCE FOR SOVEREIGN SURVIVAL.<br>RESOURCES. DEFENCE. LOGISTICS.</div>
+    <div class="hero-btns">
+      <button class="btn-primary">INITIALISE PROTOCOL &rarr;</button>
+      <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="btn-outline" style="text-decoration:none">EXECUTIVE BRIEFING</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box"><span class="stat-num">72H</span><div class="stat-label">PREDICTIVE WINDOW</div></div>
+      <div class="stat-box"><span class="stat-num">200+</span><div class="stat-label">LIVE SIGNAL CHANNELS</div></div>
+      <div class="stat-box"><span class="stat-num">100%</span><div class="stat-label">SOVEREIGN FOCUS</div></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: THREAT MATRIX -->
+  <div class="hero-right">
+    <div class="hr-section">
+      <div class="hr-title">SOVEREIGN THREAT MATRIX // PROXY DATA</div>
+      <div class="threat-grid">
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot red"></span><span style="color:var(--text);letter-spacing:1px">UKRAINE-RUSSIA WAR</span></div>
+          <div class="threat-row">DAY: <span class="val">1,157</span></div>
+          <div class="threat-row">STAT: <span class="val critical">ACTIVE</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val critical">CRITICAL</span></div>
+        </div>
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot orange"></span><span style="color:var(--text);letter-spacing:1px">ISRAEL-GAZA</span></div>
+          <div class="threat-row">DAY: <span class="val">567</span></div>
+          <div class="threat-row">STAT: <span class="val critical">ACTIVE</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val elevated">ELEVATED</span></div>
+        </div>
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot orange"></span><span style="color:var(--text);letter-spacing:1px">TAIWAN STRAIT TENSION</span></div>
+          <div class="threat-row">DAY: <span class="val">—</span></div>
+          <div class="threat-row">STAT: <span class="val elevated">ELEVATED</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val critical">CRITICAL</span></div>
+        </div>
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot amber"></span><span style="color:var(--text);letter-spacing:1px">SOUTH CHINA SEA</span></div>
+          <div class="threat-row">DAY: <span class="val">—</span></div>
+          <div class="threat-row">STAT: <span class="val monitoring">MONITORING</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val high">HIGH</span></div>
+        </div>
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot amber"></span><span style="color:var(--text);letter-spacing:1px">SUDAN CIVIL WAR</span></div>
+          <div class="threat-row">DAY: <span class="val">742</span></div>
+          <div class="threat-row">STAT: <span class="val critical">ACTIVE</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val monitoring">MODERATE</span></div>
+        </div>
+        <div class="threat-box">
+          <div style="font-size:7px;margin-bottom:6px"><span class="threat-dot amber"></span><span style="color:var(--text);letter-spacing:1px">MYANMAR CIVIL WAR</span></div>
+          <div class="threat-row">DAY: <span class="val">1,402</span></div>
+          <div class="threat-row">STAT: <span class="val critical">ACTIVE</span></div>
+          <div class="threat-row">EXPO: RE RISK: <span class="val affected">AFFECTED</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hr-section" style="flex:1">
+      <div class="hr-title">ACTOR INTELLIGENCE</div>
+      <div id="osint-cards"></div>
+      <div class="sv-grid">
+        <div class="sv-item"><span class="sv-label">SIGNALS TODAY</span><span class="sv-val">14,858</span></div>
+        <div class="sv-item"><span class="sv-label">ACTORS MONITORED</span><span class="sv-val">244</span></div>
+        <div class="sv-item"><span class="sv-label">SCENARIOS SIMULATED</span><span class="sv-val">1,264</span></div>
+        <div class="sv-item"><span class="sv-label">PREDICTIONS ACTIVE</span><span class="sv-val">20</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTEL TABS -->
+<div class="intel-tabs" id="tabs"></div>
+
+<!-- INTEL BODY -->
+<div class="intel-body">
+  <div class="intel-feed">
+    <div class="feed-header" id="feed-header">LIVE HEADLINES // TARGET: CRITICAL MINERALS</div>
+    <div id="news-feed"></div>
+  </div>
+  <div class="tactical-panel" id="tactical-panel"></div>
+</div>
+
+<!-- CHOKEPOINT MAP SECTION -->
+<div style="border-bottom:1px solid var(--border);padding:32px 40px;background:var(--bg2)">
+
+  <!-- SECTION HEADER -->
+  <div style="font-size:8px;letter-spacing:4px;color:var(--cyan);margin-bottom:20px;display:flex;align-items:center;gap:10px">
+    <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+    INDO-PACIFIC CHOKEPOINT RISK // LIVE SURVEILLANCE
+    <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+
+  <!-- FULL-WIDTH MAP -->
+  <div style="border:1px solid var(--border);background:var(--bg);padding:14px;margin-bottom:24px">
+    <div style="font-size:7px;color:var(--text3);letter-spacing:2px;margin-bottom:10px;display:flex;justify-content:space-between"><span>MARITIME CHOKEPOINT SURVEILLANCE // synARKa SENSE LAYER ACTIVE</span><span style="color:var(--red)">? 6 NODES MONITORED</span></div>
+    <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#03070f">
+          <defs>
+            <radialGradient id="glow-r" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glow-o" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f97316" stop-opacity="0.3"/><stop offset="100%" stop-color="#f97316" stop-opacity="0"/></radialGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="55" x2="500" y2="55" stroke="#0f1a2e" stroke-width="0.5"/>
+          <line x1="0" y1="110" x2="500" y2="110" stroke="#0f1a2e" stroke-width="0.5"/>
+          <line x1="0" y1="165" x2="500" y2="165" stroke="#0f1a2e" stroke-width="0.5"/>
+          <line x1="125" y1="0" x2="125" y2="220" stroke="#0f1a2e" stroke-width="0.5"/>
+          <line x1="250" y1="0" x2="250" y2="220" stroke="#0f1a2e" stroke-width="0.5"/>
+          <line x1="375" y1="0" x2="375" y2="220" stroke="#0f1a2e" stroke-width="0.5"/>
+          <!-- Africa east -->
+          <path d="M62 30 L75 28 L80 40 L78 65 L74 95 L68 120 L60 115 L55 90 L52 60 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Arabian Peninsula -->
+          <path d="M130 38 L155 32 L168 42 L170 62 L160 78 L145 80 L132 68 L128 52 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- India -->
+          <path d="M190 48 L210 44 L222 52 L225 70 L218 90 L205 98 L192 88 L186 68 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- SE Asia mainland -->
+          <path d="M268 32 L290 28 L298 42 L292 58 L278 64 L265 55 L262 42 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Malay Peninsula -->
+          <path d="M278 65 L285 68 L282 92 L275 96 L270 88 L272 72 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Sumatra -->
+          <path d="M252 95 L275 88 L290 96 L295 108 L280 116 L260 114 L246 106 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Java -->
+          <path d="M282 120 L310 116 L328 122 L322 130 L295 132 L278 128 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Borneo -->
+          <path d="M305 78 L330 72 L345 82 L348 105 L335 115 L314 112 L298 98 L300 82 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Philippines -->
+          <path d="M345 55 L358 50 L365 62 L360 75 L348 78 L340 68 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- China coast -->
+          <path d="M330 28 L365 22 L385 32 L380 50 L362 58 L345 55 L332 44 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Taiwan -->
+          <ellipse cx="385" cy="50" rx="8" ry="12" fill="#070d1a" stroke="#1a2a40" stroke-width="0.8"/>
+          <!-- Australia -->
+          <path d="M325 138 L365 130 L400 136 L420 155 L415 178 L395 190 L368 192 L340 182 L318 162 L320 148 Z" fill="#070d1a" stroke="#1a2a40" stroke-width="1"/>
+          <!-- Australia label -->
+          <text x="358" y="165" font-family="monospace" font-size="7" fill="#1e3348" letter-spacing="2" text-anchor="middle">AUSTRALIA</text>
+
+          <!-- SHIPPING ROUTES -->
+          <path d="M148 62 Q168 68 190 72" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.9"/>
+          <path d="M210 80 Q238 88 268 90" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.9"/>
+          <path d="M282 90 Q298 78 320 68" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.9"/>
+          <path d="M348 68 Q365 58 382 52" fill="none" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.8"/>
+          <path d="M360 118 Q368 130 372 142" fill="none" stroke="#00e5c8" stroke-width="1" stroke-dasharray="3,4" opacity="0.6"/>
+          <path d="M78 68 Q102 58 128 55" fill="none" stroke="#eab308" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.8"/>
+
+          <!-- GLOW HALOS -->
+          <ellipse cx="148" cy="62" rx="14" ry="14" fill="url(#glow-r)"/>
+          <ellipse cx="268" cy="90" rx="14" ry="14" fill="url(#glow-o)"/>
+          <ellipse cx="385" cy="50" rx="12" ry="12" fill="url(#glow-r)"/>
+
+          <!-- CHOKEPOINT: HORMUZ -->
+          <circle cx="148" cy="62" r="6" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+          <circle cx="148" cy="62" r="2.5" fill="#ef4444"/>
+          <text x="148" y="52" font-family="monospace" font-size="6" fill="#ef4444" text-anchor="middle" letter-spacing="1">HORMUZ</text>
+          <text x="148" y="44" font-family="monospace" font-size="5" fill="#94a3b8" text-anchor="middle">CRITICAL</text>
+
+          <!-- CHOKEPOINT: MALACCA -->
+          <circle cx="268" cy="90" r="6" fill="none" stroke="#f97316" stroke-width="1.5"/>
+          <circle cx="268" cy="90" r="2.5" fill="#f97316"/>
+          <text x="262" y="80" font-family="monospace" font-size="6" fill="#f97316" letter-spacing="1">MALACCA</text>
+          <text x="262" y="73" font-family="monospace" font-size="5" fill="#94a3b8">ELEVATED</text>
+
+          <!-- CHOKEPOINT: S CHINA SEA -->
+          <circle cx="328" cy="68" r="6" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+          <circle cx="328" cy="68" r="2.5" fill="#ef4444"/>
+          <text x="335" y="65" font-family="monospace" font-size="6" fill="#ef4444" letter-spacing="0.5">S.CHINA SEA</text>
+          <text x="335" y="58" font-family="monospace" font-size="5" fill="#94a3b8">CRITICAL</text>
+
+          <!-- CHOKEPOINT: TAIWAN STRAIT -->
+          <circle cx="382" cy="50" r="5" fill="none" stroke="#ef4444" stroke-width="1.2"/>
+          <circle cx="382" cy="50" r="2" fill="#ef4444"/>
+          <text x="390" y="47" font-family="monospace" font-size="5.5" fill="#ef4444" letter-spacing="0.5">TAIWAN STR</text>
+
+          <!-- CHOKEPOINT: LOMBOK -->
+          <circle cx="360" cy="118" r="5" fill="none" stroke="#eab308" stroke-width="1.2"/>
+          <circle cx="360" cy="118" r="2" fill="#eab308"/>
+          <text x="367" y="115" font-family="monospace" font-size="5.5" fill="#eab308" letter-spacing="0.5">LOMBOK</text>
+
+          <!-- CHOKEPOINT: SUEZ -->
+          <circle cx="110" cy="48" r="5" fill="none" stroke="#eab308" stroke-width="1.2"/>
+          <circle cx="110" cy="48" r="2" fill="#eab308"/>
+          <text x="96" y="43" font-family="monospace" font-size="5.5" fill="#eab308" letter-spacing="0.5">SUEZ</text>
+
+          <!-- LEGEND BAR -->
+          <rect x="0" y="208" width="500" height="12" fill="#070d1a"/>
+          <circle cx="15" cy="214" r="3" fill="#ef4444"/>
+          <text x="22" y="217" font-family="monospace" font-size="5.5" fill="#94a3b8">CRITICAL</text>
+          <circle cx="80" cy="214" r="3" fill="#f97316"/>
+          <text x="87" y="217" font-family="monospace" font-size="5.5" fill="#94a3b8">ELEVATED</text>
+          <circle cx="148" cy="214" r="3" fill="#eab308"/>
+          <text x="155" y="217" font-family="monospace" font-size="5.5" fill="#94a3b8">MONITORING</text>
+          <line x1="228" y1="214" x2="242" y2="214" stroke="#00e5c8" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="246" y="217" font-family="monospace" font-size="5.5" fill="#94a3b8">AU SUPPLY ROUTE</text>
+          <line x1="340" y1="214" x2="354" y2="214" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="358" y="217" font-family="monospace" font-size="5.5" fill="#94a3b8">RISK CORRIDOR</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- RIGHT: SYNTHETIC ETHNOGRAPHY RADAR -->
+    <div style="border:1px solid rgba(168,85,247,0.3);background:var(--bg);padding:16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:7px;letter-spacing:2px;color:var(--purple)">SYNTHETIC ETHNOGRAPHY ENGINE // PROPRIETARY IP</div>
+        <div style="font-size:7px;color:var(--cyan);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:var(--cyan);display:inline-block;animation:pulse 2s ease-in-out infinite"></span>LIVE</div>
+      </div>
+      <div style="font-size:8px;color:var(--text3);letter-spacing:1px">1,000+ PSYCHOMETRIC AGENT SWARMS // PARALLEL SIMULATION ACTIVE</div>
+      <div style="display:flex;justify-content:center"><canvas id="radarCanvas" width="380" height="320" style="display:block;max-width:100%"></canvas></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div style="border:1px solid rgba(168,85,247,0.3);background:rgba(168,85,247,0.04);padding:8px">
+          <div style="font-size:7px;color:var(--purple);letter-spacing:2px;margin-bottom:3px">THE MOAT // IP LAYER</div>
+          <div style="font-size:8px;color:var(--text2);line-height:1.6">Consensus Logic Weighting. Actor taxonomy. Psychometric calibration. Cannot be replicated off-shelf.</div>
+        </div>
+        <div style="border:1px solid rgba(0,229,200,0.2);background:rgba(0,229,200,0.03);padding:8px">
+          <div style="font-size:7px;color:var(--cyan);letter-spacing:2px;margin-bottom:3px">SIGNAL SOURCES</div>
+          <div style="font-size:8px;color:var(--text2);line-height:1.6">Perplexity + Claude + Gemini + n8n. 200+ streams. 14 time zones. Zero human latency.</div>
+        </div>
+        <div style="border:1px solid rgba(249,115,22,0.2);background:rgba(249,115,22,0.03);padding:8px">
+          <div style="font-size:7px;color:var(--orange);letter-spacing:2px;margin-bottom:3px">VERIFY LAYER</div>
+          <div style="font-size:8px;color:var(--text2);line-height:1.6">97% signal clarity threshold. Hallucination elimination. Cross-validated before delivery.</div>
+        </div>
+        <div style="border:1px solid rgba(234,179,8,0.2);background:rgba(234,179,8,0.03);padding:8px">
+          <div style="font-size:7px;color:var(--amber);letter-spacing:2px;margin-bottom:3px">PREDICTION LEDGER</div>
+          <div style="font-size:8px;color:var(--text2);line-height:1.6">Metaculus-logged. Timestamped. Brier score quarterly. Cannot be backdated. The compounding moat.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById('radarCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const W=380,H=320,cx=W/2,cy=H/2,R=118;
+  let t=0;
+  const axes=[
+    {label:'SENSE',angle:-Math.PI/2,val:0.92,color:'#00e5c8'},
+    {label:'SIMULATE',angle:-Math.PI/2+Math.PI*2/5,val:0.88,color:'#a855f7'},
+    {label:'VERIFY',angle:-Math.PI/2+Math.PI*4/5,val:0.97,color:'#22c55e'},
+    {label:'DELIVER',angle:-Math.PI/2+Math.PI*6/5,val:0.85,color:'#f97316'},
+    {label:'PREDICT',angle:-Math.PI/2+Math.PI*8/5,val:0.81,color:'#eab308'},
+  ];
+  const sources=[
+    {name:'Perplexity',r:50,a:0,speed:0.018,size:4,color:'#a855f7'},
+    {name:'Claude',r:36,a:1.2,speed:-0.022,size:5,color:'#00e5c8'},
+    {name:'Gemini',r:62,a:2.4,speed:0.015,size:4,color:'#3b82f6'},
+    {name:'n8n',r:42,a:3.8,speed:0.028,size:3,color:'#f97316'},
+    {name:'OSINT',r:72,a:0.8,speed:-0.012,size:3.5,color:'#ef4444'},
+    {name:'Maritime',r:54,a:4.2,speed:0.020,size:3.5,color:'#eab308'},
+    {name:'LinkedIn',r:40,a:5.5,speed:-0.016,size:3,color:'#0ea5e9'},
+    {name:'Reddit',r:64,a:2.0,speed:0.025,size:3,color:'#f97316'},
+    {name:'Telegram',r:32,a:3.1,speed:0.030,size:3,color:'#00e5c8'},
+    {name:'Metaculus',r:78,a:1.5,speed:-0.010,size:4,color:'#22c55e'},
+    {name:'GCaptain',r:66,a:5.0,speed:0.018,size:3,color:'#94a3b8'},
+    {name:'ASPI',r:52,a:4.8,speed:-0.014,size:3.5,color:'#a855f7'},
+  ];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#03070f';ctx.fillRect(0,0,W,H);
+    for(let i=1;i<=5;i++){
+      const ri=(R/5)*i;
+      ctx.beginPath();ctx.arc(cx,cy,ri,0,Math.PI*2);
+      ctx.strokeStyle=i===5?'#1a2a40':'#0f1a2e';ctx.lineWidth=i===5?1:0.5;ctx.stroke();
+      if(i<5){ctx.fillStyle='#1e3348';ctx.font='5px monospace';ctx.textAlign='left';ctx.fillText(Math.round(i*20)+'%',cx+ri+2,cy-2);}
+    }
+    const sw=t*0.8;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(sw);
+    const sg=ctx.createLinearGradient(0,0,R,0);
+    sg.addColorStop(0,'rgba(0,229,200,0.28)');sg.addColorStop(1,'rgba(0,229,200,0)');
+    ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,R,-0.4,0);ctx.closePath();ctx.fillStyle=sg;ctx.fill();
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(R,0);ctx.strokeStyle='rgba(0,229,200,0.8)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.restore();
+    axes.forEach(ax=>{
+      const ex=cx+R*Math.cos(ax.angle),ey=cy+R*Math.sin(ax.angle);
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(ex,ey);ctx.strokeStyle='#1a2a40';ctx.lineWidth=1;ctx.stroke();
+      const lx=cx+(R+16)*Math.cos(ax.angle),ly=cy+(R+16)*Math.sin(ax.angle);
+      ctx.fillStyle=ax.color;ctx.font='bold 7px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(ax.label,lx,ly);
+      const vx=cx+ax.val*R*Math.cos(ax.angle),vy=cy+ax.val*R*Math.sin(ax.angle);
+      ctx.beginPath();ctx.arc(vx,vy,3,0,Math.PI*2);ctx.fillStyle=ax.color;ctx.fill();
+    });
+    ctx.beginPath();
+    axes.forEach((ax,i)=>{
+      const vx=cx+ax.val*R*Math.cos(ax.angle),vy=cy+ax.val*R*Math.sin(ax.angle);
+      i===0?ctx.moveTo(vx,vy):ctx.lineTo(vx,vy);
+    });
+    ctx.closePath();ctx.strokeStyle='rgba(0,229,200,0.6)';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='rgba(0,229,200,0.06)';ctx.fill();
+    sources.forEach(s=>{
+      const angle=s.a+t*s.speed,nx=cx+s.r*Math.cos(angle),ny=cy+s.r*Math.sin(angle);
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(nx,ny);ctx.strokeStyle=s.color+'22';ctx.lineWidth=0.5;ctx.stroke();
+      ctx.beginPath();ctx.arc(nx,ny,s.size,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill();
+      ctx.beginPath();ctx.arc(nx,ny,s.size+2,0,Math.PI*2);ctx.strokeStyle=s.color+'44';ctx.lineWidth=1;ctx.stroke();
+      const diff=((angle-sw)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+      if(diff<0.45||diff>5.83){
+        ctx.fillStyle=s.color;ctx.font='5.5px monospace';
+        ctx.textAlign=nx>cx?'left':'right';ctx.textBaseline='middle';
+        ctx.fillText(s.name,nx+(nx>cx?s.size+3:-(s.size+3)),ny);
+      }
+    });
+    ctx.beginPath();ctx.arc(cx,cy,8,0,Math.PI*2);ctx.fillStyle='#0a1220';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,8,0,Math.PI*2);ctx.strokeStyle='#00e5c8';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle='#00e5c8';ctx.fill();
+    ctx.fillStyle='#4a6080';ctx.font='5px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('synARKa',cx,cy+16);
+    ctx.fillStyle='rgba(10,21,37,0.92)';ctx.fillRect(4,4,96,48);
+    ctx.fillStyle='#00e5c8';ctx.font='bold 7.5px monospace';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('AGENTS: 1,000+',8,8);
+    ctx.fillStyle='#94a3b8';ctx.font='6px monospace';
+    ctx.fillText('SOURCES: 200+',8,20);ctx.fillText('TIMEZONES: 14',8,30);ctx.fillText('ACCURACY: 97%',8,40);
+    t+=0.016;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+<!-- 72H CASCADE -->
+<div class="cascade-section">
+  <div class="section-eyebrow">THE 72-HOUR CASCADE</div>
+  <div class="cascade-grid">
+    <div class="cascade-box">
+      <div class="cb-num">01</div>
+      <div class="cb-title">STRATEGIC PRE-EMPTIVE</div>
+      <div class="cb-text">Identifying policy shifts and threat patterns before they crystallise into global headlines. The signal exists before the story.</div>
+    </div>
+    <div class="cascade-box">
+      <div class="cb-num">02</div>
+      <div class="cb-title">INFORMATION DOMINANCE</div>
+      <div class="cb-text">Collating signals from extraction nodes, refineries, and military nodes into a single verified truth. No noise. No latency.</div>
+    </div>
+    <div class="cascade-box">
+      <div class="cb-num">03</div>
+      <div class="cb-title">ASSET INSULATION</div>
+      <div class="cb-text">Providing the window of opportunity required to reallocate and secure critical sovereign interests before consensus forms.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<div class="comparison-section" style="grid-template-columns:1fr 1fr;gap:28px;padding:36px 40px">
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div class="comp-headline" style="font-size:38px;line-height:1.05">MOST<br>INTELLIGENCE<br>PLATFORMS<br>LOOK BACK.<br><span class="accent">SYNARKA<br>LOOKS<br>FORWARD.</span></div>
+    <div class="comp-text">Australian sovereignty is at the mercy of supply chain chokepoints and opaque geopolitical shifts. synARKa provides a 72-hour window of tactical clarity — before the consensus forms.</div>
+    <div class="threat-levels">
+      <div class="tl-title">GLOBAL THREAT LEVEL // LIVE</div>
+      <div class="tl-row"><div class="tl-label"><span class="tl-name">INDO-PACIFIC</span><span class="tl-status elevated">62% ELEVATED</span></div><div class="tl-progress"><div class="tl-fill elevated" style="width:62%"></div></div></div>
+      <div class="tl-row"><div class="tl-label"><span class="tl-name">RARE EARTHS</span><span class="tl-status critical">80% CRITICAL</span></div><div class="tl-progress"><div class="tl-fill critical" style="width:80%"></div></div></div>
+      <div class="tl-row"><div class="tl-label"><span class="tl-name">SUPPLY CHAIN</span><span class="tl-status high">72% HIGH</span></div><div class="tl-progress"><div class="tl-fill high" style="width:72%"></div></div></div>
+      <div class="tl-row"><div class="tl-label"><span class="tl-name">DEFENCE RISK</span><span class="tl-status high">65% HIGH</span></div><div class="tl-progress"><div class="tl-fill high" style="width:65%"></div></div></div>
+      <div class="tl-row"><div class="tl-label"><span class="tl-name">HORMUZ CLOSURE PROB</span><span class="tl-status elevated">41% ELEVATED</span></div><div class="tl-progress"><div class="tl-fill elevated" style="width:41%"></div></div></div>
+    </div>
+    <table class="comp-table">
+      <thead><tr><th>PARAMETER</th><th class="trad">TRADITIONAL</th><th class="synarka">SYNARKA</th></tr></thead>
+      <tbody>
+        <tr><td>SIGNAL WINDOW</td><td class="trad">24–48H DELAY</td><td class="synarka">72H AHEAD</td></tr>
+        <tr><td>DATA SOURCES</td><td class="trad">SINGLE LAYER</td><td class="synarka">200+ STREAMS</td></tr>
+        <tr><td>ACTOR MODELLING</td><td class="trad">NONE</td><td class="synarka">1,000+ AGENTS</td></tr>
+        <tr><td>VERIFICATION</td><td class="trad">MANUAL</td><td class="synarka">AUTOMATED</td></tr>
+        <tr><td>DELIVERY</td><td class="trad">DAILY REPORT</td><td class="synarka">LIVE SIGNAL</td></tr>
+        <tr><td>ACCURACY</td><td class="trad">REACTIVE</td><td class="synarka">PREDICTIVE</td></tr>
+        <tr><td>FOCUS</td><td class="trad">GLOBAL GENERIC</td><td class="synarka">INDO-PACIFIC</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="border:1px solid var(--border);background:var(--bg);padding:14px">
+      <div style="font-size:7px;letter-spacing:3px;color:var(--orange);margin-bottom:10px;display:flex;justify-content:space-between"><span>ACTOR INTELLIGENCE // MONITORED</span><span style="color:var(--red)">? 12 ACTIVE</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="border:1px solid rgba(239,68,68,0.3);padding:8px 10px;background:rgba(239,68,68,0.04)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--red);letter-spacing:1px">[FLASH]</span><span style="font-size:7px;color:var(--text3)">12M AGO</span></div><div style="font-size:8px;color:var(--red);letter-spacing:1px;margin-bottom:2px">BEIJING MOFCOM</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"Export licensing review for terbium &amp; dysprosium extended 90 days."</div></div>
+        <div style="border:1px solid var(--border);padding:8px 10px;background:var(--bg3)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--text3);letter-spacing:1px">[DARK CORP]</span><span style="font-size:7px;color:var(--text3)">2H AGO</span></div><div style="font-size:8px;color:var(--cyan);letter-spacing:1px;margin-bottom:2px">CHINA RE CONSORTIUM</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"China controls 60% of rare earth mining and 85% of processing."</div></div>
+        <div style="border:1px solid var(--border);padding:8px 10px;background:var(--bg3)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--text3);letter-spacing:1px">[OSINT]</span><span style="font-size:7px;color:var(--text3)">5H AGO</span></div><div style="font-size:8px;color:var(--cyan);letter-spacing:1px;margin-bottom:2px">HORMUZ WATCH</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"Mines remain key obstacle to full Hormuz reopening — Hegseth."</div></div>
+        <div style="border:1px solid var(--border);padding:8px 10px;background:var(--bg3)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--text3);letter-spacing:1px">[THE STRATEGIST]</span><span style="font-size:7px;color:var(--text3)">8H AGO</span></div><div style="font-size:8px;color:var(--orange);letter-spacing:1px;margin-bottom:2px">US COMMERCE DEPT</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"Critical mineral supply chain independence is a national security priority."</div></div>
+        <div style="border:1px solid var(--border);padding:8px 10px;background:var(--bg3)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--purple);letter-spacing:1px">[ASPI]</span><span style="font-size:7px;color:var(--text3)">14H AGO</span></div><div style="font-size:8px;color:var(--purple);letter-spacing:1px;margin-bottom:2px">JUSTIN BASSI // ASPI</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"Australia's defence posture must account for rare earth supply chain fragility."</div></div>
+        <div style="border:1px solid var(--border);padding:8px 10px;background:var(--bg3)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:7px;color:var(--text3);letter-spacing:1px">[GCAPTAIN]</span><span style="font-size:7px;color:var(--text3)">18H AGO</span></div><div style="font-size:8px;color:var(--amber);letter-spacing:1px;margin-bottom:2px">PLA NAVY SOUTH FLEET</div><div style="font-size:9px;color:var(--text2);font-style:italic;line-height:1.5">"Live-fire exercises in South China Sea. 2 shipping corridors temporarily closed."</div></div>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);background:var(--bg);padding:14px">
+      <div style="font-size:7px;letter-spacing:2px;color:var(--text3);margin-bottom:10px">AU SOVEREIGN SUPPLY EXPOSURE</div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">FUEL IMPORTS VIA HORMUZ</span><span style="color:var(--red)">83%</span></div><div style="height:3px;background:var(--border)"><div style="width:83%;height:3px;background:var(--red)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">RE IMPORTS VIA MALACCA</span><span style="color:var(--orange)">71%</span></div><div style="height:3px;background:var(--border)"><div style="width:71%;height:3px;background:var(--orange)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">TRADE VIA S.CHINA SEA</span><span style="color:var(--orange)">68%</span></div><div style="height:3px;background:var(--border)"><div style="width:68%;height:3px;background:var(--orange)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">AU FUEL RESERVE</span><span style="color:var(--red)">31 DAYS</span></div><div style="height:3px;background:var(--border)"><div style="width:10%;height:3px;background:var(--red)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">AU-OWNED TANKERS</span><span style="color:var(--red)">ZERO</span></div><div style="height:3px;background:var(--border)"><div style="width:1%;height:3px;background:var(--red)"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:8px;margin-bottom:3px"><span style="color:var(--text2)">CHINA RE PROCESSING CONTROL</span><span style="color:var(--red)">85%</span></div><div style="height:3px;background:var(--border)"><div style="width:85%;height:3px;background:var(--red)"></div></div></div>
+      </div>
+    </div>
+    <div style="border:1px solid rgba(0,229,200,0.25);background:rgba(0,229,200,0.03);padding:12px">
+      <div style="font-size:7px;letter-spacing:2px;color:var(--cyan);margin-bottom:6px">synARKa SOVEREIGN BRIEF</div>
+      <div style="font-size:9px;color:var(--text2);line-height:1.8;margin-bottom:10px">Request the full Indo-Pacific Intelligence Brief — timestamped predictions, actor analysis, 72-hour forward signal.</div>
+      <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" style="display:block;background:var(--purple);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;padding:10px 16px;text-decoration:none;text-align:center">REQUEST INTELLIGENCE BRIEF ?</a>
+    </div>
+  </div>
+</div>
+
+<!-- TECH DISCLOSURE -->
+<div class="tech-section">
+  <div class="tech-header">
+    <span class="threat-dot red" style="width:8px;height:8px"></span>
+    <span class="tech-eyebrow">SOVEREIGN TECHNOLOGY DISCLOSURE</span>
+    <span class="tech-badge">CLASSIFICATION: OPEN SOURCE SIGNAL</span>
+  </div>
+  <div class="tech-title">The Architecture Behind synARKa Is Not A Chatbot.</div>
+  <div class="tech-subtitle">SYNARKA OPERATES A PROPRIETARY MULTI-LAYER INTELLIGENCE ARCHITECTURE ENGINEERED FOR ONE PURPOSE: DETECTING GEOPOLITICAL SIGNAL SHIFT BEFORE IT BECOMES MARKET MOVEMENT.</div>
+  <div class="layers">
+    <div class="layer">
+      <div class="layer-name">SENSE LAYER —</div>
+      <div class="layer-text">Autonomous real-time web spiders and deep-scrape agents continuously harvest signal from 200+ verified sovereign, commercial, and dark-web adjacent data streams across 14 time zones. No human latency. No editorial filter.</div>
+    </div>
+    <div class="layer">
+      <div class="layer-name">SIMULATE LAYER —</div>
+      <div class="layer-text">1,000+ psychometric agent swarms — each calibrated to a distinct geopolitical actor profile — run simultaneous scenario simulations the moment a signal is detected. Chinese Ministry spokespersons. ASX board rooms. Pentagon procurement desks. Jakarta trade negotiators. Every actor. Every reaction. Modelled in parallel.</div>
+    </div>
+    <div class="layer">
+      <div class="layer-name">VERIFY LAYER —</div>
+      <div class="layer-text">Every simulated output is cross-validated against live structured and unstructured data sources before delivery. Hallucination elimination protocol. 97% signal clarity threshold. If it does not pass verification, it does not leave the engine.</div>
+    </div>
+    <div class="layer">
+      <div class="layer-name">DELIVER LAYER —</div>
+      <div class="layer-text">Verified, timestamped, actor-weighted intelligence delivered directly to the decision-maker. Not a dashboard. Not a newsletter. A sovereign-grade intelligence instrument.</div>
+    </div>
+  </div>
+  <div class="ip-boxes">
+    <div class="ip-box">
+      <div class="ip-box-title">PREDICTION INTEGRITY —</div>
+      <div class="ip-box-text">ALL SYNARKA FORECASTS ARE TIMESTAMPED ON PUBLICATION AND LOGGED TO A PUBLIC IMMUTABLE LEDGER. TRACK RECORD IS AUDITABLE. BRIER SCORE UPDATED QUARTERLY.</div>
+    </div>
+    <div class="ip-box">
+      <div class="ip-box-title">IP POSITION —</div>
+      <div class="ip-box-text">CORE SIMULATION ARCHITECTURE, PSYCHOMETRIC AGENT TAXONOMY, AND CONSENSUS LOGIC WEIGHTING METHODOLOGY ARE PROPRIETARY. THE MOAT IS NOT THE DATA. THE MOAT IS THE ORCHESTRATION.</div>
+    </div>
+    <div class="ip-box">
+      <div class="ip-box-title">CAPITAL POSITION —</div>
+      <div class="ip-box-text">SYNARKA IS FOUNDER-HELD. EQUITY IS NOT FOR SALE BEYOND 10%. STRATEGIC PARTNERSHIP ENQUIRIES ONLY. THIS IS A LONG-TERM SOVEREIGN ASSET — NOT A SHORT-TERM EXIT VEHICLE.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-tagline">? BUILT IN AUSTRALIA. ENGINEERED FOR THE INDO-PACIFIC. 72 HOURS BEFORE THE WORLD REACTS.</div>
+  <div class="footer-grid">
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="3" r="2" fill="none" stroke="#4a6080" stroke-width="1"/><path d="M1 9c0-2 1.8-3 4-3s4 1 4 3" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">FOUNDER</div><div class="footer-value">RAJ SINGH</div></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" rx="1" fill="none" stroke="#4a6080" stroke-width="1"/><path d="M1 3.5l4 2.5 4-2.5" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">DIRECT LINE</div><a href="mailto:raj@synarka.pro" class="footer-value" style="text-decoration:none">raj@synarka.pro</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="#4a6080" stroke-width="1"/><path d="M5 1v4l2 2" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">NETWORK</div><a href="https://synarka.pro" target="_blank" class="footer-value" style="text-decoration:none">synarka.pro</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M9 1L1 4.5l3 1L5.5 9 9 1z" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">INTELLIGENCE CHANNEL</div><a href="https://t.me/synARKaIntelligence" target="_blank" class="footer-value" style="text-decoration:none">t.me/synARKaIntelligence</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" rx="1" fill="none" stroke="#4a6080" stroke-width="1"/><path d="M3 5h4M3 3h4M3 7h2" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">LINKEDIN PROFILE</div><a href="https://www.linkedin.com/in/synarka-intelligence" target="_blank" class="footer-value" style="text-decoration:none">linkedin.com/in/synarka-intelligence</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 8L8 2M2 2h6v6" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">INTELLIGENCE BRIEF</div><a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="footer-value" style="text-decoration:none;color:var(--purple)">REQUEST BRIEF ?</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M9 1L1 4.5l3 1L5.5 9 9 1z" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">X / TWITTER</div><a href="https://x.com/synARKa" target="_blank" class="footer-value" style="text-decoration:none">@synARKa</a></div>
+    </div>
+    <div class="footer-item">
+      <div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="#4a6080" stroke-width="1"/><path d="M3 5h4M5 3v4" fill="none" stroke="#4a6080" stroke-width="1"/></svg></div>
+      <div><div class="footer-label">SECURE LINE</div><a href="tel:+61469313323" class="footer-value" style="text-decoration:none">+61-469-313-323</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">© MMXXVI SOVEREIGN PROTOCOL V3.1 // ALL SYSTEMS OPERATIONAL // ABN 83 988 690 362</div>
+</footer>
+
+<script>
+const tickerItems=[
+  {src:"[BBC NEWS]",text:"China car giant BYD says it can thrive without US market amid tariff pressure"},
+  {src:"[THE STRATEGIST]",text:"Not just fuel: Australia also relies on Gulf urea supplies for agriculture"},
+  {src:"[THE STRATEGIST]",text:"Helping Iran, China is a party in the war against Israel"},
+  {src:"[SUPPLY CHAIN]",text:"MD-40 deploys AI in supply chain, business processes"},
+  {src:"[BBC NEWS]",text:"The viral manifesto of anti-woke tech boss with NHS and defence contracts"},
+  {src:"[THE STRATEGIST]",text:"XDS 2026 — How Australia's defence strategy converges with US balance of power"},
+  {src:"[SUPPLY CHAIN]",text:"Ocean shipping surcharges spurred by Iran war weigh on contract talks"},
+];
+const t=document.getElementById('ticker');
+const full=[...tickerItems,...tickerItems];
+t.innerHTML=full.map(i=>`<span class="ticker-item"><span class="src">${i.src}</span>${i.text}</span>`).join('');
+
+async function fetchLiveTicker(){
+  try{
+    const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.aspistrategist.org.au/feed/&count=8');
+    const d=await r.json();
+    if(d.items&&d.items.length>0){
+      const live=d.items.map(item=>({src:'[THE STRATEGIST]',text:item.title}));
+      const gcr=await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.gcaptain.com/feed/&count=6');
+      const gcd=await gcr.json();
+      if(gcd.items) live.push(...gcd.items.map(i=>({src:'[GCAPTAIN]',text:i.title})));
+      const combined=[...live,...live];
+      t.innerHTML=combined.map(i=>`<span class="ticker-item"><span class="src">${i.src}</span>${i.text}</span>`).join('');
+    }
+  }catch(e){}
+}
+fetchLiveTicker();
+setInterval(fetchLiveTicker,600000);
+
+const markets=[
+  {sym:"LYNAS (ASX)",price:"$7.21",chg:"-1.29%",up:false},
+  {sym:"PILBARA (ASX)",price:"$4.12",chg:"+3.16%",up:true},
+  {sym:"ILUKA (ASX)",price:"$5.05",chg:"+0.51%",up:true},
+  {sym:"ARAFURA (ASX)",price:"$0.33",chg:"-5.64%",up:false},
+  {sym:"LIONTOWN (ASX)",price:"$0.89",chg:"+1.07%",up:true},
+  {sym:"GOLD",price:"$2,352",chg:"+0.87%",up:true},
+  {sym:"SILVER",price:"$27.46",chg:"+1.21%",up:true},
+  {sym:"BRENT CRUDE",price:"$83.86",chg:"-0.59%",up:false},
+  {sym:"NATURAL GAS",price:"$2.18",chg:"+2.30%",up:true},
+  {sym:"S&P 500",price:"$5,621",chg:"+0.45%",up:true},
+];
+function renderMarkets(data){
+  const m=document.getElementById('market');
+  const full=[...data,...data];
+  m.innerHTML=full.map(i=>`<div class="mitem"><span class="sym">${i.sym}</span><span class="price">${i.price}</span><span class="${i.up?'up':'dn'}">${i.chg}</span></div>`).join('');
+}
+renderMarkets(markets);
+
+// LIVE PRICES via CoinGecko (free, no key needed)
+async function fetchLivePrices(){
+  try{
+    const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=gold,silver,bitcoin&vs_currencies=usd&include_24hr_change=true');
+    const d=await r.json();
+    const live=[...markets];
+    if(d.gold){
+      const idx=live.findIndex(x=>x.sym==='GOLD');
+      const chg=d.gold.usd_24h_change||0;
+      live[idx]={sym:'GOLD',price:`$${Math.round(d.gold.usd).toLocaleString()}`,chg:`${chg>=0?'+':''}${chg.toFixed(2)}%`,up:chg>=0};
+    }
+    if(d.silver){
+      const idx=live.findIndex(x=>x.sym==='SILVER');
+      const chg=d.silver.usd_24h_change||0;
+      live[idx]={sym:'SILVER',price:`$${d.silver.usd.toFixed(2)}`,chg:`${chg>=0?'+':''}${chg.toFixed(2)}%`,up:chg>=0};
+    }
+    renderMarkets(live);
+  }catch(e){renderMarkets(markets);}
+}
+fetchLivePrices();
+setInterval(fetchLivePrices,120000);
+
+// LIVE NEWS via RSS2JSON (free tier, no key)
+async function fetchLiveNews(){
+  const feeds=[
+    {url:'https://api.rss2json.com/v1/api.json?rss_url=https://www.gcaptain.com/feed/',src:'GCAPTAIN',tab:'LOGISTICS RISK'},
+    {url:'https://api.rss2json.com/v1/api.json?rss_url=https://www.aspistrategist.org.au/feed/',src:'THE STRATEGIST',tab:'CRITICAL MINERALS'},
+  ];
+  for(const feed of feeds){
+    try{
+      const r=await fetch(feed.url);
+      const d=await r.json();
+      if(d.items&&d.items.length>0){
+        const items=d.items.slice(0,6).map(item=>({
+          src:feed.src,
+          title:item.title.toUpperCase().substring(0,90),
+          time:new Date(item.pubDate).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'})
+        }));
+        if(feedData[feed.tab]){
+          feedData[feed.tab]=[...items,...feedData[feed.tab].slice(0,3)];
+        }
+        if(activeTab===feed.tab){switchTab(Object.keys(feedData).indexOf(feed.tab));}
+      }
+    }catch(e){}
+  }
+}
+fetchLiveNews();
+setInterval(fetchLiveNews,300000);
+
+const cities=[
+  {city:"WASHINGTON DC",tz:"America/New_York"},
+  {city:"LONDON",tz:"Europe/London"},
+  {city:"MOSCOW",tz:"Europe/Moscow"},
+  {city:"NEW DELHI",tz:"Asia/Kolkata"},
+  {city:"BEIJING",tz:"Asia/Shanghai"},
+  {city:"SYDNEY",tz:"Australia/Sydney"},
+];
+function updateClocks(){
+  document.getElementById('clocks').innerHTML=cities.map(c=>{
+    const t=new Date().toLocaleTimeString('en-GB',{timeZone:c.tz,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    return `<div class="ts-city"><span class="city">${c.city}</span><span class="time">${t}</span></div>`;
+  }).join('');
+}
+updateClocks();setInterval(updateClocks,1000);
+
+const signals=[
+  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"CRITICAL",actor:"LYNAS RARE EARTHS",text:'"Samarium oxide production milestone achieved. Expanding Heavy Rare Earth processing capabilities."',ago:"4H AGO"},
+  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"ELEVATED",actor:"US COMMERCE DEPT",text:'"New analysis: China rare earth export restrictions represent a strategic leverage play, not an economic decision."',ago:"20H AGO"},
+  {type:"DEFENCE",typeClass:"defence",badge:"ELEVATED",actor:"US COMMERCE DEPT",text:'"America\'s critical mineral supply chain independence is a national security priority. Full stop."',ago:"20H AGO"},
+  {type:"LOGISTICS",typeClass:"logistics",badge:"CRITICAL",actor:"GC CAPTAIN",text:'"Indo-Pacific maritime chokepoints remain the most vulnerable areas in global supply chain architecture."',ago:"1H AGO"},
+  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"ELEVATED",actor:"LYNAS RARE EARTHS",text:'"Samarium oxide production milestone achieved. Expanding Heavy Rare Earth processing capabilities."',ago:"4H AGO"},
+];
+document.getElementById('hero-left').innerHTML=signals.map(s=>`
+<div class="signal-card">
+  <div class="sc-header">
+    <span class="sc-type ${s.typeClass}">${s.type}</span>
+    <span class="sc-badge ${s.badge.toLowerCase()}">${s.badge}</span>
+  </div>
+  <div class="sc-actor">ACTOR: ${s.actor}</div>
+  <div class="sc-text">${s.text}</div>
+  <div class="sc-footer"><span class="sc-time">${s.ago}</span><a class="sc-link" href="#">OSINT LINK &rsaquo;</a></div>
+</div>`).join('');
+
+const osintCards=[
+  {src:"[DARK CORP]",time:"2H AGO",entity:"CHINA RE CONSORTIUM",text:'"Analysis: China controls 60% of rare earth mining and 85% of processing."'},
+  {src:"[OSINT]",time:"5H AGO",entity:"HORMUZ WATCH",text:'"Hegseth signals mines remain key obstacle to full Hormuz reopening."'},
+];
+document.getElementById('osint-cards').innerHTML=osintCards.map(c=>`
+<div class="osint-card">
+  <div class="osint-header"><span class="osint-src">${c.src}</span><span class="osint-time">${c.time}</span></div>
+  <div class="osint-entity">${c.entity}</div>
+  <div class="osint-text">${c.text}</div>
+</div>`).join('');
+
+const tabData=[
+  {label:"CRITICAL MINERALS",active:true},
+  {label:"DEFENCE TECH",active:false},
+  {label:"LOGISTICS RISK",active:false},
+];
+const tabsEl=document.getElementById('tabs');
+tabsEl.innerHTML=tabData.map((t,i)=>`
+<div class="tab ${t.active?'active':''}" onclick="switchTab(${i})">
+  <svg class="tab-icon" viewBox="0 0 14 14" fill="none" stroke="${t.active?'#00e5c8':'#4a6080'}" stroke-width="1.2">
+    ${i===0?'<polygon points="7,1 12,4 12,10 7,13 2,10 2,4"/>':i===1?'<path d="M7 1 L12 4 L12 8 C12 11 7 13 7 13 C7 13 2 11 2 8 L2 4 Z"/>':'<circle cx="7" cy="7" r="5"/><line x1="7" y1="2" x2="7" y2="7"/><line x1="7" y1="7" x2="10" y2="7"/>'}
+  </svg>
+  <span class="tab-label">${t.label}</span>
+  <span class="tab-dot"></span>
+</div>`).join('');
+
+const feedData={
+  "CRITICAL MINERALS":[
+    {src:"GCAPTAIN",title:"PANAMA CANAL PUSHES BACK ON 'LINE JUMPING' CLAIMS AS AUCTION SLOT PRICES SURGE",time:"22:32:01"},
+    {src:"GCAPTAIN",title:"HEGSETH SIGNALS MINES REMAIN KEY OBSTACLE TO FULL HORMUZ REOPENING",time:"22:04:08"},
+    {src:"GCAPTAIN",title:"U.S. TARGETS MAJOR CHINESE REFINERY AND SHIPS IN ESCALATING CRACKDOWN ON IRAN'S OIL TRADE",time:"18:51:42"},
+    {src:"GCAPTAIN",title:"DAMEN AND UK DREDGING SIGN CONTRACT FOR ADVANCED TSHD",time:"18:42:32"},
+    {src:"THE STRATEGIST",title:"CHINA CONTROLS 84% OF GLOBAL RARE EARTH PROCESSING — AUSTRALIA MUST ACT NOW",time:"17:20:11"},
+    {src:"AFR",title:"LYNAS EXPANDS HEAVY RARE EARTH CAPACITY AT MOUNT WELD AMID CHINA EXPORT CONTROLS",time:"15:44:09"},
+  ],
+  "DEFENCE TECH":[
+    {src:"DEFENCE NEWS",title:"UKRAINE TO FIELD 25,000 GROUND ROBOTS IN PUSH TO REPLACE SOLDIERS FOR FRONTLINE LOGISTICS",time:"18:18:15"},
+    {src:"DEFENCE NEWS",title:"US AIR FORCE AIMS TO DOUBLE F-15EX EAGLE FLEET",time:"18:04:20"},
+    {src:"DEFENCE NEWS",title:"WHY THE US MARINE CORPS WANTS A NEW ANTI-TANK LOITERING MUNITION",time:"16:33:24"},
+    {src:"DEFENCE NEWS",title:"THE US MILITARY WANTS A FLEET OF MISSILE-KILLING LASER DRONES",time:"15:12:08"},
+    {src:"THE STRATEGIST",title:"AUSTRALIA'S AUKUS SUBMARINE TIMELINE UNDER REVIEW AS COSTS ESCALATE",time:"13:55:30"},
+  ],
+  "LOGISTICS RISK":[
+    {src:"GCAPTAIN",title:"PANAMA CANAL PUSHES BACK ON 'LINE JUMPING' CLAIMS AS AUCTION SLOT PRICES SURGE",time:"22:32:01"},
+    {src:"GCAPTAIN",title:"HEGSETH SIGNALS MINES REMAIN KEY OBSTACLE TO FULL HORMUZ REOPENING",time:"22:04:08"},
+    {src:"GCAPTAIN",title:"U.S. TARGETS MAJOR CHINESE REFINERY AND SHIPS IN ESCALATING CRACKDOWN ON IRAN'S OIL TRADE",time:"18:51:40"},
+    {src:"GCAPTAIN",title:"DAMEN AND UK DREDGING SIGN CONTRACT FOR ADVANCED TSHD",time:"18:42:50"},
+    {src:"GCAPTAIN",title:"WHITE HOUSE EXTENDS JONES ACT SHIPPING WAIVER TO AUGUST",time:"18:21:10"},
+    {src:"GCAPTAIN",title:"IMO'S MEPC 84 OPENS AS KEY TEST FOR DELAYED SHIPPING CLIMATE PACT",time:"16:42:18"},
+  ]
+};
+
+const tacticalData={
+  "CRITICAL MINERALS":{
+    prob:74.2,probColor:"var(--orange)",window:"OPEN",
+    quote:"Sovereign resilience depends on identifying refinery chokepoints before executive action.",
+    signals:[
+      {name:"CHINA RE EXPORT RESTRICTION PROB",val:"82%",cls:"red"},
+      {name:"LYNAS SUPPLY CONTINUITY",val:"91%",cls:"green"},
+      {name:"HORMUZ CLOSURE IMPACT ON AU",val:"67%",cls:"orange"},
+      {name:"AU GOVT INTERVENTION PROB",val:"44%",cls:"amber"},
+      {name:"PRICE SPIKE 30-DAY WINDOW",val:"78%",cls:"orange"},
+    ],
+    actors:[
+      {name:"MOFCOM",cls:"hot"},{name:"LYNAS RE",cls:"watch"},
+      {name:"PILBARA MIN",cls:"watch"},{name:"ARAFURA",cls:"neutral"},
+      {name:"ILUKA RES",cls:"neutral"},{name:"BEIJING RARE EARTH",cls:"hot"},
+    ],
+    predictions:[
+      {id:"SYN-CM-041",conf:"HIGH",confCls:"high",text:"China to tighten dysprosium export quotas Q2 2026",resolve:"RESOLVES: 30 JUN 2026",pct:81},
+      {id:"SYN-CM-042",conf:"MED",confCls:"med",text:"Lynas NdPr output to exceed 10,000T by Q3 2026",resolve:"RESOLVES: 30 SEP 2026",pct:63},
+      {id:"SYN-CM-043",conf:"HIGH",confCls:"high",text:"AU critical minerals strategic reserve activated by May 2026",resolve:"RESOLVES: 31 MAY 2026",pct:77},
+    ],
+    velocity:{processed:14858,actors:244,scenarios:1264,active:20},
+  },
+  "DEFENCE TECH":{
+    prob:61.5,probColor:"var(--amber)",window:"OPEN",
+    quote:"Autonomous systems procurement decisions made in the next 72 hours will define battlefield doctrine for a decade.",
+    signals:[
+      {name:"AUKUS SUBMARINE DELAY PROB",val:"73%",cls:"orange"},
+      {name:"GHOST BAT PROGRAMME RISK",val:"38%",cls:"amber"},
+      {name:"US DEFENCE TECH EXPORT BLOCK",val:"29%",cls:"green"},
+      {name:"AI WEAPONS ESCALATION INDEX",val:"85%",cls:"red"},
+      {name:"ASCA TENDER ACTIVITY 72H",val:"HIGH",cls:"orange"},
+    ],
+    actors:[
+      {name:"PENTAGON",cls:"hot"},{name:"DSTO",cls:"watch"},
+      {name:"BAE SYSTEMS AU",cls:"watch"},{name:"BOEING AU",cls:"neutral"},
+      {name:"ASPI",cls:"watch"},{name:"DEFENCE SA",cls:"neutral"},
+    ],
+    predictions:[
+      {id:"SYN-DF-018",conf:"HIGH",confCls:"high",text:"Australia to announce additional ASCA contract tranche before June 2026",resolve:"RESOLVES: 30 JUN 2026",pct:79},
+      {id:"SYN-DF-019",conf:"MED",confCls:"med",text:"US restricts AI targeting system exports to non-AUKUS partners",resolve:"RESOLVES: 31 DEC 2026",pct:55},
+      {id:"SYN-DF-020",conf:"MED",confCls:"med",text:"Ghost Bat autonomous drone enters operational testing phase Q3 2026",resolve:"RESOLVES: 30 SEP 2026",pct:61},
+    ],
+    velocity:{processed:9204,actors:187,scenarios:944,active:14},
+  },
+  "LOGISTICS RISK":{
+    prob:68.9,probColor:"var(--orange)",window:"OPEN",
+    quote:"Australia's 30-day fuel reserve is the single most exploitable sovereign vulnerability in the Indo-Pacific theatre.",
+    signals:[
+      {name:"HORMUZ CLOSURE PROBABILITY",val:"41%",cls:"amber"},
+      {name:"MALACCA DISRUPTION INDEX",val:"34%",cls:"amber"},
+      {name:"AU FUEL RESERVE DAYS",val:"31D",cls:"red"},
+      {name:"FREIGHT RATE SPIKE 30D PROB",val:"62%",cls:"orange"},
+      {name:"DARWIN PORT RISK SCORE",val:"HIGH",cls:"red"},
+    ],
+    actors:[
+      {name:"GEODIS AU",cls:"watch"},{name:"IRAN IRGC",cls:"hot"},
+      {name:"TANKER CONSORTIUM",cls:"hot"},{name:"MSC",cls:"neutral"},
+      {name:"PORT AU",cls:"watch"},{name:"ENERGY MIN BOWEN",cls:"watch"},
+    ],
+    predictions:[
+      {id:"SYN-LG-031",conf:"HIGH",confCls:"high",text:"Hormuz disruption to increase AU diesel price 8–14% within 30 days",resolve:"RESOLVES: 25 MAY 2026",pct:74},
+      {id:"SYN-LG-032",conf:"MED",confCls:"med",text:"Federal govt to announce strategic fuel reserve expansion Q2 2026",resolve:"RESOLVES: 30 JUN 2026",pct:58},
+      {id:"SYN-LG-033",conf:"HIGH",confCls:"high",text:"Darwin Port strategic review tabled by July 2026",resolve:"RESOLVES: 31 JUL 2026",pct:71},
+    ],
+    velocity:{processed:11432,actors:198,scenarios:1089,active:17},
+  }
+};
+
+function renderTactical(tab){
+  const d=tacticalData[tab];if(!d)return;
+  document.getElementById('tactical-panel').innerHTML=`
+    <div class="tp-title">TACTICAL CONTEXT</div>
+    <div class="tp-metric">
+      <div class="tp-label">POLICY INVARIANT SHIFT PROBABILITY:</div>
+      <div class="tp-value" style="color:${d.probColor}">${d.prob}<span class="unit">%</span></div>
+      <div class="tp-bar-wrap"><div class="tp-bar" style="width:${d.prob}%;background:${d.probColor}"></div></div>
+    </div>
+    <div class="tp-text">72-HOUR WINDOW: <span style="color:var(--cyan)">${d.window}</span></div>
+    <div class="tp-divider"></div>
+    <div class="tp-section-title">SIGNAL PROBABILITY MATRIX</div>
+    ${d.signals.map(s=>`<div class="tp-signal-row"><span class="tp-signal-name">${s.name}</span><span class="tp-signal-val ${s.cls}">${s.val}</span></div>`).join('')}
+    <div class="tp-divider"></div>
+    <div class="tp-section-title">ACTIVE ACTORS // MONITORED</div>
+    <div style="margin-bottom:8px">${d.actors.map(a=>`<span class="tp-actor-tag ${a.cls}">${a.name}</span>`).join('')}</div>
+    <div class="tp-divider"></div>
+    <div class="tp-section-title">ACTIVE PREDICTIONS // LEDGER</div>
+    ${d.predictions.map(p=>`
+    <div class="tp-prediction">
+      <div class="tp-pred-header"><span class="tp-pred-id">${p.id}</span><span class="tp-pred-conf ${p.confCls}">${p.conf} CONF</span></div>
+      <div class="tp-pred-text">${p.text}</div>
+      <div class="tp-mini-bar-wrap"><div class="tp-mini-bar-bg"><div class="tp-mini-bar-fill" style="width:${p.pct}%;background:${p.confCls==='high'?'var(--green)':'var(--amber)'}"></div></div><span class="tp-mini-pct">${p.pct}%</span></div>
+      <div class="tp-pred-resolve">${p.resolve}</div>
+    </div>`).join('')}
+    <div class="tp-divider"></div>
+    <div class="tp-section-title">SIGNAL VELOCITY // SESSION</div>
+    <div class="tp-signal-row"><span class="tp-signal-name">SIGNALS PROCESSED</span><span class="tp-signal-val">${d.velocity.processed.toLocaleString()}</span></div>
+    <div class="tp-signal-row"><span class="tp-signal-name">ACTORS MONITORED</span><span class="tp-signal-val">${d.velocity.actors}</span></div>
+    <div class="tp-signal-row"><span class="tp-signal-name">SCENARIOS SIMULATED</span><span class="tp-signal-val">${d.velocity.scenarios.toLocaleString()}</span></div>
+    <div class="tp-signal-row" style="border-bottom:none"><span class="tp-signal-name">PREDICTIONS ACTIVE</span><span class="tp-signal-val">${d.velocity.active}</span></div>
+    <div class="tp-divider"></div>
+    <div class="tp-quote">"${d.quote}"</div>
+    <div class="tp-version" style="margin-top:10px">ENGINE VERSION: V3.1 // ALPHA</div>
+  `;
+}
+
+let activeTab="CRITICAL MINERALS";
+function switchTab(i){
+  activeTab=tabData[i].label;
+  document.querySelectorAll('.tab').forEach((t,j)=>{
+    t.classList.toggle('active',j===i);
+    t.querySelector('svg').setAttribute('stroke',j===i?'#00e5c8':'#4a6080');
+    t.querySelector('.tab-dot').style.background=j===i?'var(--cyan)':'var(--border)';
+    t.querySelector('.tab-label').style.color=j===i?'var(--cyan)':'var(--text3)';
+  });
+  document.getElementById('feed-header').textContent=`LIVE HEADLINES // TARGET: ${activeTab}`;
+  const feed=feedData[activeTab]||[];
+  document.getElementById('news-feed').innerHTML=feed.map(n=>`
+  <div class="news-item">
+    <div class="news-src">${n.src}</div>
+    <div class="news-title">${n.title}</div>
+    <div class="news-time">${n.time}</div>
+  </div>`).join('');
+  renderTactical(activeTab);
+}
+switchTab(0);
+</script>
+</body>
+</html>
