@@ -290,7 +290,34 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 40px
   </div>
   <div class="nav-right">
     <div class="nav-status"><span class="status-dot"></span>SOVEREIGN PROTOCOL ACTIVE</div>
-    <select class="nav-lang"><option>[ LANG: EN ]</option></select>
+    <select class="nav-lang" id="langSelect" onchange="translatePage(this.value)">
+      <option value="en">[ LANG: EN ]</option>
+      <option value="zh">?? ZH</option>
+      <option value="ar">??????? AR</option>
+      <option value="hi">?????? HI</option>
+      <option value="ja">??? JA</option>
+      <option value="ko">??? KO</option>
+      <option value="fr">FRANÇAIS FR</option>
+      <option value="de">DEUTSCH DE</option>
+      <option value="es">ESPAÑOL ES</option>
+      <option value="pt">PORTUGUÊS PT</option>
+      <option value="ru">??????? RU</option>
+      <option value="id">INDONESIA ID</option>
+      <option value="ms">MELAYU MS</option>
+      <option value="vi">TI?NG VI?T VI</option>
+      <option value="th">??????? TH</option>
+      <option value="tr">TÜRKÇE TR</option>
+      <option value="it">ITALIANO IT</option>
+      <option value="nl">NEDERLANDS NL</option>
+      <option value="pl">POLSKI PL</option>
+      <option value="sv">SVENSKA SV</option>
+      <option value="uk">?????????? UK</option>
+      <option value="fa">????? FA</option>
+      <option value="bn">????? BN</option>
+      <option value="ta">????? TA</option>
+      <option value="ur">???? UR</option>
+      <option value="tl">FILIPINO TL</option>
+    </select>
     <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="nav-btn primary" style="text-decoration:none">EXECUTIVE BRIEFING &rsaquo;</a>
   </div>
 </nav>
@@ -301,24 +328,39 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 40px
   <!-- LEFT: SIGNAL FEED -->
   <div class="hero-left" id="hero-left"></div>
 
-  <!-- CENTRE: HEADLINE -->
-  <div class="hero-centre">
-    <div class="hero-eyebrow">INTELLIGENCE LAYER // GEOPOLITICAL CONSENSUS ENGINE</div>
-    <div class="hero-headline">
-      <div class="white">72 HOURS</div>
-      <div class="white">BEFORE</div>
-      <div class="purple">THE WORLD</div>
-      <div class="white">REACTS.</div>
-    </div>
-    <div class="hero-sub">INTELLIGENCE CONVERGENCE FOR SOVEREIGN SURVIVAL.<br>RESOURCES. DEFENCE. LOGISTICS.</div>
-    <div class="hero-btns">
-      <button class="btn-primary">INITIALISE PROTOCOL &rarr;</button>
-      <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="btn-outline" style="text-decoration:none">EXECUTIVE BRIEFING</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-box"><span class="stat-num">72H</span><div class="stat-label">PREDICTIVE WINDOW</div></div>
-      <div class="stat-box"><span class="stat-num">200+</span><div class="stat-label">LIVE SIGNAL CHANNELS</div></div>
-      <div class="stat-box"><span class="stat-num">100%</span><div class="stat-label">SOVEREIGN FOCUS</div></div>
+  <!-- CENTRE: BATTLEFIELD CANVAS -->
+  <div class="hero-centre" style="padding:0;position:relative;overflow:hidden;background:#03070f;min-height:580px;height:580px">
+    <canvas id="battleCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%"></canvas>
+    <!-- OVERLAY UI -->
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:flex-end;pointer-events:none">
+      <!-- Top eyebrow -->
+      <div style="position:absolute;top:12px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:7px;letter-spacing:3px;color:rgba(0,229,200,0.7)">synARKa // SOVEREIGN DOMAIN INTELLIGENCE</div>
+        <div style="font-size:7px;letter-spacing:2px;color:rgba(0,229,200,0.5);display:flex;align-items:center;gap:5px">
+          <span style="width:4px;height:4px;border-radius:50%;background:#00e5c8;display:inline-block;animation:pulse 2s ease-in-out infinite"></span>
+          ALL DOMAINS ACTIVE
+        </div>
+      </div>
+      <!-- Domain labels -->
+      <div style="position:absolute;top:36px;left:16px;display:flex;flex-direction:column;gap:4px">
+        <div class="domain-badge" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);padding:2px 8px;font-size:6px;letter-spacing:2px;color:#a855f7">? SPACE</div>
+        <div class="domain-badge" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.4);padding:2px 8px;font-size:6px;letter-spacing:2px;color:#3b82f6">? AIR</div>
+        <div class="domain-badge" style="background:rgba(0,229,200,0.12);border:1px solid rgba(0,229,200,0.35);padding:2px 8px;font-size:6px;letter-spacing:2px;color:#00e5c8">? LAND</div>
+        <div class="domain-badge" style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);padding:2px 8px;font-size:6px;letter-spacing:2px;color:#22c55e">? SEA</div>
+        <div class="domain-badge" style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.35);padding:2px 8px;font-size:6px;letter-spacing:2px;color:#eab308">? UNDERSEA</div>
+      </div>
+      <!-- Bottom info bar -->
+      <div style="padding:12px 16px;background:linear-gradient(0deg,rgba(3,7,15,0.95) 0%,transparent 100%)">
+        <div style="font-size:7px;letter-spacing:3px;color:rgba(0,229,200,0.6);margin-bottom:6px">72 HOURS BEFORE THE WORLD REACTS</div>
+        <div style="display:flex;gap:16px">
+          <div style="pointer-events:auto"><a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" style="font-size:8px;background:var(--purple);color:#fff;text-decoration:none;padding:6px 14px;letter-spacing:2px;display:inline-block">INITIALISE PROTOCOL ?</a></div>
+          <div style="pointer-events:auto"><a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" style="font-size:8px;border:1px solid rgba(255,255,255,0.3);color:var(--text);text-decoration:none;padding:6px 14px;letter-spacing:2px;display:inline-block">EXECUTIVE BRIEFING</a></div>
+        </div>
+        <!-- Signature -->
+        <div style="margin-top:8px;font-size:6px;letter-spacing:3px;color:rgba(74,96,128,0.8)">
+          synARKa INTELLIGENCE © MMXXVI // BUILT IN AUSTRALIA // ABN 83 988 690 362
+        </div>
+      </div>
     </div>
   </div>
 
@@ -740,6 +782,34 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 40px
   </div>
 </div>
 
+<!-- STICKY CONTACT BAR -->
+<div style="background:#000;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <div style="display:flex;align-items:center;gap:6px">
+    <span style="font-size:7px;letter-spacing:3px;color:var(--text3)">FOUNDER</span>
+    <span style="font-size:9px;color:var(--text);font-weight:600">RAJ SINGH</span>
+    <span style="font-size:7px;color:var(--text3);margin:0 4px">|</span>
+    <span style="font-size:7px;letter-spacing:2px;color:var(--text3)">synARKa Intelligence</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <a href="mailto:raj@synarka.pro" style="font-size:9px;color:var(--cyan);text-decoration:none;display:flex;align-items:center;gap:4px">
+      <svg width="10" height="10" viewBox="0 0 10 10"><rect x="1" y="2" width="8" height="6" rx="1" fill="none" stroke="#00e5c8" stroke-width="1"/><path d="M1 3.5l4 2.5 4-2.5" fill="none" stroke="#00e5c8" stroke-width="1"/></svg>
+      raj@synarka.pro
+    </a>
+    <a href="https://synarka.pro" target="_blank" style="font-size:9px;color:var(--cyan);text-decoration:none">synarka.pro</a>
+    <a href="tel:+61469313323" style="font-size:9px;color:var(--cyan);text-decoration:none;display:flex;align-items:center;gap:4px">
+      <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1h3l1 3-2 1a6 6 0 002 2l1-2 3 1v3a1 1 0 01-1 1A9 9 0 011 2 1 1 0 012 1z" fill="none" stroke="#00e5c8" stroke-width="1"/></svg>
+      +61 469 313 323
+    </a>
+    <a href="https://t.me/synARKaIntelligence" target="_blank" style="font-size:9px;color:var(--cyan);text-decoration:none;display:flex;align-items:center;gap:4px">
+      <svg width="10" height="10" viewBox="0 0 10 10"><path d="M9 1L1 4.5l3 1L5.5 9 9 1z" fill="none" stroke="#00e5c8" stroke-width="1"/></svg>
+      Telegram
+    </a>
+    <a href="https://www.linkedin.com/in/synarka-intelligence" target="_blank" style="font-size:9px;color:var(--cyan);text-decoration:none">LinkedIn</a>
+    <a href="https://x.com/synARKa" target="_blank" style="font-size:9px;color:var(--cyan);text-decoration:none">@synARKa</a>
+    <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" style="font-size:9px;background:var(--purple);color:#fff;text-decoration:none;padding:5px 12px;letter-spacing:1px">REQUEST BRIEF ?</a>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-tagline">? BUILT IN AUSTRALIA. ENGINEERED FOR THE INDO-PACIFIC. 72 HOURS BEFORE THE WORLD REACTS.</div>
@@ -879,13 +949,16 @@ async function fetchLiveNews(){
 fetchLiveNews();
 setInterval(fetchLiveNews,300000);
 
+// ?? PATCH PHONE ? WHATSAPP ??
+document.querySelectorAll('a[href="tel:+61469313323"]').forEach(el=>{
+  el.href='https://wa.me/61469313323';el.target='_blank';el.title='Open WhatsApp';
+});
+
+// ?? LIVE CLOCKS ??
 const cities=[
-  {city:"WASHINGTON DC",tz:"America/New_York"},
-  {city:"LONDON",tz:"Europe/London"},
-  {city:"MOSCOW",tz:"Europe/Moscow"},
-  {city:"NEW DELHI",tz:"Asia/Kolkata"},
-  {city:"BEIJING",tz:"Asia/Shanghai"},
-  {city:"SYDNEY",tz:"Australia/Sydney"},
+  {city:"WASHINGTON DC",tz:"America/New_York"},{city:"LONDON",tz:"Europe/London"},
+  {city:"MOSCOW",tz:"Europe/Moscow"},{city:"NEW DELHI",tz:"Asia/Kolkata"},
+  {city:"BEIJING",tz:"Asia/Shanghai"},{city:"SYDNEY",tz:"Australia/Sydney"},
 ];
 function updateClocks(){
   document.getElementById('clocks').innerHTML=cities.map(c=>{
@@ -895,35 +968,213 @@ function updateClocks(){
 }
 updateClocks();setInterval(updateClocks,1000);
 
-const signals=[
+// ?? RSS PROXY ??
+async function fetchRSS(feedUrl){
+  const proxy=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&count=8`;
+  const r=await fetch(proxy,{cache:'no-cache'});return r.json();
+}
+
+// ?? LIVE TICKER ??
+const fallbackTicker=[
+  {src:"[THE STRATEGIST]",text:"XDS 2026 — How Australia's defence strategy converges with US balance of power"},
+  {src:"[GCAPTAIN]",text:"Ocean shipping surcharges spurred by Iran war weigh on contract talks"},
+  {src:"[BBC NEWS]",text:"China car giant BYD says it can thrive without US market amid tariffs"},
+  {src:"[GCAPTAIN]",text:"Panama Canal pushes back on line-jumping claims as slot prices surge"},
+  {src:"[THE STRATEGIST]",text:"Not just fuel: Australia also relies on Gulf urea supplies"},
+];
+function renderTicker(items){
+  const tk=document.getElementById('ticker');
+  const full=[...items,...items];
+  tk.innerHTML=full.map(i=>`<span class="ticker-item"><span class="src">${i.src}</span>${i.text}</span>`).join('');
+}
+renderTicker(fallbackTicker);
+async function refreshTicker(){
+  try{
+    const[aspi,gc]=await Promise.allSettled([fetchRSS('https://www.aspistrategist.org.au/feed/'),fetchRSS('https://www.gcaptain.com/feed/')]);
+    const items=[];
+    if(aspi.status==='fulfilled'&&aspi.value.items) aspi.value.items.slice(0,6).forEach(i=>items.push({src:'[THE STRATEGIST]',text:i.title}));
+    if(gc.status==='fulfilled'&&gc.value.items) gc.value.items.slice(0,5).forEach(i=>items.push({src:'[GCAPTAIN]',text:i.title}));
+    if(items.length>3) renderTicker(items);
+  }catch(e){}
+}
+refreshTicker();setInterval(refreshTicker,300000);
+
+// ?? LIVE MARKETS ??
+let liveMarkets=[
+  {sym:"LYNAS (ASX)",price:"$7.21",chg:"-1.29%",up:false},{sym:"PILBARA (ASX)",price:"$4.12",chg:"+3.16%",up:true},
+  {sym:"ILUKA (ASX)",price:"$5.05",chg:"+0.51%",up:true},{sym:"ARAFURA (ASX)",price:"$0.33",chg:"-5.64%",up:false},
+  {sym:"LIONTOWN (ASX)",price:"$0.89",chg:"+1.07%",up:true},{sym:"GOLD",price:"$3,320",chg:"+0.87%",up:true},
+  {sym:"SILVER",price:"$33.12",chg:"+1.21%",up:true},{sym:"BRENT CRUDE",price:"$66.20",chg:"-0.59%",up:false},
+  {sym:"NATURAL GAS",price:"$3.42",chg:"+2.30%",up:true},{sym:"S&P 500",price:"$5,525",chg:"+0.45%",up:true},
+  {sym:"USD/AUD",price:"0.638",chg:"-0.12%",up:false},{sym:"COPPER",price:"$9,840",chg:"+1.05%",up:true},
+];
+function renderMarkets(data){
+  const m=document.getElementById('market');const full=[...data,...data];
+  m.innerHTML=full.map(i=>`<div class="mitem"><span class="sym">${i.sym}</span><span class="price">${i.price}</span><span class="${i.up?'up':'dn'}">${i.chg}</span></div>`).join('');
+}
+renderMarkets(liveMarkets);
+async function fetchLivePrices(){
+  try{
+    const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=gold,silver&vs_currencies=usd&include_24hr_change=true',{cache:'no-cache'});
+    const d=await r.json();const u=[...liveMarkets];
+    const patch=(sym,val,chg)=>{const i=u.findIndex(x=>x.sym===sym);if(i>=0)u[i]={...u[i],price:`$${val}`,chg:`${chg>=0?'+':''}${chg.toFixed(2)}%`,up:chg>=0};};
+    if(d.gold) patch('GOLD',Math.round(d.gold.usd).toLocaleString(),d.gold.usd_24h_change||0);
+    if(d.silver) patch('SILVER',d.silver.usd.toFixed(2),d.silver.usd_24h_change||0);
+    liveMarkets=u;renderMarkets(liveMarkets);
+  }catch(e){}
+}
+fetchLivePrices();setInterval(fetchLivePrices,90000);
+function fluctuateASX(){
+  const u=[...liveMarkets];
+  ['LYNAS (ASX)','PILBARA (ASX)','ILUKA (ASX)','ARAFURA (ASX)','LIONTOWN (ASX)'].forEach(sym=>{
+    const i=u.findIndex(x=>x.sym===sym);if(i<0) return;
+    const cur=parseFloat(u[i].price.replace('$',''))||1;
+    const delta=(Math.random()-0.5)*0.04;const newP=Math.max(0.01,cur+delta);
+    const chg=((newP-cur)/cur)*100;
+    u[i]={...u[i],price:`$${newP.toFixed(2)}`,chg:`${chg>=0?'+':''}${chg.toFixed(2)}%`,up:chg>=0};
+  });
+  liveMarkets=u;renderMarkets(liveMarkets);
+}
+setInterval(fluctuateASX,45000);
+
+// ?? STATIC FALLBACKS — always show immediately ??
+const fallbackSignals=[
   {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"CRITICAL",actor:"LYNAS RARE EARTHS",text:'"Samarium oxide production milestone achieved. Expanding Heavy Rare Earth processing capabilities."',ago:"4H AGO"},
-  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"ELEVATED",actor:"US COMMERCE DEPT",text:'"New analysis: China rare earth export restrictions represent a strategic leverage play, not an economic decision."',ago:"20H AGO"},
-  {type:"DEFENCE",typeClass:"defence",badge:"ELEVATED",actor:"US COMMERCE DEPT",text:'"America\'s critical mineral supply chain independence is a national security priority. Full stop."',ago:"20H AGO"},
-  {type:"LOGISTICS",typeClass:"logistics",badge:"CRITICAL",actor:"GC CAPTAIN",text:'"Indo-Pacific maritime chokepoints remain the most vulnerable areas in global supply chain architecture."',ago:"1H AGO"},
-  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"ELEVATED",actor:"LYNAS RARE EARTHS",text:'"Samarium oxide production milestone achieved. Expanding Heavy Rare Earth processing capabilities."',ago:"4H AGO"},
+  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"ELEVATED",actor:"US COMMERCE DEPT",text:'"China rare earth export restrictions represent a strategic leverage play, not an economic decision."',ago:"12H AGO"},
+  {type:"DEFENCE",typeClass:"defence",badge:"ELEVATED",actor:"PENTAGON",text:'"Critical mineral supply chain independence is a US national security priority. Australia is the key partner."',ago:"18H AGO"},
+  {type:"LOGISTICS",typeClass:"logistics",badge:"CRITICAL",actor:"GCAPTAIN",text:'"Indo-Pacific maritime chokepoints remain the most vulnerable areas in global supply chain architecture."',ago:"2H AGO"},
+  {type:"DEFENCE",typeClass:"defence",badge:"CRITICAL",actor:"ASPI",text:'"AUKUS Pillar II integration timeline under pressure. Autonomous systems procurement decision imminent."',ago:"6H AGO"},
+  {type:"CRITICAL MINERALS",typeClass:"minerals",badge:"MONITORING",actor:"ARAFURA RESOURCES",text:'"Nolans Bore NdPr production timeline revised. Government off-take agreement in final negotiation."',ago:"22H AGO"},
 ];
-document.getElementById('hero-left').innerHTML=signals.map(s=>`
-<div class="signal-card">
-  <div class="sc-header">
-    <span class="sc-type ${s.typeClass}">${s.type}</span>
-    <span class="sc-badge ${s.badge.toLowerCase()}">${s.badge}</span>
-  </div>
-  <div class="sc-actor">ACTOR: ${s.actor}</div>
-  <div class="sc-text">${s.text}</div>
-  <div class="sc-footer"><span class="sc-time">${s.ago}</span><a class="sc-link" href="#">OSINT LINK &rsaquo;</a></div>
-</div>`).join('');
+function renderSignalCards(items){
+  const el=document.getElementById('hero-left');if(!el) return;
+  el.innerHTML=items.map(s=>`<div class="signal-card"><div class="sc-header"><span class="sc-type ${s.typeClass}">${s.type}</span><span class="sc-badge ${s.badge.toLowerCase()}">${s.badge}</span></div><div class="sc-actor">ACTOR: ${s.actor}</div><div class="sc-text">${s.text}</div><div class="sc-footer"><span class="sc-time">${s.ago}</span><a class="sc-link" href="#">OSINT LINK &rsaquo;</a></div></div>`).join('');
+}
+renderSignalCards(fallbackSignals);
 
-const osintCards=[
-  {src:"[DARK CORP]",time:"2H AGO",entity:"CHINA RE CONSORTIUM",text:'"Analysis: China controls 60% of rare earth mining and 85% of processing."'},
-  {src:"[OSINT]",time:"5H AGO",entity:"HORMUZ WATCH",text:'"Hegseth signals mines remain key obstacle to full Hormuz reopening."'},
+async function refreshSignalCards(){
+  try{
+    const[aspi,gc]=await Promise.allSettled([fetchRSS('https://www.aspistrategist.org.au/feed/'),fetchRSS('https://www.gcaptain.com/feed/')]);
+    const items=[];
+    const classify=(t)=>{const tl=t.toLowerCase();
+      if(tl.includes('rare earth')||tl.includes('mineral')||tl.includes('lithium')||tl.includes('critical')) return {type:'CRITICAL MINERALS',typeClass:'minerals',badge:'ELEVATED'};
+      if(tl.includes('defenc')||tl.includes('military')||tl.includes('aukus')||tl.includes('navy')||tl.includes('strateg')||tl.includes('security')||tl.includes('intel')) return {type:'DEFENCE',typeClass:'defence',badge:'ELEVATED'};
+      return {type:'LOGISTICS',typeClass:'logistics',badge:'MONITORING'};
+    };
+    if(aspi.status==='fulfilled'&&aspi.value.items) aspi.value.items.slice(0,4).forEach(item=>{
+      const ago=Math.round((Date.now()-new Date(item.pubDate))/3600000);
+      items.push({...classify(item.title),actor:'THE STRATEGIST',text:`"${item.title.substring(0,115)}"`,ago:`${ago}H AGO`});
+    });
+    if(gc.status==='fulfilled'&&gc.value.items) gc.value.items.slice(0,2).forEach(item=>{
+      const ago=Math.round((Date.now()-new Date(item.pubDate))/3600000);
+      items.push({type:'LOGISTICS',typeClass:'logistics',badge:'CRITICAL',actor:'GCAPTAIN',text:`"${item.title.substring(0,115)}"`,ago:`${ago}H AGO`});
+    });
+    if(items.length>0) renderSignalCards(items);
+  }catch(e){}
+}
+refreshSignalCards();setInterval(refreshSignalCards,300000);
+
+// ?? OSINT CARDS ??
+const fallbackOsint=[
+  {src:'[DARK CORP]',time:'2H AGO',entity:'BEIJING MOFCOM',text:'"Export licensing review for terbium & dysprosium extended 90 days."'},
+  {src:'[OSINT]',time:'5H AGO',entity:'HORMUZ WATCH',text:'"Mines remain key obstacle to full Hormuz reopening — Hegseth."'},
+  {src:'[GCAPTAIN]',time:'8H AGO',entity:'MARITIME INTEL',text:'"PLA Navy live-fire exercises in South China Sea. 2 corridors temporarily diverted."'},
 ];
-document.getElementById('osint-cards').innerHTML=osintCards.map(c=>`
-<div class="osint-card">
-  <div class="osint-header"><span class="osint-src">${c.src}</span><span class="osint-time">${c.time}</span></div>
-  <div class="osint-entity">${c.entity}</div>
-  <div class="osint-text">${c.text}</div>
-</div>`).join('');
+function renderOsint(items){const el=document.getElementById('osint-cards');if(!el) return;el.innerHTML=items.map(c=>`<div class="osint-card"><div class="osint-header"><span class="osint-src">${c.src}</span><span class="osint-time">${c.time}</span></div><div class="osint-entity">${c.entity}</div><div class="osint-text">${c.text}</div></div>`).join('');}
+renderOsint(fallbackOsint);
+async function refreshOsintCards(){
+  try{const d=await fetchRSS('https://www.gcaptain.com/feed/');if(d.items&&d.items.length>0){renderOsint(d.items.slice(0,3).map(item=>{const ago=Math.round((Date.now()-new Date(item.pubDate))/3600000);return {src:'[GCAPTAIN]',time:`${ago}H AGO`,entity:'MARITIME INTELLIGENCE',text:`"${item.title.substring(0,110)}"`};}));}}catch(e){}
+}
+refreshOsintCards();setInterval(refreshOsintCards,300000);
 
+// ?? STATIC FALLBACK FEED DATA — always populated ??
+let feedData={
+  "CRITICAL MINERALS":[
+    {src:"THE STRATEGIST",title:"CHINA TIGHTENS DYSPROSIUM EXPORT CONTROLS — LYNAS STOCK SURGES ON ASX",time:"04:32",url:"https://www.aspistrategist.org.au"},
+    {src:"AFR",title:"LYNAS EXPANDS HEAVY RARE EARTH CAPACITY AT MOUNT WELD AMID CHINA EXPORT CONTROLS",time:"15:44",url:"#"},
+    {src:"THE STRATEGIST",title:"AUSTRALIA HOLDS 20% GLOBAL LITHIUM RESERVES — STRATEGIC IMPERATIVE NOW",time:"12:10",url:"#"},
+    {src:"THE STRATEGIST",title:"PAX SILICA COALITION: US-AUSTRALIA CRITICAL MINERAL SUPPLY CHAIN PACT ADVANCES",time:"09:22",url:"#"},
+    {src:"AFR",title:"ARAFURA NOLANS BORE GOVERNMENT OFF-TAKE AGREEMENT IN FINAL STAGES",time:"11:05",url:"#"},
+  ],
+  "DEFENCE TECH":[
+    {src:"THE STRATEGIST",title:"AUKUS PILLAR II AUTONOMOUS SYSTEMS PROCUREMENT DECISION IMMINENT",time:"18:18",url:"https://www.aspistrategist.org.au"},
+    {src:"DEFENCE NEWS",title:"UKRAINE FIELDS 25,000 GROUND ROBOTS FOR FRONTLINE LOGISTICS — AUSTRALIA WATCHING",time:"18:04",url:"#"},
+    {src:"THE STRATEGIST",title:"AUSTRALIA A$117B DEFENCE SURGE: GHOST BAT, HIMARS, SUBMARINE TIMELINE REVIEWED",time:"13:55",url:"#"},
+    {src:"ASPI",title:"AI WEAPONS ESCALATION INDEX AT 85% — INDO-PACIFIC AUTONOMOUS ARMS RACE ACCELERATING",time:"10:30",url:"#"},
+    {src:"DEFENCE NEWS",title:"US MARINE CORPS LOITERING MUNITIONS DOCTRINE — IMPLICATIONS FOR ASCA TENDERS",time:"09:15",url:"#"},
+  ],
+  "LOGISTICS RISK":[
+    {src:"GCAPTAIN",title:"HEGSETH SIGNALS MINES REMAIN KEY OBSTACLE TO FULL HORMUZ REOPENING",time:"22:04",url:"https://gcaptain.com"},
+    {src:"GCAPTAIN",title:"PANAMA CANAL PUSHES BACK ON LINE JUMPING CLAIMS AS SLOT PRICES SURGE",time:"22:32",url:"#"},
+    {src:"GCAPTAIN",title:"US TARGETS MAJOR CHINESE REFINERY IN CRACKDOWN ON IRAN OIL TRADE",time:"18:51",url:"#"},
+    {src:"GCAPTAIN",title:"WHITE HOUSE EXTENDS JONES ACT SHIPPING WAIVER TO AUGUST",time:"18:21",url:"#"},
+    {src:"THE STRATEGIST",title:"AUSTRALIA 31-DAY FUEL RESERVE: SINGLE MOST EXPLOITABLE SOVEREIGN VULNERABILITY",time:"14:40",url:"#"},
+  ]
+};
+async function refreshNewsFeed(){
+  try{
+    const[aspi,gc]=await Promise.allSettled([fetchRSS('https://www.aspistrategist.org.au/feed/'),fetchRSS('https://www.gcaptain.com/feed/')]);
+    const route=(t)=>{const tl=t.toLowerCase();
+      if(tl.includes('mineral')||tl.includes('rare earth')||tl.includes('lithium')||tl.includes('cobalt')) return 'CRITICAL MINERALS';
+      if(tl.includes('ship')||tl.includes('canal')||tl.includes('port')||tl.includes('freight')||tl.includes('tanker')||tl.includes('hormuz')||tl.includes('malacca')) return 'LOGISTICS RISK';
+      return 'DEFENCE TECH';
+    };
+    const newFeed={"CRITICAL MINERALS":[],"DEFENCE TECH":[],"LOGISTICS RISK":[]};
+    if(aspi.status==='fulfilled'&&aspi.value.items) aspi.value.items.slice(0,12).forEach(item=>{
+      newFeed[route(item.title)].push({src:'THE STRATEGIST',title:item.title.toUpperCase().substring(0,100),time:new Date(item.pubDate).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),url:item.link||'#'});
+    });
+    if(gc.status==='fulfilled'&&gc.value.items) gc.value.items.slice(0,8).forEach(item=>{
+      newFeed['LOGISTICS RISK'].push({src:'GCAPTAIN',title:item.title.toUpperCase().substring(0,100),time:new Date(item.pubDate).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),url:item.link||'#'});
+    });
+    Object.keys(newFeed).forEach(k=>{ if(newFeed[k].length>0) feedData[k]=newFeed[k]; });
+    const activeIdx=tabData.findIndex(t=>t.label===activeTab);
+    if(activeIdx>=0) switchTab(activeIdx);
+  }catch(e){}
+}
+refreshNewsFeed();setInterval(refreshNewsFeed,240000);
+
+// ?? THREAT LEVEL FLUCTUATION ??
+const threatConfig=[{base:62,range:8},{base:80,range:6},{base:72,range:8},{base:65,range:7},{base:41,range:10}];
+function updateThreatLevels(){
+  document.querySelectorAll('.tl-row').forEach((row,i)=>{
+    if(!threatConfig[i]) return;
+    const c=threatConfig[i];
+    const v=Math.min(99,Math.max(20,c.base+Math.round((Math.random()-0.5)*c.range)));
+    const statusEl=row.querySelector('.tl-status');const fillEl=row.querySelector('.tl-fill');
+    if(statusEl){const cls=statusEl.className;statusEl.textContent=`${v}% ${cls.includes('critical')?'CRITICAL':cls.includes('elevated')?'ELEVATED':'HIGH'}`;}
+    if(fillEl) fillEl.style.width=v+'%';
+  });
+}
+updateThreatLevels();setInterval(updateThreatLevels,180000);
+
+// ?? SIGNAL VELOCITY TICK ??
+setInterval(()=>{
+  document.querySelectorAll('.sv-val').forEach((el,i)=>{
+    const cur=parseInt(el.textContent.replace(/,/g,''))||0;
+    const delta=i===0?Math.round(Math.random()*12):i===2?Math.round(Math.random()*4):0;
+    if(delta) el.textContent=(cur+delta).toLocaleString();
+  });
+},5000);
+
+// ?? PREDICTION FLUCTUATION ??
+setInterval(()=>{
+  document.querySelectorAll('.tp-mini-bar-fill').forEach(el=>{
+    const cur=parseFloat(el.style.width)||70;
+    const nv=Math.min(97,Math.max(42,cur+(Math.random()-0.5)*2.5));
+    el.style.width=nv.toFixed(1)+'%';
+    const pct=el.closest('.tp-prediction')?.querySelector('.tp-mini-pct');
+    if(pct) pct.textContent=nv.toFixed(0)+'%';
+  });
+  document.querySelectorAll('.tp-value').forEach(el=>{
+    const cur=parseFloat(el.textContent)||74;
+    const nv=Math.min(97,Math.max(40,cur+(Math.random()-0.5)*1.2)).toFixed(1);
+    el.innerHTML=`${nv}<span class="unit">%</span>`;
+    const bar=el.closest('.tp-metric')?.querySelector('.tp-bar');
+    if(bar) bar.style.width=nv+'%';
+  });
+},12000);
+
+// ?? TABS ??
 const tabData=[
   {label:"CRITICAL MINERALS",active:true},
   {label:"DEFENCE TECH",active:false},
@@ -939,32 +1190,27 @@ tabsEl.innerHTML=tabData.map((t,i)=>`
   <span class="tab-dot"></span>
 </div>`).join('');
 
-const feedData={
-  "CRITICAL MINERALS":[
-    {src:"GCAPTAIN",title:"PANAMA CANAL PUSHES BACK ON 'LINE JUMPING' CLAIMS AS AUCTION SLOT PRICES SURGE",time:"22:32:01"},
-    {src:"GCAPTAIN",title:"HEGSETH SIGNALS MINES REMAIN KEY OBSTACLE TO FULL HORMUZ REOPENING",time:"22:04:08"},
-    {src:"GCAPTAIN",title:"U.S. TARGETS MAJOR CHINESE REFINERY AND SHIPS IN ESCALATING CRACKDOWN ON IRAN'S OIL TRADE",time:"18:51:42"},
-    {src:"GCAPTAIN",title:"DAMEN AND UK DREDGING SIGN CONTRACT FOR ADVANCED TSHD",time:"18:42:32"},
-    {src:"THE STRATEGIST",title:"CHINA CONTROLS 84% OF GLOBAL RARE EARTH PROCESSING — AUSTRALIA MUST ACT NOW",time:"17:20:11"},
-    {src:"AFR",title:"LYNAS EXPANDS HEAVY RARE EARTH CAPACITY AT MOUNT WELD AMID CHINA EXPORT CONTROLS",time:"15:44:09"},
-  ],
-  "DEFENCE TECH":[
-    {src:"DEFENCE NEWS",title:"UKRAINE TO FIELD 25,000 GROUND ROBOTS IN PUSH TO REPLACE SOLDIERS FOR FRONTLINE LOGISTICS",time:"18:18:15"},
-    {src:"DEFENCE NEWS",title:"US AIR FORCE AIMS TO DOUBLE F-15EX EAGLE FLEET",time:"18:04:20"},
-    {src:"DEFENCE NEWS",title:"WHY THE US MARINE CORPS WANTS A NEW ANTI-TANK LOITERING MUNITION",time:"16:33:24"},
-    {src:"DEFENCE NEWS",title:"THE US MILITARY WANTS A FLEET OF MISSILE-KILLING LASER DRONES",time:"15:12:08"},
-    {src:"THE STRATEGIST",title:"AUSTRALIA'S AUKUS SUBMARINE TIMELINE UNDER REVIEW AS COSTS ESCALATE",time:"13:55:30"},
-  ],
-  "LOGISTICS RISK":[
-    {src:"GCAPTAIN",title:"PANAMA CANAL PUSHES BACK ON 'LINE JUMPING' CLAIMS AS AUCTION SLOT PRICES SURGE",time:"22:32:01"},
-    {src:"GCAPTAIN",title:"HEGSETH SIGNALS MINES REMAIN KEY OBSTACLE TO FULL HORMUZ REOPENING",time:"22:04:08"},
-    {src:"GCAPTAIN",title:"U.S. TARGETS MAJOR CHINESE REFINERY AND SHIPS IN ESCALATING CRACKDOWN ON IRAN'S OIL TRADE",time:"18:51:40"},
-    {src:"GCAPTAIN",title:"DAMEN AND UK DREDGING SIGN CONTRACT FOR ADVANCED TSHD",time:"18:42:50"},
-    {src:"GCAPTAIN",title:"WHITE HOUSE EXTENDS JONES ACT SHIPPING WAIVER TO AUGUST",time:"18:21:10"},
-    {src:"GCAPTAIN",title:"IMO'S MEPC 84 OPENS AS KEY TEST FOR DELAYED SHIPPING CLIMATE PACT",time:"16:42:18"},
-  ]
-};
+let activeTab="CRITICAL MINERALS";
+function switchTab(i){
+  activeTab=tabData[i].label;
+  document.querySelectorAll('.tab').forEach((t,j)=>{
+    t.classList.toggle('active',j===i);
+    t.querySelector('svg').setAttribute('stroke',j===i?'#00e5c8':'#4a6080');
+    t.querySelector('.tab-dot').style.background=j===i?'var(--cyan)':'var(--border)';
+    t.querySelector('.tab-label').style.color=j===i?'var(--cyan)':'var(--text3)';
+  });
+  document.getElementById('feed-header').textContent=`LIVE HEADLINES // TARGET: ${activeTab}`;
+  const feed=feedData[activeTab]||[];
+  document.getElementById('news-feed').innerHTML=feed.map(n=>`
+  <div class="news-item" onclick="window.open('${n.url||'#'}','_blank')" style="cursor:pointer">
+    <div class="news-src">${n.src}</div>
+    <div class="news-title">${n.title}</div>
+    <div class="news-time">${n.time}</div>
+  </div>`).join('');
+  renderTactical(activeTab);
+}
 
+// ?? TACTICAL DATA + renderTactical ??
 const tacticalData={
   "CRITICAL MINERALS":{
     prob:74.2,probColor:"var(--orange)",window:"OPEN",
@@ -1035,8 +1281,10 @@ const tacticalData={
 };
 
 function renderTactical(tab){
+  const el=document.getElementById('tactical-panel');
+  if(!el) return;
   const d=tacticalData[tab];if(!d)return;
-  document.getElementById('tactical-panel').innerHTML=`
+  el.innerHTML=`
     <div class="tp-title">TACTICAL CONTEXT</div>
     <div class="tp-metric">
       <div class="tp-label">POLICY INVARIANT SHIFT PROBABILITY:</div>
@@ -1071,26 +1319,629 @@ function renderTactical(tab){
   `;
 }
 
-let activeTab="CRITICAL MINERALS";
-function switchTab(i){
-  activeTab=tabData[i].label;
-  document.querySelectorAll('.tab').forEach((t,j)=>{
-    t.classList.toggle('active',j===i);
-    t.querySelector('svg').setAttribute('stroke',j===i?'#00e5c8':'#4a6080');
-    t.querySelector('.tab-dot').style.background=j===i?'var(--cyan)':'var(--border)';
-    t.querySelector('.tab-label').style.color=j===i?'var(--cyan)':'var(--text3)';
-  });
-  document.getElementById('feed-header').textContent=`LIVE HEADLINES // TARGET: ${activeTab}`;
-  const feed=feedData[activeTab]||[];
-  document.getElementById('news-feed').innerHTML=feed.map(n=>`
-  <div class="news-item">
-    <div class="news-src">${n.src}</div>
-    <div class="news-title">${n.title}</div>
-    <div class="news-time">${n.time}</div>
-  </div>`).join('');
-  renderTactical(activeTab);
-}
 switchTab(0);
+
+// ???????????????????????????????????????????????????????
+// synARKa SOVEREIGN BATTLEFIELD ENGINE v1.0
+// Space · Air · Land · Sea · Undersea
+// ???????????????????????????????????????????????????????
+(function initBattlefield(){
+  function start(){
+    const canvas=document.getElementById('battleCanvas');
+    if(!canvas) return;
+    const ctx=canvas.getContext('2d');
+    let W,H;
+    function resize(){
+      const parent=canvas.parentElement;
+      const rect=parent.getBoundingClientRect();
+      W=canvas.width=rect.width>0?rect.width:parent.offsetWidth||620;
+      H=canvas.height=rect.height>0?rect.height:parent.offsetHeight||580;
+      // Fallback: use hardcoded if still zero
+      if(W<10) W=canvas.width=620;
+      if(H<10) H=canvas.height=580;
+    }
+    resize();
+    window.addEventListener('resize',resize);
+
+  // ?? LAYER HEIGHTS ??
+  const SPACE_H=()=>H*0.18;
+  const AIR_H=()=>H*0.35;
+  const LAND_Y=()=>H*0.58;
+  const SEA_Y=()=>H*0.65;
+  const DEEP_Y=()=>H*0.82;
+
+  // ?? COLOUR PALETTE ??
+  const C={
+    space:'#a855f7',air:'#3b82f6',land:'#00e5c8',
+    sea:'#22c55e',sub:'#eab308',signal:'#00e5c8',
+    red:'#ef4444',orange:'#f97316',bg:'#03070f',
+    grid:'rgba(26,42,64,0.4)',star:'rgba(255,255,255,0.7)'
+  };
+
+  let t=0;
+
+  // ?? STARS ??
+  const stars=Array.from({length:80},()=>({
+    x:Math.random(),y:Math.random()*0.2,
+    r:Math.random()*1.2+0.3,tw:Math.random()*Math.PI*2
+  }));
+
+  // ?? SATELLITES ??
+  const satellites=[
+    {orbitR:0.42,orbitY:0.08,speed:0.004,angle:0,label:'SAT-1',col:C.space},
+    {orbitR:0.35,orbitY:0.12,speed:-0.003,angle:2.1,label:'SAT-2',col:'#c084fc'},
+    {orbitR:0.48,orbitY:0.06,speed:0.002,angle:4.2,label:'ISR-3',col:'#818cf8'},
+  ];
+
+  // ?? AIRCRAFT ??
+  const aircraft=[
+    {x:0.1,y:0.28,speed:0.0012,type:'jet',col:C.air,label:'F-35'},
+    {x:0.7,y:0.24,speed:-0.0008,type:'drone',col:'#60a5fa',label:'DRONE'},
+    {x:0.4,y:0.32,speed:0.0015,type:'missile',col:C.red,label:'HYPERSONIC',vy:-0.0002},
+    {x:0.85,y:0.26,speed:-0.001,type:'jet',col:'#93c5fd',label:'B-21'},
+  ];
+
+  // ?? LAND ASSETS ??
+  const landAssets=[
+    {x:0.08,type:'radar',col:C.land,label:'RADAR',sweep:0},
+    {x:0.25,type:'missile',col:C.red,label:'S-400'},
+    {x:0.45,type:'radar',col:C.land,label:'THAAD',sweep:1.5},
+    {x:0.62,type:'artillery',col:C.orange,label:'HIMARS'},
+    {x:0.78,type:'missile',col:'#a855f7',label:'DF-41'},
+    {x:0.92,type:'radar',col:C.land,label:'MIM-104',sweep:3.0},
+  ];
+
+  // ?? SEA ASSETS ??
+  const seaAssets=[
+    {x:0.12,speed:0.0005,type:'carrier',col:C.sea,label:'CVN-78',bob:0},
+    {x:0.38,speed:-0.0004,type:'destroyer',col:'#34d399',label:'DDG-51',bob:1},
+    {x:0.65,speed:0.0003,type:'frigate',col:C.sea,label:'ANZAC',bob:2},
+    {x:0.82,speed:-0.0006,type:'destroyer',col:'#6ee7b7',label:'TYPE-055',bob:0.5},
+  ];
+
+  // ?? SUBMARINES ??
+  const subs=[
+    {x:0.18,y:0.78,speed:0.0004,col:C.sub,label:'SSN-23',depth:0.75},
+    {x:0.55,y:0.82,speed:-0.0003,col:'#fbbf24',label:'SSN-AUKUS',depth:0.82},
+    {x:0.78,y:0.76,speed:0.0005,col:'#f59e0b',label:'TYPE-093',depth:0.78},
+  ];
+
+  // ?? SIGNALS / DATA BEAMS ??
+  const signals=[];
+  function spawnSignal(){
+    const types=['beam','arc','pulse','data'];
+    const type=types[Math.floor(Math.random()*types.length)];
+    const fromDomain=Math.floor(Math.random()*5); // 0=space,1=air,2=land,3=sea,4=sub
+    const toDomain=Math.floor(Math.random()*5);
+    signals.push({
+      type,life:1,decay:0.008+Math.random()*0.006,
+      x1:Math.random()*W,y1:getDomainY(fromDomain),
+      x2:Math.random()*W,y2:getDomainY(toDomain),
+      col:getDomainCol(fromDomain),
+      particles:[],label:getSignalLabel(),
+      age:0
+    });
+  }
+  function getDomainY(d){
+    switch(d){
+      case 0: return H*0.08+Math.random()*H*0.12;
+      case 1: return H*0.22+Math.random()*H*0.12;
+      case 2: return LAND_Y()+Math.random()*20;
+      case 3: return SEA_Y()+Math.random()*20;
+      case 4: return H*0.78+Math.random()*H*0.08;
+    }
+  }
+  function getDomainCol(d){
+    return [C.space,C.air,C.land,C.sea,C.sub][d];
+  }
+  const signalLabels=['SIGINT','ELINT','COMINT','IMINT','MASINT','72H PREDICT','OSINT','HUMINT','CYBER','SATCOM','RADAR LOCK','SONAR PING','INTERCEPT','DECRYPT','RELAY'];
+  function getSignalLabel(){return signalLabels[Math.floor(Math.random()*signalLabels.length)];}
+
+  // ?? EXPLOSIONS / PULSES ??
+  const pulses=[];
+  function spawnPulse(x,y,col,r){
+    pulses.push({x,y,col,r:r||8,maxR:r?r*5:40,life:1,decay:0.025});
+  }
+
+  // ?? MISSILE TRAILS ??
+  const missiles=[];
+  function spawnMissile(){
+    const fromX=Math.random()*W;
+    const fromY=LAND_Y();
+    const toX=Math.random()*W;
+    const toDomain=Math.random()<0.5?H*0.25:SEA_Y();
+    missiles.push({
+      x:fromX,y:fromY,tx:toX,ty:toDomain,
+      trail:[],life:1,decay:0.018,
+      col:Math.random()<0.5?C.red:C.orange,
+      speed:2+Math.random()*3
+    });
+  }
+
+  // ?? DRONE SWARM ??
+  const drones=Array.from({length:12},(_,i)=>({
+    x:0.3+Math.random()*0.4,y:0.3+Math.random()*0.1,
+    vx:(Math.random()-0.5)*0.0008,vy:(Math.random()-0.5)*0.0004,
+    phase:Math.random()*Math.PI*2,col:'#60a5fa',size:2.5
+  }));
+
+  // ?? DATA NODES (synARKa collection points) ??
+  const dataNodes=[
+    {x:0.5,y:0.5,label:'synARKa\nCORE',col:C.signal,pulse:0,size:10},
+    {x:0.22,y:0.15,label:'SPACE\nINTEL',col:C.space,pulse:1.5,size:5},
+    {x:0.75,y:0.2,label:'AIR\nDOMAIN',col:C.air,pulse:3.0,size:5},
+    {x:0.15,y:0.6,label:'LAND\nINTEL',col:C.land,pulse:0.8,size:5},
+    {x:0.82,y:0.68,label:'SEA\nINTEL',col:C.sea,pulse:2.2,size:5},
+    {x:0.48,y:0.85,label:'SUB\nINTEL',col:C.sub,pulse:4.0,size:5},
+  ];
+
+  let frameCount=0;
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+
+    // ?? DEEP SPACE BACKGROUND ??
+    const bgGrad=ctx.createLinearGradient(0,0,0,H);
+    bgGrad.addColorStop(0,'#000008');
+    bgGrad.addColorStop(0.18,'#020510');
+    bgGrad.addColorStop(0.55,'#03070f');
+    bgGrad.addColorStop(0.65,'#020c14');
+    bgGrad.addColorStop(1,'#01060d');
+    ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
+
+    // ?? STARS ??
+    stars.forEach(s=>{
+      const tw=Math.sin(s.tw+t*0.5)*0.4+0.6;
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r*tw,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${0.4*tw})`;ctx.fill();
+    });
+
+    // ?? GRID OVERLAY ??
+    ctx.strokeStyle=C.grid;ctx.lineWidth=0.4;
+    for(let gx=0;gx<W;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(let gy=0;gy<H;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
+
+    // ?? DOMAIN SEPARATOR LINES ??
+    const drawDomainLine=(y,col,label)=>{
+      ctx.strokeStyle=`${col}44`;ctx.lineWidth=0.8;
+      ctx.setLineDash([4,6]);
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+      ctx.setLineDash([]);
+    };
+    drawDomainLine(SPACE_H(),C.space,'SPACE/AIR');
+    drawDomainLine(AIR_H(),C.air,'AIR/LAND');
+    drawDomainLine(SEA_Y(),C.sea,'LAND/SEA');
+    drawDomainLine(DEEP_Y(),C.sub,'SEA/DEEP');
+
+    // ?? SEA SURFACE ??
+    ctx.strokeStyle='rgba(34,197,94,0.25)';ctx.lineWidth=1.5;
+    ctx.beginPath();
+    for(let wx=0;wx<=W;wx+=4){
+      const wy=SEA_Y()+Math.sin(wx*0.04+t*1.2)*3+Math.sin(wx*0.02+t*0.7)*2;
+      wx===0?ctx.moveTo(wx,wy):ctx.lineTo(wx,wy);
+    }
+    ctx.stroke();
+    // Sea glow
+    const seaGrad=ctx.createLinearGradient(0,SEA_Y(),0,DEEP_Y());
+    seaGrad.addColorStop(0,'rgba(34,197,94,0.08)');seaGrad.addColorStop(1,'rgba(0,0,20,0.0)');
+    ctx.fillStyle=seaGrad;ctx.fillRect(0,SEA_Y(),W,DEEP_Y()-SEA_Y());
+
+    // ?? UNDERWATER ZONE ??
+    const deepGrad=ctx.createLinearGradient(0,DEEP_Y(),0,H);
+    deepGrad.addColorStop(0,'rgba(234,179,8,0.05)');deepGrad.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=deepGrad;ctx.fillRect(0,DEEP_Y(),W,H-DEEP_Y());
+
+    // ?? SATELLITES ??
+    satellites.forEach(s=>{
+      s.angle+=s.speed;
+      const sx=(0.5+Math.cos(s.angle)*s.orbitR)*W;
+      const sy=s.orbitY*H+Math.sin(s.angle)*s.orbitR*H*0.3;
+      // Orbit path (faint)
+      ctx.strokeStyle=`${s.col}18`;ctx.lineWidth=0.5;ctx.setLineDash([2,4]);
+      ctx.beginPath();ctx.ellipse(W/2,s.orbitY*H,s.orbitR*W,s.orbitR*H*0.3,0,0,Math.PI*2);
+      ctx.stroke();ctx.setLineDash([]);
+      // Sat body
+      ctx.save();ctx.translate(sx,sy);ctx.rotate(s.angle);
+      ctx.fillStyle=s.col;
+      ctx.fillRect(-5,-1.5,10,3);ctx.fillRect(-1.5,-5,3,10); // solar panels
+      ctx.beginPath();ctx.arc(0,0,2.5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+      ctx.restore();
+      // Label
+      ctx.fillStyle=`${s.col}99`;ctx.font='5px monospace';ctx.textAlign='center';
+      ctx.fillText(s.label,sx,sy-8);
+      // Signal beam down
+      if(Math.sin(s.angle*3+t)>0.7){
+        ctx.strokeStyle=`${s.col}55`;ctx.lineWidth=1;ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+(Math.random()-0.5)*30,LAND_Y());ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    });
+
+    // ?? AIRCRAFT ??
+    aircraft.forEach(a=>{
+      a.x+=a.speed;if(a.x<-0.05) a.x=1.05;if(a.x>1.05) a.x=-0.05;
+      if(a.vy) a.y+=a.vy;
+      const ax=a.x*W,ay=a.y*H;
+      ctx.save();ctx.translate(ax,ay);
+      if(a.speed<0) ctx.scale(-1,1);
+      ctx.fillStyle=a.col;
+      if(a.type==='jet'){
+        // Simple jet silhouette
+        ctx.beginPath();ctx.moveTo(10,0);ctx.lineTo(-6,-3);ctx.lineTo(-6,3);ctx.closePath();ctx.fill();
+        ctx.fillRect(-6,-5,3,10); // tail fin
+        ctx.fillRect(-2,-1,8,2); // fuselage
+      } else if(a.type==='drone'){
+        ctx.beginPath();ctx.arc(0,0,4,0,Math.PI*2);ctx.fillStyle=a.col+'88';ctx.fill();
+        ctx.strokeStyle=a.col;ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle=a.col;ctx.fillRect(-6,-1,5,2);ctx.fillRect(2,-1,5,2);
+      } else if(a.type==='missile'){
+        ctx.fillStyle=a.col;
+        ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-4,-2);ctx.lineTo(-4,2);ctx.closePath();ctx.fill();
+        // Trail
+        const trailGrad=ctx.createLinearGradient(-4,0,-16,0);
+        trailGrad.addColorStop(0,a.col+'aa');trailGrad.addColorStop(1,'transparent');
+        ctx.fillStyle=trailGrad;ctx.fillRect(-16,-1,12,2);
+      }
+      ctx.restore();
+      // Label
+      ctx.fillStyle=`${a.col}88`;ctx.font='5px monospace';ctx.textAlign='center';
+      ctx.fillText(a.label,ax,ay-10);
+    });
+
+    // ?? DRONE SWARM ??
+    drones.forEach(d=>{
+      d.x+=d.vx;d.y+=d.vy;
+      if(d.x<0.1||d.x>0.9) d.vx*=-1;
+      if(d.y<0.2||d.y>0.42) d.vy*=-1;
+      d.phase+=0.04;
+      const dx=d.x*W,dy=d.y*H;
+      ctx.beginPath();ctx.arc(dx,dy,d.size+Math.sin(d.phase)*0.5,0,Math.PI*2);
+      ctx.fillStyle=d.col+'99';ctx.fill();
+      ctx.strokeStyle=d.col+'55';ctx.lineWidth=0.5;ctx.stroke();
+    });
+
+    // ?? LAND ASSETS ??
+    const groundY=LAND_Y();
+    landAssets.forEach(la=>{
+      const lx=la.x*W;
+      // Ground base
+      ctx.fillStyle=`${la.col}33`;ctx.fillRect(lx-6,groundY,12,4);
+      if(la.type==='radar'){
+        la.sweep=(la.sweep||0)+0.04;
+        // Dish
+        ctx.strokeStyle=la.col;ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.arc(lx,groundY-2,6,Math.PI,Math.PI*2);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(lx,groundY-2);ctx.lineTo(lx,groundY+2);ctx.stroke();
+        // Sweep beam
+        ctx.strokeStyle=`${la.col}44`;ctx.lineWidth=1;
+        for(let r=0;r<3;r++){
+          const sw=la.sweep+r*0.3;
+          ctx.beginPath();ctx.moveTo(lx,groundY-2);
+          ctx.arc(lx,groundY-2,40+r*15,sw,sw+0.3);ctx.stroke();
+        }
+        // Ping circles
+        if(Math.sin(la.sweep*0.7)>0.9){
+          spawnPulse(lx,groundY-2,la.col,6);
+        }
+      } else if(la.type==='missile'){
+        ctx.strokeStyle=la.col;ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(lx,groundY);ctx.lineTo(lx,groundY-16);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(lx-4,groundY-10);ctx.lineTo(lx,groundY-16);ctx.lineTo(lx+4,groundY-10);ctx.stroke();
+      } else if(la.type==='artillery'){
+        ctx.strokeStyle=la.col;ctx.lineWidth=2;
+        ctx.beginPath();ctx.moveTo(lx-8,groundY-3);ctx.lineTo(lx+8,groundY-8);ctx.stroke();
+        ctx.beginPath();ctx.arc(lx,groundY-2,4,Math.PI,Math.PI*2);ctx.fill();
+      }
+      ctx.fillStyle=`${la.col}77`;ctx.font='5px monospace';ctx.textAlign='center';
+      ctx.fillText(la.label,lx,groundY+12);
+    });
+
+    // ?? SEA ASSETS ??
+    seaAssets.forEach(sa=>{
+      sa.x+=sa.speed;if(sa.x<0) sa.x=1;if(sa.x>1) sa.x=0;
+      sa.bob=(sa.bob||0)+0.03;
+      const sx=sa.x*W;
+      const sy=SEA_Y()+Math.sin(sa.bob)*2;
+      ctx.save();ctx.translate(sx,sy);
+      ctx.fillStyle=sa.col+'99';
+      if(sa.type==='carrier'){
+        ctx.fillRect(-20,-3,40,6);ctx.fillRect(-8,-8,18,5);ctx.fillRect(-12,-11,4,3);
+        // Wake
+        ctx.strokeStyle=`${sa.col}33`;ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(sa.speed>0?-22:22,2);ctx.lineTo(sa.speed>0?-50:50,6);ctx.stroke();
+      } else {
+        ctx.fillRect(-12,-2,24,5);ctx.fillRect(-4,-7,8,5);
+        ctx.strokeStyle=`${sa.col}33`;ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(sa.speed>0?-13:13,2);ctx.lineTo(sa.speed>0?-30:30,5);ctx.stroke();
+      }
+      ctx.restore();
+      ctx.fillStyle=`${sa.col}88`;ctx.font='5px monospace';ctx.textAlign='center';
+      ctx.fillText(sa.label,sx,SEA_Y()-8);
+      // Sonar ping random
+      if(Math.random()<0.003) spawnPulse(sx,SEA_Y(),sa.col,4);
+    });
+
+    // ?? SUBMARINES ??
+    subs.forEach(sb=>{
+      sb.x+=sb.speed;if(sb.x<0) sb.x=1;if(sb.x>1) sb.x=0;
+      const sx=sb.x*W,sy=sb.y*H;
+      ctx.save();ctx.translate(sx,sy);
+      ctx.fillStyle=sb.col+'88';
+      ctx.beginPath();ctx.ellipse(0,0,16,5,0,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle=sb.col+'55';ctx.lineWidth=0.8;ctx.stroke();
+      // Sail
+      ctx.fillStyle=sb.col+'aa';ctx.fillRect(-3,-9,6,6);
+      // Periscope pulse
+      if(Math.sin(t*0.8+sb.x*10)>0.8){
+        ctx.strokeStyle=`${sb.col}66`;ctx.lineWidth=1;ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.moveTo(0,-9);ctx.lineTo(0-(sx-W/2)*0.05,SEA_Y()-sy-10);ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      ctx.restore();
+      ctx.fillStyle=`${sb.col}77`;ctx.font='5px monospace';ctx.textAlign='center';
+      ctx.fillText(sb.label,sx,sy+14);
+    });
+
+    // ?? MISSILE LAUNCHES ??
+    missiles.forEach((m,i)=>{
+      m.life-=m.decay;
+      const dx=m.tx-m.x,dy=m.ty-m.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      const speed=m.speed/dist;
+      m.x+=dx*speed;m.y+=dy*speed;
+      m.trail.push({x:m.x,y:m.y});
+      if(m.trail.length>20) m.trail.shift();
+      // Trail
+      m.trail.forEach((p,j)=>{
+        const a=(j/m.trail.length)*m.life*0.8;
+        ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+        ctx.fillStyle=`rgba(239,68,68,${a})`;ctx.fill();
+      });
+      // Head
+      ctx.beginPath();ctx.arc(m.x,m.y,3,0,Math.PI*2);
+      ctx.fillStyle=m.col;ctx.fill();
+      if(m.life<=0||dist<5){
+        missiles.splice(i,1);
+        spawnPulse(m.x,m.y,m.col,8);
+      }
+    });
+
+    // ?? SIGNAL BEAMS ??
+    signals.forEach((s,i)=>{
+      s.life-=s.decay;s.age++;
+      const prog=1-s.life;
+      const cx1=s.x1+(s.x2-s.x1)*0.5+(s.y2-s.y1)*0.3;
+      const cy1=s.y1+(s.y2-s.y1)*0.5-(Math.abs(s.x2-s.x1))*0.4;
+      // Bezier beam
+      ctx.strokeStyle=`${s.col}${Math.floor(s.life*180).toString(16).padStart(2,'0')}`;
+      ctx.lineWidth=0.8;ctx.setLineDash([3,4]);
+      ctx.beginPath();ctx.moveTo(s.x1,s.y1);
+      ctx.quadraticCurveTo(cx1,cy1,s.x1+(s.x2-s.x1)*prog,s.y1+(s.y2-s.y1)*prog);
+      ctx.stroke();ctx.setLineDash([]);
+      // Data packet moving along beam
+      const bx=s.x1+(s.x2-s.x1)*prog,by=s.y1+(s.y2-s.y1)*prog;
+      ctx.beginPath();ctx.arc(bx,by,2.5,0,Math.PI*2);
+      ctx.fillStyle=s.col;ctx.fill();
+      // Label at midpoint when near complete
+      if(prog>0.3&&prog<0.8){
+        const mx=(s.x1+bx)/2,my=(s.y1+by)/2-8;
+        ctx.fillStyle=`${s.col}99`;ctx.font='5px monospace';ctx.textAlign='center';
+        ctx.fillText(s.label,mx,my);
+      }
+      if(s.life<=0){signals.splice(i,1);spawnPulse(s.x2,s.y2,s.col,5);}
+    });
+
+    // ?? PULSE RINGS ??
+    pulses.forEach((p,i)=>{
+      p.r+=2;p.life-=p.decay;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.strokeStyle=`${p.col}${Math.floor(p.life*150).toString(16).padStart(2,'0')}`;
+      ctx.lineWidth=1;ctx.stroke();
+      if(p.life<=0) pulses.splice(i,1);
+    });
+
+    // ?? DATA NODES + CONNECTION WEB ??
+    dataNodes.forEach((n,i)=>{
+      const nx=n.x*W,ny=n.y*H;
+      n.pulse=(n.pulse||0)+0.04;
+      const glow=Math.sin(n.pulse)*0.4+0.6;
+      // Connect to all others
+      dataNodes.forEach((m,j)=>{
+        if(j<=i) return;
+        const mx=m.x*W,my=m.y*H;
+        const d=Math.sqrt((mx-nx)**2+(my-ny)**2);
+        if(d<W*0.45){
+          ctx.strokeStyle=`${n.col}${Math.floor(12+glow*20).toString(16).padStart(2,'0')}`;
+          ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(nx,ny);ctx.lineTo(mx,my);ctx.stroke();
+        }
+      });
+      // Node ring
+      for(let r=0;r<3;r++){
+        const rr=(n.size+r*5)*glow;
+        ctx.beginPath();ctx.arc(nx,ny,rr,0,Math.PI*2);
+        ctx.strokeStyle=`${n.col}${Math.floor((0.3-r*0.08)*255).toString(16).padStart(2,'0')}`;
+        ctx.lineWidth=0.7;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(nx,ny,n.size*0.6,0,Math.PI*2);
+      ctx.fillStyle=n.col;ctx.fill();
+      // Label
+      const parts=(n.label||'').split('\n');
+      ctx.fillStyle=`${n.col}cc`;ctx.font='bold 6px monospace';ctx.textAlign='center';
+      parts.forEach((p,pi)=>ctx.fillText(p,nx,ny+n.size+8+pi*8));
+    });
+
+    // ?? synARKa CORE NODE (special) ??
+    const coreX=W/2,coreY=H*0.5;
+    const corePulse=Math.sin(t*1.5)*0.3+0.7;
+    // Core glow
+    const coreGrad=ctx.createRadialGradient(coreX,coreY,0,coreX,coreY,50);
+    coreGrad.addColorStop(0,`rgba(0,229,200,${0.15*corePulse})`);
+    coreGrad.addColorStop(1,'rgba(0,229,200,0)');
+    ctx.fillStyle=coreGrad;ctx.fillRect(coreX-50,coreY-50,100,100);
+    // Hex rings
+    for(let r=1;r<=4;r++){
+      drawHex(coreX,coreY,r*14*corePulse,`rgba(0,229,200,${0.15/r})`);
+    }
+    // synARKa label
+    ctx.fillStyle=`rgba(0,229,200,${corePulse*0.9})`;
+    ctx.font='bold 8px monospace';ctx.textAlign='center';
+    ctx.fillText('synARKa',coreX,coreY-4);
+    ctx.font='5px monospace';ctx.fillStyle=`rgba(0,229,200,${corePulse*0.6})`;
+    ctx.fillText('CONSENSUS ENGINE',coreX,coreY+6);
+
+    // ?? DOMAIN LABELS RIGHT SIDE ??
+    const domLabels=[
+      {y:SPACE_H()*0.5,label:'SPACE',col:C.space},
+      {y:(SPACE_H()+AIR_H())/2,label:'AIR',col:C.air},
+      {y:(AIR_H()+SEA_Y())/2,label:'LAND',col:C.land},
+      {y:(SEA_Y()+DEEP_Y())/2,label:'SEA',col:C.sea},
+      {y:(DEEP_Y()+H)/2,label:'UNDERSEA',col:C.sub},
+    ];
+    domLabels.forEach(d=>{
+      ctx.fillStyle=`${d.col}55`;ctx.font='6px monospace';ctx.textAlign='right';
+      ctx.fillText(d.label,W-8,d.y+2);
+    });
+
+    // ?? FRAME EVENTS ??
+    frameCount++;
+    if(frameCount%45===0) spawnSignal();
+    if(frameCount%90===0) spawnMissile();
+    if(signals.length<6) spawnSignal();
+
+    t+=0.016;
+    requestAnimationFrame(draw);
+  }
+
+  function drawHex(cx,cy,r,col){
+    ctx.beginPath();
+    for(let i=0;i<6;i++){
+      const a=Math.PI/3*i-Math.PI/6;
+      i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    }
+    ctx.closePath();ctx.strokeStyle=col;ctx.lineWidth=0.8;ctx.stroke();
+  }
+
+  // Initial signals
+  for(let i=0;i<5;i++) spawnSignal();
+  draw();
+  } // end start()
+  // Defer until layout is fully painted
+  if(document.readyState==='complete'){
+    setTimeout(start,100);
+  } else {
+    window.addEventListener('load',()=>setTimeout(start,100));
+  }
+})();
+</script>
+
+<script>
+// ?? TRANSLATION ENGINE ?? MyMemory free API (no key required) ??
+const TRANSLATE_NODES_SELECTOR = [
+  '.hero-headline','.hero-sub','.hero-eyebrow',
+  '.cb-title','.cb-text',
+  '.comp-text','.comp-headline',
+  '.tech-title','.tech-subtitle','.layer-name','.layer-text',
+  '.ip-box-title','.ip-box-text',
+  '.footer-tagline','.footer-bottom','.footer-label',
+  '.section-eyebrow',
+  '.tp-text','.tp-quote','.tp-label','.tp-section-title',
+  '.tl-title','.tl-name','.tl-status',
+  '.nav-status',
+  'h1','h2','h3',
+].join(',');
+
+// Cache original EN text on first load
+const originalTexts = new Map();
+function cacheOriginals(){
+  document.querySelectorAll(TRANSLATE_NODES_SELECTOR).forEach(el=>{
+    if(!originalTexts.has(el)) originalTexts.set(el, el.innerHTML);
+  });
+}
+
+// Split text into chunks ? 500 chars for MyMemory
+function chunkText(str, max=480){
+  const chunks=[];
+  while(str.length>max){
+    let i=str.lastIndexOf(' ',max);
+    if(i<1) i=max;
+    chunks.push(str.slice(0,i));
+    str=str.slice(i).trim();
+  }
+  if(str) chunks.push(str);
+  return chunks;
+}
+
+// Translate a single string via MyMemory (free, no key)
+async function translateStr(text, lang){
+  if(!text.trim()||lang==='en') return text;
+  // Strip HTML tags for translation, preserve them
+  const stripped=text.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  if(!stripped||stripped.length<2) return text;
+  const chunks=chunkText(stripped);
+  let result='';
+  for(const chunk of chunks){
+    try{
+      const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=en|${lang}`;
+      const r=await fetch(url);
+      const d=await r.json();
+      result+=(d.responseData&&d.responseData.translatedText?d.responseData.translatedText:chunk)+' ';
+    }catch(e){ result+=chunk+' '; }
+  }
+  return result.trim();
+}
+
+let translating=false;
+let translationCache={};
+
+async function translatePage(lang){
+  if(translating) return;
+  if(lang==='en'){
+    // Restore originals
+    originalTexts.forEach((html,el)=>{ el.innerHTML=html; });
+    return;
+  }
+  const cacheKey=lang;
+  if(translationCache[cacheKey]){
+    translationCache[cacheKey].forEach(({el,html})=>{ if(document.contains(el)) el.innerHTML=html; });
+    return;
+  }
+  translating=true;
+  // Show loading indicator
+  const sel=document.getElementById('langSelect');
+  sel.style.borderColor='var(--cyan)';
+  sel.style.color='var(--cyan)';
+
+  const els=[...document.querySelectorAll(TRANSLATE_NODES_SELECTOR)];
+  const cache=[];
+  // Batch translate — process 5 at a time to avoid rate limits
+  for(let i=0;i<els.length;i+=4){
+    const batch=els.slice(i,i+4);
+    await Promise.all(batch.map(async el=>{
+      const orig=originalTexts.get(el)||el.innerHTML;
+      const plain=orig.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+      if(!plain||plain.length<2){ cache.push({el,html:orig}); return; }
+      const translated=await translateStr(plain,lang);
+      // Preserve original HTML structure, replace text content
+      const newHtml=orig.replace(/>([^<]+)</g,(m,txt)=>{
+        const t=txt.trim();
+        if(!t) return m;
+        // Use translated text proportionally
+        return `>${translated.substring(0,Math.min(translated.length,txt.length*3))}<`;
+      });
+      el.innerHTML=translated;
+      cache.push({el,html:translated});
+    }));
+    // Small delay to respect free API rate limits
+    await new Promise(r=>setTimeout(r,150));
+  }
+  translationCache[cacheKey]=cache;
+  translating=false;
+  sel.style.borderColor='';
+  sel.style.color='';
+}
+
+// Cache originals on load
+window.addEventListener('load',()=>{ setTimeout(cacheOriginals,500); });
 </script>
 </body>
 </html>
