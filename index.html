@@ -1584,47 +1584,114 @@ refreshTicker();
 setInterval(refreshTicker, 300000);
 
 /* MARKET STRIP */
-const fallbackMarket = [
-  {sym:'AUD/USD',price:'0.659',chg:'+0.21%',up:true},{sym:'USD/JPY',price:'151.42',chg:'-0.18%',up:false},
-  {sym:'EUR/USD',price:'1.084',chg:'+0.07%',up:true},{sym:'GBP/USD',price:'1.262',chg:'-0.13%',up:false},
-  {sym:'USD/CNY',price:'7.21',chg:'+0.04%',up:true},{sym:'GOLD',price:'$3,148',chg:'+0.62%',up:true},
-  {sym:'SILVER',price:'$32.40',chg:'+0.91%',up:true},{sym:'BRENT',price:'$74.18',chg:'-1.04%',up:false},
-  {sym:'WTI',price:'$70.22',chg:'-1.12%',up:false},{sym:'COPPER',price:'$9,840',chg:'+1.06%',up:true},
-  {sym:'LYNAS (ASX)',price:'$7.23',chg:'+0.23%',up:true},{sym:'PILBARA (ASX)',price:'$4.11',chg:'-0.06%',up:false},
-  {sym:'ILUKA (ASX)',price:'$8.06',chg:'+0.24%',up:true},{sym:'ARAFURA (ASX)',price:'$0.33',chg:'+1.31%',up:true},
-  {sym:'BTC',price:'$95,420',chg:'+0.84%',up:true},
-];
-function renderMarket(data) {
+// MARKET STRIP — LIVE DATA ONLY
+// Forex: Frankfurter API (live, free, no key)
+// Gold + BTC: CoinGecko free API (live, no key)  
+// ASX stocks: Yahoo Finance via allorigins proxy (15-min delayed, labelled)
+// REMOVED: Brent, WTI, Silver, Copper — no free live API available without key
+
+let marketState = {
+  'AUD/USD': {price:'—',chg:'',up:true,live:false},
+  'USD/JPY':  {price:'—',chg:'',up:true,live:false},
+  'EUR/USD':  {price:'—',chg:'',up:true,live:false},
+  'GBP/USD':  {price:'—',chg:'',up:true,live:false},
+  'USD/CNY':  {price:'—',chg:'',up:true,live:false},
+  'GOLD':     {price:'—',chg:'',up:true,live:false},
+  'BTC':      {price:'—',chg:'',up:true,live:false},
+  'LYC.AX':   {price:'—',chg:'',up:true,live:false,label:'LYNAS (ASX)'},
+  'PLS.AX':   {price:'—',chg:'',up:false,live:false,label:'PILBARA (ASX)'},
+  'ILU.AX':   {price:'—',chg:'',up:true,live:false,label:'ILUKA (ASX)'},
+  'ARU.AX':   {price:'—',chg:'',up:true,live:false,label:'ARAFURA (ASX)'},
+};
+
+function renderMarket(state) {
   const el = document.getElementById('market');
   if (!el) return;
-  const doubled = [...data, ...data];
-  el.innerHTML = doubled.map(i =>
-    `<div class="mitem"><span class="sym">${i.sym}</span><span class="price">${i.price}</span><span class="chg ${i.up ? 'up' : 'dn'}">${i.chg}</span></div>`
-  ).join('');
+  const ORDER = ['AUD/USD','USD/JPY','EUR/USD','GBP/USD','USD/CNY','GOLD','BTC','LYC.AX','PLS.AX','ILU.AX','ARU.AX'];
+  const items = ORDER.map(k => {
+    const d = state[k];
+    const label = d.label || k;
+    const priceStr = d.price === '—' ? '<span style="color:var(--text-3)">—</span>' : `<span class="price">${d.price}</span>`;
+    const chgStr = d.chg ? `<span class="chg ${d.up?'up':'dn'}">${d.chg}</span>` : '';
+    const liveTag = k.endsWith('.AX') ? '<span style="font-size:8px;color:var(--text-3);margin-left:2px">~15m</span>' : '';
+    return `<div class="mitem"><span class="sym">${label}</span>${priceStr}${chgStr}${liveTag}</div>`;
+  });
+  const doubled = [...items, ...items];
+  el.innerHTML = doubled.join('');
 }
-renderMarket(fallbackMarket);
+renderMarket(marketState);
 
-async function refreshForex() {
+// 1. FOREX — Frankfurter (genuinely live, updates business days)
+async function fetchForex() {
   try {
     const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=AUD,JPY,EUR,GBP,CNY');
     if (!r.ok) return;
     const d = await r.json();
     if (!d.rates) return;
-    const live = [...fallbackMarket];
-    const upd = (sym, val, inv) => {
-      const idx = live.findIndex(x => x.sym === sym);
-      if (idx > -1) { const v = inv ? (1 / val).toFixed(3) : val.toFixed(3); live[idx] = { ...live[idx], price: v }; }
-    };
-    if (d.rates.AUD) upd('AUD/USD', d.rates.AUD, true);
-    if (d.rates.JPY) upd('USD/JPY', d.rates.JPY, false);
-    if (d.rates.EUR) upd('EUR/USD', d.rates.EUR, true);
-    if (d.rates.GBP) upd('GBP/USD', d.rates.GBP, true);
-    if (d.rates.CNY) upd('USD/CNY', d.rates.CNY, false);
-    renderMarket(live);
-  } catch (e) {}
+    if (d.rates.AUD) { const v = (1/d.rates.AUD).toFixed(4); marketState['AUD/USD']={price:v,chg:'',up:true,live:true}; }
+    if (d.rates.JPY) { marketState['USD/JPY']={price:d.rates.JPY.toFixed(2),chg:'',up:true,live:true}; }
+    if (d.rates.EUR) { marketState['EUR/USD']={price:(1/d.rates.EUR).toFixed(4),chg:'',up:true,live:true}; }
+    if (d.rates.GBP) { marketState['GBP/USD']={price:(1/d.rates.GBP).toFixed(4),chg:'',up:true,live:true}; }
+    if (d.rates.CNY) { marketState['USD/CNY']={price:d.rates.CNY.toFixed(4),chg:'',up:true,live:true}; }
+    renderMarket(marketState);
+  } catch(e) {}
 }
-refreshForex();
-setInterval(refreshForex, 300000);
+
+// 2. GOLD + BTC — CoinGecko free (no key, genuinely live)
+async function fetchCrypto() {
+  try {
+    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,gold&vs_currencies=usd&include_24hr_change=true');
+    if (!r.ok) return;
+    const d = await r.json();
+    if (d.bitcoin) {
+      const p = d.bitcoin.usd, chg = d.bitcoin.usd_24h_change;
+      marketState['BTC']={price:'$'+p.toLocaleString('en-US',{maximumFractionDigits:0}),chg:(chg>=0?'+':'')+chg.toFixed(2)+'%',up:chg>=0,live:true};
+    }
+    if (d.gold) {
+      const p = d.gold.usd, chg = d.gold.usd_24h_change;
+      marketState['GOLD']={price:'$'+p.toLocaleString('en-US',{maximumFractionDigits:0}),chg:(chg>=0?'+':'')+chg.toFixed(2)+'%',up:chg>=0,live:true};
+    }
+    renderMarket(marketState);
+  } catch(e) {}
+}
+
+// 3. ASX STOCKS — Yahoo Finance via allorigins CORS proxy (15-min delayed, labelled)
+async function fetchASX() {
+  const tickers = ['LYC.AX','PLS.AX','ILU.AX','ARU.AX'];
+  for (const ticker of tickers) {
+    try {
+      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=2d`;
+      const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const r = await fetch(proxy);
+      if (!r.ok) continue;
+      const outer = await r.json();
+      const data = JSON.parse(outer.contents);
+      const q = data?.chart?.result?.[0]?.meta;
+      if (!q) continue;
+      const price = q.regularMarketPrice;
+      const prev = q.chartPreviousClose;
+      if (!price) continue;
+      const chgPct = prev ? ((price - prev) / prev * 100) : 0;
+      marketState[ticker] = {
+        price: '$' + price.toFixed(2),
+        chg: (chgPct >= 0 ? '+' : '') + chgPct.toFixed(2) + '%',
+        up: chgPct >= 0,
+        live: true,
+        label: marketState[ticker].label
+      };
+    } catch(e) {}
+  }
+  renderMarket(marketState);
+}
+
+// Run all fetches
+fetchForex();
+fetchCrypto();
+fetchASX();
+// Refresh intervals
+setInterval(fetchForex, 60000);   // every 1 min
+setInterval(fetchCrypto, 60000);  // every 1 min
+setInterval(fetchASX, 300000);    // every 5 min (ASX 15-min delayed anyway)
 
 /* SOVEREIGN CLOCKS */
 const cities = [
@@ -2056,7 +2123,7 @@ const TAB_DATA = {
   GEO:{label:'Geopolitics & Chokepoints',rssFeeds:[{url:'https://www.lowyinstitute.org/the-interpreter/rss.xml',src:'Lowy Interpreter'},{url:'https://www.rand.org/topics/rss.xml',src:'RAND Corporation'}],voices:[{initials:'LI',name:'Lowy Institute',handle:'@TheLowyInstitute',org:'Lowy Institute',text:'Australia\'s strategic geography puts it at the intersection of every major Indo-Pacific chokepoint. This is not a vulnerability — managed correctly, it is sovereign leverage.'},{initials:'CF',name:'CFR Global',handle:'@CFR_org',org:'Council on Foreign Relations',text:'The Taiwan Strait remains the highest-probability flashpoint in the Indo-Pacific. Any kinetic event would disrupt 40% of global semiconductor supply within 30 days.'},{initials:'RA',name:'RAND Analysis',handle:'@RANDCorporation',org:'RAND Corporation',text:'Hormuz closure probability models: 15–25% over 18-month horizon under current IRGC posture. Australian fuel reserve exposure (31 days) is the most acute sovereign risk in the OECD.'},{initials:'AS',name:'ASPI',handle:'@ASPI_org',org:'Australian Strategic Policy Institute',text:'The Indo-Pacific is not becoming more stable. It is becoming more contested. Australia\'s 2026 defence posture review must address the 72-hour decision window.'}],insight:{id:'SYN-GEO-028',conf:74,headline:'Hormuz disruption probability elevated to 41% over next 90 days — Australian fuel exposure window: 31 days',body:'Consensus synthesis across 8 reasoning engines places the 90-day Hormuz partial-closure probability at 41% — elevated from 34% last month. Australia imports 90% of refined fuel as finished product and holds only 31 days of strategic reserves. A 14-day Hormuz disruption translates directly to 8–14% diesel price increase within 30 days.',resolve:'Resolves: 31 July 2026',timestamp:'Published 2 May 2026 · synARKa Intelligence'},chart:{type:'horizontalBar',label:'Indo-Pacific Threat Index',labels:['Taiwan Strait','South China Sea','Hormuz','Malacca','Korea Peninsula','Myanmar'],data:[82,67,41,34,28,44],color:'rgba(249,115,22,0.8)',borderColor:'#F97316',yLabel:'Risk %'},liveFeedUrl:'https://www.lowyinstitute.org/the-interpreter/rss.xml',liveFeedSrc:'Lowy Interpreter'},
   DEF:{label:'Defence — 5 Domains',rssFeeds:[{url:'https://www.aspistrategist.org.au/feed/',src:'ASPI Strategist'},{url:'https://breakingdefense.com/feed/',src:'Breaking Defense'}],voices:[{initials:'AS',name:'ASPI Strategist',handle:'@ASPI_org',org:'Australian Strategic Policy Institute',text:'AUKUS Pillar II is the most consequential defence technology transfer in Australian history. The timeline is tight. The industrial base is not ready. The urgency is real.'},{initials:'BD',name:'Breaking Defense',handle:'@BreakingDefense',org:'Breaking Defense',text:'Ghost Bat autonomous combat aircraft programme advances toward IOC. First fully autonomous teaming exercise with F/A-18F completed March 2026.'},{initials:'JB',name:'Justin Bassi',handle:'@JustinBassi',org:'ASPI Executive Director',text:'Australia\'s defence spending surge — A$117B additional over the decade — is necessary but insufficient without the industrial and technology base to support it.'},{initials:'PN',name:'Peter W. Singer',handle:'@peterwsinger',org:'New America Foundation',text:'The drone revolution is not coming. It is here. 25,000 ground robots deployed in Ukraine. The Pacific theatre will see similar density within 36 months.'}],insight:{id:'SYN-DEF-019',conf:79,headline:'Australia to announce additional ASCA contract tranche before June 2026, targeting autonomous systems and AI-enabled C2',body:'Consensus across 8 reasoning engines rates 79% probability that the Australian Government will announce a new ASCA (Advanced Strategic Capabilities Accelerator) contract tranche before end of June 2026. The signal chain: three separate ministerial statements in March–April 2026 referencing "autonomous systems procurement timelines".',resolve:'Resolves: 30 June 2026',timestamp:'Published 2 May 2026 · synARKa Intelligence'},chart:{type:'radar',label:'Australian Defence Domain Readiness',labels:['Space','Air','Land','Sea','Undersea','Software/AI'],data:[62,71,58,74,45,38],color:'rgba(129,140,248,0.6)',borderColor:'#818cf8',yLabel:'Readiness %'},liveFeedUrl:'https://www.aspistrategist.org.au/feed/',liveFeedSrc:'ASPI Strategist'},
   LOG:{label:'Logistics & Supply Chain',rssFeeds:[{url:'https://gcaptain.com/feed/',src:'gCaptain'},{url:'https://splash247.com/feed/',src:'Splash247'}],voices:[{initials:'GC',name:'gCaptain',handle:'@JohnKonradGCAP',org:'gCaptain Maritime News',text:'The Hormuz "toll" warning from Treasury is not hypothetical. Shipping insurers are already pricing 3–5% war-risk surcharges on Gulf transits. That cost passes directly to Australian fuel prices.'},{initials:'LJ',name:'Lars Jensen',handle:'@LarsJensen',org:'Vespucci Maritime',text:'Container freight market showing early signs of restabilisation after 2024–25 volatility. But any Hormuz event resets the clock.'},{initials:'LS',name:'The Loadstar',handle:'@Mike_Wackett',org:'The Loadstar',text:'Port congestion at Singapore MPA running 18% above 5-year average. Malacca throughput record set April 2026 but dwell times increasing.'},{initials:'SP',name:'Splash247',handle:'@Splash247',org:'Splash Global Maritime News',text:'Darwin Port\'s strategic review — long overdue. The combination of Chinese operating interest and US Marine rotational force creates a risk geometry.'}],insight:{id:'SYN-LOG-033',conf:74,headline:'Hormuz disruption to increase Australian diesel price 8–14% within 30 days — mining and freight sectors most exposed',body:'Consensus synthesis places the 30-day Hormuz partial-disruption impact on Australian diesel at +8% to +14% with 74% confidence. Australia imports 90% of refined fuel as finished product, with 83% of maritime imports transiting Indonesian straits.',resolve:'Resolves: 25 May 2026',timestamp:'Published 2 May 2026 · synARKa Intelligence'},chart:{type:'line',label:'Freight Rate Index — Indo-Pacific Routes',labels:['Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'],data:[98,104,112,108,115,121,118],color:'rgba(249,115,22,0.8)',borderColor:'#F97316',yLabel:'Index'},liveFeedUrl:'https://gcaptain.com/feed/',liveFeedSrc:'gCaptain'},
-  MKT:{label:'Markets / Energy / Forex',rssFeeds:[{url:'https://feeds.reuters.com/reuters/businessNews',src:'Reuters Business'},{url:'https://www.proactiveinvestors.com.au/companies/rss',src:'Proactive Investors AU'}],voices:[{initials:'AF',name:'AFR Markets',handle:'@afr',org:'Australian Financial Review',text:'ASX rare earth stocks outperformed the broader index by 14% in April 2026. The market is pricing a structural supply shift — not just a temporary China export restriction.'},{initials:'JK',name:'J. Kemp Energy',handle:'@JKempEnergy',org:'Reuters Energy Analysis',text:'Brent crude sensitivity to Hormuz is now the dominant price signal for Asian refiners. A 14-day closure would push Brent to $95–105 range based on current inventory levels.'},{initials:'BL',name:'Bloomberg Markets',handle:'@business',org:'Bloomberg',text:'AUD/USD holding above 0.65 despite global risk-off pressure — Chinese lithium demand recovery supporting commodity currencies.'},{initials:'CS',name:'CommSec',handle:'@CommSec',org:'Commonwealth Securities',text:'Australian mining sector capex intentions for 2026 at decade-high. Critical minerals projects attracting sovereign-backed financing at scale not seen since the 2012 iron ore boom.'}],insight:{id:'SYN-MKT-022',conf:68,headline:'AUD to outperform G10 peers in H2 2026 if China critical minerals restocking cycle confirms — target: 0.68–0.72',body:'Consensus synthesis rates 68% probability that the AUD/USD breaks above 0.68 in H2 2026 driven by: (1) China critical minerals restocking following H1 export restriction clarity, (2) Australian rare earth producers beginning commercial-scale output, and (3) continued US Fed rate normalisation.',resolve:'Resolves: 31 December 2026',timestamp:'Published 2 May 2026 · synARKa Intelligence'},chart:{type:'line',label:'AUD/USD — 6 Month Trend',labels:['Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'],data:[0.648,0.641,0.655,0.649,0.658,0.662,0.659],color:'rgba(34,197,94,0.8)',borderColor:'#22C55E',yLabel:'AUD/USD'},liveFeedUrl:'https://www.aspistrategist.org.au/feed/',liveFeedSrc:'Reuters Markets',liveFeedFallback:[{title:'AUD/USD holds 0.659 — commodity currency bid supported by China restocking signals',url:'#',ago:'2h ago'},{title:'Brent crude war-risk premium building toward $78 — Hormuz disruption probability elevated',url:'#',ago:'5h ago'},{title:'ASX rare earths outperform by 14% in April 2026 — structural repricing underway: AFR',url:'#',ago:'8h ago'},{title:'GOLD hits $3,148 — safe-haven bid + central bank accumulation driving the move',url:'#',ago:'12h ago'},{title:'Macquarie: Australian mining sector capex intentions at decade-high for 2026',url:'#',ago:'1d ago'}]},
+  MKT:{label:'Markets / Energy / Forex',rssFeeds:[{url:'https://feeds.reuters.com/reuters/businessNews',src:'Reuters Business'},{url:'https://www.proactiveinvestors.com.au/companies/rss',src:'Proactive Investors AU'}],voices:[{initials:'AF',name:'AFR Markets',handle:'@afr',org:'Australian Financial Review',text:'ASX rare earth stocks outperformed the broader index by 14% in April 2026. The market is pricing a structural supply shift — not just a temporary China export restriction.'},{initials:'JK',name:'J. Kemp Energy',handle:'@JKempEnergy',org:'Reuters Energy Analysis',text:'Brent crude sensitivity to Hormuz is now the dominant price signal for Asian refiners. A 14-day closure would push Brent to $95–105 range based on current inventory levels.'},{initials:'BL',name:'Bloomberg Markets',handle:'@business',org:'Bloomberg',text:'AUD/USD holding above 0.65 despite global risk-off pressure — Chinese lithium demand recovery supporting commodity currencies.'},{initials:'CS',name:'CommSec',handle:'@CommSec',org:'Commonwealth Securities',text:'Australian mining sector capex intentions for 2026 at decade-high. Critical minerals projects attracting sovereign-backed financing at scale not seen since the 2012 iron ore boom.'}],insight:{id:'SYN-MKT-022',conf:68,headline:'AUD to outperform G10 peers in H2 2026 if China critical minerals restocking cycle confirms — target: 0.68–0.72',body:'Consensus synthesis rates 68% probability that the AUD/USD breaks above 0.68 in H2 2026 driven by: (1) China critical minerals restocking following H1 export restriction clarity, (2) Australian rare earth producers beginning commercial-scale output, and (3) continued US Fed rate normalisation.',resolve:'Resolves: 31 December 2026',timestamp:'Published 2 May 2026 · synARKa Intelligence'},chart:{type:'line',label:'AUD/USD — 6 Month Trend',labels:['Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'],data:[0.648,0.641,0.655,0.649,0.658,0.662,0.659],color:'rgba(34,197,94,0.8)',borderColor:'#22C55E',yLabel:'AUD/USD'},liveFeedUrl:'https://www.aspistrategist.org.au/feed/',liveFeedSrc:'Reuters Markets',liveFeedFallback:[{title:'AUD/USD — commodity currency supported by China critical minerals restocking signals',url:'#',ago:'2h ago'},{title:'Hormuz war-risk insurance premiums rising — shipping surcharges +3-5% on Gulf transits',url:'#',ago:'5h ago'},{title:'ASX rare earths outperform by 14% in April 2026 — structural repricing underway: AFR',url:'#',ago:'8h ago'},{title:'Gold at multi-year highs — central bank accumulation and safe-haven bid sustained',url:'#',ago:'12h ago'},{title:'Macquarie: Australian mining sector capex intentions at decade-high for 2026',url:'#',ago:'1d ago'}]},
 };
 
 let chartJsLoaded = false;
@@ -2097,23 +2164,33 @@ const TAB_KEY_METRICS = {
     {label:'AUS Fuel Import',value:'90%',sub:'Finished product',cls:'km-dn'},
   ],
   MKT: [
-    {label:'AUD/USD',value:'0.659',sub:'Live rate',cls:'km-up'},
-    {label:'BRENT',value:'$74.18',sub:'-1.04% today',cls:'km-dn'},
-    {label:'GOLD',value:'$3,148',sub:'+0.62% today',cls:'km-amb'},
-    {label:'MKT Conf.',value:'68%',sub:'AUD H2 target',cls:'km-tel'},
+    {label:'AUD/USD',value:'Loading…',sub:'Live · Frankfurter',cls:'km-up',liveKey:'AUD/USD'},
+    {label:'GOLD',value:'Loading…',sub:'Live · CoinGecko',cls:'km-amb',liveKey:'GOLD'},
+    {label:'BTC',value:'Loading…',sub:'Live · CoinGecko',cls:'km-tel',liveKey:'BTC'},
+    {label:'MKT Conf.',value:'68%',sub:'AUD H2 insight',cls:'km-pur'},
   ],
 };
 
 function renderKeyMetrics(tabKey) {
   const items = TAB_KEY_METRICS[tabKey] || [];
-  return items.map(m => `
+  return items.map(m => {
+    // Pull live value from marketState if liveKey defined
+    let val = m.value;
+    if (m.liveKey && typeof marketState !== 'undefined' && marketState[m.liveKey]) {
+      const ms = marketState[m.liveKey];
+      if (ms.price && ms.price !== '—') val = ms.price;
+    }
+    return `
     <div class="km-box">
       <span class="km-label">${m.label}</span>
-      <span class="km-value ${m.cls}">${m.value}</span>
+      <span class="km-value ${m.cls}">${val}</span>
       <span class="km-sub">${m.sub}</span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
+
+// Re-render MKT metrics when market data loads
+const _origRenderMarket = renderMarket;
 
 function renderChart(tab, data) {
   const wrap = document.getElementById('tab-chart-wrap');
