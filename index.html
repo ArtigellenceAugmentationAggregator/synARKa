@@ -140,6 +140,34 @@ nav{
 .nav-lang:hover{border-color:var(--border-strong);color:var(--text)}
 .nav-cta{background:var(--amber);color:var(--canvas);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.1em;padding:8px 16px;text-transform:uppercase;border-radius:2px;transition:all var(--t-fast);border:1px solid var(--amber)}
 .nav-cta:hover{background:transparent;color:var(--amber)}
+/* OTHER PROJECTS DROPDOWN */
+.nav-projects{position:relative;flex-shrink:0}
+.nav-projects-btn{
+  background:var(--surface-2);color:var(--text-2);
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.1em;
+  padding:8px 14px;text-transform:uppercase;border:1px solid var(--border-strong);
+  border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:all var(--t-fast);white-space:nowrap;
+}
+.nav-projects-btn:hover{border-color:var(--amber);color:var(--amber)}
+.nav-projects-btn svg{transition:transform var(--t-fast)}
+.nav-projects.open .nav-projects-btn svg{transform:rotate(180deg)}
+.nav-projects-dropdown{
+  display:none;position:absolute;top:calc(100% + 8px);right:0;
+  background:var(--surface-2);border:1px solid var(--border-strong);
+  min-width:240px;z-index:200;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+}
+.nav-projects.open .nav-projects-dropdown{display:block}
+.npd-header{font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--text-3);letter-spacing:0.2em;text-transform:uppercase;padding:10px 14px 6px;border-bottom:1px solid var(--border)}
+.npd-item{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-bottom:1px solid var(--border);text-decoration:none;transition:background var(--t-fast)}
+.npd-item:last-child{border-bottom:none}
+.npd-item:hover{background:var(--surface-3)}
+.npd-item-name{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.08em}
+.npd-item-desc{font-family:var(--font-ui);font-size:11px;color:var(--text-3);line-height:1.4}
+.npd-item.synarka .npd-item-name{color:var(--teal)}
+.npd-item.insights .npd-item-name{color:var(--amber)}
+.npd-item.aaa .npd-item-name{color:#818cf8}
 
 /* HERO */
 .hero{display:grid;grid-template-columns:300px 1fr 320px;min-height:560px;border-bottom:1px solid var(--border)}
@@ -645,7 +673,24 @@ footer{background:var(--canvas);border-top:1px solid var(--border);padding:28px 
       <option value="id">INDONESIA ID</option><option value="ms">MELAYU MS</option>
       <option value="vi">TIẾNG VIỆT VI</option>
     </select>
-    <a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" rel="noopener" class="nav-cta">Executive Briefing →</a>
+    <div class="nav-projects" id="navProjects">
+      <button class="nav-projects-btn" onclick="document.getElementById('navProjects').classList.toggle('open')">
+        Other Projects
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+      <div class="nav-projects-dropdown">
+        <div class="npd-header">Raj Singh · Projects</div>
+        <a href="https://insights.synarka.pro" target="_blank" class="npd-item insights">
+          <span class="npd-item-name">insights.synarka.pro</span>
+          <span class="npd-item-desc">7 timestamped insights · May 2026 Ledger · Hashed before publication</span>
+        </a>
+        <a href="https://aaa.artigellence.com" target="_blank" class="npd-item aaa">
+          <span class="npd-item-name">aaa.artigellence.com</span>
+          <span class="npd-item-desc">AAA by Artigellence · AI automation &amp; agents for Australian SMEs</span>
+        </a>
+
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -1231,7 +1276,7 @@ footer{background:var(--canvas);border-top:1px solid var(--border);padding:28px 
     <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M9 1L1 4.5l3 1L5.5 9 9 1z" fill="none" stroke="var(--text-3)" stroke-width="1"/></svg></div><div><div class="footer-label">INTELLIGENCE BRIEF</div><a href="https://tinyurl.com/synARKa-IntelligenceBrief" target="_blank" class="footer-value" style="text-decoration:none;color:var(--amber)">Request Brief →</a></div></div>
     <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="var(--text-3)" stroke-width="1"/><path d="M3 5h4M5 3v4" fill="none" stroke="var(--text-3)" stroke-width="1"/></svg></div><div><div class="footer-label">SECURE LINE</div><a href="tel:+61469313323" class="footer-value" style="text-decoration:none">+61 469 313 323</a></div></div>
   </div>
-  <div class="footer-bottom">© MMXXVI Artigellence Augmentation Aggregator · ABN 83 988 690 362 · All systems operational</div>
+  <div class="footer-bottom">© MMXXVI Artigellence Augmentation Aggregator · ABN 83 988 690 362 · All systems operational · <a href="https://www.rajsingh.online" target="_blank" style="color:var(--text-3);text-decoration:none;font-size:9px">rajsingh.online</a></div>
   <div class="footer-legal">
     <div style="display:flex;align-items:center;gap:0;flex-shrink:0"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="#disclaimer">Disclaimer</a></div>
     <div class="legal-right">⚠ Research &amp; Educational Content Only · Not Financial Advice</div>
@@ -2376,6 +2421,13 @@ async function fetchCelestrak() {
   }
 }
 fetchCelestrak();
+
+// Close Other Projects dropdown on outside click
+document.addEventListener('click', function(e) {
+  const el = document.getElementById('navProjects');
+  if (el && !el.contains(e.target)) el.classList.remove('open');
+});
+
 </script>
 </body>
 </html>
