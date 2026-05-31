@@ -6,10 +6,10 @@
 consensus engine running multi-engine convergence synthesis across critical minerals,
 geopolitics, defence, logistics, infrastructure, national resources and markets.
 
-**Live:** [synarka.pro](https://synarka.pro)
-**Ledger:** [insights.synarka.pro](https://insights.synarka.pro)
-**Founded:** 12 April 2026, Sydney, Australia
-**Operating entity:** Artigellence Augmentation Aggregator
+- **Live:** [synarka.pro](https://synarka.pro)
+- **Ledger:** [insights.synarka.pro](https://insights.synarka.pro)
+- **Founded:** 12 April 2026 · Sydney, Australia
+- **Operating entity:** Artigellence Augmentation Aggregator
 
 ---
 
@@ -18,6 +18,8 @@ geopolitics, defence, logistics, infrastructure, national resources and markets.
 A single self-contained `index.html` file (~256 KB, ~3,000 lines) that powers
 synarka.pro. No build step. No framework. No backend. Static deployment to Netlify
 or GitHub Pages.
+
+---
 
 ## Architecture · The Three Engines
 
@@ -30,14 +32,18 @@ or GitHub Pages.
 
 Four-layer architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 
+---
+
 ## Eight domain tabs
 
 `Critical Minerals · Geopolitics · Defence · Logistics · Markets · Infrastructure · Resources · Insights`
 
+---
+
 ## Features
 
 - Inline SVG logo (A-frame compass + pulse ring)
-- 15-language selector (EN · 中文 · हिं · 日本語 · 한국어 · العربية · Bahasa · Tiếng Việt · ไทย · Français · Español · Português · Русский · Deutsch · Italiano), RTL for Arabic
+- 15-language selector — EN · 中文 · हिं · 日本語 · 한국어 · العربية · Bahasa · Tiếng Việt · ไทย · Français · Español · Português · Русский · Deutsch · Italiano. RTL for Arabic.
 - Dark / light theme toggle (localStorage-persisted)
 - Hero with Earth + battlefield canvases and Sovereign Domain Intelligence overlay
 - Live ticker (RSS aggregation: ASPI · gCaptain · Lowy)
@@ -51,8 +57,10 @@ Four-layer architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 - 5-step Process diagram
 - 12 FAQ items in 4×3 grid
 - DEF tab interactive 5-domain clickable map (Space · Air · Land · Sea · Undersea)
-- Distributed widgets per tab (Wars/Instability in GEO · Cables/Sats in DEF · Ports in LOG · Airports in INFRA · Weather in RES)
+- Distributed widgets per tab — Wars/Instability in GEO · Cables/Sats in DEF · Ports in LOG · Airports in INFRA · Weather in RES
 - Insights Ledger preview with link to live insights.synarka.pro
+
+---
 
 ## Data sources
 
@@ -64,57 +72,73 @@ All public, free APIs:
 | CoinGecko | Gold (PAXG proxy) · BTC · crypto | 5 min |
 | Open-Meteo | Weather (6 city hubs) | 10 min |
 | Celestrak | Active satellite catalog | On load |
-| Hacker News | Tech pulse (not displayed in v3) | 10 min |
 | RSS via rss2json | ASPI · Lowy · gCaptain · Mining.com · Reuters · AFR | 5 min |
-| Yahoo (~15min delayed) | ASX equity prices | Manual |
+| Yahoo (~15min delayed) | ASX equity prices | Static |
 
 No proprietary feeds. No Bloomberg terminal. No paid subscriptions.
+
+---
 
 ## Honesty discipline
 
 Every "Phase 2" or "v1.0 in active build" marker is intentional. The site never
 describes capabilities-under-construction as live. The word **insight** is used —
 never **prediction** (ACMA + ASIC compliance). Confidence numbers range 25%–88%,
-calibrated, never rounded up.
+calibrated, never rounded up. Misses will be published as openly as hits.
+
+---
 
 ## Deployment
 
-```bash
-# Netlify
-1. Download index.html (formerly synarka_pro_FINAL_v3.html)
-2. Drag onto Netlify dashboard
-3. Configure custom domain → synarka.pro
-4. Hard refresh after deploy
+### Netlify (recommended)
 
-# GitHub Pages
-1. Push index.html to repo root or /docs
-2. Settings → Pages → source: main / root or /docs
-3. Custom domain → synarka.pro
-
-# Local preview
-python3 -m http.server 8000
-# → http://localhost:8000
 ```
+1. Drag this folder onto app.netlify.com
+2. Configure custom domain → synarka.pro
+3. Hard refresh after deploy
+```
+
+### GitHub Pages
+
+```
+1. Push to repo root or /docs
+2. Repo Settings → Pages → source: main / root (or /docs)
+3. Custom domain → synarka.pro
+4. Hard refresh
+```
+
+### Local preview
+
+```bash
+python3 -m http.server 8000
+# http://localhost:8000
+```
+
+---
 
 ## Configuration
 
 The only embedded URL that may need editing:
 
-- **Beehiiv newsletter endpoint** — search the file for `synarka.beehiiv.com/subscribe`
+- **Beehiiv newsletter endpoint** — search `index.html` for `synarka.beehiiv.com/subscribe`
   and replace with your actual publication URL once Beehiiv is live.
 
 All other endpoints (raj@synarka.pro · t.me/synARKaIntelligence · rajsingh.online ·
 insights.synarka.pro · +61 469 313 323) are pre-wired and live.
 
+---
+
 ## Browser support
 
-- Chromium-based browsers (Chrome · Edge · Brave · Opera)
+- Chromium-based (Chrome · Edge · Brave · Opera)
 - Firefox 120+
 - Safari 17+
 - Mobile Safari · Chrome Android
 
 Hard requirements: ES2020 JavaScript · Fetch API · CSS Grid · CSS custom properties ·
 Canvas 2D · `localStorage`.
+
+---
 
 ## Engagement tiers
 
@@ -129,6 +153,8 @@ Canvas 2D · `localStorage`.
 | Audit · One-time | 5K–15K + GST | Diagnostic before subscription |
 | Consultancy · Bespoke | Case-by-case | M&A · tender prep · strategic briefings |
 
+---
+
 ## Contact
 
 - **Email:** raj@synarka.pro
@@ -138,6 +164,8 @@ Canvas 2D · `localStorage`.
 - **Founder:** [rajsingh.online](https://rajsingh.online)
 - **Phone / WhatsApp:** +61 469 313 323
 
+---
+
 ## License
 
 © MMXXVI · Artigellence Augmentation Aggregator · Sydney, Australia.
@@ -145,6 +173,8 @@ All rights reserved. The orchestration, prompt library, persona taxonomy and
 Indo-Pacific corridor topology are proprietary IP and not exposed in this repository.
 
 This repository contains the public-facing static site only — not the engine.
+
+---
 
 ## Status
 

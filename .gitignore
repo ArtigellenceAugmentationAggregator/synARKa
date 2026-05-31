@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor
+*.bak
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node / build (in case you add tooling later)
+node_modules/
+dist/
+build/
+
+# Env
+.env
+.env.local
+.env.production
+
+# Deploy
+.netlify/
+.vercel/
+
+# Misc
+*.zip
+*.tar.gz
