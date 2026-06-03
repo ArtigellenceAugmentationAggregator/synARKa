@@ -522,6 +522,36 @@ body.light-mode .news-item{background:rgba(255,255,255,0.6)}
 .voices-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(max-width:680px){.voices-grid{grid-template-columns:1fr}}
 .voice-card{background:var(--canvas);border:1px solid var(--border);padding:14px;border-radius:2px}
+/* ─── X / TWITTER PULSE (per-tab right-column block) ─── */
+.tweet-list{display:flex;flex-direction:column;gap:10px}
+.tweet-card{background:var(--canvas);border:1px solid var(--border);padding:12px 14px;border-radius:2px;transition:all var(--t-fast);display:flex;flex-direction:column;gap:8px}
+.tweet-card:hover{border-color:var(--teal-dim);background:rgba(45,212,191,0.04)}
+.tweet-head{display:flex;align-items:center;gap:10px}
+.tweet-avatar{width:28px;height:28px;border-radius:50%;background:var(--surface-2);color:var(--teal);font-family:var(--font-mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-shrink:0}
+.tweet-meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.tweet-name{font-family:var(--font-ui);font-size:12px;color:var(--text);font-weight:600;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tweet-handle{font-family:var(--font-mono);font-size:10px;color:var(--text-3);line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tweet-time{font-family:var(--font-mono);font-size:9px;color:var(--text-3);letter-spacing:0.06em;flex-shrink:0}
+.tweet-text{font-family:var(--font-ui);font-size:12px;color:var(--text-2);line-height:1.5;letter-spacing:-0.003em}
+.tweet-stats{display:flex;gap:14px;padding-top:8px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:9px;color:var(--text-3);letter-spacing:0.08em;text-transform:uppercase}
+.tweet-stats .stat{display:flex;align-items:center;gap:5px}
+.tweet-stats .stat .v{color:var(--text);font-weight:600}
+.tab-right-block[data-pulse="MIN"] .tweet-avatar{color:var(--teal)}
+.tab-right-block[data-pulse="MIN"] .tweet-card:hover{border-color:var(--teal-dim);background:rgba(45,212,191,0.04)}
+.tab-right-block[data-pulse="GEO"] .tweet-avatar{color:var(--critical)}
+.tab-right-block[data-pulse="GEO"] .tweet-card:hover{border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.04)}
+.tab-right-block[data-pulse="DEF"] .tweet-avatar{color:var(--indigo)}
+.tab-right-block[data-pulse="DEF"] .tweet-card:hover{border-color:var(--indigo-dim);background:rgba(129,140,248,0.04)}
+.tab-right-block[data-pulse="LOG"] .tweet-avatar{color:var(--amber)}
+.tab-right-block[data-pulse="LOG"] .tweet-card:hover{border-color:var(--amber-dim);background:rgba(224,168,0,0.04)}
+.tab-right-block[data-pulse="MKT"] .tweet-avatar{color:var(--up)}
+.tab-right-block[data-pulse="MKT"] .tweet-card:hover{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.04)}
+.tab-right-block[data-pulse="INFRA"] .tweet-avatar{color:var(--cyan)}
+.tab-right-block[data-pulse="INFRA"] .tweet-card:hover{border-color:var(--cyan-dim);background:rgba(6,182,212,0.04)}
+.tab-right-block[data-pulse="RES"] .tweet-avatar{color:var(--lime)}
+.tab-right-block[data-pulse="RES"] .tweet-card:hover{border-color:var(--lime-dim);background:rgba(132,204,22,0.04)}
+.tab-right-block[data-pulse="INS"] .tweet-avatar{color:var(--violet)}
+.tab-right-block[data-pulse="INS"] .tweet-card:hover{border-color:var(--violet-dim);background:rgba(167,139,250,0.04)}
 .voice-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .voice-avatar{width:32px;height:32px;background:linear-gradient(135deg,var(--teal),var(--violet));color:#0B0E13;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:50%}
 .voice-meta{display:flex;flex-direction:column;line-height:1.2}
@@ -2844,18 +2874,112 @@ function renderKeyMetrics(metrics) {
     return `<div class="km-box"><span class="km-label">${m.label}</span><span class="km-value ${m.cls}">${val}</span><span class="km-sub">${m.sub}</span></div>`;
   }).join('');
 }
+/* ═══════════════════════════════════════════════════════════════
+   INFRA + RES — Portfolio card data + render functions
+   Ported from v2.0 FINAL · 9 cards each · auto-responsive grid
+   ═══════════════════════════════════════════════════════════════ */
+const INFRA_CARDS = [
+  {eyebrow:'AIRPORTS',title:'Major Hubs · 8 AU + 12 Intl',body:'Sydney, Melbourne, Brisbane, Perth, Adelaide, Darwin, Hobart, Canberra plus 12 international Indo-Pacific hubs. Live departures clickable in bottom strip.',sLabel:'Tracked',sVal:'20'},
+  {eyebrow:'PORTS',title:'Container + Critical Mineral Berths',body:'Port Hedland, Dampier, Newcastle, Brisbane, Melbourne, Sydney, Fremantle, Darwin. East-coast container throughput up 4.2% YoY. Critical minerals export capacity at ceiling.',sLabel:'Throughput',sVal:'+4.2%'},
+  {eyebrow:'CRUISE TERMINALS',title:'International Cruise · OPT Sydney + Melbourne + Brisbane',body:'Cruise sector recovery to 92% of 2019 baseline in FY26. White Bay terminal upgrade ongoing. Darwin emerging as Indo-Pacific cruise hub.',sLabel:'Recovery',sVal:'92%'},
+  {eyebrow:'DAMS',title:'Snowy 2.0 + Tantangara + Talbingo',body:'Snowy 2.0 first generator commissioning Q4 2026 · full 2,200 MW by 2028. Largest committed dispatchable storage in NEM. Tunnel works 87% complete.',sLabel:'Capacity',sVal:'2.2 GW'},
+  {eyebrow:'HIGHWAYS',title:'Pacific · Hume · Bruce · Stuart · WA Coastal',body:'A$237B Infrastructure Australia priority list dominated by interstate corridors, regional freight, and bushfire/flood resilience upgrades.',sLabel:'Priority',sVal:'A$237B'},
+  {eyebrow:'ELECTRICITY GRIDS',title:'NEM + SWIS + NT Grid',body:'AEMO winter 2026 reserve margins tightest in decade. NSW + VIC 8-10% reserve. Snowy 2.0 timing critical to winter 2027 reliability.',sLabel:'NSW Reserve',sVal:'8.2%'},
+  {eyebrow:'COAL',title:'Hunter Valley + Bowen Basin · Secular Decline',body:'Newcastle thermal coal export volumes structurally declining. Bowen Basin metallurgical coal stable. Asia thermal coal demand peaking 2027 per IEA.',sLabel:'Peak',sVal:'2027 IEA'},
+  {eyebrow:'HYDRO',title:'Snowy Hydro · Hydro Tasmania · Marinus Link',body:'AU hydro generation capacity 8,800 MW. Marinus Link 1,500 MW Bass Strait cable approved · construction 2026-2030. Doubling Tas-VIC interconnection.',sLabel:'Capacity',sVal:'8.8 GW'},
+  {eyebrow:'NUCLEAR · OPEN DEBATE',title:'AUKUS SSN Pathway · Civil Nuclear Policy',body:'Civil nuclear power remains prohibited under Federal law. AUKUS Pillar I SSN pathway proceeds at HMAS Stirling and Osborne. Civil nuclear debate active in policy discourse — synARKa publishes calibrated assessment, not advocacy.',sLabel:'Status',sVal:'AUKUS-only'},
+];
+
+const RES_CARDS = [
+  {eyebrow:'WORLD HERITAGE · NATURAL',title:'Great Barrier Reef',body:'344,400 sq km marine protected area. 2026 LTMP shows northern reefs recovering from 2024 bleaching. Federal climate-resilience budget uplift insight: 74% confidence A$1.2-1.8B over 5 years.',sLabel:'Asset Val',sVal:'A$56B'},
+  {eyebrow:'WORLD HERITAGE · MIXED',title:'Kakadu National Park',body:'Australia\'s largest national park · 19,800 sq km · Indigenous Bininj/Mungguy heritage. Ranger Mine rehabilitation completing 2026. UNESCO 2026 reporting cycle in progress.',sLabel:'Area',sVal:'19,800 km²'},
+  {eyebrow:'WORLD HERITAGE · MIXED',title:'Uluru-Kata Tjuta',body:'Anangu-managed sacred site · 1,326 sq km · UNESCO since 1987. Tourism contributes A$680M annually. Climbing closure 2019 — visitor experience model now Indigenous-led.',sLabel:'Annual Vis',sVal:'250K+'},
+  {eyebrow:'WORLD HERITAGE · NATURAL',title:'Tasmanian Wilderness',body:'15,800 sq km · 20% of Tasmania · among the most significant temperate-zone wilderness areas globally. Bushfire risk geometry shifting with climate.',sLabel:'Area',sVal:'15,800 km²'},
+  {eyebrow:'ICONIC',title:'Great Ocean Road · Twelve Apostles',body:'243 km coastal corridor · Victoria · A$3.4B tourism contribution. Climate-driven coastal erosion creating infrastructure pressure. VicRoads upgrade investment A$280M.',sLabel:'Tourism',sVal:'A$3.4B'},
+  {eyebrow:'WORLD HERITAGE · NATURAL',title:'Wet Tropics of Queensland',body:'9,000 sq km · UNESCO 1988 · world\'s oldest continuously surviving tropical rainforest. Critical biodiversity corridor under climate stress.',sLabel:'Asset Val',sVal:'A$12B'},
+  {eyebrow:'WORLD HERITAGE · NATURAL',title:'Shark Bay · WA',body:'23,000 sq km marine reserve · Hamelin Pool stromatolites · world\'s most extensive seagrass beds. Ningaloo Reef adjacent.',sLabel:'Area',sVal:'23,000 km²'},
+  {eyebrow:'ALPINE',title:'Snowy Mountains · Kosciuszko',body:'690,000 hectares NSW · ski tourism + hydro generation co-located. Snowy 2.0 underground tunnels traverse the alpine zone. Multi-use sovereign asset.',sLabel:'Area',sVal:'6,900 km²'},
+  {eyebrow:'WORLD HERITAGE · CULTURAL',title:'Sydney Opera House + Royal Exhibition Building',body:'AU\'s most internationally recognised cultural assets. Opera House contributes A$1.2B annually to NSW economy. UNESCO since 2007.',sLabel:'NSW GDP',sVal:'A$1.2B/yr'},
+];
+
+function renderINFRAExtra() {
+  return `<div class="intel-block">
+    <div class="intel-block-title">Infrastructure Portfolio · Indo-Pacific Sovereign Asset Map</div>
+    <div class="infra-grid">
+      ${INFRA_CARDS.map(c => `
+        <div class="infra-card">
+          <div class="ic-eyebrow">${c.eyebrow}</div>
+          <h4>${c.title}</h4>
+          <div class="ic-body">${c.body}</div>
+          <div class="ic-stats"><span>${c.sLabel} <span class="v">${c.sVal}</span></span></div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
+function renderRESExtra() {
+  return `<div class="intel-block">
+    <div class="intel-block-title">National Resources · UNESCO World Heritage + Iconic Assets</div>
+    <div class="res-grid">
+      ${RES_CARDS.map(c => `
+        <div class="res-card">
+          <div class="rc-eyebrow">${c.eyebrow}</div>
+          <h4>${c.title}</h4>
+          <div class="rc-body">${c.body}</div>
+          <div class="rc-stats"><span>${c.sLabel} <span class="v">${c.sVal}</span></span></div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
 function tabExtra(tabKey) {
   // Distributed widgets per tab
   if (tabKey === 'GEO') return widgetWars() + widgetInstability();
   if (tabKey === 'DEF') return widgetDefMap();
   if (tabKey === 'LOG') return widgetPorts();
-  if (tabKey === 'INFRA') return widgetAirportsAUS() + widgetAirportsIntl();
-  if (tabKey === 'RES') return widgetWeather();
+  if (tabKey === 'INFRA') return renderINFRAExtra() + widgetAirportsAUS() + widgetAirportsIntl();
+  if (tabKey === 'RES') return renderRESExtra() + widgetWeather();
   if (tabKey === 'MKT') return renderMKTContent();
   return '';
 }
+function renderTweetPulse(tabKey) {
+  // Pulls tweets from the existing X_FEED_DATA[tabKey] array — no data duplication
+  const items = (typeof X_FEED_DATA !== 'undefined' && X_FEED_DATA[tabKey]) ? X_FEED_DATA[tabKey] : [];
+  if (!items.length) return '';
+  return `<div class="tab-right-block" data-pulse="${tabKey}">
+    <div class="tab-right-title">𝕏 / Twitter Pulse — ${tabKey}</div>
+    <div class="tweet-list">
+      ${items.map(t => `
+        <div class="tweet-card">
+          <div class="tweet-head">
+            <div class="tweet-avatar">${t.init}</div>
+            <div class="tweet-meta">
+              <span class="tweet-name">${t.name}</span>
+              <span class="tweet-handle">${t.handle}</span>
+            </div>
+            <span class="tweet-time">${t.time}</span>
+          </div>
+          <div class="tweet-text">${t.text}</div>
+          <div class="tweet-stats">
+            <span class="stat">↻ <span class="v">${(t.stats && t.stats.rt) || '—'}</span></span>
+            <span class="stat">♡ <span class="v">${(t.stats && t.stats.lk) || '—'}</span></span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
 function tabRightExtras(tabKey) {
-  if (tabKey === 'DEF') return widgetCables() + widgetSatellites();
+  if (tabKey === 'DEF') return widgetCables() + widgetSatellites() + renderTweetPulse('DEF');
+  if (tabKey === 'MIN') return renderTweetPulse('MIN');
+  if (tabKey === 'GEO') return renderTweetPulse('GEO');
+  if (tabKey === 'LOG') return renderTweetPulse('LOG');
+  if (tabKey === 'MKT') return renderTweetPulse('MKT');
+  if (tabKey === 'INFRA') return renderTweetPulse('INFRA');
+  if (tabKey === 'RES') return renderTweetPulse('RES');
   return '';
 }
 async function renderTabBody(tabKey) {
@@ -3049,6 +3173,11 @@ function renderINSContent() {
       </div>
       <div class="ilb-r">Open Ledger →</div>
     </a>
+
+    <!-- INS · X / Twitter Pulse — single-column wrapper to match INS layout -->
+    <div style="max-width:1480px;margin:32px auto 0;padding:0 24px">
+      ${renderTweetPulse('INS')}
+    </div>
   `;
 }
 
