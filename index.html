@@ -1038,7 +1038,152 @@ body.light-mode .xfcard{background:#0B0E13}
 .process-step h4{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--text);line-height:1.3}
 .process-step .ps-body{font-family:var(--font-ui);font-size:12.5px;color:var(--text-2);line-height:1.55;flex:1}
 .process-step .ps-meta{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;padding-top:12px;border-top:1px solid var(--border);margin-top:auto}
+/* ═══ MISSION CONTROL P1 ═══ */
+.telemetry-bar{display:flex;align-items:center;gap:10px;background:#000;border-bottom:1px solid var(--border);padding:5px 16px;cursor:pointer;user-select:none;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+.telemetry-bar:hover{color:var(--text-2,#9ca3af)}
+.telemetry-bar .tb-live{color:var(--up,#22C55E);font-size:9px;animation:tbPulse 2.4s infinite}
+@keyframes tbPulse{0%,100%{opacity:1}50%{opacity:.35}}
+.telemetry-bar .tb-label{color:var(--teal);font-weight:600}
+.telemetry-bar .tb-meta{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.telemetry-bar .tb-chevron{transition:transform .3s}
+.telemetry-bar.open .tb-chevron{transform:rotate(180deg)}
+.telemetry-drawer{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.telemetry-drawer.open{max-height:120px}
+.hero-kicker{font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;opacity:.9}
+.hero-ladder{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--text-3);margin:-30px 0 34px;text-align:center}
+.hero-ladder strong{color:var(--amber);font-weight:600}
+.traction-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:46px}
+.traction-cell{background:var(--surface-1,#11161f);padding:16px 18px 17px;text-align:left}
+.traction-cell .tc-val{font-family:var(--font-ui);font-size:30px;font-weight:650;color:var(--text);line-height:1;letter-spacing:-.02em}
+.traction-cell .tc-val.up{color:var(--up,#22C55E)}
+.traction-cell .tc-val .tc-of{font-size:16px;color:var(--text-3);font-weight:500;margin-left:2px}
+.traction-cell .tc-label{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;color:var(--text-3);margin-top:7px;line-height:1.5;text-transform:uppercase}
+@media(max-width:860px){.traction-strip{grid-template-columns:1fr 1fr}}
+.proof-section{max-width:1160px;margin:0 auto;padding:84px 24px 70px}
+.proof-head{text-align:center;max-width:760px;margin:0 auto 44px}
+.proof-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--violet,#A78BFA);margin-bottom:16px}
+.proof-title{font-size:clamp(30px,4.4vw,46px);font-weight:600;letter-spacing:-.02em;color:var(--text);margin:0 0 18px;line-height:1.06}
+.proof-title .accent{color:var(--teal)}
+.proof-sub{font-size:15px;line-height:1.65;color:var(--text-2,#9ca3af)}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1020px){.proof-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.proof-grid{grid-template-columns:1fr}}
+.proof-card{background:var(--surface-1,#11161f);border:1px solid var(--border);border-radius:4px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;position:relative}
+.proof-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.proof-card.hit::before{background:var(--up,#22C55E)}
+.proof-card.miss::before{background:var(--down,#EF4444)}
+.proof-card .pc-status{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.proof-card.hit .pc-status{color:var(--up,#22C55E)}
+.proof-card.miss .pc-status{color:var(--down,#EF4444)}
+.proof-card .pc-name{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.proof-card .pc-line{font-size:12.5px;line-height:1.6;color:var(--text-2,#9ca3af);flex:1}
+.proof-card .pc-nums{display:flex;flex-direction:column;gap:4px;border-top:1px dashed var(--border);padding-top:10px}
+.proof-card .pc-conv{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--text-3);text-transform:uppercase}
+.proof-card .pc-result{font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.02em}
+.proof-card .pc-result.up{color:var(--up,#22C55E)}
+.proof-card .pc-result.down{color:var(--down,#EF4444)}
+.proof-foot{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:38px}
+/* ═══ MISSION CONTROL P2 ═══ */
+.ladder-section{max-width:1160px;margin:0 auto;padding:74px 24px 66px}
+.ladder-head{text-align:center;max-width:780px;margin:0 auto 40px}
+.ladder-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+.ladder-title{font-size:clamp(28px,4vw,42px);font-weight:600;letter-spacing:-.02em;color:var(--text);line-height:1.08;margin:0}
+.ladder-title .hl-t2{color:var(--teal)}
+.ladder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:rung}
+@media(max-width:1020px){.ladder-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.ladder-grid{grid-template-columns:1fr}}
+.ladder-rung{background:var(--surface-1,#11161f);border:1px solid var(--border);border-radius:4px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:9px;position:relative}
+.ladder-rung.featured{border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.05)}
+.ladder-rung .lr-num{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;color:var(--text-3);text-transform:uppercase}
+.ladder-rung.featured .lr-num{color:var(--teal)}
+.ladder-rung .lr-name{font-size:19px;font-weight:650;color:var(--text);letter-spacing:-.01em}
+.ladder-rung .lr-price{font-family:var(--font-ui);font-size:22px;font-weight:600;color:var(--amber);letter-spacing:-.01em}
+.ladder-rung.featured .lr-price{color:var(--teal)}
+.ladder-rung .lr-freq{font-family:var(--font-mono);font-size:10px;color:var(--text-3);font-weight:400;letter-spacing:.04em;margin-left:4px}
+.ladder-rung .lr-body{font-size:12.5px;line-height:1.62;color:var(--text-2,#9ca3af);flex:1}
+.ladder-rung .lr-cta{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);text-decoration:none;border-top:1px dashed var(--border);padding-top:11px;font-weight:600}
+.ladder-rung .lr-cta:hover{color:var(--text)}
+a.hero-ladder{display:block;text-decoration:none;cursor:pointer}
+a.hero-ladder:hover strong{text-decoration:underline}
+.engine-schematic{display:flex;align-items:stretch;justify-content:center;gap:10px;margin:26px auto 8px;max-width:980px;flex-wrap:wrap}
+.es-node{flex:1;min-width:150px;border:1px solid var(--border);border-radius:4px;background:var(--surface-1,#11161f);padding:13px 14px 14px;text-align:left;position:relative}
+.es-node::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.es-node.teal::before{background:var(--teal)}
+.es-node.coral::before{background:#fb8498}
+.es-node.amber::before{background:var(--amber)}
+.es-node.violet::before{background:var(--violet,#A78BFA)}
+.es-node .es-stage{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.22em;color:var(--text-3)}
+.es-node .es-name{font-family:var(--font-mono);font-size:16px;font-weight:700;letter-spacing:.12em;margin:4px 0 3px}
+.es-node.teal .es-name{color:var(--teal)}.es-node.coral .es-name{color:#fb8498}.es-node.amber .es-name{color:var(--amber)}.es-node.violet .es-name{color:var(--violet,#A78BFA)}
+.es-node .es-sub{font-family:var(--font-mono);font-size:9px;color:var(--text-3);letter-spacing:.04em}
+.es-link{display:flex;align-items:center;color:var(--text-3);font-size:18px;font-family:var(--font-mono)}
+@media(max-width:760px){.es-link{display:none}.es-node{min-width:42%}}
+/* per-tab domain skins · ~4% presence · CSS-only */
+.tab-body{transition:background .5s ease}
+.tab-bg-MIN{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='96'%3E%3Cpath d='M42 4 76 24v40L42 84 8 64V24z' fill='none' stroke='%232DD4BF' stroke-opacity='.07'/%3E%3C/svg%3E")}
+.tab-bg-GEO{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cpath d='M-10 140 Q60 90 170 110 M-10 60 Q80 20 170 50' fill='none' stroke='%23F97316' stroke-opacity='.08' stroke-dasharray='7 9'/%3E%3C/svg%3E")}
+.tab-bg-DEF{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cg fill='none' stroke='%23818cf8' stroke-opacity='.07'%3E%3Ccircle cx='110' cy='110' r='44'/%3E%3Ccircle cx='110' cy='110' r='86'/%3E%3Cpath d='M110 110 L196 66'/%3E%3C/g%3E%3C/svg%3E")}
+.tab-bg-LOG{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='90'%3E%3Cg stroke='%23E0A800' stroke-opacity='.08' fill='none'%3E%3Cpath d='M0 25h180' stroke-dasharray='14 10'/%3E%3Cpath d='M0 65h180' stroke-dasharray='4 12'/%3E%3C/g%3E%3C/svg%3E")}
+.tab-bg-MKT{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cg stroke='%2322C55E' stroke-opacity='.06'%3E%3Cpath d='M0 89.5h90M89.5 0v90'/%3E%3Cpath d='M22 60v-26M52 70V34M76 50V18' stroke-opacity='.09' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E")}
+.tab-bg-INFRA{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M0 63.5h64M63.5 0v64' stroke='%2306b6d4' stroke-opacity='.07'/%3E%3C/svg%3E")}
+.tab-bg-RES{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120'%3E%3Cg fill='none' stroke='%2384cc16' stroke-opacity='.07'%3E%3Cpath d='M0 30 Q50 12 100 30 T200 30'/%3E%3Cpath d='M0 70 Q50 50 100 70 T200 70'/%3E%3Cpath d='M0 108 Q50 92 100 108 T200 108'/%3E%3C/g%3E%3C/svg%3E")}
+/* ═══ MISSION CONTROL P3 ═══ */
+.tab-bg-INS{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='44'%3E%3Cpath d='M0 43.5h300' stroke='%23A78BFA' stroke-opacity='.08'/%3E%3Cpath d='M46 0v44' stroke='%23A78BFA' stroke-opacity='.12'/%3E%3C/svg%3E")}
+.founder-btn-gold{border-color:var(--amber);color:var(--amber)}
+.founder-btn-gold:hover{background:var(--amber);color:#0B0E13;border-color:var(--amber)}
+.pricing-doors{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 30px}
+.pdoor{border:1px solid var(--border);border-radius:3px;padding:12px 20px;cursor:pointer;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);background:var(--surface-1,#11161f);display:flex;flex-direction:column;gap:4px;min-width:170px;text-align:left;transition:all .2s}
+.pdoor .pd-sub{font-size:9px;font-weight:400;letter-spacing:.06em;color:var(--text-3);text-transform:none}
+.pdoor:hover{border-color:var(--teal)}
+.pdoor.active{border-color:var(--teal);color:var(--teal);background:rgba(45,212,191,.06)}
+.tier-card.tier-hidden{display:none}
+.onboard-section{max-width:1160px;margin:0 auto;padding:78px 24px 70px}
+.ob-head{text-align:center;max-width:760px;margin:0 auto 34px}
+.ob-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.ob-title{font-size:clamp(27px,3.8vw,40px);font-weight:600;letter-spacing:-.02em;color:var(--text);line-height:1.1;margin:0}
+.ob-title .hl-t2{color:var(--teal)}
+.ob-flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 auto 38px}
+.obf-node{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;color:var(--text-2);border:1px solid var(--border);border-radius:2px;padding:7px 12px;background:var(--surface-1,#11161f)}
+.obf-arrow{color:var(--text-3);font-family:var(--font-mono)}
+.ob-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:18px;margin-bottom:26px}
+@media(max-width:920px){.ob-grid{grid-template-columns:1fr}}
+.ob-voice{background:var(--surface-1,#11161f);border:1px solid var(--border);border-radius:4px;padding:20px;align-self:start}
+.obv-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;font-weight:600}
+.obv-player{display:flex;align-items:center;gap:14px}
+.obv-btn{width:52px;height:52px;border-radius:50%;border:1px solid var(--amber);background:rgba(224,168,0,.08);color:var(--amber);font-size:18px;cursor:pointer;flex-shrink:0;transition:all .2s}
+.obv-btn:hover{background:var(--amber);color:#0B0E13}
+.obv-title{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.4}
+.obv-sub{font-family:var(--font-mono);font-size:10px;color:var(--text-3);margin-top:4px;letter-spacing:.05em}
+.ob-check{background:var(--surface-1,#11161f);border:1px solid var(--border);border-radius:4px;padding:20px}
+.obc-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:8px}
+.obc-sub{font-size:12px;color:var(--text-3);line-height:1.55;margin-bottom:14px}
+.obc-q{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px dashed var(--border)}
+.obc-q .obc-text{font-size:12.5px;line-height:1.5;color:var(--text-2)}
+.obc-btns{display:flex;gap:6px;flex-shrink:0}
+.obc-btns button{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;padding:6px 13px;border:1px solid var(--border);background:transparent;color:var(--text-2);border-radius:2px;cursor:pointer;text-transform:uppercase}
+.obc-btns button.sel-y{border-color:var(--up,#22C55E);color:var(--up,#22C55E)}
+.obc-btns button.sel-n{border-color:var(--down,#EF4444);color:var(--down,#EF4444)}
+.obc-verdict{margin-top:14px;padding:13px 15px;border:1px dashed var(--border);border-radius:3px;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--text-3);line-height:1.6}
+.obc-verdict.v-clear{border-color:var(--up,#22C55E);color:var(--up,#22C55E)}
+.obc-verdict.v-gap{border-color:var(--amber);color:var(--amber)}
+.obc-verdict.v-blind{border-color:var(--down,#EF4444);color:var(--down,#EF4444)}
+.ob-wizard{background:var(--surface-1,#11161f);border:1px solid var(--border);border-radius:4px;padding:20px}
+.obw-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet,#A78BFA);font-weight:600;margin-bottom:14px}
+.obw-step{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:8px 0}
+.obw-q{font-family:var(--font-mono);font-size:11px;color:var(--text-2);letter-spacing:.08em;min-width:110px;text-transform:uppercase}
+.obw-chips{display:flex;gap:8px;flex-wrap:wrap}
+.obw-chips button{font-size:12px;padding:8px 14px;border:1px solid var(--border);background:transparent;color:var(--text-2);border-radius:20px;cursor:pointer;transition:all .15s}
+.obw-chips button:hover{border-color:var(--teal);color:var(--teal)}
+.obw-chips button.sel{border-color:var(--teal);color:#0B0E13;background:var(--teal)}
+.obw-result{margin-top:10px;font-size:13.5px;line-height:1.65;color:var(--text)}
+.obw-result a{color:var(--teal);font-weight:600}
 </style>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is synARKa Intelligence?", "acceptedAnswer": {"@type": "Answer", "text": "A geopolitical consensus engine for the Indo-Pacific. Three engines — Satellite, Predictive-Simulation, Intelligence — converge on critical minerals, geopolitics, defence, logistics, infrastructure, national resources and markets. Australian sovereign lens. Founder-held. Bootstrapped."}}, {"@type": "Question", "name": "Why synARKa? Where is the moat?", "acceptedAnswer": {"@type": "Answer", "text": "Three pillars: (1) the Indo-Pacific corridor — 25 years of operational knowledge, uncopyable. (2) Critical Minerals & Rare Earths — the structural backbone of the next decade's contest. (3) Three Engines + Four Layers — Satellite / Predictive-Simulation / Intelligence on a SENSE→SIMULATE→VERIFY→DELIVER architecture. Founder-bound. Compounding daily."}}, {"@type": "Question", "name": "What does \"Multi-Engine Consensus\" mean?", "acceptedAnswer": {"@type": "Answer", "text": "Every synARKa insight is generated by running structured cascade prompts across 8 up-to-date frontier reasoning engines. Where 6+ engines cluster within ±10 confidence points, the median is adopted. Where they diverge >20 points, dissent is flagged in writing. The consensus is the moat, not any single model. Specific model names are not disclosed publicly."}}, {"@type": "Question", "name": "Is the Sovereign Sense Engine live today?", "acceptedAnswer": {"@type": "Answer", "text": "Partially. The 8-engine multi-LLM consensus is operational and publishing insights. Satellite ingestion, automated SHA-256 hashing, OpenTimestamps anchoring, 1,000+ psychometric swarms, and sub-12hr SLAs are v1.0 in active build. We never describe Phase 2 capabilities as live. Honesty is non-negotiable."}}, {"@type": "Question", "name": "What do I actually receive at each tier?", "acceptedAnswer": {"@type": "Answer", "text": "Free: public ledger + weekly digest. Watch (A$99): 1 domain weekly + Telegram. Operator (A$1.5K): all 8 domains + 48hr alerts. Pro (A$5K): daily dispatches + founder direct + 24hr SLA. Enterprise (A$15K+): sovereign cadence + multi-corridor + 12hr SLA + NDA. Tailored: POA. Audit: one-time A$5K–15K. Consultancy: case-by-case."}}, {"@type": "Question", "name": "Is this financial advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. synARKa Intelligence is geopolitical research and educational commentary only. We are not a licensed financial adviser, AFS licensee, or investment service. All published market data is indicative only. Seek independent advice from an appropriately licensed Australian financial adviser before any financial decision."}}, {"@type": "Question", "name": "Why \"insight\" and not \"prediction\"?", "acceptedAnswer": {"@type": "Answer", "text": "In Australia, \"prediction markets\" are regulated by ACMA as gambling and remain illegal in most contexts; the ASIC binary options ban runs to 2031. To respect that regulatory line and to be honest about what we do — calibrated probability synthesis, not betting odds — every published call is an insight. The word is locked."}}, {"@type": "Question", "name": "Who is behind synARKa?", "acceptedAnswer": {"@type": "Answer", "text": "Raj Singh, Sydney-based founder. 25 years of cross-cultural negotiation in the India-Australia corridor. r/energy #1 all-time post (94K+ views, organic). 12 months of deep AI immersion. Operates as a one-person bootstrapped company with no outside capital. Trades under Artigellence Augmentation Aggregator."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Service", "name": "synARKa Entry Ladder", "provider": {"@type": "Organization", "name": "synARKa Intelligence", "url": "https://synarka.pro"}, "areaServed": "Indo-Pacific", "serviceType": "Geopolitical & satellite intelligence", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Entry Ladder", "itemListElement": [{"@type": "Offer", "name": "72-Hour Brief", "price": "500", "priceCurrency": "AUD", "description": "One corridor question, multi-engine consensus read, 72-hour turnaround."}, {"@type": "Offer", "name": "Site Baseline Audit", "priceSpecification": {"@type": "PriceSpecification", "minPrice": "3500", "maxPrice": "7500", "priceCurrency": "AUD"}, "description": "One named asset — archive satellite baseline + structural risk read + geopolitical context. Credits toward SiteWatch."}, {"@type": "Offer", "name": "SiteWatch", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "1490", "priceCurrency": "AUD", "unitText": "per site per month (from)"}, "description": "Continuous monitoring on an audited asset — monthly change-detection brief + alert trigger. Brokered tasking, NDA-tier providers."}]}}
+</script>
 </head>
 <body data-lang="en">
 
@@ -1048,6 +1193,14 @@ body.light-mode .xfcard{background:#0B0E13}
   <a href="#disclaimer" class="compliance-link">Read full disclaimer →</a>
 </div>
 
+<!-- ═══ TELEMETRY DRAWER · Mission Control P1 — strips preserved, collapsed by default ═══ -->
+<div class="telemetry-bar" id="telemetryBar" onclick="toggleTelemetry()" role="button" aria-expanded="false" title="Expand live telemetry">
+  <span class="tb-live">●</span>
+  <span class="tb-label">Telemetry</span>
+  <span class="tb-meta">Live Signal Pulse · Markets · Indo-Pacific Clocks</span>
+  <span class="tb-chevron" id="tbChevron">▾</span>
+</div>
+<div class="telemetry-drawer" id="telemetryDrawer">
 <!-- ═══ TICKER ═══ -->
 <div class="ticker-wrap">
   <div class="ticker-label">⚡ Live Signal Pulse</div>
@@ -1064,6 +1217,7 @@ body.light-mode .xfcard{background:#0B0E13}
 <div class="time-strip">
   <div class="time-label">⏱ Indo-Pacific Clocks</div>
   <div class="clocks" id="clocks"></div>
+</div>
 </div>
 
 <!-- ═══ NAV — Logo · Full-name pills · Lang · Dark/Light · CTA ═══ -->
@@ -1169,8 +1323,9 @@ body.light-mode .xfcard{background:#0B0E13}
     <div class="hero-meta">
       <span class="live">● Sovereign Protocol Active</span>
       <span class="amber">★ Built in Australia · Indo-Pacific Lens</span>
-      <span>Founded 12 April 2026 · Sydney</span>
+      <span>Australian entity · Active since 2003 · Sydney</span>
     </div>
+    <div class="hero-kicker">Sovereign Satellite-Intelligence · Indo-Pacific Corridor</div>
     <h1>
       <span data-t="hero_lead">The intelligence layer that sees the shift</span><br>
       <span class="accent" data-t="hero_72">72 hours</span> <span data-t="hero_before">before it becomes the</span> <span class="accent-v" data-t="hero_headline">headline.</span>
@@ -1182,14 +1337,35 @@ body.light-mode .xfcard{background:#0B0E13}
       Commodity pixels in. Last-mile context out.
     </p>
     <div class="hero-cta-row">
-      <a href="#pricing" class="btn-primary"><span data-t="cta_primary">Engage the Engine →</span></a>
+      <a href="https://cal.com/raj-aaa/synarka" class="btn-primary" target="_blank" rel="noopener"><span>Book 15 Minutes →</span></a>
+      <a href="#proof" class="btn-secondary"><span>Read the Resolved Ledger</span></a>
+      <a href="#pricing" class="btn-secondary"><span data-t="cta_primary">Engage the Engine →</span></a>
       <a href="#three-engines" class="btn-secondary"><span data-t="cta_secondary">See the Three Engines</span></a>
+    </div>
+    <a href="#ladder" class="hero-ladder">Entry ladder · <strong>A$500</strong> single-question 72-hr brief → Site Baseline Audit → <strong>SiteWatch</strong> monthly monitoring → Sovereign retainer</a>
+    <div class="traction-strip">
+      <div class="traction-cell">
+        <div class="tc-val up">5<span class="tc-of">/6</span></div>
+        <div class="tc-label">Published insights resolved correct · May ledger · miss reported in full</div>
+      </div>
+      <div class="traction-cell">
+        <div class="tc-val">94K<span class="tc-of">+</span></div>
+        <div class="tc-label">Views · r/energy all-time #1 organic post</div>
+      </div>
+      <div class="traction-cell">
+        <div class="tc-val">ASPI · Lowy</div>
+        <div class="tc-label">Network orbit · SAA · Indo-Pacific policy circle</div>
+      </div>
+      <div class="traction-cell">
+        <div class="tc-val">2003</div>
+        <div class="tc-label">Australian operating entity · 22 years active</div>
+      </div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="label">Active Insights</div>
         <div class="val">07</div>
-        <div class="desc">May 2026 · SHA-256 logged</div>
+        <div class="desc">May 2026 · Logged · resolution-dated</div>
       </div>
       <div class="hero-stat">
         <div class="label">Reasoning Engines</div>
@@ -1211,160 +1387,43 @@ body.light-mode .xfcard{background:#0B0E13}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     MOAT BANNER + THREE ENGINES
+     PROOF SCOREBOARD · RESOLVED LEDGER INLINE · Mission Control P1
      ═══════════════════════════════════════════════════════ -->
-<div class="moat-banner">
-  <div class="moat-banner-inner">
-    <div class="moat-banner-stamp">
-      <div class="ms-lead">★ THE MOAT</div>
-      Three pillars · Uncopyable · Founder-held · Compounding daily
+<section id="proof" class="proof-section">
+  <div class="proof-head">
+    <div class="proof-tag">§ The Ledger · Resolved 31 May 2026</div>
+    <h2 class="proof-title">Don't take our word. <span class="accent">Read the receipts.</span></h2>
+    <p class="proof-sub">Four insights from the May ledger resolved on 31 May. Three correct, one published miss — reported as openly as the hits. Every price verified at source. Combined with 15 May resolutions: <strong>5 of 6 published insights resolved correct.</strong></p>
+  </div>
+  <div class="proof-grid">
+    <div class="proof-card hit">
+      <div class="pc-status">✓ Resolved Correct · 18 days early</div>
+      <div class="pc-name">ASX Rare-Earths Offtake Call</div>
+      <div class="pc-line">"One ASX RE miner announces a US-aligned offtake by 31 May." Arafura × Traxys signed 13 May.</div>
+      <div class="pc-nums"><span class="pc-conv">65% published conviction</span><span class="pc-result up">~+40% ARU · ~+15% basket</span></div>
     </div>
-    <div class="moat-pillars">
-      <div class="moat-pillar">
-        <div class="mp-num t1">PILLAR 01</div>
-        <div class="mp-name" data-t="moat_p1">Indo-Pacific Corridor</div>
-      </div>
-      <div class="moat-pillar">
-        <div class="mp-num t2">PILLAR 02</div>
-        <div class="mp-name" data-t="moat_p2">Critical Minerals &amp; Rare Earths</div>
-      </div>
-      <div class="moat-pillar">
-        <div class="mp-num t3">PILLAR 03</div>
-        <div class="mp-name" data-t="moat_p3">3 Engines · 4 Layers</div>
-      </div>
+    <div class="proof-card hit">
+      <div class="pc-status">✓ Resolved Correct · widest margin</div>
+      <div class="pc-name">The Gold Price Floor</div>
+      <div class="pc-line">"XAU holds above US$3,200 through 31 May." Gold ran to ~US$4,485 — the floor was never approached.</div>
+      <div class="pc-nums"><span class="pc-conv">88% conviction · highest on ledger</span><span class="pc-result up">~+36% in 29 days</span></div>
+    </div>
+    <div class="proof-card hit">
+      <div class="pc-status">✓ Resolved Correct</div>
+      <div class="pc-name">Materials over Financials</div>
+      <div class="pc-line">"XMJ outperforms XFJ through 31 May." Materials +10.51% — best sector; Financials lagged.</div>
+      <div class="pc-nums"><span class="pc-conv">62% conviction</span><span class="pc-result up">~10pp clean spread</span></div>
+    </div>
+    <div class="proof-card miss">
+      <div class="pc-status">✗ Published Miss · falsification fired clean</div>
+      <div class="pc-name">Hormuz → AUD Cascade</div>
+      <div class="pc-line">25% conviction — lowest on ledger, published anyway. AUD closed 0.7201; the 0.66 trigger voided it exactly as written.</div>
+      <div class="pc-nums"><span class="pc-conv">25% conviction · coral flag</span><span class="pc-result down">Sized to conviction · ~0.6% loss</span></div>
     </div>
   </div>
-</div>
-
-<section class="three-engines" id="three-engines">
-  <div class="section">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow"><span class="num">01</span>The Three Engines · How synARKa Operates</div>
-        <h2>Three engines. <span class="hl">One Indo-Pacific corridor.</span></h2>
-      </div>
-      <div class="section-head-right">
-        <span class="key">LAST-MILE CONTEXT</span>
-        <span>Pixels in · Structural truth out</span>
-      </div>
-    </div>
-
-    <p style="font-family:var(--font-ui);font-size:15px;color:var(--text-2);line-height:1.65;max-width:920px">
-      Satellite hardware is cheap. Raw pixels are cheap. Frontier models are cheap. What is not cheap — and not replicable —
-      is the orchestration that maps a 0.5°C thermal anomaly on a Karratha mine wall to <em>"Zone B compressor failing,"</em>
-      a MOFCOM bulletin to <em>"three named ASX miners exposed within 90 days,"</em> and a Hormuz disruption to <em>"AUD/USD prints 0.62–0.64 by 31 May."</em>
-      That orchestration is the moat. Three engines converge to deliver it.
-    </p>
-
-    <div class="engines-grid">
-      <div class="engine-card e1">
-        <div class="eng-num">ENGINE 01</div>
-        <div class="eng-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
-        </div>
-        <h3>Satellite · <span class="acc">the eyes</span></h3>
-        <div class="eng-body">
-          Commodity satellite data — <strong>SAR</strong> (ICEYE, Capella · 24h revisit), <strong>LWIR thermal</strong> (Planet Labs, Maxar · 1–3d), and <strong>multispectral baselines</strong> (Sentinel, Landsat · 2–5d) — ingested via developer aggregators on a pay-per-pass basis. No hardware capex. Raw pixels become <strong>structural truth</strong>: millimetre wall shifts, 0.1°C thermal drift, tailings dam variance.
-        </div>
-        <div class="eng-stack">
-          <span>SAR · 24h</span><span>LWIR Thermal</span><span>Multispectral</span><span>Vertex AI Pipeline</span>
-        </div>
-        <div class="eng-meta">
-          <span>Pixels → Structural Alerts</span>
-          <span class="eng-status build">v1.0 · In active build</span>
-        </div>
-      </div>
-
-      <div class="engine-card e2">
-        <div class="eng-num">ENGINE 02</div>
-        <div class="eng-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><circle cx="5" cy="6" r="1.5"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="18" r="1.5"/><circle cx="19" cy="18" r="1.5"/><path d="M6.5 7l4 3.5M17.5 7l-4 3.5M6.5 17l4-3.5M17.5 17l-4-3.5"/></svg>
-        </div>
-        <h3>Predictive-Simulation · <span class="acc">the math</span></h3>
-        <div class="eng-body">
-          <strong>Convergence synthesis</strong> across 8 up-to-date frontier reasoning engines. Structured cascade prompts run independently. Adversarial debate captured. Where engines cluster within ±10 confidence points, median is adopted; where they diverge &gt;20 points, <strong>dissent is preserved as risk layer</strong>. Founder-layer calibration applied to structural fragility of every chain.
-        </div>
-        <div class="eng-stack">
-          <span>8-Engine Convergence</span><span>Adversarial Debate</span><span>Dissent Capture</span><span>Founder Calibration</span><span>1000+ Swarms (Phase 2)</span>
-        </div>
-        <div class="eng-meta">
-          <span>Synthetic Ethnography</span>
-          <span class="eng-status">Consensus · Live</span>
-        </div>
-      </div>
-
-      <div class="engine-card e3">
-        <div class="eng-num">ENGINE 03</div>
-        <div class="eng-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-        </div>
-        <h3>Intelligence · <span class="acc">the corridor</span></h3>
-        <div class="eng-body">
-          Real-time mapping of who-influences-what across the Indo-Pacific — bridge nodes, cascade pathways, ASPI–Lowy–Strategic Analysis connections, ASX continuous disclosure, MOFCOM bulletins, DFAT statements, sovereign signal drift.
-          <strong>25 years of corridor knowledge</strong> compounding with every published insight. Cannot be bought. Cannot be replicated by funding.
-        </div>
-        <div class="eng-stack">
-          <span>Indo-Pacific Topology</span><span>ASPI Network</span><span>MOFCOM/DFAT Watch</span><span>ASX Continuous Disclosure</span>
-        </div>
-        <div class="eng-meta">
-          <span>Founder-Held Position</span>
-          <span class="eng-status">Active · Compounding</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     ARCHITECTURE · 4-stage · directly under Three Engines
-     ═══════════════════════════════════════════════════════ -->
-<section class="arch-section" id="architecture">
-  <div class="arch-inner">
-    <div class="arch-disclosure-bar">
-      <span class="arch-disc-dot"></span>
-      <span class="arch-disc-label">SOVEREIGN TECHNOLOGY DISCLOSURE</span>
-      <span class="arch-disc-tag">CLASSIFICATION · OPEN SOURCE SIGNAL</span>
-    </div>
-    <h2 class="arch-headline">The architecture behind synARKa is <span class="hl">not a chatbot.</span></h2>
-    <p class="arch-lead">Four stages. Agnostic by design — every component swappable as better tools arrive. The architecture is the moat, not any single model or sensor. The discipline endures.</p>
-
-    <div class="arch-grid">
-      <div class="arch-layer arch-sense">
-        <div class="arch-layer-num">STAGE 01</div>
-        <div class="arch-layer-label">▸ SENSE</div>
-        <div class="arch-layer-body">Continuous ingestion: deep-research queries (500/day), satellite aggregators (SkyWatch · SkyFi · Up42), maritime APIs, regulatory feeds (MOFCOM · USTR · DFAT · APRA · RBA), ASX continuous disclosure, social listeners. Normalised signal stream. No human latency. No editorial filter.</div>
-      </div>
-      <div class="arch-layer arch-simulate">
-        <div class="arch-layer-num">STAGE 02</div>
-        <div class="arch-layer-label">▸ SIMULATE</div>
-        <div class="arch-layer-body">Convergence synthesis across 8 up-to-date frontier reasoning engines running structured cascade prompts. Adversarial debate captured. Median adopted where 6+ cluster within ±10 points; dissent flagged where divergence &gt;20 points. <strong>Phase 2 · in active build:</strong> 1,000+ psychometric agent swarms (OASIS / MiroFish).</div>
-      </div>
-      <div class="arch-layer arch-verify">
-        <div class="arch-layer-num">STAGE 03</div>
-        <div class="arch-layer-label">▸ VERIFY</div>
-        <div class="arch-layer-body">Every simulated output cross-validated against primary sources before delivery. Adaptive Logic Architect eliminates noise. <strong>Phase 2 · in active build:</strong> SHA-256 hashing + OpenTimestamps anchoring to Bitcoin blockchain. Brier-scored track record. 97% signal clarity threshold.</div>
-      </div>
-      <div class="arch-layer arch-deliver">
-        <div class="arch-layer-num">STAGE 04</div>
-        <div class="arch-layer-label">▸ DELIVER</div>
-        <div class="arch-layer-body">Verified, timestamped, calibrated insight delivered to the decision-maker. Telegram SIGNAL channel · encrypted PDF brief · FastAPI webhook (Phase 2). Public ledger at insights.synarka.pro. Not a dashboard. A sovereign-grade intelligence instrument with auditable methodology.</div>
-      </div>
-    </div>
-
-    <div class="arch-footer-grid">
-      <div class="arch-footer-item">
-        <div class="arch-fi-label">INSIGHT INTEGRITY</div>
-        <div class="arch-fi-body">Every insight timestamped, logged, calibrated. Confidence ranges 25%–88% — never rounded up. Phase 2 Brier scoring rolls out as Q2 2026 insights resolve from 15 May onwards.</div>
-      </div>
-      <div class="arch-footer-item">
-        <div class="arch-fi-label">IP POSITION</div>
-        <div class="arch-fi-body">The moat is the orchestration — prompt library, persona taxonomy, Indo-Pacific corridor topology, synthesis judgement. Cannot be commoditised. Cannot be forked in six months.</div>
-      </div>
-      <div class="arch-footer-item">
-        <div class="arch-fi-label">CAPITAL POSITION</div>
-        <div class="arch-fi-body">synARKa is founder-held. Bootstrapped. No outside capital. Strategic partnership enquiries only. Long-term sovereign asset — not a short-term exit vehicle.</div>
-      </div>
-    </div>
+  <div class="proof-foot">
+    <a href="https://insights.synarka.pro" class="btn-secondary" target="_blank" rel="noopener"><span>Open the full ledger → insights.synarka.pro</span></a>
+    <div class="proof-disclaim">Worked examples at verified market prices on stated dates · not trade recommendations · research &amp; educational content only · a ledger that hides its misses is not a ledger.</div>
   </div>
 </section>
 
@@ -1500,6 +1559,214 @@ body.light-mode .xfcard{background:#0B0E13}
       (satellite ingestion · change detection · automated alert routing · SHA-256 hashing · OpenTimestamps anchoring) is <strong>v1.0 in active build</strong>,
       not a fully-deployed live service today. Historical baseline audits on individual sites are available; full continuous monitoring at enterprise scale
       goes live with the first three paying audit engagements.
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCT LADDER · Mission Control P2 · door → audit → SiteWatch → retainer
+     ═══════════════════════════════════════════════════════ -->
+<section id="ladder" class="ladder-section">
+  <div class="ladder-head">
+    <div class="ladder-tag">§ The Entry Ladder · How Engagement Starts</div>
+    <h2 class="ladder-title">Four rungs. <span class="hl-t2">Risk stays on the operator</span> until value is in the room.</h2>
+  </div>
+  <div class="ladder-grid">
+    <div class="ladder-rung">
+      <div class="lr-num">RUNG 01</div>
+      <div class="lr-name">72-Hour Brief</div>
+      <div class="lr-price">A$500 <span class="lr-freq">one question</span></div>
+      <div class="lr-body">One corridor question — a mineral, a route, a policy shift, a counterparty. Multi-engine consensus read, sourced and calibrated, in your inbox inside 72 hours.</div>
+      <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener" class="lr-cta">Book the question →</a>
+    </div>
+    <div class="ladder-rung">
+      <div class="lr-num">RUNG 02</div>
+      <div class="lr-name">Site Baseline Audit</div>
+      <div class="lr-price">A$3,500–7,500 <span class="lr-freq">one-time</span></div>
+      <div class="lr-body">One named asset — refinery, port, mine, corridor segment. Archive satellite baseline + structural risk read + the geopolitical context layer no pixel vendor carries. Credits toward SiteWatch.</div>
+      <a href="mailto:raj@synarka.pro?subject=Site%20Baseline%20Audit" class="lr-cta">Request audit scope →</a>
+    </div>
+    <div class="ladder-rung featured">
+      <div class="lr-num">RUNG 03 · ★</div>
+      <div class="lr-name">SiteWatch</div>
+      <div class="lr-price">from A$1,490<span class="lr-freq">/mo per site</span></div>
+      <div class="lr-body">Continuous monitoring on your audited asset — monthly change-detection brief + alert trigger. Tasking brokered across commercial constellations, pay-per-pass, NDA-tier providers. Activates from your Baseline Audit as the v1.0 pipeline scales.</div>
+      <a href="mailto:raj@synarka.pro?subject=SiteWatch" class="lr-cta">Start with the audit →</a>
+    </div>
+    <div class="ladder-rung">
+      <div class="lr-num">RUNG 04</div>
+      <div class="lr-name">Sovereign Retainer</div>
+      <div class="lr-price">Tiered <span class="lr-freq">see protocols</span></div>
+      <div class="lr-body">Full-engine engagement — multi-site, multi-domain, board-level cadence. Eight protocols from Free to Consultancy, all on the table below.</div>
+      <a href="#pricing" class="lr-cta">Choose your protocol →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     MOAT BANNER + THREE ENGINES
+     ═══════════════════════════════════════════════════════ -->
+<div class="moat-banner">
+  <div class="moat-banner-inner">
+    <div class="moat-banner-stamp">
+      <div class="ms-lead">★ THE MOAT</div>
+      Three pillars · Uncopyable · Founder-held · Compounding daily
+    </div>
+    <div class="moat-pillars">
+      <div class="moat-pillar">
+        <div class="mp-num t1">PILLAR 01</div>
+        <div class="mp-name" data-t="moat_p1">Indo-Pacific Corridor</div>
+      </div>
+      <div class="moat-pillar">
+        <div class="mp-num t2">PILLAR 02</div>
+        <div class="mp-name" data-t="moat_p2">Critical Minerals &amp; Rare Earths</div>
+      </div>
+      <div class="moat-pillar">
+        <div class="mp-num t3">PILLAR 03</div>
+        <div class="mp-name" data-t="moat_p3">3 Engines · 4 Layers</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="three-engines" id="three-engines">
+  <div class="section">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow"><span class="num">01</span>The Three Engines · How synARKa Operates</div>
+        <h2>Three engines. <span class="hl">One Indo-Pacific corridor.</span></h2>
+      </div>
+      <div class="section-head-right">
+        <span class="key">LAST-MILE CONTEXT</span>
+        <span>Pixels in · Structural truth out</span>
+      </div>
+    </div>
+
+    <p style="font-family:var(--font-ui);font-size:15px;color:var(--text-2);line-height:1.65;max-width:920px">
+      Satellite hardware is cheap. Raw pixels are cheap. Frontier models are cheap. What is not cheap — and not replicable —
+      is the orchestration that maps a 0.5°C thermal anomaly on a Karratha mine wall to <em>"Zone B compressor failing,"</em>
+      a MOFCOM bulletin to <em>"three named ASX miners exposed within 90 days,"</em> and a Hormuz disruption to <em>"AUD/USD prints 0.62–0.64 by 31 May."</em>
+      That orchestration is the moat. Three engines converge to deliver it.
+    </p>
+
+    <div class="engines-grid">
+      <div class="engine-card e1">
+        <div class="eng-num">ENGINE 01</div>
+        <div class="eng-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
+        </div>
+        <h3>Satellite · <span class="acc">the eyes</span></h3>
+        <div class="eng-body">
+          Commodity satellite data — <strong>SAR</strong> (ICEYE, Capella · 24h revisit), <strong>LWIR thermal</strong> (Planet Labs, Maxar · 1–3d), and <strong>multispectral baselines</strong> (Sentinel, Landsat · 2–5d) — ingested via developer aggregators on a pay-per-pass basis. No hardware capex. Raw pixels become <strong>structural truth</strong>: millimetre wall shifts, 0.1°C thermal drift, tailings dam variance.
+        </div>
+        <div class="eng-stack">
+          <span>SAR · 24h</span><span>LWIR Thermal</span><span>Multispectral</span><span>Vertex AI Pipeline</span>
+        </div>
+        <div class="eng-meta">
+          <span>Pixels → Structural Alerts</span>
+          <span class="eng-status build">v1.0 · In active build</span>
+        </div>
+      </div>
+
+      <div class="engine-card e2">
+        <div class="eng-num">ENGINE 02</div>
+        <div class="eng-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><circle cx="5" cy="6" r="1.5"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="18" r="1.5"/><circle cx="19" cy="18" r="1.5"/><path d="M6.5 7l4 3.5M17.5 7l-4 3.5M6.5 17l4-3.5M17.5 17l-4-3.5"/></svg>
+        </div>
+        <h3>Predictive-Simulation · <span class="acc">the math</span></h3>
+        <div class="eng-body">
+          <strong>Convergence synthesis</strong> across 8 up-to-date frontier reasoning engines. Structured cascade prompts run independently. Adversarial debate captured. Where engines cluster within ±10 confidence points, median is adopted; where they diverge &gt;20 points, <strong>dissent is preserved as risk layer</strong>. Founder-layer calibration applied to structural fragility of every chain.
+        </div>
+        <div class="eng-stack">
+          <span>8-Engine Convergence</span><span>Adversarial Debate</span><span>Dissent Capture</span><span>Founder Calibration</span><span>1000+ Swarms (Phase 2)</span>
+        </div>
+        <div class="eng-meta">
+          <span>Synthetic Ethnography</span>
+          <span class="eng-status">Consensus · Live</span>
+        </div>
+      </div>
+
+      <div class="engine-card e3">
+        <div class="eng-num">ENGINE 03</div>
+        <div class="eng-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        </div>
+        <h3>Intelligence · <span class="acc">the corridor</span></h3>
+        <div class="eng-body">
+          Real-time mapping of who-influences-what across the Indo-Pacific — bridge nodes, cascade pathways, ASPI–Lowy–Strategic Analysis connections, ASX continuous disclosure, MOFCOM bulletins, DFAT statements, sovereign signal drift.
+          <strong>25 years of corridor knowledge</strong> compounding with every published insight. Cannot be bought. Cannot be replicated by funding.
+        </div>
+        <div class="eng-stack">
+          <span>Indo-Pacific Topology</span><span>ASPI Network</span><span>MOFCOM/DFAT Watch</span><span>ASX Continuous Disclosure</span>
+        </div>
+        <div class="eng-meta">
+          <span>Founder-Held Position</span>
+          <span class="eng-status">Active · Compounding</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     ARCHITECTURE · 4-stage · directly under Three Engines
+     ═══════════════════════════════════════════════════════ -->
+<section class="arch-section" id="architecture">
+  <div class="arch-inner">
+    <div class="arch-disclosure-bar">
+      <span class="arch-disc-dot"></span>
+      <span class="arch-disc-label">SOVEREIGN TECHNOLOGY DISCLOSURE</span>
+      <span class="arch-disc-tag">CLASSIFICATION · OPEN SOURCE SIGNAL</span>
+    </div>
+    <h2 class="arch-headline">The architecture behind synARKa is <span class="hl">not a chatbot.</span></h2>
+    <div class="engine-schematic">
+      <div class="es-node teal"><div class="es-stage">STAGE 01</div><div class="es-name">SENSE</div><div class="es-sub">Signal ingest · multi-source</div></div>
+      <div class="es-link">→</div>
+      <div class="es-node coral"><div class="es-stage">STAGE 02</div><div class="es-name">SIMULATE</div><div class="es-sub">Parallel futures · 8 engines</div></div>
+      <div class="es-link">→</div>
+      <div class="es-node amber"><div class="es-stage">STAGE 03</div><div class="es-name">VERIFY</div><div class="es-sub">Truth-grounded · falsifiable</div></div>
+      <div class="es-link">→</div>
+      <div class="es-node violet"><div class="es-stage">STAGE 04</div><div class="es-name">DELIVER</div><div class="es-sub">Brief before the headline</div></div>
+    </div>
+    <p class="arch-lead">Four stages. Agnostic by design — every component swappable as better tools arrive. The architecture is the moat, not any single model or sensor. The discipline endures.</p>
+
+    <div class="arch-grid">
+      <div class="arch-layer arch-sense">
+        <div class="arch-layer-num">STAGE 01</div>
+        <div class="arch-layer-label">▸ SENSE</div>
+        <div class="arch-layer-body">Continuous ingestion: deep-research queries (500/day), satellite aggregators (SkyWatch · SkyFi · Up42), maritime APIs, regulatory feeds (MOFCOM · USTR · DFAT · APRA · RBA), ASX continuous disclosure, social listeners. Normalised signal stream. No human latency. No editorial filter.</div>
+      </div>
+      <div class="arch-layer arch-simulate">
+        <div class="arch-layer-num">STAGE 02</div>
+        <div class="arch-layer-label">▸ SIMULATE</div>
+        <div class="arch-layer-body">Convergence synthesis across 8 up-to-date frontier reasoning engines running structured cascade prompts. Adversarial debate captured. Median adopted where 6+ cluster within ±10 points; dissent flagged where divergence &gt;20 points. <strong>Phase 2 · in active build:</strong> 1,000+ psychometric agent swarms (OASIS / MiroFish).</div>
+      </div>
+      <div class="arch-layer arch-verify">
+        <div class="arch-layer-num">STAGE 03</div>
+        <div class="arch-layer-label">▸ VERIFY</div>
+        <div class="arch-layer-body">Every simulated output cross-validated against primary sources before delivery. Adaptive Logic Architect eliminates noise. <strong>Phase 2 · in active build:</strong> SHA-256 hashing + OpenTimestamps anchoring to Bitcoin blockchain. Brier-scored track record. 97% signal clarity threshold.</div>
+      </div>
+      <div class="arch-layer arch-deliver">
+        <div class="arch-layer-num">STAGE 04</div>
+        <div class="arch-layer-label">▸ DELIVER</div>
+        <div class="arch-layer-body">Verified, timestamped, calibrated insight delivered to the decision-maker. Telegram SIGNAL channel · encrypted PDF brief · FastAPI webhook (Phase 2). Public ledger at insights.synarka.pro. Not a dashboard. A sovereign-grade intelligence instrument with auditable methodology.</div>
+      </div>
+    </div>
+
+    <div class="arch-footer-grid">
+      <div class="arch-footer-item">
+        <div class="arch-fi-label">INSIGHT INTEGRITY</div>
+        <div class="arch-fi-body">Every insight timestamped, logged, calibrated. Confidence ranges 25%–88% — never rounded up. Phase 2 Brier scoring rolls out as Q2 2026 insights resolve from 15 May onwards.</div>
+      </div>
+      <div class="arch-footer-item">
+        <div class="arch-fi-label">IP POSITION</div>
+        <div class="arch-fi-body">The moat is the orchestration — prompt library, persona taxonomy, Indo-Pacific corridor topology, synthesis judgement. Cannot be commoditised. Cannot be forked in six months.</div>
+      </div>
+      <div class="arch-footer-item">
+        <div class="arch-fi-label">CAPITAL POSITION</div>
+        <div class="arch-fi-body">synARKa is founder-held. Bootstrapped. No outside capital. Strategic partnership enquiries only. Long-term sovereign asset — not a short-term exit vehicle.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1651,6 +1918,12 @@ body.light-mode .xfcard{background:#0B0E13}
   <div class="pricing-inner">
     <div class="pricing-eyebrow">▶ ENGAGEMENT TIERS · 8 PATHWAYS</div>
     <h2 class="pricing-headline">Choose your protocol.</h2>
+    <div class="pricing-doors">
+      <div class="pdoor active" data-door="SUB" onclick="setPricingDoor('SUB',this)">Subscribe<span class="pd-sub">Free → Pro · individuals &amp; desks</span></div>
+      <div class="pdoor" data-door="ENG" onclick="setPricingDoor('ENG',this)">Engage<span class="pd-sub">Enterprise · Tailored Sovereign</span></div>
+      <div class="pdoor" data-door="PRJ" onclick="setPricingDoor('PRJ',this)">Project Work<span class="pd-sub">One-time Audit · Consultancy</span></div>
+      <div class="pdoor" data-door="ALL" onclick="setPricingDoor('ALL',this)">All Eight<span class="pd-sub">Full matrix</span></div>
+    </div>
     <p class="pricing-sub">Free public ledger to Sovereign-grade enterprise engagements. All subscriptions month-to-month, no lock-in. Audits and consultancy stand alone or run alongside any tier. All prices AUD, exclude GST where applicable.</p>
 
     <div class="pricing-grid">
@@ -1790,12 +2063,12 @@ body.light-mode .xfcard{background:#0B0E13}
           <div class="fc-text"><strong>India–Australia corridor.</strong> Cross-cultural negotiation across three decades. The Indo-Pacific position is operational, not theoretical.</div>
         </div>
         <div class="founder-cred">
-          <div class="fc-icon">12 Apr</div>
-          <div class="fc-text"><strong>Founded synARKa Intelligence · 12 April 2026.</strong> Trades under <strong>Artigellence Augmentation Aggregator</strong> — the registered business name and parent operating brand.</div>
+          <div class="fc-icon">2003</div>
+          <div class="fc-text"><strong>Operating entity active since 2003.</strong> synARKa trades under <strong>Artigellence Augmentation Aggregator</strong> — a 22-year Australian entity, not a weekend project.</div>
         </div>
         <div class="founder-cred">
-          <div class="fc-icon">93K</div>
-          <div class="fc-text"><strong>r/energy #1 all-time post · 93,000 upvotes · 88.5% upvote ratio · zero ad spend.</strong> Market signal, not a vanity metric.</div>
+          <div class="fc-icon">94K</div>
+          <div class="fc-text"><strong>r/energy #1 all-time post · 94,000+ views · zero ad spend.</strong> Organic market signal, not a vanity metric.</div>
         </div>
         <div class="founder-cred">
           <div class="fc-icon">12 mo</div>
@@ -1812,7 +2085,7 @@ body.light-mode .xfcard{background:#0B0E13}
         "Satellite data is cheap. Frontier reasoning models are cheap. Raw intelligence is cheap. The last mile of context — translating commodity pixels into 'Zone B compressor is failing' — that is the moat. And it cannot be bought."
       </div>
       <div class="founder-bio">
-        Raj Singh founded synARKa Intelligence on <strong>12 April 2026</strong> after losing a prior business to overclaiming. The honesty discipline of this platform — "insight" not "prediction", Phase 2 capabilities flagged in-build, calibrated confidence numbers — is a non-negotiable consequence of that lesson.
+        Raj Singh launched synARKa after losing a prior business to overclaiming. The honesty discipline of this platform — "insight" not "prediction", Phase 2 capabilities flagged in-build, calibrated confidence numbers — is a non-negotiable consequence of that lesson.
         synARKa operates as a one-person, bootstrapped, founder-held company. No outside capital. No equity for sale beyond 10%. The architecture, prompt library, persona taxonomy, and Indo-Pacific corridor topology are proprietary IP and not exposed in public documents.
         For Sovereign-grade engagements, an initial 30-minute discovery call is standard before any proposal is issued.
       </div>
@@ -1833,8 +2106,80 @@ body.light-mode .xfcard{background:#0B0E13}
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.61c-.152.677-.55.842-1.115.524l-3.08-2.27-1.485 1.43c-.164.164-.302.302-.62.302l.22-3.12 5.68-5.132c.248-.22-.054-.342-.383-.122L7.18 14.43l-2.995-.935c-.652-.203-.664-.652.136-.966l11.7-4.51c.54-.194 1.015.132.54.229z"/></svg>
           Telegram Channel
         </a>
+        <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener" class="founder-btn founder-btn-gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Book 15 Minutes
+        </a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     ONBOARD · Mission Control P3 · voice + self-check + wizard
+     ═══════════════════════════════════════════════════════ -->
+<section id="onboard" class="onboard-section">
+  <div class="ob-head">
+    <div class="ob-tag">§ Onboarding · Two Minutes, No Pressure</div>
+    <h2 class="ob-title">Find out in <span class="hl-t2">two minutes</span> whether synARKa is for you.</h2>
+  </div>
+
+  <div class="ob-flow">
+    <div class="obf-node">LISTEN</div><div class="obf-arrow">→</div>
+    <div class="obf-node">SELF-CHECK</div><div class="obf-arrow">→</div>
+    <div class="obf-node">ONE QUESTION · A$500</div><div class="obf-arrow">→</div>
+    <div class="obf-node">VALUE LANDS</div><div class="obf-arrow">→</div>
+    <div class="obf-node">CLIMB THE LADDER</div>
+  </div>
+
+  <div class="ob-grid">
+    <div class="ob-voice">
+      <div class="obv-label">▶ 90-Second Voice Brief · direct from the founder</div>
+      <div class="obv-player">
+        <button class="obv-btn" id="voiceBtn" onclick="toggleVoice()">▶</button>
+        <div class="obv-meta">
+          <div class="obv-title">What synARKa does — and what it can do for you</div>
+          <div class="obv-sub" id="voiceStatus">Tap to listen · 90 seconds</div>
+        </div>
+      </div>
+      <audio id="voiceBrief" src="synarka-voice-brief.mp3" preload="none"></audio>
+    </div>
+
+    <div class="ob-check">
+      <div class="obc-label">The 6-Question Intelligence-Gap Check</div>
+      <div class="obc-sub">Answer honestly. If you pass all six, synARKa will tell you that you don't need us — the honest "you're fine" is genuinely on the table.</div>
+      <div class="obc-list" id="obcList">
+        <div class="obc-q" data-q="1"><span class="obc-text">Did your team see the last corridor-moving event — offtake, export control, chokepoint disruption — before it hit mainstream wires?</span><span class="obc-btns"><button onclick="obcAnswer(this,1,'Y')">Yes</button><button onclick="obcAnswer(this,1,'N')">No</button></span></div>
+        <div class="obc-q" data-q="2"><span class="obc-text">Do you know, today, which single chokepoint failure would hit your supply chain or portfolio hardest?</span><span class="obc-btns"><button onclick="obcAnswer(this,2,'Y')">Yes</button><button onclick="obcAnswer(this,2,'N')">No</button></span></div>
+        <div class="obc-q" data-q="3"><span class="obc-text">When a signal breaks at 2am AEST, does anything in your pipeline triage it before the morning wires do?</span><span class="obc-btns"><button onclick="obcAnswer(this,3,'Y')">Yes</button><button onclick="obcAnswer(this,3,'N')">No</button></span></div>
+        <div class="obc-q" data-q="4"><span class="obc-text">Can you audit the track record of your current intelligence source — published calls, resolution dates, misses included?</span><span class="obc-btns"><button onclick="obcAnswer(this,4,'Y')">Yes</button><button onclick="obcAnswer(this,4,'N')">No</button></span></div>
+        <div class="obc-q" data-q="5"><span class="obc-text">Do you have satellite-side visibility on the physical assets you depend on — your sites, your suppliers' sites, your routes?</span><span class="obc-btns"><button onclick="obcAnswer(this,5,'Y')">Yes</button><button onclick="obcAnswer(this,5,'N')">No</button></span></div>
+        <div class="obc-q" data-q="6"><span class="obc-text">If your board asked "what's our 72-hour Indo-Pacific exposure right now," could you answer with sources?</span><span class="obc-btns"><button onclick="obcAnswer(this,6,'Y')">Yes</button><button onclick="obcAnswer(this,6,'N')">No</button></span></div>
+      </div>
+      <div class="obc-verdict" id="obcVerdict">Answer all six for your read.</div>
+    </div>
+  </div>
+
+  <div class="ob-wizard">
+    <div class="obw-label">Or take the 10-second path — two taps to your entry point</div>
+    <div class="obw-step"><span class="obw-q">I am a…</span>
+      <div class="obw-chips" id="obwRole">
+        <button onclick="obwPick('role','Fund / Investor',this)">Fund / Investor</button>
+        <button onclick="obwPick('role','Miner / Explorer',this)">Miner / Explorer</button>
+        <button onclick="obwPick('role','Defence / Gov',this)">Defence / Gov</button>
+        <button onclick="obwPick('role','Logistics / Infra',this)">Logistics / Infra</button>
+        <button onclick="obwPick('role','Legal / M&A',this)">Legal / M&amp;A</button>
+        <button onclick="obwPick('role','Trading Desk',this)">Trading Desk</button>
+      </div>
+    </div>
+    <div class="obw-step"><span class="obw-q">Right now I need…</span>
+      <div class="obw-chips" id="obwNeed">
+        <button onclick="obwPick('need','Q',this)">One question answered</button>
+        <button onclick="obwPick('need','A',this)">An asset watched</button>
+        <button onclick="obwPick('need','C',this)">Ongoing corridor coverage</button>
+      </div>
+    </div>
+    <div class="obw-result" id="obwResult"></div>
   </div>
 </section>
 
@@ -1911,7 +2256,7 @@ body.light-mode .xfcard{background:#0B0E13}
       <div class="faq-item"><div class="faq-q">What do I actually receive at each tier?</div><div class="faq-a"><strong>Free:</strong> public ledger + weekly digest. <strong>Watch (A$99):</strong> 1 domain weekly + Telegram. <strong>Operator (A$1.5K):</strong> all 8 domains + 48hr alerts. <strong>Pro (A$5K):</strong> daily dispatches + founder direct + 24hr SLA. <strong>Enterprise (A$15K+):</strong> sovereign cadence + multi-corridor + 12hr SLA + NDA. <strong>Tailored:</strong> POA. <strong>Audit:</strong> one-time A$5K–15K. <strong>Consultancy:</strong> case-by-case.</div></div>
       <div class="faq-item"><div class="faq-q">Is this financial advice?</div><div class="faq-a">No. synARKa Intelligence is geopolitical research and educational commentary only. We are not a licensed financial adviser, AFS licensee, or investment service. All published market data is indicative only. Seek independent advice from an appropriately licensed Australian financial adviser before any financial decision.</div></div>
       <div class="faq-item"><div class="faq-q">Why "insight" and not "prediction"?</div><div class="faq-a">In Australia, "prediction markets" are regulated by ACMA as gambling and remain illegal in most contexts; the ASIC binary options ban runs to 2031. To respect that regulatory line and to be honest about what we do — calibrated probability synthesis, not betting odds — every published call is an <strong>insight</strong>. The word is locked.</div></div>
-      <div class="faq-item"><div class="faq-q">Who is behind synARKa?</div><div class="faq-a">Raj Singh, Sydney-based founder. 25 years of cross-cultural negotiation in the India-Australia corridor. r/energy #1 all-time post (~93K upvotes, organic). 12 months of deep AI immersion. Operates as a one-person bootstrapped company with no outside capital. Trades under <strong>Artigellence Augmentation Aggregator</strong>.</div></div>
+      <div class="faq-item"><div class="faq-q">Who is behind synARKa?</div><div class="faq-a">Raj Singh, Sydney-based founder. 25 years of cross-cultural negotiation in the India-Australia corridor. r/energy #1 all-time post (94K+ views, organic). 12 months of deep AI immersion. Operates as a one-person bootstrapped company with no outside capital. Trades under <strong>Artigellence Augmentation Aggregator</strong>.</div></div>
       <div class="faq-item"><div class="faq-q">What does "72 hours before the world reacts" mean?</div><div class="faq-a">Forward-looking, not reactive. We track weak signals, actor divergence, scheduled diplomatic events, regulatory calendars, and cascade pathways to identify what is about to happen. Insights are timestamped on publication. The track record will be auditable as Q2 2026 insights resolve from 15 May 2026 onwards.</div></div>
       <div class="faq-item"><div class="faq-q">How do I engage Pro, Enterprise, or Sovereign?</div><div class="faq-a">Email raj@synarka.pro with your name, organisation, and what you need. Watch and Operator are self-serve. Pro and Enterprise require a 15-minute call. Sovereign engagements require a 30-minute discovery call and NDA before any proposal is issued.</div></div>
       <div class="faq-item"><div class="faq-q">Do you take outside investment?</div><div class="faq-a">No. synARKa is founder-held. Equity is not for sale beyond 10%. Strategic partnership enquiries welcome — investment enquiries declined. This is a long-term sovereign asset, not a short-term exit vehicle.</div></div>
@@ -2985,6 +3330,7 @@ function tabRightExtras(tabKey) {
 async function renderTabBody(tabKey) {
   const body = document.getElementById('tab-body');
   if (!body) return;
+  body.className = 'tab-body tab-bg-' + tabKey;
 
   if (tabKey === 'INS') {
     body.style.gridTemplateColumns = '1fr';
@@ -3296,6 +3642,61 @@ async function updateMktCryptoPrices() {
   } catch(e) {}
 }
 
+</script>
+<script>
+function toggleTelemetry(){
+  var d=document.getElementById('telemetryDrawer'),b=document.getElementById('telemetryBar');
+  var open=d.classList.toggle('open');b.classList.toggle('open',open);
+  b.setAttribute('aria-expanded',open?'true':'false');
+}
+/* ═══ P3 · pricing doors ═══ */
+var PDOOR_MAP={SUB:[0,1,2,3],ENG:[4,5],PRJ:[6,7],ALL:[0,1,2,3,4,5,6,7]};
+function setPricingDoor(door,el){
+  document.querySelectorAll('.pdoor').forEach(function(d){d.classList.remove('active')});
+  if(el)el.classList.add('active');
+  var show=PDOOR_MAP[door]||PDOOR_MAP.ALL;
+  document.querySelectorAll('.pricing-grid .tier-card').forEach(function(c,i){
+    c.classList.toggle('tier-hidden',show.indexOf(i)===-1);
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){setPricingDoor('SUB',document.querySelector('.pdoor[data-door="SUB"]'))});
+/* ═══ P3 · voice brief ═══ */
+function toggleVoice(){
+  var a=document.getElementById('voiceBrief'),b=document.getElementById('voiceBtn'),s=document.getElementById('voiceStatus');
+  if(!a)return;
+  if(a.paused){
+    a.play().then(function(){b.textContent='❚❚';s.textContent='Playing · founder voice brief';})
+    .catch(function(){s.textContent='Voice brief is being recorded — the written check beside covers the same ground.';});
+    a.onended=function(){b.textContent='▶';s.textContent='Tap to listen · 90 seconds';};
+  } else { a.pause(); b.textContent='▶'; s.textContent='Paused'; }
+}
+/* ═══ P3 · 6-question self-check ═══ */
+var OBC={};
+function obcAnswer(btn,q,v){
+  OBC[q]=v;
+  var sib=btn.parentElement.querySelectorAll('button');
+  sib.forEach(function(b){b.classList.remove('sel-y','sel-n')});
+  btn.classList.add(v==='Y'?'sel-y':'sel-n');
+  var n=Object.keys(OBC).length, ver=document.getElementById('obcVerdict');
+  if(n<6){ver.className='obc-verdict';ver.textContent='Answered '+n+' of 6 — keep going.';return;}
+  var noes=0;for(var k in OBC){if(OBC[k]==='N')noes++}
+  if(noes<=1){ver.className='obc-verdict v-clear';ver.innerHTML='✓ You are well covered. Honestly — synARKa may only add marginal edge today. Bookmark the free ledger and come back when the corridor heats up.';}
+  else if(noes<=3){ver.className='obc-verdict v-gap';ver.innerHTML='△ '+noes+' gaps. Worth one A$500 question before they cost you a position. <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener" style="color:inherit;font-weight:700">Book 15 minutes →</a>';}
+  else{ver.className='obc-verdict v-blind';ver.innerHTML='✗ '+noes+' of 6 — you are flying blind in the corridor. Start with the 72-hour brief, today. <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener" style="color:inherit;font-weight:700">Book 15 minutes →</a>';}
+}
+/* ═══ P3 · wizard ═══ */
+var OBW={};
+function obwPick(key,val,el){
+  OBW[key]=val;
+  el.parentElement.querySelectorAll('button').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel');
+  if(OBW.role&&OBW.need){
+    var r=document.getElementById('obwResult'),role=OBW.role;
+    if(OBW.need==='Q'){r.innerHTML='<strong>'+role+'</strong> → start at <strong>Rung 01 · the A$500 72-Hour Brief</strong>. One corridor question, sourced and calibrated, inside 72 hours. <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">Book the question →</a>';}
+    else if(OBW.need==='A'){r.innerHTML='<strong>'+role+'</strong> → start at <strong>Rung 02 · the Site Baseline Audit</strong> (A$3,500–7,500, credits toward SiteWatch monitoring). <a href="#ladder">See the ladder →</a>';}
+    else{r.innerHTML='<strong>'+role+'</strong> → you want a <strong>protocol, not a project</strong>. <a href="#pricing">Choose from the eight protocols →</a> or <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">book 15 minutes</a> and scope it live.';}
+  }
+}
 </script>
 </body>
 </html>
