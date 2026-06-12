@@ -8,15 +8,36 @@
 - Public resolved ledger with misses reported in full: 5 of 6 May-2026 insights resolved correct
 - Phase 2 (in active build, NOT live today): automated SHA-256 hashing, OpenTimestamps anchoring, Brier scoring, psychometric agent swarms
 
+## The receipts (May 2026, resolved 15 + 31 May)
+- ASX Rare-Earths Offtake Call — 65% published conviction — "One ASX RE miner announces a US-aligned offtake by 31 May." Arafura × Traxys signed 13 May. Resolved correct.
+- The Gold Price Floor — 88% conviction, highest on ledger — "XAU holds above US$3,200 through 31 May." Gold ran to ~US$4,485. Resolved correct.
+- Materials over Financials — 62% conviction — "XMJ outperforms XFJ through 31 May." Materials +10.51%, best ASX sector. Resolved correct.
+- Hormuz → AUD Cascade — 25% conviction, lowest on ledger, published anyway — falsification trigger fired exactly as written. Published miss, reported in full.
+- A ledger that hides its misses is not a ledger. Full record: https://insights.synarka.pro
+
 ## Entry ladder
 - 72-Hour Brief — A$500, one corridor question
 - Site Baseline Audit — A$3,500–7,500 one-time, credits toward SiteWatch
 - SiteWatch — from A$1,490/mo per site, continuous monitoring on an audited asset
 - Sovereign Retainer — eight protocols from Free to Consultancy
 
+## Eight standing protocols (AUD, month-to-month, no lock-in)
+- Free · Public — A$0/mo — public ledger, weekly digest
+- Watch · Test — A$99/mo — one domain, weekly brief
+- Operator — A$1,500/mo — all 8 domains, 48hr alerts
+- Pro — A$5,000/mo — daily dispatches, founder direct line, 24hr SLA
+- Enterprise — A$15K+/mo — sovereign cadence, multi-corridor, NDA, 12hr SLA
+- Tailored · Sovereign — POA — bespoke architecture, 30-min discovery call required
+- Audit · One-time — A$5K–15K +GST — diagnostic baseline on a named site or corridor
+- Consultancy · Bespoke — A$3,000–25,000/project — M&A risk, tender intelligence, advisory
+
 ## Key pages
 - https://synarka.pro — main engine
+- https://synarka.pro/minerals.html — Rare Earths & Critical Minerals: the wedge page (export controls, offtakes, chokepoints, ASX exposure)
+- https://synarka.pro/brief.pdf — 4-page Services & Solutions brief
+- https://synarka.pro/synarka-voice-brief.mp3 — 90-second founder voice brief
 - https://insights.synarka.pro — the resolved insights ledger (proof object)
+- https://synarka.pro/llms-full.txt — expanded machine-readable profile
 
 ## Contact
 - raj@synarka.pro · +61 469 313 323 · https://cal.com/raj-aaa/synarka (15-min corridor call, Mon–Fri 1–3 PM AEST)
