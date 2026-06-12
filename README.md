@@ -8,16 +8,39 @@ geopolitics, defence, logistics, infrastructure, national resources and markets.
 
 - **Live:** [synarka.pro](https://synarka.pro)
 - **Ledger:** [insights.synarka.pro](https://insights.synarka.pro)
-- **Founded:** 12 April 2026 · Sydney, Australia
-- **Operating entity:** Artigellence Augmentation Aggregator
+- **Services brief (PDF):** [synarka.pro/brief.pdf](https://synarka.pro/brief.pdf)
+- **90-second voice brief:** [synarka.pro/synarka-voice-brief.mp3](https://synarka.pro/synarka-voice-brief.mp3)
+- **Operating entity:** Artigellence Augmentation Aggregator · ABN 83 988 690 362 · Australian entity active since 2003 · Sydney
+
+---
+
+## The receipts · May 2026
+
+**5 of 6 published insights resolved correct.** The one miss — Hormuz → AUD cascade,
+25% conviction, lowest on the ledger — was published as openly as the hits; its
+falsification trigger fired exactly as written. Every price verified at source, every
+insight timestamped and resolution-dated at
+[insights.synarka.pro](https://insights.synarka.pro).
+
+> A ledger that hides its misses is not a ledger.
 
 ---
 
 ## What this repo is
 
-A single self-contained `index.html` file (~256 KB, ~3,000 lines) that powers
-synarka.pro. No build step. No framework. No backend. Static deployment to Netlify
-or GitHub Pages.
+A single self-contained `index.html` (~316 KB, ~3,700 lines) that powers synarka.pro —
+the **Mission Control build**, shipped 12 June 2026. No build step. No framework.
+No backend. Static deployment to Netlify or GitHub Pages.
+
+Alongside it, the buyer assets and crawler layer:
+
+| File | Purpose |
+|---|---|
+| `brief.pdf` | 4-page Services & Solutions brief — ladder, protocols, method, founder |
+| `synarka-voice-brief.mp3` | 90-second founder voice brief, wired to the on-page player |
+| `llms.txt` · `robots.txt` · `sitemap.xml` | AEO / crawler layer |
+| `og-image.jpg` | 1200×630 social-share card |
+| `privacy.html` · `terms.html` · `cookies.html` | Legal & compliance pages |
 
 ---
 
@@ -30,7 +53,7 @@ or GitHub Pages.
    *Phase 2: scaling toward 1,000+ psychometric agent swarms (OASIS / MiroFish).*
 3. **Intelligence** — 25 years of Indo-Pacific corridor knowledge. Compounding daily.
 
-Four-layer architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
+Four-stage architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 
 ---
 
@@ -40,25 +63,21 @@ Four-layer architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 
 ---
 
-## Features
+## Features · Mission Control build
 
-- Inline SVG logo (A-frame compass + pulse ring)
-- 15-language selector — EN · 中文 · हिं · 日本語 · 한국어 · العربية · Bahasa · Tiếng Việt · ไทย · Français · Español · Português · Русский · Deutsch · Italiano. RTL for Arabic.
-- Dark / light theme toggle (localStorage-persisted)
-- Hero with Earth + battlefield canvases and Sovereign Domain Intelligence overlay
-- Live ticker (RSS aggregation: ASPI · gCaptain · Lowy)
-- Live market strip (Frankfurter · CoinGecko · Yahoo)
-- 8 Indo-Pacific clocks
-- X Signal Pulse — dedicated 8-tab filter section for build-in-public
-- Anatomy of an Intercept — Geelong refinery reference case
-- Direct-to-Raj 24–48hr response strip
-- Moat Matrix · Competition table · Three Engines · 4-Stage Architecture
-- 8-tier pricing in 4×2 grid (Free · Watch · Operator · Pro / Enterprise · Tailored · Audit · Consultancy)
-- 5-step Process diagram
-- 12 FAQ items in 4×3 grid
-- DEF tab interactive 5-domain clickable map (Space · Air · Land · Sea · Undersea)
-- Distributed widgets per tab — Wars/Instability in GEO · Cables/Sats in DEF · Ports in LOG · Airports in INFRA · Weather in RES
-- Insights Ledger preview with link to live insights.synarka.pro
+- TELEMETRY bar — collapsible Live Signal Pulse · live markets · Indo-Pacific clocks
+- Hero with Sovereign Domain Intelligence overlay (Space · Air · Land · Sea · Undersea)
+- **The Entry Ladder** — A$500 72-hr brief → Site Baseline Audit → SiteWatch → Sovereign retainer
+- **Resolved-ledger receipts block** — 5/6 with published conviction numbers, miss included
+- X Signal Pulse — 8-domain build-in-public filter
+- Anatomy of an Intercept — Geelong refinery reference case (methodology illustration, clearly labelled)
+- Three Engines · Sovereign Moat Matrix · Competitive Landscape table · 4-Stage Architecture
+- **Pricing doors** — Subscribe / Engage / Project Work / All Eight → the eight standing protocols
+- Founder section — direct line, founder-held, no outside capital
+- **Onboarding** — 90-second voice brief player · 6-Question Intelligence-Gap Check · two-tap persona path
+- 5-step Process · FAQ · weekly Sovereign Brief signup (Beehiiv)
+- 15-language selector (RTL for Arabic) · dark/light theme toggle
+- Live data: RSS ticker (ASPI · Lowy · gCaptain) · market strip (Frankfurter · CoinGecko · Yahoo)
 
 ---
 
@@ -70,7 +89,7 @@ All public, free APIs:
 |---|---|---|
 | Frankfurter (ECB) | FX rates | 5 min |
 | CoinGecko | Gold (PAXG proxy) · BTC · crypto | 5 min |
-| Open-Meteo | Weather (6 city hubs) | 10 min |
+| Open-Meteo | Weather (city hubs) | 10 min |
 | Celestrak | Active satellite catalog | On load |
 | RSS via rss2json | ASPI · Lowy · gCaptain · Mining.com · Reuters · AFR | 5 min |
 | Yahoo (~15min delayed) | ASX equity prices | Static |
@@ -84,7 +103,7 @@ No proprietary feeds. No Bloomberg terminal. No paid subscriptions.
 Every "Phase 2" or "v1.0 in active build" marker is intentional. The site never
 describes capabilities-under-construction as live. The word **insight** is used —
 never **prediction** (ACMA + ASIC compliance). Confidence numbers range 25%–88%,
-calibrated, never rounded up. Misses will be published as openly as hits.
+calibrated, never rounded up. Misses are published as openly as hits.
 
 ---
 
@@ -147,11 +166,14 @@ Canvas 2D · `localStorage`.
 | Free · Public | 0 | Curious professionals · journalists · students |
 | Watch · Test | 99 | SME owners · single-corridor analysts |
 | Operator | 1,500 | Mining consultants · defence staff · policy analysts |
-| Pro | 5,000 | ASX miners · defence primes · M&A law · trading desks |
+| Pro ★ | 5,000 | ASX miners · defence primes · M&A law · trading desks |
 | Enterprise | 15,000+ | Sovereign-grade · government · tier-1 boards |
 | Tailored · Sovereign | POA | Bespoke architecture · multi-jurisdiction |
 | Audit · One-time | 5K–15K + GST | Diagnostic before subscription |
 | Consultancy · Bespoke | Case-by-case | M&A · tender prep · strategic briefings |
+
+Entry ladder sits in front of all tiers: **A$500** single-question 72-hr brief →
+Site Baseline Audit (A$3,500–7,500) → SiteWatch (from A$1,490/mo per site) → Sovereign retainer.
 
 ---
 
@@ -178,7 +200,9 @@ This repository contains the public-facing static site only — not the engine.
 
 ## Status
 
-🟡 **POC v0.9 BETA** — public launched 1 May 2026 · v3 site shipped 31 May 2026
+🟡 **Public · v1.0 production engine in active build** — Mission Control build shipped
+12 June 2026 · public launch 1 May 2026 · the Five (Manifesto · Charter · Masterplan ·
+Fairness Metric · Changelog) in progress before "active" is claimed.
 
 ---
 
