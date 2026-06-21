@@ -871,6 +871,34 @@ body.light-mode .news-item{background:rgba(255,255,255,0.6)}
 .sp-btn-primary:hover{box-shadow:0 0 24px var(--amber-glow)}
 .sp-btn-secondary{background:transparent;border:1px solid var(--teal);color:var(--teal);padding:14px 28px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.14em;border-radius:2px;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;transition:all var(--t-fast);text-decoration:none}
 .sp-btn-secondary:hover{background:var(--teal-dim)}
+/* ═══ COLLABORATE · BY COMMITMENT · refer / introduce / partner ═══ */
+.collab-section{padding:60px 24px;background:var(--canvas);border-top:1px solid var(--border)}
+.collab-inner{max-width:1200px;margin:0 auto}
+.collab-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--violet);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+.collab-headline{font-family:var(--font-serif);font-size:clamp(28px,3.6vw,42px);font-weight:600;color:var(--text);line-height:1.12;margin-bottom:14px}
+.collab-headline em{font-style:italic;color:var(--violet)}
+.collab-sub{font-family:var(--font-ui);font-size:14px;color:var(--text-2);line-height:1.6;max-width:760px;margin:0 0 36px}
+.collab-sub strong{color:var(--text)}
+.collab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.collab-card{position:relative;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:32px 28px}
+.collab-card.featured{border-color:var(--violet);box-shadow:0 0 0 1px var(--violet-dim),0 0 30px var(--violet-dim)}
+.collab-card-num{position:absolute;top:32px;right:28px;font-family:var(--font-mono);font-size:13px;color:var(--text-3)}
+.collab-card h3{font-family:var(--font-serif);font-size:26px;font-weight:600;color:var(--text);margin:0 0 16px}
+.collab-badge{display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet);border:1px solid var(--border-strong);border-radius:3px;padding:6px 12px;margin-bottom:24px}
+.collab-rate{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.collab-rate-big{font-family:var(--font-serif);font-size:clamp(38px,4.6vw,52px);font-weight:600;color:var(--amber);line-height:1}
+.collab-rate-unit{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:0.1em;text-transform:uppercase}
+.collab-card p{font-family:var(--font-ui);font-size:13.5px;color:var(--text-2);line-height:1.62;margin:0}
+.collab-card p strong{color:var(--text)}
+.collab-contact{display:flex;flex-wrap:wrap;align-items:center;gap:28px;margin-top:40px;padding-top:28px;border-top:1px solid var(--border)}
+.collab-contact-item{display:flex;flex-direction:column;gap:4px}
+.collab-contact-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber)}
+.collab-contact-label.tel{color:var(--teal)}
+.collab-contact-val{font-family:var(--font-mono);font-size:14px;color:var(--text);text-decoration:none}
+a.collab-contact-val:hover{color:var(--violet)}
+.collab-contact-meta{margin-left:auto;font-family:var(--font-mono);font-size:11px;color:var(--text-3)}
+.collab-contact-pro{color:var(--teal)}
+@media(max-width:880px){.collab-grid{grid-template-columns:1fr}.collab-contact{gap:20px}.collab-contact-meta{margin-left:0}}
 
 .disclaimer-section{padding:60px 24px;background:var(--surface-1);border-top:1px solid var(--border)}
 .disclaimer-inner{max-width:1080px;margin:0 auto}
@@ -2285,6 +2313,57 @@ a.hero-ladder:hover strong{text-decoration:underline}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
+     COLLABORATE · BY COMMITMENT · refer / introduce / partner
+     ═══════════════════════════════════════════════════════ -->
+<section class="collab-section" id="collaborate">
+  <div class="collab-inner">
+    <div class="collab-eyebrow">▶ COLLABORATE · BY COMMITMENT</div>
+    <h2 class="collab-headline">Know an Australian business that needs this? <em>Share in the build.</em></h2>
+    <p class="collab-sub">Three ways to work with synARKa, by how involved you want to be. <strong>No lock-in. No MLM. No catch.</strong> The recurring tiers pay for as long as the client stays.</p>
+    <div class="collab-grid">
+
+      <div class="collab-card">
+        <div class="collab-card-num">01</div>
+        <h3>Refer</h3>
+        <div class="collab-badge">No strings attached</div>
+        <div class="collab-rate"><span class="collab-rate-big">A$500</span><span class="collab-rate-unit">One-off</span></div>
+        <p>Pass us an Australian SME. If they complete Phase 0, you get <strong>A$500</strong> — credited to your retainer if you're a client, paid out if you're not. Nothing to sign.</p>
+      </div>
+
+      <div class="collab-card">
+        <div class="collab-card-num">02</div>
+        <h3>Introduce</h3>
+        <div class="collab-badge">We sign + NDA</div>
+        <div class="collab-rate"><span class="collab-rate-big">10%</span><span class="collab-rate-unit">Recurring</span></div>
+        <p>Formally introduce a business. Sign a short introducer agreement and an NDA, and earn <strong>10% for as long as they stay a client</strong>. You make the connection — Raj handles the account.</p>
+      </div>
+
+      <div class="collab-card featured">
+        <div class="collab-card-num">03</div>
+        <h3>Partner</h3>
+        <div class="collab-badge">Agreement in place</div>
+        <div class="collab-rate"><span class="collab-rate-big">33%</span><span class="collab-rate-unit">Of billed · incl. GST</span></div>
+        <p>Your office, your resources, your <strong>white-labelled product</strong> — run synARKa as your own and own the client. A full partnership agreement: <strong>33% of the billed amount, incl. GST</strong>, recurring, for as long as they stay.</p>
+      </div>
+
+    </div>
+
+    <div class="collab-contact">
+      <div class="collab-contact-item">
+        <span class="collab-contact-label">Email · Direct to Raj</span>
+        <a href="mailto:raj@synarka.pro?subject=Collaborate%20with%20synARKa" class="collab-contact-val">raj@synarka.pro</a>
+      </div>
+      <div class="collab-contact-item">
+        <span class="collab-contact-label tel">WhatsApp / Call</span>
+        <a href="https://wa.me/61469313323" target="_blank" rel="noopener" class="collab-contact-val">+61 469 313 323</a>
+      </div>
+      <div class="collab-contact-meta"><a href="https://synarka.pro" class="collab-contact-val collab-contact-pro">synarka.pro</a> &nbsp;·&nbsp; ABN 83 988 690 362 &nbsp;·&nbsp; Founder-direct &nbsp;·&nbsp; Sydney</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
      PARTNERSHIP CTA
      ═══════════════════════════════════════════════════════ -->
 <section class="sovereign-partnership" id="partnership">
@@ -2334,6 +2413,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
     <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 8L8 2M2 2h6v6" fill="none" stroke="#5C6773" stroke-width="1"/></svg></div><div><div class="footer-label">X / TWITTER</div><a href="https://x.com/synARKa" target="_blank" class="footer-value">@synARKa</a></div></div>
     <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="#5C6773" stroke-width="1"/></svg></div><div><div class="footer-label">SECURE LINE</div><a href="tel:+61469313323" class="footer-value">+61 469 313 323</a></div></div>
     <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l5 5-5 5L0 5z" fill="none" stroke="#5C6773" stroke-width="1"/></svg></div><div><div class="footer-label">INSIGHTS LEDGER</div><a href="https://insights.synarka.pro" target="_blank" class="footer-value" style="color:var(--violet)">insights.synarka.pro →</a></div></div>
+    <div class="footer-item"><div class="footer-icon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="3" cy="3" r="1.6" fill="none" stroke="#5C6773" stroke-width="1"/><circle cx="7" cy="7" r="1.6" fill="none" stroke="#5C6773" stroke-width="1"/><path d="M4.1 4.1l1.8 1.8" stroke="#5C6773" stroke-width="1"/></svg></div><div><div class="footer-label">COLLABORATE</div><a href="#collaborate" class="footer-value">Refer · Introduce · Partner →</a></div></div>
   </div>
   <div class="footer-bottom">© MMXXVI · Artigellence Augmentation Aggregator · Sydney, Australia · All systems operational</div>
   <div class="footer-legal">
