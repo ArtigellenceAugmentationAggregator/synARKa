@@ -194,7 +194,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
 <style>
+/* LIVE tab — pulsing red */
+.nav-tab-pill[data-tab="LIVE"]{color:#EF4444;border-color:rgba(239,68,68,0.35);}
+.nav-tab-pill[data-tab="LIVE"]:hover{color:#EF4444;border-color:#EF4444;background:rgba(239,68,68,0.12);}
+.nav-tab-pill.active[data-tab="LIVE"]{background:#EF4444;color:#0B0E13;border-color:#EF4444;box-shadow:0 0 12px rgba(239,68,68,0.5);}
+.tab-item[data-tab="LIVE"]:hover{background:rgba(239,68,68,0.12);color:#EF4444;}
+.tab-item.active[data-tab="LIVE"]{border-bottom-color:#EF4444;color:#EF4444;}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#EF4444;margin-right:5px;vertical-align:middle;animation:livePulse 1.6s infinite;}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.6);}70%{box-shadow:0 0 0 6px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}
+.leaflet-popup-content{font-family:'Geist',system-ui,sans-serif;}
+.leaflet-control-layers{font-family:'Geist',system-ui,sans-serif;font-size:12px;}
 /* ═══════════════════════════════════════════════════════════════════
    synARKa Intelligence · synarka.pro · v3.0 FINAL
    Light/Dark · 15 langs · Distributed widgets · 10/10 polish
@@ -1290,6 +1301,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
   </div>
 
   <div class="nav-tabs">
+    <div class="nav-tab-pill" data-tab="LIVE" onclick="navPillClick('LIVE')"><span class="live-dot"></span><span>LIVE</span></div>
     <div class="nav-tab-pill active" data-tab="MIN" onclick="navPillClick('MIN')"><span data-t="tab_min">Critical Minerals</span></div>
     <div class="nav-tab-pill" data-tab="GEO" onclick="navPillClick('GEO')"><span data-t="tab_geo">Geopolitics</span></div>
     <div class="nav-tab-pill" data-tab="DEF" onclick="navPillClick('DEF')"><span data-t="tab_def">Defence</span></div>
@@ -1543,7 +1555,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
         <div class="ac-title">The Orbital Discovery Flow</div>
         <h3>How commodity satellite data becomes structural truth.</h3>
         <div class="ac-body">
-          A Sovereign Sense pipeline ingests <strong>SAR</strong> (ICEYE, Capella) and <strong>LWIR thermal</strong> (Planet Labs, Maxar)
+          A Sovereign Sense pipeline ingests <strong>SAR</strong> (Sentinel-1 free · ICEYE, Capella, Umbra on tasking) and <strong>thermal / multispectral</strong> (Landsat, ECOSTRESS, Maxar)
           for the facility coordinate boundary, then runs pixel-by-pixel change detection against a 6–12 month historical baseline, normalised against ambient weather to isolate genuine structural deviations.
         </div>
         <div class="ac-list">
@@ -1581,7 +1593,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
       </div>
       <div class="anatomy-econ-cell sovereign">
         <h4>The Sovereign Sense Reality</h4>
-        <div class="ae-row"><span class="label">Data cost per pass</span><span class="val">&lt; A$500</span></div>
+        <div class="ae-row"><span class="label">Baseline data cost</span><span class="val">Free (Sentinel)</span></div>
         <div class="ae-row"><span class="label">Compute &amp; routing</span><span class="val">&lt; A$15/month</span></div>
         <div class="ae-row"><span class="label">Enterprise subscription</span><span class="val">A$5,000–15,000/month</span></div>
         <div class="ae-row"><span class="label">Timeframe</span><span class="val">72 hours before the world reacts</span></div>
@@ -1692,7 +1704,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
         </div>
         <h3>Satellite · <span class="acc">the eyes</span></h3>
         <div class="eng-body">
-          Commodity satellite data — <strong>SAR</strong> (ICEYE, Capella · 24h revisit), <strong>LWIR thermal</strong> (Planet Labs, Maxar · 1–3d), and <strong>multispectral baselines</strong> (Sentinel, Landsat · 2–5d) — ingested via developer aggregators on a pay-per-pass basis. No hardware capex. Raw pixels become <strong>structural truth</strong>: millimetre wall shifts, 0.1°C thermal drift, tailings dam variance.
+          Commodity satellite data — <strong>SAR</strong> (Sentinel-1 free · ICEYE, Capella, Umbra on tasking), <strong>thermal</strong> (Landsat, ECOSTRESS), and <strong>multispectral baselines</strong> (Sentinel-2, Landsat · free, 2–5d) — ingested via developer aggregators, free archive plus pay-per-pass tasking. No hardware capex. Raw pixels become <strong>structural truth</strong>: footprint change, stockpile and tailings variance, infrastructure expansion.
         </div>
         <div class="eng-stack">
           <span>SAR · 24h</span><span>LWIR Thermal</span><span>Multispectral</span><span>Vertex AI Pipeline</span>
@@ -1835,6 +1847,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
      TAB BAR · 8 domains · sticky · full names
      ═══════════════════════════════════════════════════════ -->
 <div class="tab-bar" id="tab-bar">
+  <div class="tab-item" data-tab="LIVE" onclick="switchIntelTab('LIVE',this)"><span class="tab-name"><span class="live-dot"></span>LIVE · Asset Watch</span></div>
   <div class="tab-item active" data-tab="MIN" onclick="switchIntelTab('MIN',this)"><span class="tab-name">Critical Minerals</span></div>
   <div class="tab-item" data-tab="GEO" onclick="switchIntelTab('GEO',this)"><span class="tab-name">Geopolitics</span></div>
   <div class="tab-item" data-tab="DEF" onclick="switchIntelTab('DEF',this)"><span class="tab-name">Defence &amp; Sovereignty</span></div>
@@ -2442,6 +2455,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
   <span>Telegram</span>
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    synARKa Intelligence · JS ENGINES · v3.0
@@ -3423,10 +3437,124 @@ function tabRightExtras(tabKey) {
   if (tabKey === 'RES') return renderTweetPulse('RES');
   return '';
 }
+/* ═══════════════════════════════════════════════════════════════
+   LIVE · ASSET WATCH — public, ASX-listed critical-mineral assets
+   Monitoring-capability demonstration on PUBLIC data. No operational
+   claims about any named operator. Coordinates indicative — verify
+   against satellite before any client-facing use.
+   ═══════════════════════════════════════════════════════════════ */
+const ASSET_WATCH = [
+  {name:'Mt Weld', op:'Lynas Rare Earths (ASX:LYC)', cls:'Rare Earths · NdPr', lat:-28.867, lon:122.550, st:'WA'},
+  {name:'Kalgoorlie Processing', op:'Lynas Rare Earths (ASX:LYC)', cls:'RE Processing', lat:-30.780, lon:121.470, st:'WA'},
+  {name:'Eneabba', op:'Iluka Resources (ASX:ILU)', cls:'Rare Earths Refinery', lat:-29.830, lon:115.270, st:'WA'},
+  {name:'Pilgangoora', op:'Pilbara Minerals (ASX:PLS)', cls:'Lithium · Spodumene', lat:-21.050, lon:118.920, st:'WA'},
+  {name:'Greenbushes', op:'IGO / Tianqi / Albemarle', cls:'Lithium (world\u2019s largest)', lat:-33.870, lon:116.060, st:'WA'},
+  {name:'Nolans', op:'Arafura Rare Earths (ASX:ARU)', cls:'Rare Earths · NdPr', lat:-22.550, lon:133.270, st:'NT'},
+];
+
+function renderLIVEContent() {
+  const rows = ASSET_WATCH.map((a,i) => `
+    <div class="aw-row" onclick="flyToAsset(${i})">
+      <div class="aw-dot"></div>
+      <div style="flex:1;min-width:0;">
+        <div class="aw-name">${a.name} <span class="aw-st">${a.st}</span></div>
+        <div class="aw-op">${a.op} · ${a.cls}</div>
+      </div>
+      <div class="aw-go">View →</div>
+    </div>`).join('');
+
+  return `
+  <style>
+    .aw-wrap{padding:4px 0 8px;}
+    .aw-head{display:flex;align-items:center;gap:9px;margin-bottom:4px;}
+    .aw-h1{font-family:'Geist',sans-serif;font-size:18px;font-weight:700;color:var(--text);display:flex;align-items:center;}
+    .aw-badge{font-family:'Geist Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#EF4444;border:1px solid rgba(239,68,68,0.4);border-radius:20px;padding:2px 9px;}
+    .aw-sub{font-family:'Geist',sans-serif;font-size:12.5px;color:var(--text-3);margin:4px 0 14px;line-height:1.5;}
+    .aw-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;}
+    @media (max-width:760px){.aw-grid{grid-template-columns:1fr;}}
+    #assetMap{height:420px;width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line,rgba(255,255,255,0.08));background:#0e1217;}
+    .aw-list{display:flex;flex-direction:column;gap:7px;max-height:420px;overflow-y:auto;}
+    .aw-row{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1px solid rgba(255,255,255,0.07);border-radius:11px;cursor:pointer;transition:.15s;background:rgba(255,255,255,0.02);}
+    .aw-row:hover{border-color:#EF4444;background:rgba(239,68,68,0.06);}
+    .aw-dot{width:9px;height:9px;border-radius:50%;background:#EF4444;flex-shrink:0;box-shadow:0 0 0 3px rgba(239,68,68,0.18);}
+    .aw-name{font-family:'Geist',sans-serif;font-size:13.5px;font-weight:600;color:var(--text);}
+    .aw-st{font-family:'Geist Mono',monospace;font-size:9.5px;color:var(--text-3);border:1px solid rgba(255,255,255,0.12);border-radius:5px;padding:1px 5px;margin-left:5px;}
+    .aw-op{font-family:'Geist',sans-serif;font-size:11.5px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .aw-go{font-family:'Geist Mono',monospace;font-size:11px;color:#EF4444;flex-shrink:0;}
+    .aw-note{font-family:'Geist',sans-serif;font-size:11.5px;color:var(--text-3);background:rgba(234,179,8,0.07);border:1px solid rgba(234,179,8,0.25);border-radius:10px;padding:11px 13px;margin-top:14px;line-height:1.55;}
+    .aw-note b{color:var(--warning,#EAB308);}
+  </style>
+  <div class="aw-wrap">
+    <div class="aw-head">
+      <div class="aw-h1"><span class="live-dot" style="width:9px;height:9px;margin-right:8px;"></span>LIVE · Asset Watch</div>
+      <span class="aw-badge">Public Assets</span>
+    </div>
+    <div class="aw-sub">
+      Monitoring-capability demonstration over <strong>public, ASX-listed critical-mineral assets</strong> using free, open Sentinel-2 (10&nbsp;m optical) and Sentinel-1 (all-weather SAR) imagery. Change-detection baseline — the same Sovereign Sense pipeline, on publicly-disclosed sites. Tap any asset to view.
+    </div>
+    <div class="aw-grid">
+      <div id="assetMap"></div>
+      <div class="aw-list">${rows}</div>
+    </div>
+    <div class="aw-note">
+      <b>Scope &amp; honesty.</b> Imagery is public ESA/Copernicus + Esri data over publicly-disclosed mine and refinery locations. This is a capability demonstration — <strong>not</strong> a live operational read, and <strong>no</strong> structural or operational claim is made about any named operator. Continuous monitoring with high-resolution / SAR tasking is engaged per client under the Site Baseline Audit ladder. Asset coordinates are indicative.
+    </div>
+  </div>`;
+}
+
+let assetMapObj = null;
+let assetMarkers = [];
+function initAssetWatchMap() {
+  const el = document.getElementById('assetMap');
+  if (!el || typeof L === 'undefined') return;
+  if (assetMapObj) { assetMapObj.remove(); assetMapObj = null; }
+  assetMarkers = [];
+
+  assetMapObj = L.map('assetMap', { zoomControl:true, attributionControl:true });
+
+  const esri = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { maxZoom:19, attribution:'© Esri, Maxar' }
+  ).addTo(assetMapObj);
+  const s2 = L.tileLayer(
+    'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2023_3857/default/g/{z}/{y}/{x}.jpg',
+    { maxZoom:16, attribution:'Sentinel-2 cloudless 2023 © EOX / ESA' }
+  );
+  L.control.layers({ '🛰️ High-Res': esri, '🌍 Sentinel-2 (ESA)': s2 }, null, { collapsed:true, position:'topright' }).addTo(assetMapObj);
+
+  const pts = [];
+  ASSET_WATCH.forEach((a,i) => {
+    const m = L.circleMarker([a.lat, a.lon], { radius:8, color:'#fff', weight:2, fillColor:'#EF4444', fillOpacity:1 })
+      .addTo(assetMapObj)
+      .bindPopup(`<b>${a.name}</b><br>${a.op}<br><span style="color:#666;font-size:11px;">${a.cls} · ${a.st}</span><br><span style="color:#999;font-size:10px;">${a.lat}, ${a.lon}</span>`);
+    L.circle([a.lat, a.lon], { radius:3000, color:'#EF4444', weight:1.5, fill:false, dashArray:'4 5' }).addTo(assetMapObj);
+    assetMarkers.push(m);
+    pts.push([a.lat, a.lon]);
+  });
+
+  assetMapObj.fitBounds(pts, { padding:[40,40] });
+  s2.on('tileerror', function(){ /* silent — Esri default keeps assets visible */ });
+  setTimeout(() => assetMapObj.invalidateSize(), 150);
+}
+
+function flyToAsset(i) {
+  if (!assetMapObj || !ASSET_WATCH[i]) return;
+  const a = ASSET_WATCH[i];
+  assetMapObj.flyTo([a.lat, a.lon], 14, { duration:0.8 });
+  if (assetMarkers[i]) setTimeout(() => assetMarkers[i].openPopup(), 700);
+}
+
 async function renderTabBody(tabKey) {
   const body = document.getElementById('tab-body');
   if (!body) return;
   body.className = 'tab-body tab-bg-' + tabKey;
+
+  if (tabKey === 'LIVE') {
+    body.style.gridTemplateColumns = '1fr';
+    body.innerHTML = `<div style="padding:0">${renderLIVEContent()}</div>`;
+    setTimeout(initAssetWatchMap, 60);
+    return;
+  }
 
   if (tabKey === 'INS') {
     body.style.gridTemplateColumns = '1fr';
