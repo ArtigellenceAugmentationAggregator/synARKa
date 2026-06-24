@@ -1540,8 +1540,8 @@ a.hero-ladder:hover strong{text-decoration:underline}
         <div class="ac-title">The Blind Spot</div>
         <h3>Why ground telemetry could not see what was coming.</h3>
         <div class="ac-body">
-          Refineries rely on <strong>point-source sensors</strong> — physical gas sniffers, pressure gauges, control room telemetry.
-          When a mechanical valve develops a micro-leak under high pressure, surrounding compressors draw more power to compensate, generating localised friction heat <em>before</em> internal pressure drops trigger alarms.
+          Refineries rely on <strong>point-source sensors</strong> — physical gas sniffers, pressure gauges, control room telemetry — each reading one location.
+          As a process unit drifts toward failure, the stress first shows up at <em>facility scale</em>: millimetric ground and structural deformation, and a persistent thermal shift across the affected unit's footprint — often before point sensors localise the cause.
         </div>
         <div class="ac-list">
           <div class="li"><span class="dot">✕</span>Static ground sensors cannot triangulate thermodynamic drift at facility scale.</div>
@@ -1559,8 +1559,8 @@ a.hero-ladder:hover strong{text-decoration:underline}
           for the facility coordinate boundary, then runs pixel-by-pixel change detection against a 6–12 month historical baseline, normalised against ambient weather to isolate genuine structural deviations.
         </div>
         <div class="ac-list">
-          <div class="li"><span class="dot">→</span>SAR penetrates dust, cloud, darkness — surface topography to 3–5 mm accuracy.</div>
-          <div class="li"><span class="dot">→</span>LWIR isolates 0.1–0.5 °C thermal anomalies per pixel cluster.</div>
+          <div class="li"><span class="dot">→</span>SAR / InSAR penetrates dust, cloud, darkness — millimetric ground and structural deformation (3–5 mm), the precision signal.</div>
+          <div class="li"><span class="dot">→</span>LWIR flags persistent thermal anomalies at unit and asset-footprint scale (tens of metres per pixel) — zones, not single components.</div>
           <div class="li"><span class="dot">→</span>Change-detection logic flags persistent structural deviation against baseline.</div>
           <div class="li"><span class="dot">→</span>Anomaly cropped, validated via human-in-the-loop triage, alert dispatched.</div>
         </div>
@@ -1576,7 +1576,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
           The board sees the structural truth before internal telemetry catches up.
         </div>
         <div class="ac-list">
-          <div class="li"><span class="dot">●</span>"Thermographic shift at Alkylation Valve Zone B · 72hr creeping anomaly · 0.5 °C above baseline."</div>
+          <div class="li"><span class="dot">●</span>"Ground deformation 6 mm + thermal drift across Crude Unit Zone B footprint · persistent 72 hr shift vs baseline."</div>
           <div class="li"><span class="dot">●</span>"Recommended action: Inspect within operational shift."</div>
           <div class="li"><span class="dot">●</span>SHA-256 hashed pre-publication · OpenTimestamps verification (Phase 2 · v1.0 build).</div>
         </div>
@@ -1691,7 +1691,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
 
     <p style="font-family:var(--font-ui);font-size:15px;color:var(--text-2);line-height:1.65;max-width:920px">
       Satellite hardware is cheap. Raw pixels are cheap. Frontier models are cheap. What is not cheap — and not replicable —
-      is the orchestration that maps a 0.5°C thermal anomaly on a Karratha mine wall to <em>"Zone B compressor failing,"</em>
+      is the orchestration that maps millimetric ground deformation on a Karratha tailings wall to <em>"dam-wall creep accelerating — inspect Zone B,"</em>
       a MOFCOM bulletin to <em>"three named ASX miners exposed within 90 days,"</em> and a Hormuz disruption to <em>"AUD/USD prints 0.62–0.64 by 31 May."</em>
       That orchestration is the moat. Three engines converge to deliver it.
     </p>
@@ -1890,7 +1890,7 @@ a.hero-ladder:hover strong{text-decoration:underline}
       </div>
       <div class="moat-cell right">
         <h4>What the Sovereign Sense Engine sees</h4>
-        <div class="moat-row">"Coordinate (−33.86, 151.20) is <strong>Zone B cold storage roof · Compressor B running 4 °C above 90-day baseline.</strong>"</div>
+        <div class="moat-row">"Coordinate (−33.86, 151.20) is <strong>Zone B cold-storage roof · refrigeration zone running 4 °C above 90-day baseline.</strong>"</div>
         <div class="moat-row">"MOFCOM Bulletin 22/2026 names dysprosium end-use restrictions. <strong>Three named ASX miners exposed within 90 days · covenants modelled.</strong>"</div>
         <div class="moat-row">"Brent +2.3% maps to <strong>AUD/USD 0.62–0.64 by 31 May via 4-node cascade · Node 4 (RBA) is the weak link · joint probability 25%.</strong>"</div>
         <div class="moat-row">"SMS to operations supervisor in 12 minutes: <strong>'Evacuate Zone 4. Shut valve C. Anomaly resolves in 6 h.'</strong>"</div>
