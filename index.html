@@ -385,6 +385,42 @@ body.light-mode .hero-stat{background:rgba(255,255,255,0.85)}
 .section-head h2 .vl{color:var(--violet);font-style:italic}
 .section-head-right{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:0.15em;text-transform:uppercase;text-align:right;line-height:1.7}
 .section-head-right .key{display:block;color:var(--amber);font-weight:600}
+/* ─── synARKa Space Solution ─── */
+.space-section{padding:80px 24px;max-width:1280px;margin:0 auto}
+.nav-tab-pill.space-pill{color:var(--violet);border-color:rgba(167,139,250,.3)}
+.nav-tab-pill.space-pill:hover{background:rgba(167,139,250,.12);border-color:var(--violet);color:var(--violet)}
+.pill-radar{flex:0 0 auto;display:inline-block;vertical-align:middle}
+.pill-radar-sweep{transform-origin:8px 8px;animation:radarSpin 3s linear infinite}
+.svc-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:8px}
+.svc-card{background:var(--canvas);padding:22px 26px;display:grid;grid-template-columns:46px 1fr 220px;gap:22px;align-items:center;transition:all var(--t-base)}
+.svc-card:hover{background:var(--surface-1)}
+.svc-num{font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--c);border:1px solid var(--cd);border-radius:2px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-name{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.25}
+.svc-name .acc{color:var(--c)}
+.svc-desc{font-family:var(--font-ui);font-size:12.5px;color:var(--text-2);line-height:1.55}
+.svc-desc strong{color:var(--text)}
+.svc-econ{font-family:var(--font-mono);font-size:11px;color:var(--text-2);text-align:right;letter-spacing:.02em;line-height:1.65}
+.svc-econ .et{display:block;font-size:8.5px;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.svc-econ b{color:var(--c);font-weight:600}
+@media(max-width:820px){.svc-card{grid-template-columns:42px 1fr;gap:16px}.svc-econ{grid-column:2;text-align:left;margin-top:4px}}
+.space-cap{margin-top:18px;background:linear-gradient(135deg,rgba(129,140,248,.06),rgba(167,139,250,.04));border:1px solid rgba(129,140,248,.3);border-radius:3px;padding:20px 24px}
+.space-cap .ct{font-family:var(--font-mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);margin-bottom:10px}
+.space-cap p{font-family:var(--font-ui);font-size:13px;color:var(--text-2);line-height:1.65;margin:0}
+.space-cap p strong{color:var(--text)}
+.space-honesty{font-family:var(--font-mono);font-size:11px;color:var(--text-3);letter-spacing:.04em;line-height:1.7;margin-top:18px;padding:16px;background:var(--surface-1);border:1px solid var(--border)}
+.space-honesty strong{color:var(--amber)}
+.space-intro{display:flex;gap:36px;align-items:center;justify-content:space-between}
+.space-lead{font-family:var(--font-ui);font-size:14px;color:var(--text-2);line-height:1.65;max-width:760px;margin:0}
+.space-lead strong{color:var(--text)}
+.radar-wrap{flex-shrink:0;position:relative}
+.radar-svg{width:190px;height:190px;display:block}
+.radar-sweep{transform-origin:100px 100px;animation:radarSpin 4s linear infinite}
+@keyframes radarSpin{to{transform:rotate(360deg)}}
+.blip{animation:blipPulse 4s ease-in-out infinite}
+.blip.b2{animation-delay:1s}.blip.b3{animation-delay:2s}.blip.b4{animation-delay:3s}
+@keyframes blipPulse{0%,100%{opacity:.22}45%{opacity:1}}
+.radar-cap{font-family:var(--font-mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-top:8px}
+@media(max-width:820px){.space-intro{flex-direction:column;align-items:flex-start}.radar-wrap{align-self:center}}
 
 /* ─── MOAT BANNER · top of Three Engines ─── */
 .moat-banner{max-width:1280px;margin:0 auto;padding:36px 24px 0}
@@ -1311,10 +1347,10 @@ a.hero-ladder:hover strong{text-decoration:underline}
     <div class="nav-tab-pill" data-tab="DEF" onclick="navPillClick('DEF')"><span data-t="tab_def">Defence</span></div>
     <div class="nav-tab-pill" data-tab="AGR" onclick="navPillClick('AGR')"><span data-t="tab_agr">Agriculture</span></div>
     <div class="nav-tab-pill" data-tab="INFRA" onclick="navPillClick('INFRA')"><span data-t="tab_infra">Infrastructure &amp; Resources</span></div>
+    <div class="nav-tab-pill space-pill" data-tab="SPACE" onclick="document.getElementById('space-solutions').scrollIntoView({behavior:'smooth',block:'start'})"><svg class="pill-radar" viewBox="0 0 16 16" width="13" height="13" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"/><circle cx="8" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1" opacity=".25"/><line x1="8" y1="1" x2="8" y2="15" stroke="currentColor" stroke-width=".7" opacity=".18"/><line x1="1" y1="8" x2="15" y2="8" stroke="currentColor" stroke-width=".7" opacity=".18"/><g class="pill-radar-sweep"><path d="M8 8 L8 1 A7 7 0 0 1 12.6 2.7 Z" fill="currentColor" opacity=".55"/></g><circle cx="8" cy="8" r="1.1" fill="currentColor"/></svg><span>Space Solutions</span></div>
   </div>
 
   <div class="nav-right">
-    <div class="nav-status"><span class="status-dot"></span><span data-t="nav_status">Sovereign Protocol Active</span></div>
     <select class="nav-lang" id="langSelect" aria-label="Language" onchange="setLanguage(this.value)">
       <option value="en">EN</option>
       <option value="zh">中文</option>
@@ -2364,6 +2400,85 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
 <!-- ═══════════════════════════════════════════════════════
      PRICING · 8 tiers · 4×2 symmetric grid
      ═══════════════════════════════════════════════════════ -->
+<!-- ═══ synARKa SPACE SOLUTION · India–Indo-Pacific Space Corridor ═══ -->
+<section class="space-section" id="space-solutions">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow"><span class="num">◆</span>synARKa Space Solution · India–Indo-Pacific Corridor</div>
+      <h2>Five ways into <span class="vl">the space corridor.</span></h2>
+    </div>
+    <div class="section-head-right">
+      <span class="key">BROKERED · ASSET-LIGHT</span>
+      <span>Insight, not pixels</span>
+    </div>
+  </div>
+  <div class="space-intro">
+    <p class="space-lead">The India–Indo-Pacific space corridor is the most active it has ever been. <strong>synARKa Space Solution</strong> is the consultancy layer across it — five service lines, asset-light and brokered. We turn satellite access into decisions and connect both ends of the bridge: we sell the insight and the introduction, never the hardware.</p>
+    <div class="radar-wrap">
+      <svg viewBox="0 0 200 200" class="radar-svg" xmlns="http://www.w3.org/2000/svg" aria-label="Radar sweep">
+        <defs>
+          <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(45,212,191,.08)"/><stop offset="100%" stop-color="rgba(45,212,191,0)"/></radialGradient>
+          <linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(45,212,191,0)"/><stop offset="78%" stop-color="rgba(45,212,191,.04)"/><stop offset="100%" stop-color="rgba(45,212,191,.42)"/></linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="94" fill="url(#radarGlow)"/>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(45,212,191,.2)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="66" fill="none" stroke="rgba(45,212,191,.15)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(45,212,191,.13)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="14" fill="none" stroke="rgba(45,212,191,.12)" stroke-width="1"/>
+        <line x1="100" y1="8" x2="100" y2="192" stroke="rgba(45,212,191,.09)" stroke-width="1"/>
+        <line x1="8" y1="100" x2="192" y2="100" stroke="rgba(45,212,191,.09)" stroke-width="1"/>
+        <line x1="29.5" y1="29.5" x2="170.5" y2="170.5" stroke="rgba(45,212,191,.06)" stroke-width="1"/>
+        <line x1="170.5" y1="29.5" x2="29.5" y2="170.5" stroke="rgba(45,212,191,.06)" stroke-width="1"/>
+        <g class="radar-sweep"><path d="M100 100 L100 8 A92 92 0 0 1 165.05 34.95 Z" fill="url(#sweepGrad)"/><line x1="100" y1="100" x2="100" y2="8" stroke="rgba(45,212,191,.75)" stroke-width="1.5"/></g>
+        <circle cx="139" cy="61" r="2.6" fill="#A78BFA" class="blip b1"/>
+        <circle cx="62" cy="129" r="2.2" fill="#2DD4BF" class="blip b2"/>
+        <circle cx="123" cy="143" r="2.2" fill="#06b6d4" class="blip b3"/>
+        <circle cx="70" cy="64" r="1.8" fill="#818cf8" class="blip b4"/>
+        <circle cx="100" cy="100" r="3" fill="#2DD4BF"/>
+        <circle cx="100" cy="100" r="6" fill="none" stroke="rgba(45,212,191,.4)" stroke-width="1"/>
+      </svg>
+      <div class="radar-cap">Corridor · Tasking · Coverage</div>
+    </div>
+  </div>
+
+  <div class="svc-list">
+    <div class="svc-card" style="--c:#2DD4BF;--cd:rgba(45,212,191,.3)">
+      <div class="svc-num">01</div>
+      <div><div class="svc-name">Earth-Observation <span class="acc">Insights</span></div><div class="svc-desc">Satellite-derived decision briefs for explorers and asset owners — <strong>alteration &amp; prospectivity mapping</strong> ("drill here first"), change-detection, and tailings / ESG monitoring. We sell the insight, never the raw scene.</div></div>
+      <div class="svc-econ"><span class="et">Indicative</span>One-time audit from <b>A$5K</b><br>Monitoring from <b>A$1,500/mo</b></div>
+    </div>
+    <div class="svc-card" style="--c:#A78BFA;--cd:rgba(167,139,250,.3)">
+      <div class="svc-num">02</div>
+      <div><div class="svc-name">Payload &amp; Launch <span class="acc">Brokerage</span></div><div class="svc-desc">We match Australian payloads — universities, startups, defence research — to launch slots and buses across the corridor, navigate the process, and earn on what flies.</div></div>
+      <div class="svc-econ"><span class="et">Indicative</span><b>Referral basis</b><br>per programme</div>
+    </div>
+    <div class="svc-card" style="--c:#06b6d4;--cd:rgba(6,182,212,.3)">
+      <div class="svc-num">03</div>
+      <div><div class="svc-name">Ground-Station <span class="acc">Coverage Brokering</span></div><div class="svc-desc">Southern-Hemisphere downlink is Australia’s geographic edge. We broker Australian pass capacity to operators needing southern coverage — and back the other way. No antenna, no capex.</div></div>
+      <div class="svc-econ"><span class="et">Indicative</span><b>Brokerage basis</b><br>recurring per operator</div>
+    </div>
+    <div class="svc-card" style="--c:#E0A800;--cd:rgba(224,168,0,.3)">
+      <div class="svc-num">04</div>
+      <div><div class="svc-name">Manufacturer <span class="acc">Representation</span></div><div class="svc-desc">We represent Indian space manufacturers — antennas, components, small-satellite systems — to Australian and allied buyers, opening the channel end to end.</div></div>
+      <div class="svc-econ"><span class="et">Indicative</span><b>Commission basis</b><br>per deal</div>
+    </div>
+    <div class="svc-card" style="--c:#818cf8;--cd:rgba(129,140,248,.3)">
+      <div class="svc-num">05</div>
+      <div><div class="svc-name">Intelligence <span class="acc">Subscriptions</span></div><div class="svc-desc">The recurring engine — synARKa’s multi-engine consensus intelligence delivered on a standing cadence. Every pilot and relationship above feeds it.</div></div>
+      <div class="svc-econ"><span class="et">Standing</span><b>See pricing tiers ↓</b></div>
+    </div>
+  </div>
+
+  <div class="space-cap">
+    <div class="ct">What we can offer today</div>
+    <p>Brokered access to <strong>200+ satellites</strong> across optical, radar (SAR), radio-frequency and hyperspectral; precise <strong>pass-timing and tasking</strong> over any coordinate on Earth; and brokered <strong>payload, launch and ground-station</strong> access. Aggregated and brokered, <strong>not owned</strong> — real, sellable capability with no hardware to buy and no capex.</p>
+  </div>
+
+  <p class="space-honesty">
+    <strong>HONESTY HELD.</strong> We sell insight, not pixels — data licences bar reselling raw imagery; our product is the analysis. Mapping points the drill; it does not assay the ore — satellites cannot read lithium or rare-earth grades, so we map alteration and prospectivity and say so. synARKa operates no satellites. Economics shown are indicative industry benchmarks; real terms are set per engagement.
+  </p>
+</section>
+
 <section class="pricing-section" id="pricing">
   <div class="pricing-inner">
     <div class="pricing-eyebrow">▶ ENGAGEMENT TIERS · 8 PATHWAYS</div>
