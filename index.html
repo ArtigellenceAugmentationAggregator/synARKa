@@ -2958,15 +2958,15 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
 
   <div class="ob-grid">
     <div class="ob-voice">
-      <div class="obv-label">▶ 90-Second Voice Brief · direct from the founder</div>
+      <div class="obv-label">▶ 3-Minute Voice Brief · direct from the founder</div>
       <div class="obv-player">
         <button class="obv-btn" id="voiceBtn" onclick="toggleVoice()">▶</button>
         <div class="obv-meta">
           <div class="obv-title">What synARKa does — and what it can do for you</div>
-          <div class="obv-sub" id="voiceStatus">Tap to listen · 90 seconds</div>
+          <div class="obv-sub" id="voiceStatus">Tap to listen · 3 minutes</div>
         </div>
       </div>
-      <audio id="voiceBrief" src="synarka-voice-brief.mp3" preload="none"></audio>
+      <audio id="voiceBrief" src="synarka-voice-brief.mp3?v=2" preload="none"></audio>
       <div class="obv-sub" style="margin-top:10px">Prefer to read? <a href="synARKa-brief.pdf" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;text-decoration:none">The 4-page Services Brief (PDF) &rarr;</a></div>
     </div>
 
@@ -4702,7 +4702,7 @@ function toggleVoice(){
   if(a.paused){
     a.play().then(function(){b.textContent='❚❚';s.textContent='Playing · founder voice brief';})
     .catch(function(){s.textContent='Voice brief is being recorded — the written check beside covers the same ground.';});
-    a.onended=function(){b.textContent='▶';s.textContent='Tap to listen · 90 seconds';};
+    a.onended=function(){b.textContent='▶';s.textContent='Tap to listen · 3 minutes';};
   } else { a.pause(); b.textContent='▶'; s.textContent='Paused'; }
 }
 /* ═══ P3 · 6-question self-check ═══ */
