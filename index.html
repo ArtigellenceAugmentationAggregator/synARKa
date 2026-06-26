@@ -464,6 +464,9 @@ body.light-mode .hero-stat{background:rgba(255,255,255,0.85)}
 /* ─── The Compute Corridor ─── */
 .compute .space-cap{background:linear-gradient(135deg,rgba(224,168,0,.06),rgba(249,115,22,.04));border-color:rgba(224,168,0,.28)}
 .compute .space-cap .ct{color:var(--amber)}
+.compute .cc-fit{max-width:760px;margin:26px auto 0;text-align:center}
+.compute .cc-fit .cc-fit-h{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:14px}
+.compute .cc-fit svg{width:100%;height:auto;max-width:680px;display:block;margin:0 auto}
 
 /* ─── MOAT BANNER · top of Three Engines ─── */
 .moat-banner{max-width:1280px;margin:0 auto;padding:36px 24px 0}
@@ -2577,6 +2580,30 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
     <p><strong>Terrestrial and sovereign compute</strong> is the live market — Australia's announced data-centre pipeline runs past <strong>A$100B</strong>, constrained by power, water and land. <strong>Orbital data centres are emerging</strong> — real demonstrators are in orbit, but gigawatt-scale economics still ride on unproven thermal and launch-cost breakthroughs. synARKa earns on the analysis and the introduction across both — today on the ground, as the orbit matures.</p>
   </div>
 
+  <div class="cc-fit">
+    <div class="cc-fit-h">Where synARKa fits</div>
+    <svg viewBox="0 0 680 254" role="img" style="font-family:var(--font-ui)" aria-label="Where synARKa fits among space and compute intermediaries">
+      <title>Where synARKa fits</title>
+      <desc>Space brokers, space consultants and cloud consultants each miss a capability; synARKa is the Indo-Pacific sovereign read that bridges them.</desc>
+      <defs><marker id="ccFitArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="50" y="40" width="180" height="56" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+      <text x="140" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#cbd5e1">Space brokers</text>
+      <text x="140" y="76" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#8b95a3">No sovereign read</text>
+      <rect x="250" y="40" width="180" height="56" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+      <text x="340" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#cbd5e1">Space consultants</text>
+      <text x="340" y="76" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#8b95a3">No corridor depth</text>
+      <rect x="450" y="40" width="180" height="56" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+      <text x="540" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#cbd5e1">Cloud consultants</text>
+      <text x="540" y="76" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#8b95a3">Blind to space</text>
+      <line x1="140" y1="98" x2="224" y2="160" stroke="rgba(255,255,255,.34)" stroke-width="1.5" marker-end="url(#ccFitArrow)"/>
+      <line x1="340" y1="98" x2="340" y2="160" stroke="rgba(255,255,255,.34)" stroke-width="1.5" marker-end="url(#ccFitArrow)"/>
+      <line x1="540" y1="98" x2="456" y2="160" stroke="rgba(255,255,255,.34)" stroke-width="1.5" marker-end="url(#ccFitArrow)"/>
+      <rect x="120" y="170" width="440" height="64" rx="8" fill="rgba(168,85,247,.10)" stroke="rgba(168,85,247,.55)" stroke-width="1.5"/>
+      <text x="340" y="194" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#d8b4fe">synARKa</text>
+      <text x="340" y="216" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#c4b5fd">The Indo-Pacific sovereign read between them</text>
+    </svg>
+  </div>
+
   <p class="space-honesty">
     <strong>HONESTY HELD.</strong> synARKa owns no compute, no satellites, no ground stations and no data centres — every line here is advisory, brokerage, representation or insight. We advise on renting compute and refer providers; we never own or resell it. Orbital data centres are at demonstrator and feasibility stage, not gigawatt scale — labelled emerging, never sold as live. 'Insight,' never prediction. Economics shown are indicative; real terms are set per engagement.
   </p>
@@ -3032,7 +3059,7 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     FAQ · 4×3 grid · 12 questions
+     FAQ · 4-wide grid · 20 questions
      ═══════════════════════════════════════════════════════ -->
 <section class="faq-section" id="faq">
   <div class="faq-inner">
@@ -3064,6 +3091,9 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
       <div class="faq-item"><div class="faq-q">What is hyperspectral imaging, and how do you use it?</div><div class="faq-a">Where conventional multispectral reads a handful of broad bands, <strong>hyperspectral</strong> reads hundreds of narrow contiguous bands. That spectral depth flags surface mineralogy, alteration and material signatures — useful for surface-level prospectivity context and change detection. In synARKa it is a <strong>proxy input layer</strong>, fused with geopolitics and market context — never a substitute for assay or ground-truth.</div></div>
       <div class="faq-item"><div class="faq-q">How does spectroscopy fit — is remote sensing replacing the geologist?</div><div class="faq-a">No. Spectroscopy — the science behind multi- and hyperspectral sensing — reads how surfaces reflect and emit across the spectrum, flagging likely surface mineralogy and change over time. It is a <strong>remote proxy</strong> that narrows where to look. It does not replace the drill rig, the assay lab, or the geologist. synARKa fuses the spectral signal into a decision; it does not claim sub-surface certainty.</div></div>
       <div class="faq-item"><div class="faq-q">What sensors and payloads feed the engine?</div><div class="faq-a"><strong>SAR</strong> (Sentinel-1, free; ICEYE, Capella, Umbra on tasking), <strong>thermal / LWIR</strong> (Landsat, ECOSTRESS), <strong>multispectral</strong> baselines (Sentinel-2, Landsat — free, 2–5 day revisit), and <strong>hyperspectral</strong> for surface mineralogy. Free archive plus pay-per-pass tasking, no hardware capex. CSIRO’s free continental ASTER mineral maps set the price floor for any EO value-add — synARKa’s value sits in the synthesis, not the pixels.</div></div>
+      <div class="faq-item"><div class="faq-q">How does synARKa cover subsea infrastructure and the maritime domain?</div><div class="faq-a">Through the SubSea layer — cable and pipeline watch, maritime domain awareness, blue-economy and aquaculture signals, and seabed-minerals context. It runs on <strong>brokered</strong> SAR, RF and AIS-pattern proxies fused with geopolitics — surface and signal indicators, not seabed assay. synARKa owns no maritime sensors; the value is the read, not the hardware.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the Compute Corridor — do you build data centres or rent compute?</div><div class="faq-a">It is the intelligence layer over the AI data-centre build-out — terrestrial-sovereign first, orbital as it matures. synARKa <strong>advises rent-vs-build and refers providers — it never owns or resells the compute</strong>. Orbital data centres are at demonstrator stage and labelled emerging, never sold as live. We map the corridor and own the call, not the kilograms or the silicon.</div></div>
+      <div class="faq-item"><div class="faq-q">Do you broker launch and ground-station access?</div><div class="faq-a">Yes — brokered, marketplace access across launch aggregators and ground-station networks, including Southern-Hemisphere downlink windows. synARKa operates <strong>no rockets and no dishes</strong>; access is arranged, not owned. The differentiation is the Indo-Pacific sovereign read between brokers, space consultants and cloud advisors — not the iron.</div></div>
     </div>
   </div>
 </section>
