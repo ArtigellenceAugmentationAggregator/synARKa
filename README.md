@@ -8,7 +8,7 @@ geopolitics, defence, logistics, infrastructure, national resources and markets.
 
 - **Live:** [synarka.pro](https://synarka.pro)
 - **Ledger:** [insights.synarka.pro](https://insights.synarka.pro)
-- **Services brief (PDF):** [synarka.pro/brief.pdf](https://synarka.pro/brief.pdf)
+- **Services brief (PDF, 10-page):** [synarka.pro/synARKa-brief.pdf](https://synarka.pro/synARKa-brief.pdf)
 - **90-second voice brief:** [synarka.pro/synarka-voice-brief.mp3](https://synarka.pro/synarka-voice-brief.mp3)
 - **Operating entity:** Artigellence Augmentation Aggregator · ABN 83 988 690 362 · Australian entity active since 2003 · Sydney
 
@@ -28,15 +28,15 @@ insight timestamped and resolution-dated at
 
 ## What this repo is
 
-A single self-contained `index.html` (~316 KB, ~3,700 lines) that powers synarka.pro —
-the **Mission Control build**, shipped 12 June 2026. No build step. No framework.
-No backend. Static deployment to Netlify or GitHub Pages.
+A single self-contained `index.html` (~653 KB, ~4,864 lines) that powers synarka.pro —
+the **classified-dossier build**. No build step. No framework. No backend. Static
+deployment to Netlify or GitHub Pages.
 
 Alongside it, the buyer assets and crawler layer:
 
 | File | Purpose |
 |---|---|
-| `brief.pdf` | 4-page Services & Solutions brief — ladder, protocols, method, founder |
+| `synARKa-brief.pdf` | 10-page Services & Solutions brief — ladder, protocols, method, founder |
 | `synarka-voice-brief.mp3` | 90-second founder voice brief, wired to the on-page player |
 | `llms.txt` · `robots.txt` · `sitemap.xml` | AEO / crawler layer |
 | `og-image.jpg` | 1200×630 social-share card |
@@ -44,11 +44,32 @@ Alongside it, the buyer assets and crawler layer:
 
 ---
 
+## Design · Classified dossier
+
+The site reads as a **classified intelligence publication**, not a SaaS dashboard:
+
+- **Palette** — warm near-black (`#0E0C08`) with a single brass-gold signature
+  (`#C9A227`) and one alert-red. No rainbow, no glassy gradients.
+- **Type** — Fraunces serif masthead · IBM Plex Mono for classification markings ·
+  IBM Plex Sans for body.
+- **Signature** — insights render as **declassified cables**: a `REF · CONFIDENCE ·
+  RESOLVES` header, a serif headline, a calibration bar, and a resolution **stamp**
+  (gold `PENDING`, red `DRAFT`).
+- **Motif** — the **72-Hour Cascade**: signal detected → +72h sovereign window →
+  the world reacts.
+- **Themes** — dark dossier + a warm-paper light mode, both fully styled.
+
+---
+
 ## Architecture · The Three Engines
 
-1. **Satellite** — commodity SAR + LWIR thermal + multispectral pixels via developer
-   aggregators (SkyWatch · SkyFi · Up42). Pixels → structural truth. *v1.0 in active build.*
-2. **Predictive-Simulation** — convergence synthesis across 8 up-to-date frontier
+1. **Satellite** — commodity SAR (Sentinel-1 · ICEYE · Capella · Umbra on tasking),
+   LWIR thermal (Landsat · ECOSTRESS), multispectral baselines (Sentinel-2 · Landsat),
+   and hyperspectral for surface mineralogy — ingested via developer aggregators,
+   archive plus pay-per-pass tasking brokered across commercial constellations.
+   synARKa operates **no satellites** — no hardware capex. EO surfaces structural-change
+   **proxies**, it does not assay ore. *v1.0 in active build.*
+2. **Consensus-Simulation** — convergence synthesis across 8 up-to-date frontier
    reasoning engines. Adversarial debate · dissent capture · founder-layer calibration.
    *Phase 2: scaling toward 1,000+ psychometric agent swarms (OASIS / MiroFish).*
 3. **Intelligence** — 25 years of Indo-Pacific corridor knowledge. Compounding daily.
@@ -57,25 +78,36 @@ Four-stage architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 
 ---
 
-## Eight domain tabs
+## Domain surfaces
 
-`Critical Minerals · Geopolitics · Defence · Logistics · Markets · Infrastructure · Resources · Insights`
+Five self-explanatory domain tabs plus a live tab:
+
+`Critical Minerals · Government · Defence & Sovereignty · Agriculture · Infrastructure & Resources · LIVE`
+
+Each domain tab is built to the same anatomy: a who-it's-for line, a thesis
+infographic, a declassified-cable insight (timestamped + resolution-dated), three
+analyst/think-tank voices, and a free-first call to action.
 
 ---
 
-## Features · Mission Control build
+## Features
 
 - TELEMETRY bar — collapsible Live Signal Pulse · live markets · Indo-Pacific clocks
 - Hero with Sovereign Domain Intelligence overlay (Space · Air · Land · Sea · Undersea)
-- **The Entry Ladder** — A$500 72-hr brief → Site Baseline Audit → SiteWatch → Sovereign retainer
+  and the **72-Hour Cascade** thesis visual
+- **The Entry Ladder** — First Insight (free) → A$500 72-hr brief → Site Baseline Audit
+  → SiteWatch → Sovereign retainer
 - **Resolved-ledger receipts block** — 5/6 with published conviction numbers, miss included
-- X Signal Pulse — 8-domain build-in-public filter
-- Anatomy of an Intercept — Geelong refinery reference case (methodology illustration, clearly labelled)
+- **Free-first buyer-journey flowchart** — pain → email/WhatsApp → discovery → free first
+  insight → fork (walk away · we talk)
+- Per-tab declassified-cable insights with `PENDING` / `DRAFT` resolution stamps
 - Three Engines · Sovereign Moat Matrix · Competitive Landscape table · 4-Stage Architecture
-- **Pricing doors** — Subscribe / Engage / Project Work / All Eight → the eight standing protocols
+- **Pricing doors** — Subscribe / Engage / Project Work / All Eight → the standing protocols
 - Founder section — direct line, founder-held, no outside capital
-- **Onboarding** — 90-second voice brief player · 6-Question Intelligence-Gap Check · two-tap persona path
-- 5-step Process · FAQ · weekly Sovereign Brief signup (Beehiiv)
+- **Onboarding** — 90-second voice brief player · 6-Question Intelligence-Gap Check ·
+  two-tap persona path (Fund · Miner · Defence/Gov · Logistics · Legal/M&A · Trading ·
+  **Agriculture**)
+- FAQ · weekly Sovereign Brief signup (Beehiiv)
 - 15-language selector (RTL for Arabic) · dark/light theme toggle
 - Live data: RSS ticker (ASPI · Lowy · gCaptain) · market strip (Frankfurter · CoinGecko · Yahoo)
 
@@ -83,14 +115,13 @@ Four-stage architecture: **SENSE → SIMULATE → VERIFY → DELIVER.**
 
 ## Data sources
 
-All public, free APIs:
+All public, free APIs. (The weather and satellite-catalog widgets from the earlier
+build were retired in the declutter; current live feeds are below.)
 
 | Source | Use | Refresh |
 |---|---|---|
 | Frankfurter (ECB) | FX rates | 5 min |
 | CoinGecko | Gold (PAXG proxy) · BTC · crypto | 5 min |
-| Open-Meteo | Weather (city hubs) | 10 min |
-| Celestrak | Active satellite catalog | On load |
 | RSS via rss2json | ASPI · Lowy · gCaptain · Mining.com · Reuters · AFR | 5 min |
 | Yahoo (~15min delayed) | ASX equity prices | Static |
 
@@ -102,8 +133,10 @@ No proprietary feeds. No Bloomberg terminal. No paid subscriptions.
 
 Every "Phase 2" or "v1.0 in active build" marker is intentional. The site never
 describes capabilities-under-construction as live. The word **insight** is used —
-never **prediction** (ACMA + ASIC compliance). Confidence numbers range 25%–88%,
-calibrated, never rounded up. Misses are published as openly as hits.
+never **prediction**; the engine is **Consensus-Simulation** — never
+"Predictive-Simulation" (ACMA + ASIC compliance). Confidence numbers range 25%–88%,
+calibrated, never rounded up. EO/satellite signals are flagged as proxies, not
+ground-truth. Misses are published as openly as hits.
 
 ---
 
@@ -172,8 +205,9 @@ Canvas 2D · `localStorage`.
 | Audit · One-time | 5K–15K + GST | Diagnostic before subscription |
 | Consultancy · Bespoke | Case-by-case | M&A · tender prep · strategic briefings |
 
-Entry ladder sits in front of all tiers: **A$500** single-question 72-hr brief →
-Site Baseline Audit (A$3,500–7,500) → SiteWatch (from A$1,490/mo per site) → Sovereign retainer.
+Entry ladder sits in front of all tiers: **First Insight (free)** → **A$500** single-question
+72-hr brief → Site Baseline Audit (A$3,500–7,500) → SiteWatch (from A$1,490/mo per site) →
+Sovereign retainer.
 
 ---
 
@@ -200,9 +234,9 @@ This repository contains the public-facing static site only — not the engine.
 
 ## Status
 
-🟡 **Public · v1.0 production engine in active build** — Mission Control build shipped
-12 June 2026 · public launch 1 May 2026 · the Five (Manifesto · Charter · Masterplan ·
-Fairness Metric · Changelog) in progress before "active" is claimed.
+🟡 **Public · v1.0 production engine in active build** — classified-dossier build
+shipped 29 June 2026 · public launch 1 May 2026 · the Five (Manifesto · Charter ·
+Masterplan · Fairness Metric · Changelog) in progress before "active" is claimed.
 
 ---
 
