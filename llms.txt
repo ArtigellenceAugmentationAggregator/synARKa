@@ -1,9 +1,9 @@
 # synARKa Intelligence
-> The Indo-Pacific Sovereign Sense Engine. Multi-engine consensus intelligence across critical minerals, rare earths, geopolitics, defence, logistics, infrastructure, national resources and markets — 72 hours before it becomes the headline. Sydney, Australia. Operating entity Artigellence Augmentation Aggregator, ABN 83 988 690 362, active since 2003.
+> The Indo-Pacific Sovereign Sense Engine. Multi-engine consensus intelligence across critical minerals, rare earths, geopolitics, defence, agriculture, logistics, infrastructure, national resources and markets — 72 hours before it becomes the headline. Sydney, Australia. Operating entity Artigellence Augmentation Aggregator, ABN 83 988 690 362, active since 2003.
 
 ## What synARKa is
 - Calibrated, timestamped, falsifiable insights — "insight", never "prediction" (ACMA compliance, Australia)
-- Three engines: Satellite (brokered SAR/LWIR tasking, NDA-tier providers) · Predictive-Simulation · Intelligence (multi-engine consensus across 8 reasoning engines)
+- Three engines: Satellite (brokered SAR/LWIR tasking, NDA-tier providers) · Consensus-Simulation · Intelligence (multi-engine consensus across 8 reasoning engines)
 - Four stages: SENSE → SIMULATE → VERIFY → DELIVER
 - Public resolved ledger with misses reported in full: 5 of 6 May-2026 insights resolved correct
 - Phase 2 (in active build, NOT live today): automated SHA-256 hashing, OpenTimestamps anchoring, Brier scoring, psychometric agent swarms
@@ -15,7 +15,12 @@
 - Hormuz → AUD Cascade — 25% conviction, lowest on ledger, published anyway — falsification trigger fired exactly as written. Published miss, reported in full.
 - A ledger that hides its misses is not a ledger. Full record: https://insights.synarka.pro
 
+## Domain surfaces
+Five self-explanatory domain tabs plus a live signal tab and the resolved ledger:
+Critical Minerals · Geopolitics / Government · Defence & Sovereignty · Agriculture · Infrastructure & Resources · LIVE · Insights Ledger
+
 ## Entry ladder
+- First Insight — free, one corridor question, no card, direct from the founder
 - 72-Hour Brief — A$500, one corridor question
 - Site Baseline Audit — A$3,500–7,500 one-time, credits toward SiteWatch
 - SiteWatch — from A$1,490/mo per site, continuous monitoring on an audited asset
@@ -24,7 +29,7 @@
 ## Eight standing protocols (AUD, month-to-month, no lock-in)
 - Free · Public — A$0/mo — public ledger, weekly digest
 - Watch · Test — A$99/mo — one domain, weekly brief
-- Operator — A$1,500/mo — all 8 domains, 48hr alerts
+- Operator — A$1,500/mo — all domains, 48hr alerts
 - Pro — A$5,000/mo — daily dispatches, founder direct line, 24hr SLA
 - Enterprise — A$15K+/mo — sovereign cadence, multi-corridor, NDA, 12hr SLA
 - Tailored · Sovereign — POA — bespoke architecture, 30-min discovery call required
@@ -34,7 +39,7 @@
 ## Key pages
 - https://synarka.pro — main engine
 - https://synarka.pro/minerals.html — Rare Earths & Critical Minerals: the wedge page (export controls, offtakes, chokepoints, ASX exposure)
-- https://synarka.pro/brief.pdf — 4-page Services & Solutions brief
+- https://synarka.pro/synARKa-brief.pdf — 10-page Services & Solutions brief
 - https://synarka.pro/synarka-voice-brief.mp3 — 90-second founder voice brief
 - https://insights.synarka.pro — the resolved insights ledger (proof object)
 - https://synarka.pro/llms-full.txt — expanded machine-readable profile
