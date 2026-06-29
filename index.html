@@ -1259,6 +1259,10 @@ body.light-mode .xfcard{background:#0E0C08}
 .cable-h{padding-right:124px}
 @media(max-width:680px){.hcs-row{grid-template-columns:1fr;gap:3px}.hcs-line,.hcs-barwrap{display:none}}
 @media(max-width:600px){.cable-h{padding-right:0}}
+/* hero CTA — single row, slightly smaller */
+.hero-cta-row{flex-wrap:nowrap;gap:10px}
+.hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{padding:11px 15px;font-size:10px;letter-spacing:.07em;white-space:nowrap}
+@media(max-width:920px){.hero-cta-row{flex-wrap:wrap}.hero-cta-row .btn-primary,.hero-cta-row .btn-secondary{font-size:10.5px;padding:12px 18px}}
 /* ═══ MISSION CONTROL P1 ═══ */
 .telemetry-bar{display:flex;align-items:center;gap:10px;background:#000;border-bottom:1px solid var(--border);padding:5px 16px;cursor:pointer;user-select:none;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
 .telemetry-bar:hover{color:var(--text-2,#9ca3af)}
@@ -3076,7 +3080,7 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
         </div>
       </div>
       <audio id="voiceBrief" src="synarka-voice-brief.mp3?v=2" preload="none"></audio>
-      <div class="obv-sub" style="margin-top:10px">Prefer to read? <a href="synARKa-brief.pdf" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;text-decoration:none">The 4-page Services Brief (PDF) &rarr;</a></div>
+      <div class="obv-sub" style="margin-top:10px">Prefer to read? <a href="synARKa-brief.pdf" target="_blank" rel="noopener" style="color:var(--teal);font-weight:700;text-decoration:none">The 10-page Services Brief (PDF) &rarr;</a></div>
     </div>
 
     <div class="ob-check">
@@ -3104,6 +3108,7 @@ table.ig-matrix{border-collapse:collapse;width:100%;min-width:860px}
         <button onclick="obwPick('role','Logistics / Infra',this)">Logistics / Infra</button>
         <button onclick="obwPick('role','Legal / M&A',this)">Legal / M&amp;A</button>
         <button onclick="obwPick('role','Trading Desk',this)">Trading Desk</button>
+        <button onclick="obwPick('role','Agriculture',this)">Agriculture</button>
       </div>
     </div>
     <div class="obw-step"><span class="obw-q">Right now I need…</span>
@@ -4832,6 +4837,11 @@ var WIZ={
   Q:"start with <strong>your free first insight</strong> — a pre-consensus read on a commodity-moving event, before the market consensus forms.",
   A:"<strong>asset watch</strong> — EO monitoring on a producer or refinery you trade around.",
   C:"<strong>Pro corridor coverage</strong> — daily dispatches on the commodities and corridors you trade."
+ },
+ 'Agriculture':{
+  Q:"start with <strong>your free first insight</strong> — a seasonal margin-risk question on your winter-crop book: where the season and forward grain prices diverge, before it reaches the farm gate.",
+  A:"<strong>seasonal asset watch</strong> — EO soil-moisture and canopy proxies across a cropping region, read against forward prices. A proxy that flags the risk — it does not replace agronomy or ground-truth.",
+  C:"<strong>standing seasonal-risk coverage</strong> — ongoing margin-risk briefs for the lending or insurance book across the season."
  }
 };
 var WIZ_CTA={
