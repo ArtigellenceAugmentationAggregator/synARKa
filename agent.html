@@ -62,7 +62,7 @@ a{color:var(--amber)}
     <input id="q" placeholder="Ask about pricing, the method, a domain, the proof…" onkeydown="if(event.key==='Enter')ask()">
     <button onclick="ask()">ASK</button>
   </div>
-  <div class="hon">SCRIPTED CONCIERGE &middot; GROUNDED IN SITE CONTENT ONLY &middot; NOT A LIVE MODEL &middot; INSIGHT, NEVER PREDICTION &middot; RESEARCH &amp; EDUCATIONAL ONLY<br>FOR ANYTHING IT CAN'T ANSWER: <a href="mailto:raj@synarka.pro">raj@synarka.pro</a> &middot; <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">BOOK 15 MINUTES</a></div>
+  <div class="hon"><span id="deskMode">SCRIPTED CONCIERGE &middot; GROUNDED IN SITE CONTENT ONLY &middot; NOT A LIVE MODEL</span> &middot; INSIGHT, NEVER PREDICTION &middot; RESEARCH &amp; EDUCATIONAL ONLY<br>FOR ANYTHING IT CAN'T ANSWER: <a href="mailto:raj@synarka.pro">raj@synarka.pro</a> &middot; <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">BOOK 15 MINUTES</a></div>
 </div>
 
 <script>
@@ -101,6 +101,10 @@ var FALLBACK = "That one's beyond my script — I'm a scripted concierge grounde
 var CHIPS = ["What does it cost?","How does the engine work?","Show me the proof","Critical minerals","Defence","I'm an investor","How do I start free?","Contact Raj"];
 var PRESET = {minerals:'Critical minerals',government:'Government &amp; policy',defence:'Defence',agriculture:'Agriculture',infrastructure:'Infrastructure',investor:"I'm an investor"};
 
+/* ── LIVE BRAIN ── paste your deployed Cloudflare Worker URL between the quotes.
+   Empty = scripted mode (current behaviour). One line to activate, one line to roll back. */
+var WORKER_URL = "";
+var HISTORY = [];
 var voiceOn=false;
 function toggleVoice(){voiceOn=!voiceOn;var b=document.getElementById('voiceBtn');
   b.classList.toggle('on',voiceOn);b.innerHTML=voiceOn?'&#128266; READ ALOUD: ON':'&#128264; READ ALOUD: OFF';
@@ -120,12 +124,25 @@ function answer(q){var s=q.toLowerCase(),best=null,score=0;
   return best?best.a:FALLBACK;}
 function ask(chip){var i=document.getElementById('q');var q=chip||i.value.trim();if(!q)return;
   i.value='';add('YOU',q.replace(/</g,'&lt;'));
-  setTimeout(function(){add('DESK',answer(q));},380);}
+  if(WORKER_URL){
+    HISTORY.push({role:'user',content:q});
+    fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:HISTORY})})
+    .then(function(r){return r.json();})
+    .then(function(d){var t=(d&&d.reply)?d.reply:answer(q);
+      HISTORY.push({role:'assistant',content:t});
+      add('DESK',t.replace(/\n/g,'<br>'));})
+    .catch(function(){add('DESK',answer(q));});
+  } else {
+    setTimeout(function(){add('DESK',answer(q));},380);
+  }}
 (function(){try{
   var chips=document.getElementById('chips');
   CHIPS.forEach(function(c){var b=document.createElement('button');b.className='chip';b.innerHTML=c;
     b.onclick=function(){ask(c.replace(/&amp;/g,'&'));};chips.appendChild(b);});
   add('DESK',"G'day — this is <strong>the Desk</strong>, synARKa's concierge. Ask about pricing, the eight-engine method, any of the five domains, or the proof. I'm scripted and grounded in site content only — for anything deeper, the founder is one email away.");
+  if(WORKER_URL){var dm=document.getElementById('deskMode');
+    if(dm)dm.innerHTML='AI CONCIERGE &middot; GROUNDED IN SITE CONTENT &middot; MAY MAKE MISTAKES &mdash; VERIFY BEFORE ACTING';}
   var p=new URLSearchParams(location.search).get('i');
   if(p&&PRESET[p])setTimeout(function(){ask(PRESET[p].replace(/&amp;/g,'&'));},700);
 }catch(e){}})();

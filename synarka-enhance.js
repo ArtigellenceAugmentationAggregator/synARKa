@@ -9,7 +9,7 @@
   /* 1 — scroll progress bar (all devices, cheap) */
   try{
    var bar=document.createElement('div');
-   bar.style.cssText='position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#C9A227,#E6C254);z-index:99997;pointer-events:none;transition:width .08s linear';
+   bar.style.cssText='position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#C9A227,#E6C254);z-index:99997;pointer-events:none;transition:width .08s linear';
    document.body.appendChild(bar);
    var tick=false;
    addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){
@@ -23,7 +23,7 @@
    st.textContent='.btn-primary,.btn-p{position:relative;overflow:hidden}'+
     '.btn-primary::after,.btn-p::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:skshine 4.2s ease-in-out infinite}'+
     '@keyframes skshine{14%{left:130%}100%{left:130%}}'+
-    '.sk-reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}'+
+    '.sk-reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease}'+
     '.sk-reveal.sk-in{opacity:1;transform:none}';
    document.head.appendChild(st);
   }catch(e){}
@@ -45,8 +45,8 @@
     c.style.transformStyle='preserve-3d';c.style.willChange='transform';
     c.addEventListener('mousemove',function(ev){var r=c.getBoundingClientRect();
       var x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;
-      c.style.transform='perspective(700px) rotateY('+(x*7)+'deg) rotateX('+(-y*7)+'deg)';});
-    c.addEventListener('mouseleave',function(){c.style.transform='';});
+      c.style.transform='perspective(700px) rotateY('+(x*11)+'deg) rotateX('+(-y*11)+'deg) scale(1.015)';c.style.boxShadow='0 8px 30px rgba(201,162,39,.18)';});
+    c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});
    });
   }catch(e){}
   /* 5 — gold-dust particles: ADAPTIVE — only on light pages */
@@ -57,7 +57,7 @@
     document.body.appendChild(cv);var cx=cv.getContext('2d');
     var W,H,ps=[],mx=-999,my=-999;
     function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;}rs();addEventListener('resize',rs);
-    for(var i=0;i<38;i++)ps.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.3,s:.02+Math.random()*.05,o:.15+Math.random()*.3});
+    for(var i=0;i<52;i++)ps.push({x:Math.random(),y:Math.random(),r:.7+Math.random()*1.6,s:.02+Math.random()*.06,o:.2+Math.random()*.35});
     addEventListener('mousemove',function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5;},{passive:true});
     (function loop(){cx.clearRect(0,0,W,H);
      ps.forEach(function(p){p.y-=p.s/100;if(p.y<0)p.y=1;
