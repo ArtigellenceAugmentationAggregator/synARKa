@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Desk — synARKa concierge</title>
+<meta name="description" content="Ask the synARKa Desk — pricing, method, domains, proof. Scripted concierge grounded in site content. First insight free.">
+<link rel="canonical" href="https://synarka.pro/agent.html">
+<meta property="og:title" content="The Desk — synARKa concierge">
+<meta property="og:description" content="Ask about pricing, the eight-engine method, the five domains, or the resolved ledger.">
+<meta property="og:image" content="https://synarka.pro/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#0E0C08;--surface-1:#14110B;--surface-2:#1C180F;--border:#2C2618;--border-strong:#4A3F26;
+--text:#ECE6D8;--text-2:#9E957F;--text-3:#6B6453;--amber:#C9A227;--gold:#E6C254;
+--font-ui:'IBM Plex Sans',-apple-system,sans-serif;--font-mono:'IBM Plex Mono',Consolas,monospace;--font-serif:'Fraunces',Georgia,serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--canvas);color:var(--text);font-family:var(--font-ui);line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+a{color:var(--amber)}
+.topbar{padding:16px 0;border-bottom:1px solid var(--border)}
+.topbar .in{max-width:820px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--text);text-decoration:none}
+.brand span{color:var(--amber)}
+.topnav{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;display:flex;gap:16px}
+.topnav a{color:var(--text-2);text-decoration:none}.topnav a:hover{color:var(--amber)}
+@media(max-width:600px){.topnav{display:none}}
+.deskwrap{flex:1;max-width:820px;margin:0 auto;width:100%;padding:22px 20px 30px;display:flex;flex-direction:column}
+.desk-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.desk-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;color:var(--amber)}
+.voice-btn{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--text-2);border:1px solid var(--border);background:none;border-radius:14px;padding:5px 12px;cursor:pointer}
+.voice-btn.on{color:var(--amber);border-color:var(--border-strong)}
+.chat{flex:1;border:1px solid var(--border);background:var(--surface-1);border-radius:4px;padding:18px;overflow-y:auto;min-height:340px;max-height:56vh}
+.msg{margin-bottom:14px;max-width:92%}
+.msg .who{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;color:var(--text-3);margin-bottom:4px}
+.msg .body{font-size:14px;color:var(--text-2);border:1px solid var(--border);border-radius:3px;padding:11px 14px;background:var(--surface-2)}
+.msg.desk .body{border-left:3px solid var(--amber);color:var(--text)}
+.msg.you{margin-left:auto;text-align:right}
+.msg .body strong{color:var(--gold)}
+.msg .body a{color:var(--amber)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;color:var(--text-2);border:1px solid var(--border);background:var(--surface-1);border-radius:14px;padding:6px 13px;cursor:pointer}
+.chip:hover{color:var(--amber);border-color:var(--border-strong)}
+.inrow{display:flex;gap:10px}
+.inrow input{flex:1;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:3px;color:var(--text);font-family:var(--font-ui);font-size:14px;padding:12px 14px;outline:none}
+.inrow input:focus{border-color:var(--amber)}
+.inrow button{background:var(--amber);color:#0E0C08;border:none;border-radius:3px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;padding:0 20px;cursor:pointer;font-weight:600}
+.hon{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;color:var(--text-3);text-align:center;margin-top:12px;line-height:1.7}
+</style>
+</head><body>
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html">syn<span>ARKa</span></a>
+  <nav class="topnav"><a href="start.html">90-second version</a><a href="domains.html">Five domains</a><a href="index.html">Full platform</a></nav>
+</div></div>
+
+<div class="deskwrap">
+  <div class="desk-head">
+    <div class="desk-title">&#9654; THE DESK &middot; SYNARKA CONCIERGE</div>
+    <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">&#128264; READ ALOUD: OFF</button>
+  </div>
+  <div class="chat" id="chat"></div>
+  <div class="chips" id="chips"></div>
+  <div class="inrow">
+    <input id="q" placeholder="Ask about pricing, the method, a domain, the proof…" onkeydown="if(event.key==='Enter')ask()">
+    <button onclick="ask()">ASK</button>
+  </div>
+  <div class="hon">SCRIPTED CONCIERGE &middot; GROUNDED IN SITE CONTENT ONLY &middot; NOT A LIVE MODEL &middot; INSIGHT, NEVER PREDICTION &middot; RESEARCH &amp; EDUCATIONAL ONLY<br>FOR ANYTHING IT CAN'T ANSWER: <a href="mailto:raj@synarka.pro">raj@synarka.pro</a> &middot; <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">BOOK 15 MINUTES</a></div>
+</div>
+
+<script>
+/* ══ THE BRAIN — keyword-scripted, grounded in site content only ══ */
+var BRAIN = [
+ {k:['price','pricing','cost','fee','tier','pay','charge','how much','ladder'],
+  a:"<strong>Start with one question. Climb only if it earns it.</strong><br>&bull; Your <strong>first Insight or Audit is free</strong> — one pain point, solved on us<br>&bull; 72-Hour Brief — one corridor question — <strong>A$500</strong><br>&bull; Site Baseline Audit — one named asset — <strong>A$3,500–7,500</strong><br>&bull; SiteWatch — continuous monitoring — <strong>from A$1,490/mo</strong> per site<br>&bull; Standing tiers: Watch A$99 · Operator A$1,500 · Pro A$5,000 · Enterprise A$15K+/mo · Sovereign POA<br>Month-to-month, no lock-in, founder-direct at every tier. Prices indicative; terms set per engagement."},
+ {k:['free','first insight','start','begin','trial','try'],
+  a:"<strong>Your first Insight is free.</strong> Name your sharpest exposure — a rare-earth offtake risk, a shipping route, a tailings wall, a policy shift about to land. We return one synthesised, decision-ready answer from the engine, free. If it earns the next conversation, we talk tiers. If not, you keep the answer. Email <a href='mailto:raj@synarka.pro?subject=Free%20first%20Insight'>raj@synarka.pro</a> — three lines is enough."},
+ {k:['method','how','work','engine','consensus','ai','stage','sense','simulate','verify','deliver','llm'],
+  a:"<strong>Four stages. Agnostic by design.</strong><br>&bull; <strong>SENSE</strong> — continuous multi-source signal ingest; no human latency, no editorial filter<br>&bull; <strong>SIMULATE</strong> — convergence synthesis across eight reasoning engines (ChatGPT · Gemini · Grok · Kimi · Qwen · Perplexity · Claude · NotebookLM); dissent flagged honestly<br>&bull; <strong>VERIFY</strong> — cross-checked against primary sources; falsification triggers written into each insight<br>&bull; <strong>DELIVER</strong> — timestamped, calibrated brief before the headline, not after it.<br>Every component is swappable — the orchestration is the moat, not any single model."},
+ {k:['proof','track record','ledger','result','resolve','miss','brier','accuracy'],
+  a:"<strong>Proof, not promises — every number sourced and checkable:</strong><br>&bull; <strong>94K+</strong> views — r/energy all-time #1 organic post, zero ad spend<br>&bull; <strong>5/6</strong> published insights resolved correct, May 2026 — the miss published in full<br>&bull; <strong>+10.51%</strong> ASX Materials, May 2026 — the sector the ledger called<br>Every insight carries a timestamp, calibrated confidence and a resolution date, on a public ledger: <a href='https://insights.synarka.pro' target='_blank' rel='noopener'>insights.synarka.pro</a>. Misses published at equal weight to hits."},
+ {k:['mineral','rare earth','lithium','offtake','mining','miner','asx','mofcom','dysprosium','export control'],
+  a:"<strong>Critical minerals is the flagship domain.</strong> Free maps map the drill, not the ore — export-control and offtake risk go unmodelled, and juniors are priced out of Bloomberg and Benchmark. One illustrative path: a MOFCOM dysprosium quota lands 2am AEST → eight engines converge, dissent flagged → verified against customs notices and producer filings → <strong>three exposed ASX names, calibrated, 72 hours before the wires.</strong> Full page: <a href='minerals.html'>minerals.html</a>"},
+ {k:['government','policy','dfat','think tank','canberra','osint'],
+  a:"<strong>Government &amp; policy:</strong> drowning in headlines and foreign-language OSINT; consultancies slow and enterprise-priced — a real sovereignty-execution gap. We deliver regulatory calendar + actor divergence → <strong>the corridor move, 72 hours before the headline</strong> — sourced, sovereign, fast. Full page: <a href='government.html'>government.html</a>"},
+ {k:['defence','defense','aukus','asca','palantir','prime','sme','military'],
+  a:"<strong>Defence:</strong> Palantir cost and lock-in are real; smaller allies need an auditable, exportable layer — not a black box. An ASCA / AUKUS procurement signal → <strong>tranche timing and exposed primes</strong> — sovereign, auditable, no lock-in. Australian, non-US, non-China. Full page: <a href='defence.html'>defence.html</a>"},
+ {k:['agri','farm','crop','insurer','lender','seasonal'],
+  a:"<strong>Agriculture:</strong> pretty pictures don't make decisions. Seasonal EO + market signal → <strong>one decision brief for the lender or insurer</strong> — a dollar action, not another app to operate. Full page: <a href='agriculture.html'>agriculture.html</a>"},
+ {k:['infra','tailings','pipeline','insar','port','fuel','diesel','hormuz','resource'],
+  a:"<strong>Infrastructure &amp; resources:</strong> millimetric tailings-wall creep → <strong>&ldquo;inspect Zone B,&rdquo; with auditable provenance.</strong> A Hormuz disruption → diesel +8–14% in 30 days, who's exposed (figures indicative, scoped per engagement). Full page: <a href='infrastructure.html'>infrastructure.html</a>"},
+ {k:['satellite','eo','space','orbit','imagery','sar'],
+  a:"<strong>The satellite layer — brokered, never owned.</strong> SAR, thermal, multispectral, hyperspectral across commercial constellations. <strong>EO surfaces surface proxies — it does not assay ore</strong> or find deposits directly. synARKa operates no satellites; tasking is brokered pay-per-pass. The automated ingestion pipeline is v1.0 in active build; historical baseline audits on individual sites are available now."},
+ {k:['investor','invest','equity','raise','funding','capital'],
+  a:"<strong>synARKa is founder-held; equity is not for sale beyond 10%.</strong> A long-term sovereign asset — not a short-term exit vehicle. Conversations are open with a small circle of strategic investors and operators who know the Indo-Pacific resources market — expressions of interest, terms founder-direct, full method dossier and resolved ledger under mutual NDA. <a href='https://cal.com/raj-aaa/synarka' target='_blank' rel='noopener'>The first conversation costs 15 minutes.</a>"},
+ {k:['who','founder','raj','about','team','background'],
+  a:"<strong>Raj Singh — Founder &amp; Operator, Sydney.</strong> Twenty-five years of Indo-Pacific corridor operations across 38 countries; Australian entity active since 2003. Every engagement is founder-direct — no junior, no analyst, no account-manager handoff. Solo, AI-augmented: the entire stack was designed, built and shipped by one operator. <a href='https://www.rajsingh.online' target='_blank' rel='noopener'>rajsingh.online</a>"},
+ {k:['contact','email','call','book','whatsapp','phone','meet'],
+  a:"<strong>Four ways to start:</strong><br>&bull; Email one corridor question — <a href='mailto:raj@synarka.pro'>raj@synarka.pro</a> (reply in 24–48h, direct from the founder)<br>&bull; WhatsApp — <strong>+61 469 313 323</strong><br>&bull; Book 15 minutes — <a href='https://cal.com/raj-aaa/synarka' target='_blank' rel='noopener'>cal.com/raj-aaa/synarka</a> (Mon–Fri 1–3 PM AEST)<br>&bull; Read the receipts — <a href='https://insights.synarka.pro' target='_blank' rel='noopener'>insights.synarka.pro</a>"},
+ {k:['moat','different','competitor','why you','unique','palantir vs','worldmonitor'],
+  a:"<strong>Six things. No one else has all six:</strong> sees from orbit (v1.0 in build) · cross-examines 8 AIs (live) · simulates the reaction (Phase 2) · delivers the decision (live) · stays sovereign — Australian, non-US/China, no lock-in (live) · Indo-Pacific minerals domain (live). Each competitor owns one or two rows; only synARKa assembles all six. The orchestration cannot be forked."}
+];
+var FALLBACK = "That one's beyond my script — I'm a scripted concierge grounded in site content, not a live model. For a real answer from the founder: <a href='mailto:raj@synarka.pro'>raj@synarka.pro</a> or <a href='https://cal.com/raj-aaa/synarka' target='_blank' rel='noopener'>book 15 minutes</a>. Meanwhile, try one of the chips below.";
+var CHIPS = ["What does it cost?","How does the engine work?","Show me the proof","Critical minerals","Defence","I'm an investor","How do I start free?","Contact Raj"];
+var PRESET = {minerals:'Critical minerals',government:'Government &amp; policy',defence:'Defence',agriculture:'Agriculture',infrastructure:'Infrastructure',investor:"I'm an investor"};
+
+var voiceOn=false;
+function toggleVoice(){voiceOn=!voiceOn;var b=document.getElementById('voiceBtn');
+  b.classList.toggle('on',voiceOn);b.innerHTML=voiceOn?'&#128266; READ ALOUD: ON':'&#128264; READ ALOUD: OFF';
+  if(!voiceOn&&window.speechSynthesis)speechSynthesis.cancel();}
+function speak(html){try{if(!voiceOn||!window.speechSynthesis)return;
+  var t=html.replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/g,' ').replace(/\s+/g,' ');
+  var u=new SpeechSynthesisUtterance(t);u.lang='en-AU';u.rate=1.02;
+  var v=speechSynthesis.getVoices().filter(function(x){return x.lang==='en-AU';})[0];if(v)u.voice=v;
+  speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+function add(who,html){var c=document.getElementById('chat');var d=document.createElement('div');
+  d.className='msg '+(who==='DESK'?'desk':'you');
+  d.innerHTML='<div class="who">'+who+'</div><div class="body">'+html+'</div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;if(who==='DESK')speak(html);}
+function answer(q){var s=q.toLowerCase(),best=null,score=0;
+  BRAIN.forEach(function(b){var n=0;b.k.forEach(function(k){if(s.indexOf(k)>-1)n+=k.length;});
+    if(n>score){score=n;best=b;}});
+  return best?best.a:FALLBACK;}
+function ask(chip){var i=document.getElementById('q');var q=chip||i.value.trim();if(!q)return;
+  i.value='';add('YOU',q.replace(/</g,'&lt;'));
+  setTimeout(function(){add('DESK',answer(q));},380);}
+(function(){try{
+  var chips=document.getElementById('chips');
+  CHIPS.forEach(function(c){var b=document.createElement('button');b.className='chip';b.innerHTML=c;
+    b.onclick=function(){ask(c.replace(/&amp;/g,'&'));};chips.appendChild(b);});
+  add('DESK',"G'day — this is <strong>the Desk</strong>, synARKa's concierge. Ask about pricing, the eight-engine method, any of the five domains, or the proof. I'm scripted and grounded in site content only — for anything deeper, the founder is one email away.");
+  var p=new URLSearchParams(location.search).get('i');
+  if(p&&PRESET[p])setTimeout(function(){ask(PRESET[p].replace(/&amp;/g,'&'));},700);
+}catch(e){}})();
+</script>
+</body></html>
