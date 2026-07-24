@@ -32,7 +32,7 @@ var CSS='.skt-pill{display:inline-flex;align-items:center;gap:5px;margin-left:8p
 '.skt-cta.p{background:#C9A227;color:#0E0C08;font-weight:700}'+
 '.skt-cta.s{border:1px solid #4A3F26;color:#ECE6D8}'+
 '.skt-back{background:none;border:none;color:#6B6453;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;cursor:pointer;margin-top:14px}'+
-'@media(max-width:760px){.skt-pill{margin:6px 6px 0 0}}';
+'@media(max-width:760px){.skt-pill{margin:6px 6px 0 0}}'+'@media(min-width:1560px){.hero-meta{position:absolute;top:24px;z-index:3;margin:0;flex-wrap:nowrap;white-space:nowrap}}';
 
 /* ── SEARCH index — curated destinations ── */
 var IDX=[
@@ -138,6 +138,32 @@ function mount(){
    var over=r.right-(window.innerWidth-18);
    if(over>0)badge.style.transform='translateX(-'+Math.ceil(over)+'px)';}catch(e){}}
  fit();window.addEventListener('resize',fit);setTimeout(fit,1200);
+ /* one-line band: reparent the hero-meta chips beside the overlays so absolute
+    positioning anchors to the same container as label + domains-live */
+ try{
+  if(window.innerWidth>=1560){
+   var meta=document.querySelector('.hero-meta');
+   if(meta&&badge.parentNode){badge.parentNode.insertBefore(meta,badge);
+    var band=function(){try{
+      meta.style.transform='';meta.style.left='0px';
+      var lab=document.querySelector('.sdi-overlay-label').getBoundingClientRect();
+      var live=badge.getBoundingClientRect();
+      var host=meta.offsetParent.getBoundingClientRect();
+      var startX=lab.right-host.left+16;
+      var avail=live.left-lab.right-32;
+      meta.style.left=startX+'px';
+      var w=meta.scrollWidth;
+      if(w>avail&&avail>200){var s=Math.max(avail/w,0.72);
+        meta.style.transformOrigin='left center';meta.style.transform='scale('+s+')';}
+      /* vertical centre on the label line */
+      var mh=meta.getBoundingClientRect();
+      var dy=(lab.top+lab.height/2)-(mh.top+mh.height/2);
+      if(Math.abs(dy)>1)meta.style.top=(parseFloat(getComputedStyle(meta).top||24)+dy)+'px';
+    }catch(e){}};
+    band();window.addEventListener('resize',band);setTimeout(band,1400);
+   }
+  }
+ }catch(e){}
 
  document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){so.ov.classList.remove('open');mo.ov.classList.remove('open');}
