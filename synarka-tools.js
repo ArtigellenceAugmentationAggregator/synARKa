@@ -130,8 +130,9 @@ function mount(){
  p1.onclick=function(){so.ov.classList.add('open');draw('');sin.value='';setTimeout(function(){sin.focus()},60)};
  var p2=el('button','skt-pill','\u26A1 60-SEC MATCH');
  p2.onclick=function(){pick={};step(0);mo.ov.classList.add('open')};
- badge.parentNode.insertBefore(p2,badge.nextSibling);
- badge.parentNode.insertBefore(p1,badge.nextSibling);
+ /* mount pills INSIDE the badge so they travel with it wherever site JS puts it */
+ badge.style.display='inline-flex';badge.style.alignItems='center';badge.style.flexWrap='wrap';
+ badge.appendChild(p1);badge.appendChild(p2);
 
  document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){so.ov.classList.remove('open');mo.ov.classList.remove('open');}
