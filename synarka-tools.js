@@ -2,7 +2,7 @@
    <script src="synarka-tools.js" defer></script>  Rollback = delete the line.
    Injects two pills beside the "All Domains Active" badge. Additive only. */
 (function(){try{
-var CSS='.skt-pill{display:inline-flex;align-items:center;gap:6px;margin-left:10px;padding:6px 13px;border:1px solid #4A3F26;border-radius:3px;background:rgba(20,17,11,.85);color:#C9A227;font-family:"IBM Plex Mono",Consolas,monospace;font-size:10.5px;letter-spacing:.1em;cursor:pointer;vertical-align:middle;transition:border-color .2s}'+
+var CSS='.skt-pill{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding:5px 10px;border:1px solid #4A3F26;border-radius:3px;background:rgba(20,17,11,.85);color:#C9A227;font-family:"IBM Plex Mono",Consolas,monospace;font-size:9.5px;letter-spacing:.08em;cursor:pointer;vertical-align:middle;transition:border-color .2s;white-space:nowrap}'+
 '.skt-pill:hover{border-color:#C9A227}'+
 '.skt-ov{position:fixed;inset:0;z-index:99999;background:rgba(8,7,4,.82);backdrop-filter:blur(5px);display:none;align-items:flex-start;justify-content:center;padding:9vh 18px 18px}'+
 '.skt-ov.open{display:flex}'+
@@ -131,8 +131,13 @@ function mount(){
  var p2=el('button','skt-pill','\u26A1 60-SEC MATCH');
  p2.onclick=function(){pick={};step(0);mo.ov.classList.add('open')};
  /* mount pills INSIDE the badge so they travel with it wherever site JS puts it */
- badge.style.display='inline-flex';badge.style.alignItems='center';badge.style.flexWrap='wrap';
+ badge.style.display='inline-flex';badge.style.alignItems='center';badge.style.flexWrap='nowrap';badge.style.whiteSpace='nowrap';
  badge.appendChild(p1);badge.appendChild(p2);
+ /* keep the whole row inside the viewport, symmetric to the right margin */
+ function fit(){try{badge.style.transform='';var r=badge.getBoundingClientRect();
+   var over=r.right-(window.innerWidth-18);
+   if(over>0)badge.style.transform='translateX(-'+Math.ceil(over)+'px)';}catch(e){}}
+ fit();window.addEventListener('resize',fit);setTimeout(fit,1200);
 
  document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){so.ov.classList.remove('open');mo.ov.classList.remove('open');}
