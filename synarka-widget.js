@@ -1,6 +1,9 @@
 /* synARKa Desk widget — one-line install: <script src="synarka-widget.js" defer></script>
    Injects its own CSS. Rollback = delete the line. Additive only. */
 (function(){try{
+/* LIVE ENGINE: same Worker as agent.html. Empty string = scripted only. */
+var WORKER_URL = "https://synarka-desk.artigellence.workers.dev";
+var HIST = [];
 var CSS='#skw-b{position:fixed;right:22px;bottom:22px;z-index:9998;background:#C9A227;color:#0E0C08;border:none;border-radius:26px;padding:13px 20px;font-family:"IBM Plex Mono",Consolas,monospace;font-size:11px;letter-spacing:.08em;font-weight:600;cursor:pointer;box-shadow:0 4px 22px rgba(201,162,39,.35)}'+
 '#skw-p{position:fixed;right:22px;bottom:76px;z-index:9999;width:min(360px,calc(100vw - 34px));background:#14110B;border:1px solid #4A3F26;border-radius:6px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.55)}'+
 '#skw-p.open{display:flex}'+
@@ -32,7 +35,7 @@ function mount(){
  var st=el('style');st.textContent=CSS;document.head.appendChild(st);
  var btn=el('button',{id:'skw-b'},'\u25B6 ASK THE DESK');
  var p=el('div',{id:'skw-p'});
- p.appendChild(el('div',{id:'skw-h'},'<span>\u25B6 THE DESK \u00b7 SYNARKA</span><button id="skw-x">\u2715</button>'));
+ p.appendChild(el('div',{id:'skw-h'},'<span>\u25B6 THE DESK \u00b7 '+(WORKER_URL?'AI \u00b7 VERIFY BEFORE ACTING':'SYNARKA')+'</span><button id="skw-x">\u2715</button>'));
  var c=el('div',{id:'skw-c'});p.appendChild(c);
  var ch=el('div',{id:'skw-ch'});p.appendChild(ch);
  var r=el('div',{id:'skw-r'});
@@ -40,11 +43,22 @@ function mount(){
  var snd=el('button',{id:'skw-s'},'ASK');r.appendChild(inp);r.appendChild(snd);p.appendChild(r);
  document.body.appendChild(btn);document.body.appendChild(p);
  function add(who,html){var m=el('div',{class:'skw-m '+(who==='d'?'d':'u')},html);c.appendChild(m);c.scrollTop=c.scrollHeight}
- function go(q){if(!q)return;inp.value='';add('u',q.replace(/</g,'&lt;'));setTimeout(function(){add('d',ans(q))},320)}
+ function go(q){if(!q)return;inp.value='';add('u',q.replace(/</g,'&lt;'));
+  if(WORKER_URL){
+   var think=el('div',{class:'skw-m d'},'<em style="opacity:.6">thinking\u2026</em>');c.appendChild(think);c.scrollTop=c.scrollHeight;
+   HIST.push({role:'user',content:q});
+   fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:HIST})})
+   .then(function(r){return r.json()})
+   .then(function(d){think.remove();
+     if(d&&d.answer){HIST.push({role:'assistant',content:d.answer});
+       add('d',d.answer.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>'));}
+     else{add('d',ans(q))}})
+   .catch(function(){think.remove();add('d',ans(q))});
+  } else {setTimeout(function(){add('d',ans(q))},320)}}
  ['What does it cost?','How does it work?','Show me proof','Start free'].forEach(function(t){
    var b2=el('button',{class:'skw-cp'},t);b2.onclick=function(){go(t)};ch.appendChild(b2)});
  btn.onclick=function(){var o=p.classList.toggle('open');
-   if(o&&!c.children.length)add('d',"G'day \u2014 the Desk here. Pricing, method, proof, or the five domains \u2014 ask away. First insight is free.");};
+   if(o&&!c.children.length)add('d',WORKER_URL?"G'day \u2014 the Desk here. Ask me anything about synARKa \u2014 pricing, method, proof, your domain, or your own situation. First insight is free.":"G'day \u2014 the Desk here. Pricing, method, proof, or the five domains \u2014 ask away. First insight is free.");};
  p.querySelector('#skw-x').onclick=function(){p.classList.remove('open')};
  snd.onclick=function(){go(inp.value.trim())};
  inp.addEventListener('keydown',function(e){if(e.key==='Enter')go(inp.value.trim())});
