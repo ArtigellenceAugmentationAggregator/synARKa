@@ -1,0 +1,29 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Singh;Rajdeep;;;
+FN:Rajdeep 'Raj' Singh
+NICKNAME:Raj
+ORG:synARKa Intelligence
+TITLE:Founder - synARKa Intelligence
+TEL;TYPE=CELL,VOICE:+61469313323
+EMAIL;TYPE=WORK,PREF:raj@synarka.pro
+EMAIL;TYPE=WORK:raj@artigellence.com
+URL:https://synarka.pro
+URL:https://insights.synarka.pro
+URL:https://aaa.artigellence.com
+URL:https://www.rajsingh.online
+ADR;TYPE=WORK:;;;Sydney;NSW;;Australia
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/synarka-intellig
+ ence
+X-SOCIALPROFILE;TYPE=telegram:https://t.me/synARKaIntelligence
+NOTE:Two ventures. synARKa Intelligence - the consensus engine for the Ind
+ o-Pacific. Multi-LLM consensus synthesis across critical minerals\, gover
+ nment\, defence\, agriculture\, infrastructure and markets. Insights ar
+ e timestamped and calibrated\; confidence 25-88%\, never rounded up\; mis
+ ses published at equal weight to hits. The automated engine\, SHA-256 anc
+ horing and Brier scoring are v1.0 in active build\, not live. AAA by Arti
+ gellence - AI agents and automation for Australian business. Phase 0 is A
+ $4\,500 incl GST\, fully refundable to day 30. Met at Venture & Capital 2
+ 026\, Hilton Sydney. Card and links: https://synarka.pro/card
+REV:2026-07-26T00:00:00Z
+END:VCARD

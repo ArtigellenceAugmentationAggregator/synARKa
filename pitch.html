@@ -1,112 +1,391 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Investor Pack — synARKa Intelligence</title>
-<meta name="description" content="The synARKa investor pack: one-page executive summary, the 10-page brief, the live platform and the resolved ledger — everything, sourced.">
-<link rel="canonical" href="https://synarka.pro/pitch.html">
-<meta property="og:title" content="Investor Pack — synARKa Intelligence">
-<meta property="og:description" content="Seventy-two hours before the world reacts. Executive summary + 10-page brief + live platform.">
-<meta property="og:image" content="https://synarka.pro/og-image.jpg">
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E0C08">
+<title>Investor Pack &amp; The Flow — synARKa Intelligence</title>
+<meta name="description" content="synARKa Intelligence — investor pack and the full document flow. The Indo-Pacific consensus engine. Every document open, no email wall. Confidential.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--canvas:#0E0C08;--surface-1:#14110B;--surface-2:#1C180F;--border:#2C2618;--border-strong:#4A3F26;
---text:#ECE6D8;--text-2:#9E957F;--text-3:#6B6453;--amber:#C9A227;--gold:#E6C254;--down:#C44A30;
---font-ui:'IBM Plex Sans',-apple-system,sans-serif;--font-mono:'IBM Plex Mono',Consolas,monospace;--font-serif:'Fraunces',Georgia,serif}
+:root{
+  --canvas:#0E0C08; --surface-1:#14110B; --surface-2:#1C180F;
+  --border:#2C2618; --border-strong:#4A3F26;
+  --text:#ECE6D8; --text-2:#9E957F; --text-3:#6B6453;
+  --amber:#C9A227; --gold:#E6C254; --amber-dim:rgba(201,162,39,.22);
+  --up:#22C55E; --green:#25D366; --warn:#EAB308;
+  --font-serif:'Fraunces',Georgia,serif;
+  --font-ui:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--canvas);color:var(--text);font-family:var(--font-ui);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--amber)}
-.wrap{max-width:880px;margin:0 auto;padding:0 24px}
-.topbar{border-bottom:1px solid var(--border);padding:16px 0}
-.topbar .wrap{display:flex;justify-content:space-between;align-items:center}
-.brand{font-family:var(--font-serif);font-size:19px;font-weight:700;color:var(--text);text-decoration:none}
-.brand span{color:var(--amber)}
-.topnav{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;display:flex;gap:18px}
-.topnav a{color:var(--text-2);text-decoration:none}.topnav a:hover{color:var(--amber)}
-.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin:64px 0 14px}
-h1{font-family:var(--font-serif);font-size:clamp(30px,5vw,44px);line-height:1.12;font-weight:700;margin-bottom:16px}
-h1 em{color:var(--gold);font-style:italic}
-.lede{font-size:16px;color:var(--text-2);max-width:640px;margin-bottom:40px}
-.lede strong{color:var(--text)}
-.blk{border:1px solid var(--border);background:var(--surface-1);border-radius:3px;padding:24px 26px;margin-bottom:18px}
-.blk-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
-.pain .blk-label{color:var(--down)}.deliver .blk-label{color:var(--amber)}
-.blk p{font-size:14.5px;color:var(--text-2)}
-.blk p strong{color:var(--text)}
-.deliver{border-left:3px solid var(--amber)}
-.path{font-family:var(--font-mono);font-size:12.5px;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);border-radius:3px;padding:18px 22px;margin:26px 0 40px;line-height:1.8}
-.path strong{color:var(--gold)}
-.offer{border:1px solid var(--border-strong);background:var(--surface-2);border-radius:3px;padding:26px;margin-bottom:20px;text-align:center}
-.offer h2{font-family:var(--font-serif);font-size:22px;margin-bottom:8px}
-.offer h2 em{color:var(--gold);font-style:italic}
-.offer p{font-size:13.5px;color:var(--text-2);max-width:520px;margin:0 auto 18px}
-.cta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-.btn-p{background:var(--amber);color:#0E0C08;padding:12px 22px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;font-weight:600}
-.btn-s{border:1px solid var(--border-strong);color:var(--text);padding:12px 22px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px}
-.ladder{font-family:var(--font-mono);font-size:11.5px;color:var(--text-3);text-align:center;margin:18px 0 56px}
-.ladder strong{color:var(--amber)}
-footer{border-top:1px solid var(--border);margin-top:70px;padding:26px 0 40px}
-footer .wrap{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--text-3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-@media(max-width:640px){.topnav{display:none}}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--text);font-family:var(--font-ui);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--amber)}
+.mono{font-family:var(--font-mono)}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
 
-.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:10px 0 50px}
-.dcard{border:1px solid var(--border);background:var(--surface-1);border-radius:3px;padding:22px;text-decoration:none;color:var(--text);display:block;transition:border-color .2s}
-.dcard:hover{border-color:var(--amber)}
-.dc-ic{color:var(--amber);font-size:15px;margin-bottom:10px}
-.dc-name{font-family:var(--font-serif);font-size:18px;font-weight:700;margin-bottom:8px}
-.dc-line{font-size:12.5px;color:var(--text-2);margin-bottom:14px;line-height:1.5}
-.dc-go{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--amber)}
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;
+    padding:20px 0;border-bottom:1px solid var(--border);gap:14px;flex-wrap:wrap}
+.logo{font-family:var(--font-mono);font-weight:700;font-size:1.05rem;color:var(--text);letter-spacing:3px}
+.logo b{color:var(--gold)}
+.navlinks{display:flex;gap:20px;flex-wrap:wrap}
+.navlinks a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;
+    color:var(--text-3);text-transform:uppercase;white-space:nowrap}
+.navlinks a:hover{color:var(--gold)}
 
-.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:8px 0 34px}
-.doc{border:1px solid var(--border-strong);background:var(--surface-1);border-radius:3px;padding:26px;text-decoration:none;color:var(--text);display:block;transition:border-color .2s}
-.doc:hover{border-color:var(--amber)}
-.doc .dk{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--amber);margin-bottom:10px}
-.doc .dt{font-family:var(--font-serif);font-size:21px;font-weight:700;margin-bottom:8px}
-.doc .dd{font-size:13px;color:var(--text-2);margin-bottom:16px;line-height:1.55}
-.doc .dg{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--amber)}
-.proofline{font-family:var(--font-mono);font-size:11.5px;color:var(--text-2);text-align:center;border:1px solid var(--border);background:var(--surface-1);border-radius:3px;padding:14px 18px;margin-bottom:34px;line-height:1.8}
-.proofline strong{color:var(--gold)}
-.proofline a{color:var(--amber)}
-</style></head><body>
-<div class="topbar"><div class="wrap">
-  <a class="brand" href="index.html">syn<span>ARKa</span></a>
-  <nav class="topnav"><a href="start.html">90-second version</a><a href="agent.html?i=investor">Ask the desk</a><a href="index.html">Full platform</a></nav>
-</div></div>
+/* HERO */
+.hero{padding:56px 0 34px}
+.eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:22px;font-weight:600}
+h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(1.9rem,5vw,3.1rem);
+    line-height:1.14;letter-spacing:-.01em;margin-bottom:22px}
+h1 em{font-style:italic;font-weight:600;color:var(--gold)}
+.standfirst{max-width:640px;color:var(--text-2);font-size:1rem}
+.standfirst strong{color:var(--text)}
+.herobtns{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
+.hb{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:13px 22px;border:1px solid var(--border-strong);color:var(--text-2);border-radius:3px;white-space:nowrap}
+.hb.pri{background:var(--amber);color:#12100a;border-color:var(--amber);font-weight:700}
+.hb.pri:hover{background:var(--gold);color:#12100a}
+.hb:hover{border-color:var(--amber);color:var(--gold)}
+
+/* PROOF STRIP */
+.proof{border:1px solid var(--border);background:rgba(201,162,39,.05);
+    margin:26px 0 0;padding:16px 22px;
+    font-family:var(--font-mono);font-size:.7rem;line-height:2;color:var(--text-2);border-radius:4px}
+.proof b{color:var(--text);font-weight:700}
+.proof .cav{display:block;margin-top:6px;color:var(--text-3);font-size:.64rem;letter-spacing:.05em}
+
+/* SECTION HEAD */
+.sec{padding:52px 0 0}
+.sechead{margin-bottom:26px}
+.sechead h2{font-family:var(--font-serif);font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.sechead h2 em{font-style:italic;color:var(--gold)}
+.sechead .sub{color:var(--text-2);font-size:.95rem;margin-top:10px;max-width:680px}
+.sechead .sub strong{color:var(--text)}
+.sechead .sub em{color:var(--gold);font-style:italic}
+
+/* FLOW GRID */
+.flowgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.step{background:var(--surface-1);padding:26px 24px;display:flex;flex-direction:column}
+.stepnum{font-family:var(--font-mono);font-size:2rem;font-weight:700;color:var(--border-strong);line-height:1}
+.verb{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+      font-weight:700;color:var(--amber);margin:10px 0 8px}
+.step.s2 .verb{color:var(--gold)}
+.step.s3 .verb{color:var(--warn)}
+.step.s4 .verb{color:var(--up)}
+.step h4{font-family:var(--font-serif);font-size:1.12rem;font-weight:600;margin-bottom:9px;line-height:1.35}
+.step p{color:var(--text-2);font-size:.88rem;line-height:1.65}
+.step p strong{color:var(--text)}
+.docs{margin-top:15px;display:flex;flex-direction:column;gap:8px}
+.doc{display:block;border:1px solid var(--border);border-left:3px solid var(--border-strong);
+     border-radius:6px;background:var(--surface-2);padding:11px 13px;transition:border-color .16s}
+.doc:hover{border-left-color:var(--amber);border-color:var(--border-strong)}
+.doc.go{border-left-color:var(--amber)}
+.dt{display:block;font-size:.86rem;font-weight:500;color:var(--text)}
+.dm{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text-3);margin-top:4px}
+.back{margin-top:13px;font-family:var(--font-mono);font-size:.63rem;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--text-3);border-top:1px solid var(--border);padding-top:10px;line-height:1.7}
+.back strong{color:var(--gold)}
+.back.warn{color:var(--warn)}
+
+/* WHATSAPP SENDER */
+.wa{margin-top:16px;border:1px solid rgba(37,211,102,.28);border-radius:8px;
+    background:rgba(37,211,102,.045);padding:15px 16px}
+.wa-k{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--green);font-weight:700;margin-bottom:7px}
+.wa-s{font-size:.82rem;color:var(--text-2);line-height:1.6;margin-bottom:11px}
+.wa-s em{color:var(--text-3);font-style:italic}
+.wa-row{display:flex;gap:8px;flex-wrap:wrap}
+.wa-row input{flex:1;min-width:0;background:var(--canvas);border:1px solid var(--border-strong);
+    border-radius:6px;padding:11px 13px;color:var(--text);font-family:var(--font-mono);font-size:.82rem}
+.wa-row input:focus{outline:none;border-color:var(--green)}
+.wa-btn{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;background:var(--green);color:#08130c;border:1px solid var(--green);
+    border-radius:6px;padding:11px 16px;cursor:pointer;white-space:nowrap}
+.wa-btn:hover{opacity:.9}
+.wa-err{display:none;margin-top:8px;font-size:.78rem;color:#F87171;line-height:1.5}
+.wa-note{margin-top:9px;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+    color:var(--text-3);line-height:1.7}
+.wa-note b{color:var(--text-2)}
+
+/* POSITION */
+.pos{margin-top:22px;border-left:2px solid var(--amber);padding:8px 0 8px 24px}
+.pos .lbl{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.2em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:10px;font-weight:600}
+.pos p{color:var(--text-2);font-size:.93rem;max-width:680px}
+.pos p+p{margin-top:9px}
+.pos b{color:var(--text)}
+.pos .gold{color:var(--gold);font-weight:700}
+
+/* HONESTY */
+.honest{margin-top:22px;border:1px solid var(--border);border-radius:8px;
+    background:var(--surface-1);padding:20px 22px}
+.honest .hk{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);font-weight:700;margin-bottom:11px}
+.honest table{width:100%;border-collapse:collapse}
+.honest td{padding:8px 0;border-bottom:1px solid var(--border);font-size:.86rem;color:var(--text-2);vertical-align:top}
+.honest tr:last-child td{border-bottom:none}
+.honest td.k{width:120px;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+    text-transform:uppercase;padding-right:16px;white-space:nowrap}
+.honest td.k.live{color:var(--up)}
+.honest td.k.build{color:var(--warn)}
+
+/* CTA */
+.cta{margin:52px 0 0;border:1px solid var(--border-strong);background:var(--surface-1);
+    padding:44px 28px;text-align:center;border-radius:6px}
+.cta h3{font-family:var(--font-serif);font-weight:600;font-size:clamp(1.35rem,3.4vw,1.8rem);margin-bottom:9px}
+.cta h3 em{font-style:italic;color:var(--gold)}
+.cta .s{color:var(--text-2);font-size:.86rem;margin-bottom:26px}
+.btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.nda{margin-top:22px;font-size:.78rem;color:var(--text-3);max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+footer{margin-top:64px;border-top:1px solid var(--border);padding:28px 0 44px;
+    text-align:center;font-family:var(--font-mono);font-size:.62rem;
+    letter-spacing:.09em;color:var(--text-3);line-height:2.1;text-transform:uppercase}
+footer .gold{color:var(--gold)}
+
+@media(max-width:720px){.flowgrid{grid-template-columns:1fr}}
+@media(max-width:440px){
+  .wrap{padding:0 16px}
+  .navlinks{gap:14px}
+  .hb{padding:12px 16px;font-size:.64rem}
+  .step{padding:22px 18px}
+  .honest td.k{width:auto;display:block;padding-bottom:2px}
+  .honest td{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
 <div class="wrap">
-  <div class="eyebrow">&#9654; INVESTOR PACK &middot; CONFIDENTIAL &middot; JULY 2026 &middot; SYDNEY</div>
-  <h1>Seventy-two hours <em>before the world reacts.</em></h1>
-  <p class="lede"><strong>Everything, in two documents and one live site.</strong> synARKa is founder-held; equity is not for sale beyond 10% — expressions of interest, founder-direct, full method dossier and resolved ledger under mutual NDA.</p>
 
-  <div class="docs">
-    <a class="doc" href="synARKa-exec-summary.pdf" target="_blank" rel="noopener">
-      <div class="dk">DOCUMENT 01 &middot; ONE PAGE</div>
-      <div class="dt">The Executive Summary</div>
-      <div class="dd">The whole thesis on one page — proof band, three layers, the six-row moat, the entry ladder, the position. Ninety seconds, top-left to bottom-right.</div>
-      <div class="dg">OPEN PDF &rarr;</div>
-    </a>
-    <a class="doc" href="synARKa-brief.pdf" target="_blank" rel="noopener">
-      <div class="dk">DOCUMENT 02 &middot; TEN PAGES</div>
-      <div class="dt">The Complete Brief</div>
-      <div class="dd">Services &amp; solutions in full — the engine, the moat matrix, five domains, space and subsea layers, the pricing ladder, honesty held throughout.</div>
-      <div class="dg">OPEN PDF &rarr;</div>
-    </a>
-  </div>
-
-  <div class="proofline"><strong>94K+</strong> r/energy all-time #1 organic &middot; <strong>5/6</strong> resolved correct, May 2026 — the miss published &middot; <strong>+10.51%</strong> ASX Materials — the sector the ledger called &middot; receipts: <a href="https://insights.synarka.pro" target="_blank" rel="noopener">insights.synarka.pro</a></div>
-
-  <div class="offer">
-    <h2>The first conversation costs <em>15 minutes.</em></h2>
-    <p>Mon&ndash;Fri 1&ndash;3 PM AEST &middot; founder-direct &middot; a working conversation, not a sales pitch.</p>
-    <div class="cta-row">
-      <a class="btn-p" href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">Book 15 minutes</a>
-      <a class="btn-s" href="mailto:raj@synarka.pro?subject=Investor%20conversation">Email Raj</a>
-      <a class="btn-s" href="https://wa.me/61469313323" target="_blank" rel="noopener">WhatsApp</a>
+  <nav>
+    <a class="logo" href="index.html">SYN<b>ARKA</b></a>
+    <div class="navlinks">
+      <a href="index.html">the desk</a>
+      <a href="start.html">90-second version</a>
+      <a href="card.html">the card</a>
+      <a href="#flow">the flow</a>
     </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">▶ Investor pack · Confidential · July 2026 · Sydney</div>
+    <h1>The Indo-Pacific consensus engine — <em>seventy-two hours before the world reacts.</em></h1>
+    <p class="standfirst"><strong>Everything, in four documents and one live desk.</strong>
+    synARKa is opening conversations with a small circle of strategic parties — ideally operators who know
+    critical minerals, defence, or the Australian corridor. Expressions of interest only; terms founder-direct;
+    the full dossier under mutual NDA.</p>
+    <div class="herobtns">
+      <a class="hb pri" href="#flow">▶ The Flow · all 4 documents</a>
+      <a class="hb" href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">Book 15 minutes</a>
+      <a class="hb" href="card.html">Save my card</a>
+    </div>
+  </section>
+
+  <div class="proof">
+    <b>94K+ views</b> on r/energy — all-time #1 organic, zero ad spend ·
+    <b>5 of 6</b> published Insights resolved correct, May 2026 — <b>the miss published in full</b> ·
+    <b>+10.51%</b> ASX Materials, May 2026 ·
+    <b>Australian entity active since 2003</b> · ABN 83 988 690 362
+    <span class="cav">ASX Materials figure: S&amp;P DJI via Stockhead — market data, not a synARKa outcome. Stage: POC v0.9 BETA.</span>
   </div>
-  <div class="ladder">RAJ SINGH &middot; FOUNDER &amp; OPERATOR &middot; <strong>www.rajsingh.online</strong> &middot; 25 YRS &middot; 38 COUNTRIES &middot; AUSTRALIAN ENTITY SINCE 2003</div>
+
+  <!-- ============ THE FLOW ============ -->
+  <section class="sec" id="flow">
+    <div class="sechead">
+      <div class="eyebrow">▶ The Flow · read · fill · check · share</div>
+      <h2>Read. Fill. Check. <em>Share.</em> Everything opens in one click.</h2>
+      <p class="sub">Every document below is open before you spend a cent — no email wall, no "book a call to see pricing".
+      <strong>Read what we are. Fill the intake. Check the terms. Share it with whoever else has to say yes.</strong>
+      <em>The free first Insight comes back founder-direct.</em></p>
+    </div>
+
+    <div class="flowgrid">
+
+      <div class="step s1">
+        <div class="stepnum">01</div>
+        <div class="verb">Read</div>
+        <h4>Work out whether we're even the right shape.</h4>
+        <p>What the engine does, what it does not do, what each tier buys, and how an engagement runs. Start with the one-pager — it answers the comparison questions in about ninety seconds.</p>
+        <div class="docs">
+          <a class="doc" href="/synARKa-exec-summary.pdf" target="_blank" rel="noopener"><span class="dt">Executive Summary</span><span class="dm">PDF · 1 page · the whole thesis on one sheet</span></a>
+          <a class="doc" href="/synARKa-brief.pdf" target="_blank" rel="noopener"><span class="dt">Services &amp; Solutions — The Complete Picture</span><span class="dm">PDF · 10 pages · every tier, every price</span></a>
+        </div>
+      </div>
+
+      <div class="step s2">
+        <div class="stepnum">02</div>
+        <div class="verb">Fill</div>
+        <h4>One corridor question in. A calibrated Insight back — free.</h4>
+        <p>The 1st-Insight Intake is 5 sections, 22 questions. It ends with the baseline: what you need to see, by when, and what a miss would cost you. <strong>Nothing is charged for this.</strong></p>
+        <div class="docs">
+          <a class="doc" href="/synARKa-1st-insight-intake.pdf" target="_blank" rel="noopener"><span class="dt">1st-Insight Intake</span><span class="dm">PDF · 2 pages · 5 sections · 22 questions</span></a>
+          <a class="doc go" href="index.html"><span class="dt">Or just ask the desk → synarka.pro</span><span class="dm">Free · no call · no form-gate · it answers itself</span></a>
+        </div>
+        <div class="back">↩ Your first Insight is <strong>free</strong> — timestamped, resolution-dated, logged on the ledger.</div>
+      </div>
+
+      <div class="step s3">
+        <div class="stepnum">03</div>
+        <div class="verb">Check</div>
+        <h4>Read the terms before anyone signs anything.</h4>
+        <p>Mutual NDA plus engagement terms — scope, what each stage costs, when it is payable, and what happens if you stop. <strong>Month-to-month, no lock-in, at every tier.</strong></p>
+        <div class="docs">
+          <a class="doc" href="/synARKa-sample-nda-terms.pdf" target="_blank" rel="noopener"><span class="dt">Sample Mutual NDA &amp; Engagement Terms</span><span class="dm">PDF · 2 pages · sample only · not for execution</span></a>
+        </div>
+        <div class="back warn">⚠ Sample for review. Your executable copy is issued with your scope, before anything starts.</div>
+      </div>
+
+      <div class="step s4">
+        <div class="stepnum">04</div>
+        <div class="verb">Share</div>
+        <h4>Send the whole pack to whoever else has to say yes.</h4>
+        <p>Board, CFO, ops lead, general counsel. One link, all four documents, nothing behind a gate. <em>If someone in the room needs convincing, give them the folder — not a sales pitch.</em></p>
+        <div class="docs">
+          <a class="doc go" href="https://drive.google.com/drive/folders/1Q9LgB0Vz7Ysl8M5JKzDWc_-wHqGC5iCz" target="_blank" rel="noopener"><span class="dt">Open the full document folder ↗</span><span class="dm">Google Drive · the four documents + the printable card · always current</span></a>
+          <a class="doc go" href="mailto:?subject=synARKa%20Intelligence%20%E2%80%94%20the%20document%20pack&amp;body=Have%20a%20look%20at%20this%3A%20https%3A%2F%2Fsynarka.pro%2Fpitch.html%20%E2%80%94%20all%20four%20documents%20are%20open%2C%20no%20form%20required.%0A%0AThe%20first%20Insight%20is%20free.%0A%0A%E2%80%94%20Raj%20Singh%20%C2%B7%20%2B61%20469%20313%20323%20%C2%B7%20raj%40synarka.pro%0AMy%20card%3A%20https%3A%2F%2Fsynarka.pro%2Fcard"><span class="dt">Email this pack to someone →</span><span class="dm">Opens your mail app with the link ready</span></a>
+          <a class="doc go" href="card.html"><span class="dt">Raj's card — save it to your phone ↗</span><span class="dm">One tap adds the mobile, both emails and every link</span></a>
+        </div>
+
+        <div class="wa">
+          <div class="wa-k">↳ Send all four documents by WhatsApp</div>
+          <p class="wa-s">Type their mobile number. WhatsApp opens with all four document links already written out — you just press send. <em>Australian numbers work as 0412 345 678; overseas, start with +.</em></p>
+          <div class="wa-row">
+            <input id="waNum" type="tel" inputmode="tel" autocomplete="tel" placeholder="0412 345 678" aria-label="Mobile number to send the document pack to">
+            <button id="waGo" class="wa-btn" type="button">Send the pack →</button>
+          </div>
+          <div class="wa-err" id="waErr" role="alert"></div>
+          <div class="wa-note">Opens WhatsApp on your device with the message ready — <b>nothing is sent until you press send in WhatsApp</b>, and no number is stored or seen by synARKa. A web page cannot attach PDFs into WhatsApp without a Business API account, so the message carries links, not files.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ HONESTY MATRIX ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="eyebrow">▶ What is live · what is in build</div>
+      <h2>Stated plainly, <em>before you ask.</em></h2>
+    </div>
+    <div class="honest">
+      <div class="hk">Capability status · July 2026</div>
+      <table>
+        <tr><td class="k live">Live today</td><td>Multi-LLM consensus synthesis, run founder-direct across reasoning engines. The word is <b>Insight</b>, never prediction.</td></tr>
+        <tr><td class="k live">Live today</td><td>The timestamped Insight ledger at insights.synarka.pro — resolution-dated, with <b>misses published at equal weight to hits</b>.</td></tr>
+        <tr><td class="k live">Live today</td><td>Calibrated confidence stated as a band, <b>25–88%, never rounded up</b>.</td></tr>
+        <tr><td class="k build">v1.0 · in build</td><td>The automated consensus engine, SHA-256 hashing, OpenTimestamps anchoring, Brier-scored calibration, agent-swarm simulation. <b>Not operational today. Not sold as live.</b></td></tr>
+        <tr><td class="k build">Scope limit</td><td>EO surfaces surface proxies — <b>it does not assay ore</b>. Tasking is brokered; synARKa owns no satellites.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ POSITION ============ -->
+  <section class="sec">
+    <div class="sechead">
+      <div class="eyebrow">▶ The position</div>
+      <h2>Founder-held. <em>Expressions of interest only.</em></h2>
+    </div>
+    <div class="pos">
+      <div class="lbl">Capital position</div>
+      <p><b>synARKa is founder-held. Equity is not for sale beyond 10%.</b> No raise terms are published — the number stays verbal and founder-direct. Full dossier under mutual NDA.</p>
+      <p><span class="gold">Use of funds:</span> ship the v1.0 EO pipeline · analyst capacity beyond the founder · Phase-2 swarm simulation and Brier-scored calibration.</p>
+      <p>Founded 12 April 2026 · launched 1 May 2026 · Australian entity active since 2003 · ABN 83 988 690 362.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>The first conversation costs <em>15 minutes.</em></h3>
+    <p class="s">Founder-direct · Mon–Fri 1–3 PM AEST · a working conversation, not a sales pitch.</p>
+    <div class="btnrow">
+      <a class="hb pri" href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener">Book 15 minutes</a>
+      <a class="hb" href="mailto:raj@synarka.pro?subject=synARKa%20%E2%80%94%20EOI">Email Raj</a>
+      <a class="hb" href="https://wa.me/61469313323?text=Hi%20Raj%20%E2%80%94%20synARKa%3A" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="hb" href="https://t.me/synARKaIntelligence" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p class="nda">No invented raise terms on paper — the number stays verbal, founder-direct. Full dossier under mutual NDA.
+    Research and educational content only; synARKa is not an AFS licensee and this is not financial advice.</p>
+  </section>
+
+  <footer>
+    synARKa Intelligence · The Consensus Engine · ABN 83 988 690 362 · Sydney, Australia<br>
+    Raj Singh · Founder · <a class="gold" href="https://www.rajsingh.online" target="_blank" rel="noopener">rajsingh.online</a> ·
+    <a class="gold" href="https://insights.synarka.pro" target="_blank" rel="noopener">insights.synarka.pro</a><br>
+    No tracking · no analytics cookies · no pixels<br>
+    © MMXXVI · Confidential · Not financial or legal advice
+  </footer>
+
 </div>
-<footer><div class="wrap">
-  <div>SYNARKA INTELLIGENCE &middot; ABN 83 988 690 362 &middot; SYDNEY &middot; FOUNDER-HELD &middot; EQUITY NOT FOR SALE BEYOND 10%</div>
-  <div>INSIGHT, NEVER PREDICTION &middot; RESEARCH &amp; EDUCATIONAL ONLY &middot; CONFIDENTIAL</div>
-</div></footer>
-</body></html>
+
+<script>
+/* ===== WhatsApp pack sender — normaliser ported verbatim from the AAA build ===== */
+(function(){
+  try{
+    var num=document.getElementById('waNum'),
+        go=document.getElementById('waGo'),
+        err=document.getElementById('waErr');
+    if(!num||!go||!err) return;
+
+    var SITE="https://synarka.pro";
+    var MSG=[
+      "Have a look at synARKa Intelligence — the consensus engine for the Indo-Pacific. All four documents are open, no form, no email wall:",
+      "",
+      "1. Executive Summary, one page — "+SITE+"/synARKa-exec-summary.pdf",
+      "2. Services & Solutions, every tier and price (10pp) — "+SITE+"/synARKa-brief.pdf",
+      "3. 1st-Insight Intake, free (2pp) — "+SITE+"/synARKa-1st-insight-intake.pdf",
+      "4. Sample Mutual NDA & Engagement Terms (2pp) — "+SITE+"/synARKa-sample-nda-terms.pdf",
+      "",
+      "The whole flow: "+SITE+"/pitch.html",
+      "Book 15 minutes: https://cal.com/raj-aaa/synarka",
+      "",
+      "The first Insight is free — one corridor question in, a calibrated Insight back, timestamped on the ledger. Month-to-month after that, no lock-in.",
+      "",
+      "— Raj Singh · +61 469 313 323 · raj@synarka.pro",
+      "My card: "+SITE+"/card"
+    ].join("\n");
+
+    function normalise(raw){
+      var v=(raw||"").replace(/[\s()\-.]/g,"");
+      if(!v) return null;
+      if(v.charAt(0)==="+"){                          // international, as typed
+        v=v.slice(1).replace(/\D/g,"");
+        return v.length>=8?v:null;
+      }
+      v=v.replace(/\D/g,"");
+      if(/^61\d{9}$/.test(v)) return v;               // 61412345678
+      if(/^0\d{9}$/.test(v))  return "61"+v.slice(1); // 0412345678 -> AU
+      if(/^\d{9}$/.test(v))   return "61"+v;          // 412345678  -> AU
+      return null;
+    }
+
+    function fail(m){ err.textContent=m; err.style.display="block"; }
+
+    function send(){
+      err.style.display="none";
+      var n=normalise(num.value);
+      if(!n){
+        fail("That doesn't look like a mobile number. Try 0412 345 678, or start with + for overseas.");
+        num.focus();
+        return;
+      }
+      window.open("https://wa.me/"+n+"?text="+encodeURIComponent(MSG),"_blank","noopener");
+    }
+
+    go.addEventListener("click",send);
+    num.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); send(); } });
+    num.addEventListener("input",function(){ if(err.style.display==="block") err.style.display="none"; });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
