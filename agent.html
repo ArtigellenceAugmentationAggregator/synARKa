@@ -118,6 +118,7 @@ function add(who,html){var c=document.getElementById('chat');var d=document.crea
   d.className='msg '+(who==='DESK'?'desk':'you');
   d.innerHTML='<div class="who">'+who+'</div><div class="body">'+html+'</div>';
   c.appendChild(d);c.scrollTop=c.scrollHeight;if(who==='DESK')speak(html);}
+function md(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;:!?]|$)/g,'$1<em>$2</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/^\s*[-\u2022]\s+/gm,'\u2022 ').replace(/\n/g,'<br>');}
 function answer(q){var s=q.toLowerCase(),best=null,score=0;
   BRAIN.forEach(function(b){var n=0;b.k.forEach(function(k){if(s.indexOf(k)>-1)n+=k.length;});
     if(n>score){score=n;best=b;}});
@@ -129,9 +130,9 @@ function ask(chip){var i=document.getElementById('q');var q=chip||i.value.trim()
     fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({messages:HISTORY})})
     .then(function(r){return r.json();})
-    .then(function(d){var t=(d&&d.reply)?d.reply:answer(q);
+    .then(function(d){var live=!!(d&&d.answer);var t=live?d.answer:answer(q);
       HISTORY.push({role:'assistant',content:t});
-      add('DESK',t.replace(/\n/g,'<br>'));})
+      add('DESK',live?md(t):t);})
     .catch(function(){add('DESK',answer(q));});
   } else {
     setTimeout(function(){add('DESK',answer(q));},380);

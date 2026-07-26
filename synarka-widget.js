@@ -29,6 +29,7 @@ var B=[
  [['investor','equity','raise','invest'],"<strong>Founder-held; equity not for sale beyond 10%.</strong> Expressions of interest, founder-direct, dossier under NDA. <a href='https://cal.com/raj-aaa/synarka' target='_blank' rel='noopener'>15 minutes \u2192</a>"]
 ];
 var FB="Beyond my script \u2014 the full Desk answers more: <a href='agent.html'>agent.html</a>. Or founder-direct: <a href='mailto:raj@synarka.pro'>raj@synarka.pro</a>";
+function md(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,;:!?]|$)/g,'$1<em>$2</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/^\s*[-\u2022]\s+/gm,'\u2022 ').replace(/\n/g,'<br>');}
 function ans(q){var s=q.toLowerCase(),b=null,sc=0;B.forEach(function(x){var n=0;x[0].forEach(function(k){if(s.indexOf(k)>-1)n+=k.length});if(n>sc){sc=n;b=x[1]}});return b||FB}
 function el(t,a,h){var e=document.createElement(t);for(var k in a)e.setAttribute(k,a[k]);if(h)e.innerHTML=h;return e}
 function mount(){
@@ -51,7 +52,7 @@ function mount(){
    .then(function(r){return r.json()})
    .then(function(d){think.remove();
      if(d&&d.answer){HIST.push({role:'assistant',content:d.answer});
-       add('d',d.answer.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>'));}
+       add('d',md(d.answer));}
      else{add('d',ans(q))}})
    .catch(function(){think.remove();add('d',ans(q))});
   } else {setTimeout(function(){add('d',ans(q))},320)}}
