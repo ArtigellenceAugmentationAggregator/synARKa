@@ -36,6 +36,8 @@ var CSS='.skt-pill{display:inline-flex;align-items:center;gap:5px;margin-left:8p
 
 /* ── SEARCH index — curated destinations ── */
 var IDX=[
+ {t:"Understand synARKa in 60 seconds",s:"WHO ARE YOU \u00b7 YOUR ENGINES \u00b7 YOUR PRICE",u:"how.html",k:"understand wizard who are you simple explain declutter engines layers pricing 60"},
+ {t:"Watch a question travel",s:"SENSE \u2192 SIMULATE \u2192 VERIFY \u2192 DELIVER \u00b7 TWO REAL EXAMPLES",u:"journey.html",k:"journey example how it works stages travel quota tailings"},
  {t:"Critical Minerals — flagship domain",s:"DOMAIN · OFFTAKE & EXPORT-CONTROL READ",u:"minerals.html",k:"minerals rare earth lithium mining asx offtake mofcom dysprosium export"},
  {t:"Government & Policy",s:"DOMAIN · THE CORRIDOR MOVE, 72H EARLY",u:"government.html",k:"government policy dfat think tank canberra osint"},
  {t:"Defence",s:"DOMAIN · SOVEREIGN, AUDITABLE, NO LOCK-IN",u:"defence.html",k:"defence defense aukus asca palantir prime sme military"},

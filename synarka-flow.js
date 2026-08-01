@@ -1,5 +1,5 @@
 /* ============================================================================
-   synarka-flow.js — THE FLOW layer · v1.1 · 26 Jul 2026
+   synarka-flow.js — THE FLOW layer · v1.2 · 01 Aug 2026
 
    ONE-LINE INSTALL. Add this beside the other layers in index.html:
 
@@ -8,7 +8,8 @@
    ROLLBACK = delete that one line. This file never edits index.html and
    removes nothing. Everything it adds carries a data-synarka-flow attribute.
 
-   Injects three things, each independently guarded:
+   Injects four things, each independently guarded:
+     0. Gold pill in .hero-meta — "⚡ UNDERSTAND SYNARKA · 60 SECONDS" → how.html
      1. Gold pill at the FRONT of .hero-meta
         "▶ THE FLOW · ALL 4 DOCUMENTS · OPEN NOW"          → pitch.html
      2. Matching button at the FRONT of .hero-cta-row
@@ -139,6 +140,24 @@
     } catch (e) {}
   }
 
+  /* ---------- 1b. "understand" pill → how.html ---------- */
+  function pillHow() {
+    try {
+      var host = document.querySelector('.hero-meta');
+      if (!host || host.querySelector('a.synflow-pill-how')) return;
+      var a = document.createElement('a');
+      a.className = 'synflow-pill synflow-pill-how';
+      a.setAttribute(FLAG, '1');
+      a.href = 'how.html';
+      a.textContent = '⚡ UNDERSTAND SYNARKA · 60 SECONDS';
+      a.setAttribute('aria-label', 'Understand synARKa in 60 seconds — who are you, what you get, what it costs');
+      /* place immediately after the FLOW pill if present, else first */
+      var flow = host.querySelector('a.synflow-pill:not(.synflow-pill-how)');
+      if (flow && flow.nextSibling) host.insertBefore(a, flow.nextSibling);
+      else host.insertBefore(a, host.firstChild);
+    } catch (e) {}
+  }
+
   /* ---------- 2. hero CTA button ---------- */
   function button() {
     try {
@@ -230,7 +249,7 @@
   }
 
   function mount() {
-    try { css(); pill(); button(); sender(); } catch (e) {}
+    try { css(); pill(); pillHow(); button(); sender(); } catch (e) {}
   }
 
   try {
