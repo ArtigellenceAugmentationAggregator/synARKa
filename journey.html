@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>One question's journey — synARKa Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#0E0C08; --surface-1:#14110B; --surface-2:#1C180F;
+  --border:#2C2618; --border-strong:#4A3F26;
+  --text:#ECE6D8; --text-2:#9E957F; --text-3:#6B6453;
+  --amber:#C9A227; --gold:#E6C254;
+  --sense:#2DD4BF; --simulate:#818CF8; --verify:#C9A227; --deliver:#22C55E;
+  --font-serif:'Fraunces',Georgia,serif;
+  --font-ui:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--canvas);color:var(--text);font-family:var(--font-ui);
+     font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* HEAD */
+.head{padding:52px 0 14px;text-align:center}
+.eyebrow{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.24em;
+  color:var(--amber);text-transform:uppercase;font-weight:600;margin-bottom:16px}
+h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(1.7rem,4.6vw,2.7rem);
+  line-height:1.16;letter-spacing:-.01em}
+h1 em{font-style:italic;color:var(--gold)}
+.sub{color:var(--text-2);font-size:.98rem;max-width:640px;margin:14px auto 0}
+.sub b{color:var(--text)}
+
+/* LEGEND */
+.legend{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:26px 0 8px;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.ldot{width:9px;height:9px;border-radius:50%;flex:none}
+.ldot.on{background:var(--gold);box-shadow:0 0 8px rgba(230,194,84,.5)}
+.ldot.off{background:transparent;border:1px solid var(--border-strong)}
+
+/* JOURNEY GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0 0}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+.journey{border:1px solid var(--border);border-radius:10px;background:var(--surface-1);
+  overflow:hidden;display:flex;flex-direction:column}
+
+/* card head */
+.jhead{padding:22px 24px 18px;border-bottom:1px solid var(--border)}
+.jtag{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.j1 .jtag{color:var(--gold)}
+.j2 .jtag{color:var(--sense)}
+.jtag .dom{border:1px solid var(--border-strong);border-radius:2px;padding:2px 8px;color:var(--text-3)}
+.jtrigger{font-family:var(--font-serif);font-size:1.28rem;font-weight:600;line-height:1.35;letter-spacing:-.01em}
+.jtrigger em{font-style:italic;color:var(--gold)}
+.j2 .jtrigger em{color:var(--sense)}
+
+/* engine dots row */
+.engines{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
+.eng{display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase}
+.eng .ldot{width:8px;height:8px}
+.eng.on{color:var(--text-2)}
+.eng.on b{color:var(--gold);font-weight:600}
+.eng.off{color:var(--text-3);opacity:.55}
+.eng.off b{font-weight:400;text-decoration:line-through;text-decoration-color:var(--border-strong)}
+.engnote{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;color:var(--text-3);
+  margin-top:8px;text-transform:uppercase}
+
+/* stages */
+.stages{flex:1;display:flex;flex-direction:column}
+.stage{display:flex;gap:16px;padding:16px 24px;border-bottom:1px solid rgba(44,38,24,.7);position:relative}
+.stage:last-of-type{border-bottom:0}
+.snum{flex:none;width:86px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;position:relative}
+.sdot{width:12px;height:12px;border-radius:50%;flex:none;margin-top:5px;position:relative;z-index:1}
+.stage.sense   .sdot{background:var(--sense);box-shadow:0 0 9px rgba(45,212,191,.45)}
+.stage.simulate .sdot{background:var(--simulate);box-shadow:0 0 9px rgba(129,140,248,.45)}
+.stage.verify  .sdot{background:var(--verify);box-shadow:0 0 9px rgba(201,162,39,.45)}
+.stage.deliver .sdot{background:var(--deliver);box-shadow:0 0 9px rgba(34,197,94,.45)}
+.sname{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.stage.sense   .sname{color:var(--sense)}
+.stage.simulate .sname{color:var(--simulate)}
+.stage.verify  .sname{color:var(--verify)}
+.stage.deliver .sname{color:var(--deliver)}
+/* connecting line */
+.stage::before{content:"";position:absolute;left:29px;top:34px;bottom:-16px;width:1px;
+  background:linear-gradient(180deg,var(--border-strong),var(--border))}
+.stage:last-of-type::before{display:none}
+@media(max-width:520px){.stage::before{left:28px}}
+.sbody{flex:1;min-width:0}
+.sbody p{font-size:.9rem;color:var(--text-2);line-height:1.6}
+.sbody p b{color:var(--text);font-weight:600}
+.sbody p em{color:var(--gold);font-style:italic}
+.j2 .sbody p em{color:var(--sense)}
+.smeta{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-3);margin-top:5px}
+
+/* outcome */
+.outcome{margin:0;padding:20px 24px 22px;background:var(--surface-2);border-top:1px solid var(--border-strong)}
+.ok{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--deliver);font-weight:700;margin-bottom:8px}
+.oline{font-family:var(--font-serif);font-size:1.14rem;font-weight:600;line-height:1.4}
+.oline em{font-style:italic;color:var(--gold)}
+.ometa{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.ometa b{color:var(--text-2);font-weight:600}
+.conf{display:inline-flex;align-items:center;gap:8px}
+.confbar{width:64px;height:4px;border-radius:2px;background:var(--border);overflow:hidden}
+.confbar i{display:block;height:100%;background:var(--amber);border-radius:2px}
+
+/* takeaway strip */
+.take{margin:26px 0 0;border:1px dashed var(--border-strong);border-radius:10px;
+  padding:18px 22px;text-align:center;background:rgba(201,162,39,.04)}
+.take p{font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--text-2);line-height:1.6}
+.take p b{color:var(--gold);font-style:normal;font-weight:600}
+
+/* footer */
+footer{margin-top:46px;border-top:1px solid var(--border);padding:24px 0 40px;text-align:center;
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--text-3);
+  line-height:2;text-transform:uppercase}
+@media(max-width:520px){
+  .stage{padding:14px 16px;gap:12px}
+  .snum{width:78px}
+  .jhead,.outcome{padding-left:16px;padding-right:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="eyebrow">▶ How synARKa works · shown, not explained</div>
+    <h1>One question. <em>Four stages.</em> Watch it travel.</h1>
+    <p class="sub">Two real examples from the published ledger — one driven by <b>policy signal</b>, one by <b>satellite</b>. Same engine underneath. Different instruments, same discipline.</p>
+  </div>
+
+  <div class="legend">
+    <span><i class="ldot on"></i>Engine used on this question</span>
+    <span><i class="ldot off"></i>Engine not needed</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- ═══════ JOURNEY 1 · POLICY-DRIVEN ═══════ -->
+    <div class="journey j1">
+      <div class="jhead">
+        <div class="jtag">Journey 01 · Policy signal <span class="dom">Critical minerals</span></div>
+        <div class="jtrigger">Beijing tightens a <em>dysprosium export quota.</em> Who gets hit?</div>
+        <div class="engines">
+          <span class="eng off"><i class="ldot off"></i><b>Satellite</b></span>
+          <span class="eng on"><i class="ldot on"></i><b>8-engine consensus</b></span>
+          <span class="eng on"><i class="ldot on"></i><b>Corridor · 25 yrs</b></span>
+        </div>
+        <div class="engnote">No satellite here — a quota is invisible from orbit.</div>
+      </div>
+
+      <div class="stages">
+        <div class="stage sense">
+          <div class="snum"><span class="sdot"></span><span class="sname">01 Sense</span></div>
+          <div class="sbody">
+            <p>The MOFCOM notice lands in the ingest — regulatory feeds, customs postings, producer filings. <b>No human latency, no editorial filter.</b></p>
+            <div class="smeta">T+0 hours</div>
+          </div>
+        </div>
+        <div class="stage simulate">
+          <div class="snum"><span class="sdot"></span><span class="sname">02 Simulate</span></div>
+          <div class="sbody">
+            <p>The same question runs across <b>eight reasoning engines, independently.</b> Six-plus cluster → consensus adopted. <em>Dissent is flagged, never averaged away.</em></p>
+            <div class="smeta">Engines disagree? You see it.</div>
+          </div>
+        </div>
+        <div class="stage verify">
+          <div class="snum"><span class="sdot"></span><span class="sname">03 Verify</span></div>
+          <div class="sbody">
+            <p>Cross-checked against <b>customs notices and producer filings</b> — primary sources, not headlines. Falsification triggers written into the insight.</p>
+            <div class="smeta">Fails verification → never leaves the engine</div>
+          </div>
+        </div>
+        <div class="stage deliver">
+          <div class="snum"><span class="sdot"></span><span class="sname">04 Deliver</span></div>
+          <div class="sbody">
+            <p>A timestamped brief to the decision-maker — <b>Telegram, PDF, public ledger</b> — before the wires write it up.</p>
+            <div class="smeta">Inside 72 hours</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcome">
+        <div class="ok">↳ What the buyer receives</div>
+        <div class="oline">"<em>Three named ASX miners</em> exposed within 90 days — the offtake read, sourced and calibrated."</div>
+        <div class="ometa">
+          <span class="conf">Confidence <span class="confbar"><i style="width:81%"></i></span> <b>81%</b></span>
+          <span>Resolution date <b>set on publication</b></span>
+          <span>Miss? <b>Published anyway</b></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ JOURNEY 2 · SATELLITE-DRIVEN ═══════ -->
+    <div class="journey j2">
+      <div class="jhead">
+        <div class="jtag">Journey 02 · Satellite <span class="dom">Infrastructure &amp; resources</span></div>
+        <div class="jtrigger">A tailings wall on a named mine is <em>moving — millimetres a month.</em></div>
+        <div class="engines">
+          <span class="eng on"><i class="ldot on"></i><b>Satellite · InSAR</b></span>
+          <span class="eng on"><i class="ldot on"></i><b>8-engine consensus</b></span>
+          <span class="eng on"><i class="ldot on"></i><b>Corridor · 25 yrs</b></span>
+        </div>
+        <div class="engnote">All three engines — this is a physical asset question.</div>
+      </div>
+
+      <div class="stages">
+        <div class="stage sense">
+          <div class="snum"><span class="sdot"></span><span class="sname">01 Sense</span></div>
+          <div class="sbody">
+            <p>An <b>InSAR pass</b> over the site — brokered tasking, no owned hardware. Millimetric ground movement, measured from orbit, revisit on revisit.</p>
+            <div class="smeta">Surface proxies · not ore assay</div>
+          </div>
+        </div>
+        <div class="stage simulate">
+          <div class="snum"><span class="sdot"></span><span class="sname">02 Simulate</span></div>
+          <div class="sbody">
+            <p>Eight engines weigh the movement — <b>rate, pattern, season</b> — against what tailings failures have looked like before. <em>Consensus, not one model's guess.</em></p>
+            <div class="smeta">Dissent preserved</div>
+          </div>
+        </div>
+        <div class="stage verify">
+          <div class="snum"><span class="sdot"></span><span class="sname">03 Verify</span></div>
+          <div class="sbody">
+            <p>Checked against <b>site records, rainfall, prior surveys</b> — is this creep, or noise? The corridor lens knows the difference.</p>
+            <div class="smeta">Auditable provenance, end to end</div>
+          </div>
+        </div>
+        <div class="stage deliver">
+          <div class="snum"><span class="sdot"></span><span class="sname">04 Deliver</span></div>
+          <div class="sbody">
+            <p>Not a dashboard. Not 400 pixels. <b>One line the site manager can act on today.</b></p>
+            <div class="smeta">A dollar action · not another app</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcome">
+        <div class="ok">↳ What the buyer receives</div>
+        <div class="oline">"<em>Inspect Zone B.</em>" — with the evidence trail attached.</div>
+        <div class="ometa">
+          <span>Baseline audit <b>A$3,500–7,500</b></span>
+          <span>SiteWatch <b>from A$1,490/mo</b></span>
+          <span>Month-to-month <b>no lock-in</b></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="take">
+    <p>Same four stages every time: <b>Sense → Simulate → Verify → Deliver.</b><br>
+    The instruments change with the question. The discipline never does — <b>insight, never prediction · misses published at equal weight to hits.</b></p>
+  </div>
+
+  <footer>
+    synARKa Intelligence · The Consensus Engine · Indo-Pacific · Sydney<br>
+    Research &amp; educational only · not financial advice · EO surfaces proxies, not assay<br>
+    Agent-swarm simulation · SHA-256 · Brier scoring — v1.0 in active build, never sold as live
+  </footer>
+
+</div>
+</body>
+</html>
