@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Find Your First Insight in 60 Seconds — synARKa Intelligence</title>
+<meta name="description" content="Three taps: your industry, your biggest exposure, who watches it today. See the exact corridor insight synARKa would run for you — and what it costs. First insight free, no terms.">
+<link rel="canonical" href="https://synarka.pro/wizard.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#0E0C08;--surface-1:#14110B;--surface-2:#1C180F;--surface-3:#241F14;
+  --border:#2C2618;--border-strong:#4A3F26;
+  --text:#ECE6D8;--text-2:#9E957F;--text-3:#6B6453;
+  --amber:#C9A227;--amber-dim:rgba(201,162,39,0.12);--amber-glow:rgba(201,162,39,0.35);
+  --teal:#C9A227;--violet:#E6C254;--critical:#C44A30;
+  --font-ui:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
+  --font-serif:'Fraunces',Georgia,serif;
+  --t-fast:120ms cubic-bezier(0.4,0,0.2,1);--t-base:200ms cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--canvas);color:var(--text);font-family:var(--font-ui);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wz-top{border-bottom:1px solid var(--border);background:var(--surface-1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.wz-brand{font-family:var(--font-serif);font-size:17px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
+.wz-brand span{color:var(--amber)}
+.wz-back{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);text-decoration:none;transition:color var(--t-fast)}
+.wz-back:hover{color:var(--amber)}
+.wz-wrap{max-width:1080px;margin:0 auto;padding:44px 24px 80px}
+.wz-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);text-align:center;margin-bottom:14px}
+.wz-h1{font-family:var(--font-serif);font-size:clamp(28px,4.4vw,40px);font-weight:600;text-align:center;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+.wz-h1 em{font-style:italic;color:var(--amber)}
+.wz-lead{font-family:var(--font-ui);font-size:14.5px;color:var(--text-2);line-height:1.65;text-align:center;max-width:600px;margin:0 auto 30px}
+.wz-steps{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:34px}
+.wz-dot{width:30px;height:30px;border-radius:50%;border:1px solid var(--border-strong);display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;color:var(--text-3);transition:all var(--t-base)}
+.wz-dot.on{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 3px var(--amber-dim)}
+.wz-dot.done{border-color:var(--amber);background:var(--amber);color:var(--canvas)}
+.wz-bar{width:44px;height:1px;background:var(--border-strong)}
+.wz-q{font-family:var(--font-serif);font-size:23px;font-weight:600;text-align:center;margin-bottom:8px}
+.wz-hint{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);text-align:center;margin-bottom:26px}
+.wz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px}
+.wz-card{background:var(--surface-1);border:1px solid var(--border);border-radius:6px;padding:16px 17px;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color var(--t-fast),transform var(--t-fast),background var(--t-fast)}
+.wz-card:hover{border-color:var(--amber);transform:translateY(-2px);background:var(--surface-2)}
+.wz-card b{display:block;font-family:var(--font-serif);font-size:15px;font-weight:600;margin-bottom:5px;line-height:1.25}
+.wz-card small{display:block;font-family:var(--font-ui);font-size:12px;color:var(--text-2);line-height:1.5}
+.wz-card .wz-sub{color:var(--text-3);font-size:11.5px;margin-bottom:8px}
+.wz-card .wz-pain{color:var(--text-2);font-size:12px;line-height:1.55;margin-bottom:9px}
+.wz-sig{font-family:var(--font-mono);font-size:9.5px;line-height:1.6;color:var(--text-3);border-top:1px solid var(--border);padding-top:8px}
+.wz-sig span{display:block;color:var(--amber);letter-spacing:.14em;font-size:8.5px;margin-bottom:3px}
+.wz-note{font-family:var(--font-mono);font-size:11px;line-height:1.7;color:var(--text-3);max-width:780px;margin:0 auto 22px;padding:12px 14px;background:var(--surface-1);border:1px solid var(--border);border-left:2px solid var(--amber)}
+.wz-note b{color:var(--amber)}
+.wz-pane{display:none}
+.wz-pane.on{display:block;animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wz-nav{margin-top:26px;text-align:center}
+.wz-prev{background:none;border:1px solid var(--border-strong);color:var(--text-2);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border-radius:4px;cursor:pointer;transition:all var(--t-fast)}
+.wz-prev:hover{border-color:var(--amber);color:var(--amber)}
+/* ── result ── */
+.wz-res{background:var(--surface-1);border:1px solid var(--border-strong);border-radius:8px;overflow:hidden}
+.wz-res-top{background:var(--surface-2);border-bottom:1px solid var(--border);padding:20px 24px}
+.wz-res-tag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.wz-res-h{font-family:var(--font-serif);font-size:22px;font-weight:600;line-height:1.25}
+.wz-res-body{padding:22px 24px}
+.wz-row{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+.wz-row:last-of-type{border-bottom:none}
+.wz-row dt{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);padding-top:2px}
+.wz-row dd{font-family:var(--font-ui);font-size:13.5px;color:var(--text);line-height:1.6}
+.wz-row dd em{color:var(--amber);font-style:normal;font-weight:600}
+.wz-price{background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:16px 18px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.wz-price-l{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:5px}
+.wz-price-v{font-family:var(--font-serif);font-size:24px;font-weight:600;color:var(--amber)}
+.wz-price-v small{font-family:var(--font-mono);font-size:10.5px;color:var(--text-2);letter-spacing:.08em;margin-left:7px;font-weight:400}
+.wz-cta{display:inline-flex;align-items:center;gap:8px;background:var(--amber);color:var(--canvas);font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:13px 22px;border-radius:4px;text-decoration:none;transition:opacity var(--t-fast)}
+.wz-cta:hover{opacity:.86}
+.wz-cta2{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);color:var(--text-2);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:4px;text-decoration:none;transition:all var(--t-fast)}
+.wz-cta2:hover{border-color:var(--amber);color:var(--amber)}
+.wz-actions{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.wz-honesty{font-family:var(--font-mono);font-size:10px;line-height:1.75;color:var(--text-3);letter-spacing:.03em;background:var(--surface-1);border:1px solid var(--border);border-radius:6px;padding:15px 17px;margin-top:22px}
+.wz-honesty b{color:var(--amber);font-weight:600}
+.wz-restart{margin-top:22px;text-align:center}
+.wz-foot{border-top:1px solid var(--border);padding:22px 24px;text-align:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.09em;color:var(--text-3);line-height:1.9}
+.wz-foot a{color:var(--text-2);text-decoration:none}
+.wz-foot a:hover{color:var(--amber)}
+@media(max-width:600px){
+  .wz-grid{grid-template-columns:1fr}
+  .wz-row{grid-template-columns:1fr;gap:5px}
+  .wz-wrap{padding:32px 18px 60px}
+}
+</style>
+</head>
+<body>
+
+<div class="wz-top">
+  <a href="index.html" class="wz-brand">syn<span>ARKa</span> Intelligence</a>
+  <a href="index.html" class="wz-back">← Back to site</a>
+</div>
+
+<div class="wz-wrap">
+  <div class="wz-eyebrow">60-Second Match · No Signup</div>
+  <h1 class="wz-h1">Find your <em>first insight</em>.</h1>
+  <p class="wz-lead">Three taps: your industry, your biggest exposure, who watches it today — and you'll see the exact corridor insight synARKa would run for you, with the honest price next to it.</p>
+
+  <div class="wz-steps">
+    <div class="wz-dot on" id="d1">1</div><div class="wz-bar"></div>
+    <div class="wz-dot" id="d2">2</div><div class="wz-bar"></div>
+    <div class="wz-dot" id="d3">3</div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="wz-pane on" id="p1">
+    <div class="wz-q">What kind of operation do you run?</div>
+    <div class="wz-hint">All 24 entry verticals · tap yours</div>
+    <p class="wz-note"><b>&#9888; READ THIS FIRST.</b> No outcome numbers appear on these tiles, because synARKa has no completed client engagements to draw them from. What is shown is true today: the exposure pattern observed in each sector, and the live feeds the engine actually reads. Your first insight is free &mdash; judge the work, not a statistic.</p>
+    <div class="wz-grid" id="g1"></div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="wz-pane" id="p2">
+    <div class="wz-q">What worries you most?</div>
+    <div class="wz-hint" id="h2">Pick the exposure that would hurt first</div>
+    <div class="wz-grid" id="g2"></div>
+    <div class="wz-nav"><button class="wz-prev" onclick="goStep(1)">← Back</button></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="wz-pane" id="p3">
+    <div class="wz-q">Who watches this today?</div>
+    <div class="wz-hint">Be honest — it changes what we'd send you</div>
+    <div class="wz-grid" id="g3"></div>
+    <div class="wz-nav"><button class="wz-prev" onclick="goStep(2)">← Back</button></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="wz-pane" id="p4">
+    <div class="wz-res">
+      <div class="wz-res-top">
+        <div class="wz-res-tag" id="rTag">Your Match</div>
+        <div class="wz-res-h" id="rHead"></div>
+      </div>
+      <div class="wz-res-body">
+        <dl>
+          <div class="wz-row"><dt>Your sector</dt><dd id="rSector"></dd></div>
+          <div class="wz-row"><dt>Where it hurts</dt><dd id="rPain"></dd></div>
+          <div class="wz-row"><dt>Signals we read</dt><dd id="rSig"></dd></div>
+          <div class="wz-row"><dt>What we'd watch</dt><dd id="rWatch"></dd></div>
+          <div class="wz-row"><dt>Your exposure</dt><dd id="rExp"></dd></div>
+          <div class="wz-row"><dt>What you'd get</dt><dd id="rGet"></dd></div>
+          <div class="wz-row"><dt>Cadence</dt><dd id="rCad"></dd></div>
+        </dl>
+        <div class="wz-price">
+          <div>
+            <div class="wz-price-l">Your first insight</div>
+            <div class="wz-price-v">Free <small>no terms · no card</small></div>
+          </div>
+          <div>
+            <div class="wz-price-l">If you want more, next rung</div>
+            <div class="wz-price-v" id="rNext" style="font-size:19px"></div>
+          </div>
+        </div>
+        <div class="wz-actions">
+          <a href="https://cal.com/raj-aaa/synarka" target="_blank" rel="noopener" class="wz-cta" id="rBook">Book your free insight →</a>
+          <a href="#" class="wz-cta2" id="rMail">Email it instead</a>
+        </div>
+        <div class="wz-honesty">
+          <b>HONESTY HELD.</b> Insight, never prediction. Calibrated confidence 25–88%, never rounded up; misses published at equal weight to hits. EO surfaces proxies — it does not assay ore. Brokered tasking, no satellites owned. Research and educational, not financial advice. Australian entity active since 2003.
+        </div>
+      </div>
+    </div>
+    <div class="wz-restart"><button class="wz-prev" onclick="restart()">↻ Start over</button></div>
+  </div>
+</div>
+
+<div class="wz-foot">
+  synARKa Intelligence · Artigellence Augmentation Aggregator · ABN 83 988 690 362 · Sydney<br>
+  <a href="index.html">Home</a> · <a href="archive/synarka_archive_index.html">Full Archive</a> · <a href="mailto:raj@synarka.pro">raj@synarka.pro</a>
+</div>
+
+<script>
+/* ═══ 24 verticals · each with real corridor detail ═══ */
+var V = [
+ {id:"agri",n:"Agriculture &amp; agri-exports",s:"Grain co-ops, wool brokers, beef/dairy exporters",
+  pain:"You find out a destination market has moved when the buyer stops answering. Trade policy shifts land in Mandarin, days before the wire picks them up.",sig:"MOFCOM bulletins · DFAT trade notices · destination-port arrival feeds · GDELT event stream",
+  watch:"Export-corridor policy, tariff signals, port and shipping disruption on your destination markets",
+  get:"A read on which destination market shifts first, what triggers it, and the window before it prices in"},
+ {id:"fuel",n:"Fuel &amp; energy wholesale",s:"Bulk fuel distributors, regional resellers",
+  pain:"Landed cost moves before you can reprice the forecourt. The tanker that matters is three weeks out and nobody is watching it.",sig:"War-risk flags · maritime chokepoint feeds · OPEC+ and regulatory poll · Frankfurter FX reference rates",
+  watch:"OPEC+ signal, shipping-insurance premiums, refined-fuel supply concentration on your resupply route",
+  get:"Where your resupply line thins, which cargo is exposed, and the lead time before landed cost moves"},
+ {id:"freight",n:"Distribution &amp; freight forwarding",s:"3PLs, customs brokers, NVOCCs",
+  pain:"A lane degrades and you learn it from the carrier, not before. By then the reroute is priced against you.",sig:"AIS vessel tracking · port congestion feeds · chokepoint war-risk flags · customs and tariff notices",
+  watch:"Corridor congestion, chokepoint disruption, routing-cost shifts on the lanes you actually book",
+  get:"Which lane degrades first, the reroute cost, and how long the window stays open"},
+ {id:"miningsvc",n:"Mining services &amp; contractors",s:"Drilling, exploration, plant hire",
+  pain:"Your book depends on client capex you cannot see coming. A miner pauses a program and you find out at the contract meeting.",sig:"ASX continuous disclosure on named miners · MOFCOM export-control bulletins · Sentinel-1 SAR site activity",
+  watch:"Customer-miner exposure, critical-minerals demand signal, contract-cycle risk upstream of you",
+  get:"Which client's capex is about to move, why, and what it means for your book"},
+ {id:"maritime",n:"Maritime &amp; port operators",s:"Stevedoring, ship agents, port logistics",
+  pain:"Congestion builds upstream and arrives as your problem. The cause sits two ports away in another jurisdiction.",sig:"AIS vessel tracking · port arrival feeds · war-risk flags · Sentinel-1 SAR berth and anchorage imagery",
+  watch:"Vessel-anomaly patterns, chokepoint disruption, congestion building at your berth",
+  get:"Throughput risk read with the corridor cause named, not just the symptom"},
+ {id:"defence",n:"Defence SMEs &amp; subcontractors",s:"Part of the ~3,300 AU defence SME base",
+  pain:"An input on your subcontract line is single-sourced offshore and nobody has mapped it. Sovereignty questions arrive as audits.",sig:"DFAT and USTR notices · allied export-control registers · MOFCOM controls · ASPI and CSIS releases",
+  watch:"Supply-chain sovereignty risk, allied-sourcing shifts, input concentration on your subcontract line",
+  get:"Where your input is single-sourced offshore and what the sovereign alternative costs"},
+ {id:"battery",n:"Battery &amp; EV supply chain",s:"Battery assemblers, EV component importers",
+  pain:"Cell and magnet inputs tighten upstream of you. By the time the price moves the substitution window has closed.",sig:"MOFCOM rare-earth and graphite controls · ASX disclosure on lithium and cobalt names · corridor freight feeds",
+  watch:"Lithium, cobalt and rare-earth exposure across your component supply",
+  get:"Which input tightens first and the substitution window before it bites"},
+ {id:"downstream",n:"Critical-minerals downstream processing",s:"Refining and processing hubs",
+  pain:"Feedstock continuity and offtake destination both sit on policy you do not control, on a calendar you do not hold.",sig:"MOFCOM and USTR bulletins · ASX continuous disclosure · Sentinel-1 SAR feedstock stockpile change · thermal imagery",
+  watch:"Policy and corridor signals on your feedstock supply and offtake destinations",
+  get:"Feedstock continuity read plus the policy calendar that could reprice your offtake"},
+ {id:"coldchain",n:"Cold chain &amp; cold storage",s:"Refrigerated warehousing, pharma cold storage",
+  pain:"A delayed reefer is not a delay, it is a write-off. Refrigerant and spare-part supply is import-dependent and invisible until it fails.",sig:"AIS reefer-vessel tracking · port arrival feeds · DFAT import advisories · Open-Meteo thermal and climate signal",
+  watch:"Import-dependency and corridor disruption on your refrigerated inbound; refrigerant and equipment supply",
+  get:"Which inbound line is exposed, the temperature-critical window, and the contingency lead time"},
+ {id:"chemical",n:"Bulk chemical &amp; liquid terminals",s:"Tank terminals — acids, caustic soda, solvents",
+  pain:"Half your throughput traces to one origin country. A single export rule reprices the tank farm and the contracts under it.",sig:"MOFCOM export controls · precursor-chemical registers · AIS tanker tracking · port arrival feeds",
+  watch:"Sourcing concentration and corridor risk on the chemicals you store and move",
+  get:"Single-source exposure named, with the disruption window and alternate-origin options"},
+ {id:"trading",n:"Import/export trading houses",s:"Commodity traders, sourcing agents",
+  pain:"Tariff and sanctions timing decides the margin, and the notice period is measured in hours.",sig:"USTR and MOFCOM bulletins · DFAT sanctions notices · GDELT event stream · Frankfurter FX",
+  watch:"Tariff and sanctions timing across your Indo-Pacific counterparties",
+  get:"Counterparty and jurisdiction risk read, dated to the policy calendar"},
+ {id:"manufacturing",n:"Manufacturing (SME)",s:"Precision, electronics, componentry",
+  pain:"One line item in the bill of materials is corridor-exposed and unpriced. You discover it when the supplier stops quoting.",sig:"MOFCOM magnet and semiconductor controls · export-control registers · corridor freight and port feeds",
+  watch:"Rare-earth magnet and semiconductor input exposure in your bill of materials",
+  get:"Which component line is corridor-exposed and how far ahead you can see the squeeze"},
+ {id:"bonded",n:"Bonded &amp; customs warehousing",s:"Bonded stores, duty-deferred storage near ports",
+  pain:"Duty-deferral rules and dwell times shift on the same policy calendar, and the notice reaches you last.",sig:"Customs and tariff notices · DFAT regulatory poll · port congestion feeds · AIS arrival tracking",
+  watch:"Customs-regime change, duty-deferral policy shifts, port congestion feeding your dwell times",
+  get:"Regulatory and dwell-time risk read with the policy trigger named"},
+ {id:"hazmat",n:"Hazmat &amp; dangerous-goods logistics",s:"DG-licensed transport and storage operators",
+  pain:"Compliance tightens on a horizon nobody circulates. Precursor controls change and your licence conditions follow.",sig:"Precursor-chemical control registers · MOFCOM and DFAT notices · state DG regulatory feeds",
+  watch:"Regulatory tightening, precursor-chemical controls, corridor restrictions on DG movement",
+  get:"Compliance-horizon read: what changes, when, and which of your movements it touches"},
+ {id:"grain",n:"Grain &amp; bulk commodity storage",s:"Silos, bulk handling terminals",
+  pain:"The export window opens and closes on a decision made offshore. Storage cycles are planned against a guess.",sig:"MOFCOM and destination-market notices · port arrival feeds · rail and corridor throughput signal · Open-Meteo",
+  watch:"Export-demand shifts, destination-market policy, rail and port throughput on your corridor",
+  get:"Storage-cycle read: when the export window opens or closes, and the destination driver"},
+ {id:"lng",n:"LNG &amp; gas export infrastructure",s:"Terminal operators, gas processing facilities",
+  pain:"Offtake renegotiation signals appear in destination-market politics months before they appear in a term sheet.",sig:"Destination-market regulatory poll · GDELT event stream · AIS LNG carrier tracking · war-risk flags",
+  watch:"Destination-market demand, contract-renegotiation signals, corridor and shipping risk",
+  get:"Offtake-market read with the geopolitical driver named and dated"},
+ {id:"construction",n:"Construction materials supply",s:"Steel, cement, structural-metal distributors",
+  pain:"Input cost moves after you have quoted and before you have delivered. The driver is upstream of your supplier.",sig:"MOFCOM steel and input controls · ASX disclosure · corridor freight feeds · Frankfurter FX",
+  watch:"Input-cost volatility tied to the critical-minerals corridor and import concentration",
+  get:"Which input reprices first and the lead time before it hits your quotes"},
+ {id:"auto",n:"Automotive parts &amp; aftermarket",s:"Parts importers, aftermarket suppliers",
+  pain:"A handful of SKUs carry all the corridor risk and nobody has flagged which ones.",sig:"MOFCOM magnet and semiconductor controls · port arrival feeds · corridor freight signal",
+  watch:"Rare-earth and semiconductor exposure in the parts you import",
+  get:"Supply-line read on the SKUs most exposed to corridor disruption"},
+ {id:"credit",n:"Trade credit &amp; insurance",s:"Credit insurers, trade-finance desks",
+  pain:"Exposures that look diversified on the book cluster on one chokepoint in reality.",sig:"GDELT event stream · AIS chokepoint traffic · sanctions and regulatory registers · ASX disclosure",
+  watch:"Counterparty and corridor risk across your Indo-Pacific exposure book",
+  get:"Portfolio-level corridor read: which exposures cluster on the same single point of failure"},
+ {id:"agriinputs",n:"Agribusiness inputs",s:"Fertiliser, ag-chemical distributors",
+  pain:"Phosphate and potash sourcing runs through a narrow set of origins, and the season does not wait for the shipment.",sig:"MOFCOM fertiliser export controls · AIS bulk-carrier tracking · port arrival feeds · Open-Meteo season signal",
+  watch:"Phosphate and potash sourcing concentration, often China-linked, plus freight on those lanes",
+  get:"Sourcing-concentration read with the season-critical window flagged"},
+ {id:"renewables",n:"Renewables &amp; infrastructure developers",s:"Solar/wind project developers, grid contractors",
+  pain:"One long-lead input slips and the whole critical path moves, but the slip starts as a policy line offshore.",sig:"MOFCOM rare-earth and polysilicon controls · corridor freight feeds · ASX disclosure · regulatory poll",
+  watch:"Critical-minerals input timing against your project schedule and grid-connection calendar",
+  get:"Procurement-timing read: which input threatens the critical path and by how long"},
+ {id:"pharma",n:"Pharma &amp; medical supply chain",s:"Import-dependent device/API distributors",
+  pain:"API and device sourcing is concentrated, the cold chain that carries it is fragile, and both are invisible on your dashboard.",sig:"DFAT import advisories · AIS reefer tracking · export-control registers · port arrival feeds",
+  watch:"API and device sourcing concentration, plus the cold-chain corridor that carries them",
+  get:"Import-dependency read with the substitution and stockholding window named"},
+ {id:"rail",n:"Rail &amp; intermodal freight",s:"Rail operators moving bulk minerals/grain",
+  pain:"Volume outlook is treated as a timetable problem when it is actually an export-policy problem.",sig:"MOFCOM and destination-market notices · ASX disclosure on shippers · port throughput feeds · Sentinel-1 SAR",
+  watch:"Corridor volume shifts driven by export-market policy and port throughput",
+  get:"Volume-outlook read tied to the upstream policy or demand driver, not just the timetable"},
+ {id:"research",n:"Research &amp; policy institutions",s:"Think tanks, university Asia-Pacific desks",
+  pain:"Primary-source movement is scattered across languages and registers, and consensus forms before the divergence is recorded.",sig:"MOFCOM · USTR · DFAT · RBA · ASPI and CSIS releases · GDELT event stream · eight-engine consensus with dissent flagged",
+  watch:"Corridor developments, primary-source policy movement, consensus divergence across engines",
+  get:"Sourced corridor briefing with dissent flagged and confidence calibrated — citable, dated"}
+];
+
+/* ═══ step 2 · exposures ═══ */
+var EXP = [
+ {id:"supply",n:"Supply gets cut",s:"A source, route or counterparty goes dark with no warning",cad:"Event-triggered alert plus weekly corridor watch"},
+ {id:"price",n:"Costs move against me",s:"Landed cost or input price shifts before I can reprice",cad:"Weekly signal with event-triggered escalation"},
+ {id:"policy",n:"A rule changes",s:"Tariff, sanction, export control or compliance regime shifts",cad:"Policy-calendar cadence plus alerts on movement"},
+ {id:"client",n:"My customer's world moves",s:"Their capex, demand or exposure shifts and I find out late",cad:"Monthly deep read plus alerts on named accounts"}
+];
+
+/* ═══ step 3 · who watches ═══ */
+var WHO = [
+ {id:"nobody",n:"Honestly, nobody",s:"We find out when it's already happening",
+  head:"You are flying blind in the corridor.",next:"Site Baseline Audit · A$3,500–7,500",tag:"Highest-value match"},
+ {id:"me",n:"Me, between everything else",s:"Owner or GM reading news when there's time",
+  head:"You are the watchlist — and you are already full.",next:"Signal · A$99/mo",tag:"Your match"},
+ {id:"someone",n:"Someone internal, part-time",s:"Ops or procurement watches it alongside their day job",
+  head:"Someone watches it — nobody owns it.",next:"Operator · A$1,500/mo",tag:"Your match"},
+ {id:"paid",n:"We pay for a service already",s:"Broker reports, a consultancy, or a data subscription",
+  head:"You have coverage. The question is whether it names the corridor.",next:"Pro · A$5,000/mo",tag:"Your match"}
+];
+
+var pick = {v:null,e:null,w:null};
+
+function esc(s){return s.replace(/&amp;/g,'&');}
+
+function build(){
+  document.getElementById('g1').innerHTML = V.map(function(x){
+    return '<button class="wz-card" onclick="setV(\''+x.id+'\')"><b>'+x.n+'</b>'
+      + '<small class="wz-sub">'+x.s+'</small>'
+      + '<small class="wz-pain">'+x.pain+'</small>'
+      + '<div class="wz-sig"><span>SIGNALS WE READ FOR YOU</span>'+x.sig+'</div></button>';
+  }).join('');
+  document.getElementById('g2').innerHTML = EXP.map(function(x){
+    return '<button class="wz-card" onclick="setE(\''+x.id+'\')"><b>'+x.n+'</b><small>'+x.s+'</small></button>';
+  }).join('');
+  document.getElementById('g3').innerHTML = WHO.map(function(x){
+    return '<button class="wz-card" onclick="setW(\''+x.id+'\')"><b>'+x.n+'</b><small>'+x.s+'</small></button>';
+  }).join('');
+}
+
+function goStep(n){
+  [1,2,3,4].forEach(function(i){
+    var p=document.getElementById('p'+i); if(p) p.classList.toggle('on', i===n);
+  });
+  [1,2,3].forEach(function(i){
+    var d=document.getElementById('d'+i); if(!d) return;
+    d.classList.remove('on','done');
+    if(i<n) d.classList.add('done'); else if(i===n) d.classList.add('on');
+  });
+  if(n===4){[1,2,3].forEach(function(i){document.getElementById('d'+i).classList.add('done');});}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setV(id){
+  pick.v=V.filter(function(x){return x.id===id;})[0];
+  document.getElementById('h2').textContent = 'For '+esc(pick.v.n)+' · pick the exposure that would hurt first';
+  goStep(2);
+}
+function setE(id){ pick.e=EXP.filter(function(x){return x.id===id;})[0]; goStep(3); }
+function setW(id){ pick.w=WHO.filter(function(x){return x.id===id;})[0]; render(); goStep(4); }
+
+function render(){
+  var v=pick.v,e=pick.e,w=pick.w;
+  document.getElementById('rTag').textContent   = w.tag;
+  document.getElementById('rHead').textContent  = w.head;
+  document.getElementById('rSector').innerHTML  = '<em>'+v.n+'</em> — '+v.s;
+  document.getElementById('rPain').textContent  = v.pain;
+  document.getElementById('rSig').textContent   = v.sig;
+  document.getElementById('rWatch').textContent = v.watch;
+  document.getElementById('rExp').innerHTML     = '<em>'+e.n+'</em> — '+e.s;
+  document.getElementById('rGet').textContent   = v.get;
+  document.getElementById('rCad').textContent   = e.cad;
+  document.getElementById('rNext').textContent  = w.next;
+
+  var subject = 'Free first insight — '+esc(v.n);
+  var body = 'Sector: '+esc(v.n)+'\n'
+           + 'Biggest exposure: '+e.n+'\n'
+           + 'Who watches it today: '+w.n+'\n\n'
+           + 'What I would want watched: '+v.watch+'\n\n'
+           + 'My question:\n';
+  document.getElementById('rMail').href =
+    'mailto:raj@synarka.pro?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  document.getElementById('rBook').href =
+    'https://cal.com/raj-aaa/synarka?notes='+encodeURIComponent(esc(v.n)+' · '+e.n+' · '+w.n);
+}
+
+function restart(){ pick={v:null,e:null,w:null}; goStep(1); }
+
+build();
+/* deep-link support: wizard.html?v=coldchain jumps straight to step 2 */
+(function(){
+  var q=new URLSearchParams(location.search).get('v');
+  if(q && V.filter(function(x){return x.id===q;}).length) setV(q);
+})();
+</script>
+</body>
+</html>
